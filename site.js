@@ -20,7 +20,7 @@
 
   // caustiche: la luce che filtra dalla superficie e danza sul fondale (shader WebGL)
   const canvas = document.getElementById("water");
-  if (!canvas) return;
+  if (!canvas || !canvas.offsetParent) return; // nella versione B il canvas è nascosto
   const gl = canvas.getContext("webgl", { antialias: false, alpha: true, premultipliedAlpha: false });
   if (!gl) return;
   const vs = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";

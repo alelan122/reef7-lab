@@ -1,0 +1,94 @@
+/* Versione B · stile editoriale: titoli serif, righe sottili da tavola tecnica, niente effetto acqua a tutto schermo.
+   Questo file viene aggiunto in coda a styles.css per generare alt.css (vedi build.py). */
+:root {
+  --ink: #060c15;
+  --ink-2: #0b1522;
+  --paper: #e9eef2;
+  --text: #e6edf3;
+  --muted: #8b9bad;
+  --faint: #5b6b7d;
+  --rule: rgba(230, 237, 243, .12);
+  --rule-2: rgba(230, 237, 243, .22);
+  --aqua: #63dcec;
+}
+
+/* testata sempre sobria, con riga sotto */
+.top, .top.solid { position: relative; border-bottom: 1px solid var(--rule); }
+.top-in { height: 76px; }
+.logo img { width: 30px; height: 30px; }
+
+/* titoli: serif sottile al posto del grassetto */
+.hero h1, .page-head h1, .head h2, .svc-row h3, .svc h2, .case h2, .principle h2, .cta-band h2,
+.sector h3, .principles b, .statement p, .about .big, .big-mail, .faq summary {
+  font-family: var(--serif); font-weight: 400; letter-spacing: -.02em;
+}
+.hero h1 em, .page-head h1 em, .head h2 em, .cta-band h2 em { font-style: italic; letter-spacing: -.02em; }
+
+/* hero editoriale: niente acqua animata, il corallo disegnato in basso a destra */
+.hero { min-height: auto; display: block; background: none; isolation: auto; }
+.hero canvas, .hero::after { display: none; }
+.hero-in { position: relative; padding-top: clamp(72px, 11vw, 150px); padding-bottom: clamp(48px, 7vw, 96px); }
+.hero-in::after { content: ""; position: absolute; right: var(--gut); top: clamp(48px, 7vw, 110px); width: min(520px, 42%); height: 230px; background: url("assets/reef-deco.svg") right bottom / contain no-repeat; opacity: .75; pointer-events: none; z-index: -1; }
+.hero .mono { color: var(--muted); }
+.hero h1 { font-size: clamp(56px, 9.5vw, 148px); line-height: .95; max-width: 11ch; }
+.hero-foot { border-top: 1px solid var(--rule); }
+.hero-foot p { color: var(--muted); }
+.btn { padding: 14px 22px; font-size: 15px; }
+.btn:hover { transform: none; }
+.btn.ghost { backdrop-filter: none; }
+
+/* fascia: serif corsivo, tranquilla */
+.marquee { border-top: 1px solid var(--rule); padding: 22px 0; }
+.marquee-track { animation-duration: 60s; }
+.marquee span { font: italic 400 clamp(30px, 4vw, 56px)/1 var(--serif); letter-spacing: -.01em; color: var(--muted); -webkit-text-stroke: 0; }
+.marquee span:nth-child(even) { color: var(--text); }
+.marquee span::after { content: "·"; font-size: 1em; vertical-align: 0; color: var(--aqua); }
+
+/* testi grandi */
+.statement p { font-size: clamp(34px, 4.6vw, 68px); line-height: 1.08; max-width: 22ch; }
+.head h2 { font-size: clamp(40px, 5vw, 72px); line-height: 1; }
+.page-head h1 { font-size: clamp(48px, 7.5vw, 112px); line-height: .98; max-width: 15ch; }
+
+/* servizi */
+.svc-row { grid-template-columns: 70px 1.1fr 1.6fr 44px; }
+.svc-row h3 { font-size: clamp(28px, 2.8vw, 40px); line-height: 1.1; }
+.svc-row:hover h3 { transform: none; }
+.svc-row::before { background: linear-gradient(90deg, transparent, rgba(99, 220, 236, .05), transparent); }
+.svc-row .go { width: 40px; height: 40px; border-color: var(--rule); color: var(--muted); }
+.svc-row:hover .go { transform: none; }
+.svc h2, .case h2 { font-size: clamp(36px, 3.8vw, 56px); line-height: 1; }
+.svc .tag { font: italic 400 clamp(21px, 1.8vw, 26px)/1.25 var(--serif); letter-spacing: -.01em; }
+
+/* settori: a righe sottili invece che a riquadri */
+.sectors { background: none; border: 0; border-radius: 0; gap: 0; border-top: 1px solid var(--rule); }
+.sector { background: none; border-bottom: 1px solid var(--rule); padding: 30px 28px 32px 0; min-height: 0; }
+.sector + .sector { padding-left: 28px; border-left: 1px solid var(--rule); }
+.sector:hover { background: none; }
+.sector h3 { font-size: clamp(28px, 2.6vw, 38px); }
+
+.problem h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -.02em; font-size: clamp(38px, 4.4vw, 64px); }
+
+/* principi */
+.principles b { font-size: clamp(24px, 2.2vw, 32px); line-height: 1.1; }
+.principle h2 { font-size: clamp(44px, 6vw, 92px); line-height: .95; }
+
+/* banda finale: carta chiara */
+.cta-band { background: var(--paper); }
+.cta-band .mono { color: #5d6b79; }
+.cta-band h2 { font-size: clamp(44px, 7vw, 112px); line-height: .98; }
+.cta-band h2 em { color: #0b5f8a; }
+.cta-band .circle { color: var(--paper); }
+
+/* studio e contatti */
+.portrait { border-radius: 6px; border: 1px solid var(--rule); }
+.about .big { font-size: clamp(30px, 3.2vw, 46px); line-height: 1.1; }
+.big-mail { font-size: clamp(36px, 6.5vw, 100px); border-bottom-width: 1px; }
+.form input, .form textarea, .form select { font-size: 19px; }
+
+@media (max-width: 760px) {
+  .hero-in::after { width: 70%; opacity: .3; top: 24px; }
+  .sector + .sector { padding-left: 0; border-left: 0; }
+}
+@media (max-width: 1080px) and (min-width: 761px) {
+  .sector:nth-child(3) { padding-left: 0; border-left: 0; }
+}

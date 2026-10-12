@@ -8,16 +8,16 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 EMAIL = "lancioni.ale@gmail.com"
 SLUG = {
-    "it": {"home": "index.html", "services": "servizi.html", "solutions": "soluzioni.html", "studio": "studio.html", "contact": "contatti.html"},
-    "en": {"home": "index.html", "services": "services.html", "solutions": "solutions.html", "studio": "studio.html", "contact": "contact.html"},
+    "it": {"home": "index.html", "services": "servizi.html", "solutions": "soluzioni.html", "studio": "lab.html", "contact": "contatti.html"},
+    "en": {"home": "index.html", "services": "services.html", "solutions": "solutions.html", "studio": "lab.html", "contact": "contact.html"},
 }
 NAV = ["services", "solutions", "studio"]
 
 T = {
 "it": {
-    "nav": {"services": "Servizi", "solutions": "Soluzioni", "studio": "Studio", "contact": "Contatti"},
+    "nav": {"services": "Servizi", "solutions": "Soluzioni", "studio": "Lab", "contact": "Contatti"},
     "menu": "Menu", "close": "Chiudi", "pages": "Pagine",
-    "foot": "© 2026 Reef 7 Lab · Studio di sviluppo software",
+    "foot": "© 2026 Reef 7 Lab · Sviluppo software e intelligenza artificiale",
     "cta_k": "Nuovo progetto", "cta_h": "Pronti a far crescere il vostro <em>reef</em>?",
     "services": [
         ("01", "Siti web", "Siti che trasformano i visitatori in clienti, non in statistiche.",
@@ -59,14 +59,15 @@ T = {
          "Un'unica fonte di verità per tutta l'azienda e una crescita che non fa perdere il controllo."),
     ],
     "home": {
-        "title": "Reef 7 Lab · Studio di sviluppo software",
+        "title": "Reef 7 Lab · Sviluppo software e intelligenza artificiale",
         "desc": "Siti, applicazioni, intelligenza artificiale e dashboard su misura, collegati in un unico ecosistema.",
-        "kicker": "Reef 7 Lab · Studio di sviluppo software",
+        "kicker": "Reef 7 Lab · Sviluppo software e intelligenza artificiale",
         "h1": "Il tuo business, <em>connesso</em>.",
         "sub": "Siti, applicazioni e intelligenza artificiale su misura, collegati in un unico ecosistema. Meno lavoro manuale, decisioni più rapide, una crescita che si accumula.",
         "b1": "Parliamo del progetto", "b2": "Scopri i servizi",
-        "marquee": ["Siti web", "Applicazioni", "Intelligenza artificiale", "Company brain", "Dashboard", "Automazioni"],
-        "statement": 'Alla maggior parte delle aziende non mancano gli strumenti. Ne ha troppi, e non si parlano. <span class="dim">Noi costruiamo l\'ecosistema che li unisce e li fa lavorare per voi.</span>',
+        "problem_k": "Il problema",
+        "problem_h": "Troppi strumenti, nessun sistema.",
+        "problem_p": "La maggior parte delle aziende non ha pochi strumenti: ne ha troppi, e non si parlano tra loro. Dati copiati a mano, informazioni sparse, decisioni prese in ritardo. Noi costruiamo l'ecosistema che li unisce e li fa lavorare per voi.",
         "svc_h": "Servizi", "svc_p": "Cinque discipline, un solo obiettivo: un'azienda più veloce, più informata, più difficile da raggiungere.", "svc_all": "Tutti i servizi",
         "sol_h": "Soluzioni", "sol_p": "Ogni settore ha i suoi colli di bottiglia. Questi sono quelli che trasformiamo più spesso in vantaggi.", "sol_all": "Tutte le soluzioni",
         "reef_h": "Progettati come <em>un reef</em>", "reef_p": "Il reef è uno degli ecosistemi più efficienti della Terra. I suoi cinque principi guidano ogni sistema che costruiamo.",
@@ -84,7 +85,7 @@ T = {
         "lbl": ("La sfida", "La soluzione", "Il risultato"),
     },
     "studio": {
-        "title": "Studio · Reef 7 Lab", "desc": "La filosofia del reef: come Reef 7 Lab progetta software che cresce connesso.",
+        "title": "Lab · Reef 7 Lab", "desc": "La filosofia del reef: come Reef 7 Lab progetta software che cresce connesso.",
         "h1": "La filosofia <em>del reef</em>.",
         "sub": "Una barriera corallina copre meno dell'1% dei fondali, eppure ospita un quarto di tutta la vita marina. Il suo segreto non è la grandezza: è l'architettura. È il modello che seguiamo in ogni sistema che costruiamo.",
         "principles": [
@@ -114,9 +115,9 @@ T = {
     },
 },
 "en": {
-    "nav": {"services": "Services", "solutions": "Solutions", "studio": "Studio", "contact": "Contact"},
+    "nav": {"services": "Services", "solutions": "Solutions", "studio": "Lab", "contact": "Contact"},
     "menu": "Menu", "close": "Close", "pages": "Pages",
-    "foot": "© 2026 Reef 7 Lab · Software development studio",
+    "foot": "© 2026 Reef 7 Lab · Software and AI development",
     "cta_k": "New project", "cta_h": "Ready to grow your <em>reef</em>?",
     "services": [
         ("01", "Websites", "Sites that turn visitors into clients, not statistics.",
@@ -158,14 +159,15 @@ T = {
          "A single source of truth for the whole company, and growth that never costs you control."),
     ],
     "home": {
-        "title": "Reef 7 Lab · Software development studio",
+        "title": "Reef 7 Lab · Software and AI development",
         "desc": "Custom websites, applications, AI and dashboards, connected into a single ecosystem.",
-        "kicker": "Reef 7 Lab · Software development studio",
+        "kicker": "Reef 7 Lab · Software and AI development",
         "h1": "Your business, <em>connected</em>.",
         "sub": "Custom websites, applications and AI, connected into a single ecosystem. Less manual work, faster decisions, growth that compounds.",
         "b1": "Start a project", "b2": "Explore services",
-        "marquee": ["Websites", "Applications", "Artificial intelligence", "Company brain", "Dashboards", "Automation"],
-        "statement": 'Most companies aren\'t short of tools. They have too many, and none of them talk. <span class="dim">We build the ecosystem that connects them and puts them to work for you.</span>',
+        "problem_k": "The problem",
+        "problem_h": "Too many tools, no system.",
+        "problem_p": "Most companies aren't short of tools: they have too many, and none of them talk to each other. Data copied by hand, scattered information, decisions made too late. We build the ecosystem that connects them and puts them to work for you.",
         "svc_h": "Services", "svc_p": "Five disciplines, one goal: a company that's faster, better informed and harder to catch.", "svc_all": "All services",
         "sol_h": "Solutions", "sol_p": "Every industry has its bottlenecks. These are the ones we most often turn into advantages.", "sol_all": "All solutions",
         "reef_h": "Designed like <em>a reef</em>", "reef_p": "The reef is one of the most efficient ecosystems on Earth. Its five principles shape every system we build.",
@@ -183,7 +185,7 @@ T = {
         "lbl": ("The challenge", "The solution", "The outcome"),
     },
     "studio": {
-        "title": "Studio · Reef 7 Lab", "desc": "The reef philosophy: how Reef 7 Lab designs software that grows connected.",
+        "title": "Lab · Reef 7 Lab", "desc": "The reef philosophy: how Reef 7 Lab designs software that grows connected.",
         "h1": "The reef <em>philosophy</em>.",
         "sub": "Coral reefs cover less than 1% of the ocean floor, yet they're home to a quarter of all marine life. Their secret isn't size: it's architecture. That's the model behind every system we build.",
         "principles": [
@@ -215,10 +217,12 @@ T = {
 }
 
 
-def build(lang):
+def build(lang, variant=""):
+    """variant="" genera il sito principale; variant="alt" la versione B (stile editoriale) nella cartella alt/."""
     L, S = T[lang], SLUG[lang]
     other = "en" if lang == "it" else "it"
-    pre = "" if lang == "it" else "../"
+    pre = ("../" if variant else "") + ("" if lang == "it" else "../")
+    css = "alt.css" if variant else "styles.css"
     alt_dir = "en/" if lang == "it" else "../"
     u = lambda k: S[k]
     arrow = '<span class="arr" aria-hidden="true">→</span>'
@@ -248,8 +252,8 @@ def build(lang):
   <link rel="apple-touch-icon" href="{pre}assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{pre}styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{pre}{css}">
 </head>
 <body>
 <header class="top{'' if hero else ' solid'}"><div class="wrap top-in">
@@ -284,7 +288,6 @@ def build(lang):
     H = L["home"]
     rows = "".join(f"""
     <a class="svc-row" href="{u('services')}#s{n}"><span class="mono">{n}</span><h3>{t}</h3><p>{d}</p><span class="go" aria-hidden="true">→</span></a>""" for n, t, d, *_ in L["services"])
-    words = "".join(f"<span>{w}</span>" for w in H["marquee"])
     sectors = "".join(f"""
     <a class="sector" href="{u('solutions')}#k{i}"><span class="mono">0{i}</span><h3>{t}</h3><p>{d}</p><ul>{"".join(f"<li>{x}</li>" for x in li)}</ul></a>""" for i, (t, d, li, *_) in enumerate(L["sectors"][:3], 1))
     reef_words = "".join(f'<div><span class="mono">0{i}</span><b>{w}</b></div>' for i, w in enumerate(H["reef_words"], 1))
@@ -299,8 +302,10 @@ def build(lang):
     </div>
   </div>
 </section>
-<div class="marquee" aria-hidden="true"><div class="marquee-track">{words}{words}</div></div>
-<section class="statement"><div class="wrap"><p>{H['statement']}</p></div></section>
+<section class="block problem"><div class="wrap problem-in">
+  <p class="mono">{H['problem_k']}</p>
+  <div><h2>{H['problem_h']}</h2><p>{H['problem_p']}</p></div>
+</div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{H['svc_h']}</h2><p>{H['svc_p']}</p></div>
   <div class="svc-list">{rows}
@@ -377,16 +382,23 @@ def build(lang):
   </form>
 </div></section>""")
 
-    folder = ROOT if lang == "it" else ROOT / "en"
-    folder.mkdir(exist_ok=True)
+    base = ROOT / variant if variant else ROOT
+    folder = base if lang == "it" else base / "en"
+    folder.mkdir(parents=True, exist_ok=True)
     for key, html in out.items():
         (folder / S[key]).write_text(html, encoding="utf-8")
-        print("ok", lang, S[key])
+        print("ok", variant or "main", lang, S[key])
 
 
 if __name__ == "__main__":
     # toglie le pagine delle versioni precedenti (prezzi e lavori)
-    for old in ["lavori.html", "prezzi.html", "en/work.html", "en/pricing.html"]:
+    for old in ["lavori.html", "prezzi.html", "studio.html", "en/work.html", "en/pricing.html", "en/studio.html"]:
         (ROOT / old).unlink(missing_ok=True)
+        (ROOT / "alt" / old).unlink(missing_ok=True)
     for lang in T:
         build(lang)
+    # versione B: stesso contenuto, stile editoriale (styles.css + alt-overrides.css)
+    alt_css = (ROOT / "styles.css").read_text(encoding="utf-8") + "\n" + (ROOT / "alt-overrides.css").read_text(encoding="utf-8")
+    (ROOT / "alt.css").write_text(alt_css, encoding="utf-8")
+    for lang in T:
+        build(lang, "alt")
