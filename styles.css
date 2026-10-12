@@ -258,6 +258,63 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
 @media (max-width: 900px) { .eco { grid-template-columns: 1fr; } .eco-stage { max-height: none; } }
 @media (prefers-reduced-motion: reduce) { .links line { animation: none; } .pill, .hub, .broken, .links { transition: none; } }
 
+/* missione: obiettivi stile raccolta fondi */
+.goals { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.goal { display: flex; flex-direction: column; gap: 10px; padding: 26px; border: 1px solid var(--rule); border-radius: 14px; background: var(--ink-2); scroll-margin-top: 100px; }
+.goal.active { border-color: rgba(95, 225, 242, .45); background: radial-gradient(90% 80% at 100% 0%, rgba(47, 123, 255, .18), transparent 60%), var(--ink-2); }
+.goal-top { display: flex; justify-content: space-between; align-items: center; }
+.goal-n { font: 500 13px var(--mono); color: var(--faint); }
+.chip { font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--rule-2); color: var(--muted); }
+.goal.active .chip { border-color: var(--aqua); color: var(--aqua); }
+.goal.done .chip { background: var(--aqua); border-color: var(--aqua); color: var(--ink); }
+.goal h3 { font: 600 clamp(24px, 2.2vw, 30px)/1.05 var(--sans); letter-spacing: -.035em; margin-top: 8px; }
+.goal-country { margin-top: -4px; }
+.goal-what { color: var(--muted); font-size: 15.5px; flex: 1; }
+.bar { height: 10px; border-radius: 999px; background: rgba(238, 243, 248, .08); overflow: hidden; margin-top: 8px; }
+.bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--blue), var(--aqua)); box-shadow: 0 0 16px rgba(95, 225, 242, .5); min-width: 0; transition: width 1.2s cubic-bezier(.2, .8, .2, 1); }
+.goal-num { display: flex; justify-content: space-between; font-size: 14px; color: var(--muted); }
+.goal-num b { font: 500 14px var(--mono); color: var(--text); }
+.goal-org { font-size: 14px; padding-top: 12px; border-top: 1px solid var(--rule); display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.goal-org a { color: var(--text); }
+.goal-org a:hover { color: var(--aqua); }
+.goal-note { margin-top: 22px; font-size: 13.5px; color: var(--faint); max-width: 720px; }
+.how { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--rule); }
+.how div { padding: 26px 24px 0 0; }
+.how div + div { padding-left: 24px; border-left: 1px solid var(--rule); }
+.how b { display: block; margin: 14px 0 8px; font: 600 clamp(22px, 2vw, 28px)/1.1 var(--sans); letter-spacing: -.03em; }
+.how p { color: var(--muted); }
+.figures b { font-variant-numeric: tabular-nums; }
+.ocean-in { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+.ocean h2 { font: 600 clamp(40px, 5vw, 76px)/.95 var(--sans); letter-spacing: -.05em; margin: 18px 0 18px; }
+.ocean h2 em, .why h2 em { color: var(--aqua); letter-spacing: -.03em; }
+.ocean-p { color: var(--muted); font-size: clamp(17px, 1.35vw, 19px); max-width: 480px; }
+.ocean .goals { grid-template-columns: 1fr; }
+.why { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; }
+.why h2 { font: 600 clamp(36px, 4.4vw, 64px)/.98 var(--sans); letter-spacing: -.045em; margin-bottom: 24px; max-width: 16ch; }
+.why p:not(.mono) { color: var(--muted); font-size: clamp(17px, 1.4vw, 20px); max-width: 640px; }
+.why p + p { margin-top: 1em; }
+
+/* mappa dei reef */
+.reef-map { border: 1px solid var(--rule); border-radius: 16px; background: radial-gradient(70% 70% at 50% 50%, rgba(47, 123, 255, .1), transparent 70%), var(--ink-2); overflow: hidden; }
+.reef-map svg { display: block; width: 100%; height: auto; }
+.reef-map .sphere { fill: rgba(47, 123, 255, .04); stroke: var(--rule); }
+.reef-map .graticule { fill: none; stroke: rgba(238, 243, 248, .05); }
+.reef-map .land { fill: rgba(238, 243, 248, .1); stroke: rgba(238, 243, 248, .18); stroke-width: .5; }
+.reef-map .route { fill: none; stroke: var(--aqua); stroke-width: 1.2; stroke-dasharray: 3 6; opacity: .55; animation: flow 2.4s linear infinite; }
+.pin .dot { fill: var(--ink); stroke: var(--aqua); stroke-width: 1.5; }
+.pin.active .dot { fill: var(--aqua); }
+.pin .num { font: 600 10px var(--mono); fill: var(--aqua); text-anchor: middle; }
+.pin.active .num { fill: var(--ink); }
+.pin .label { font: 500 13px var(--sans); fill: var(--text); paint-order: stroke; stroke: var(--ink-2); stroke-width: 4px; }
+.pin .pulse { fill: none; stroke: var(--aqua); stroke-width: 1.5; transform-origin: center; transform-box: fill-box; animation: pulse 2s ease-out infinite; }
+@keyframes pulse { from { transform: scale(.6); opacity: .9; } to { transform: scale(2); opacity: 0; } }
+.pin:hover .dot { fill: var(--aqua); }
+.map-legend { list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.map-legend a { display: inline-flex; gap: 10px; align-items: center; padding: 8px 14px; border: 1px solid var(--rule); border-radius: 999px; font-size: 14px; color: var(--muted); transition: color .2s, border-color .2s; }
+.map-legend a:hover { color: var(--text); border-color: var(--aqua); }
+.map-legend span { font: 500 12px var(--mono); color: var(--aqua); }
+@media (max-width: 900px) { .ocean-in, .why { grid-template-columns: 1fr; } .how { grid-template-columns: 1fr; } .how div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); margin-top: 24px; } .pin .label { display: none; } }
+
 /* principi del reef */
 .principles { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
 .principles div { padding: 26px 20px 30px 0; }

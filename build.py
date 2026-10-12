@@ -10,16 +10,103 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 EMAIL = "lancioni.ale@gmail.com"
 # versione dei file di stile e script: cambia quando cambiano, così il browser non usa copie vecchie
-VERSION = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["styles.css", "alt-overrides.css", "site.js"])).hexdigest()[:8]
-SLUG = {
-    "it": {"home": "index.html", "services": "servizi.html", "solutions": "soluzioni.html", "studio": "lab.html", "contact": "contatti.html"},
-    "en": {"home": "index.html", "services": "services.html", "solutions": "solutions.html", "studio": "lab.html", "contact": "contact.html"},
+
+# ---------------- Missione: il 5% degli introiti al mare ----------------
+SHARE = 5        # percentuale degli introiti di ogni progetto destinata al mare
+RAISED = 0       # euro già destinati finora: aggiornalo dopo ogni donazione e rilancia lo script
+# obiettivi in ordine: (latitudine, longitudine, obiettivo in euro, organizzazione, sito)
+GOALS = [
+    (10.09, 99.84, 1000, "New Heaven Reef Conservation", "https://www.newheavenreefconservation.org"),
+    (27.26, 33.81, 1500, "HEPCA", "https://www.hepca.org"),
+    (-1.90, 130.20, 2500, "Misool Foundation", "https://www.misoolfoundation.org"),
+    (-8.70, 115.20, 2500, "Coral Triangle Center", "https://coraltrianglecenter.org"),
+    (4.17, 73.50, 3000, "Reefscapers", "https://reefscapers.com"),
+    (-17.53, -149.83, 4000, "Coral Gardeners", "https://coralgardeners.org"),
+    (-18.30, 147.70, 5000, "Great Barrier Reef Foundation", "https://www.barrierreef.org"),
+]
+MT = {
+"it": {
+    "title": "Missione · Reef 7 Lab", "desc": "Il 5% degli introiti di ogni progetto di Reef 7 Lab va a chi protegge la flora e la fauna marina.",
+    "h1": f"Il {SHARE}% di ogni progetto <em>torna al mare</em>.",
+    "sub": f"Il nostro nome viene dal reef, e il reef è in pericolo: dagli anni '50 la copertura di corallo vivo nel mondo si è dimezzata. Per questo il {SHARE}% degli introiti di ogni progetto va a organizzazioni che proteggono la flora e la fauna marina.",
+    "stats": [(f"{SHARE}%", "degli introiti di ogni progetto"), (None, "destinati al mare finora"), (str(len(GOALS)), "reef da sostenere, uno dopo l'altro")],
+    "how_h": "Come funziona", "how": [("Ogni progetto", f"Il {SHARE}% di ciò che il cliente paga viene accantonato fin dal primo giorno."),
+                                      ("Un obiettivo alla volta", "Il fondo va al reef in corso. Raggiunto l'obiettivo, si passa al successivo."),
+                                      ("Tutto trasparente", "Questa pagina mostra i fondi destinati e l'avanzamento di ogni obiettivo.")],
+    "map_h": "I reef che <em>sosterremo</em>", "map_p": "Sette barriere coralline tra le più preziose del pianeta, dal Mar Rosso alla Polinesia.",
+    "goals_h": "Prossimi obiettivi", "goals_p": "Come una raccolta fondi: ogni barra si riempie con i progetti che realizziamo.",
+    "places": [("Koh Tao", "Thailandia", "Vivai e restauro dei coralli nel Golfo di Thailandia."),
+               ("Mar Rosso", "Egitto", "Boe d'ormeggio e protezione delle barriere dalle ancore."),
+               ("Raja Ampat", "Indonesia", "Aree marine protette e pattugliamento contro la pesca illegale."),
+               ("Bali", "Indonesia", "Conservazione e formazione nel Triangolo dei Coralli."),
+               ("Maldive", "Oceano Indiano", "Trapianto di coralli su strutture di ricrescita."),
+               ("Moorea", "Polinesia francese", "Coltivazione di coralli più resistenti al calore."),
+               ("Grande Barriera Corallina", "Australia", "Ricerca e ripristino del reef più grande del mondo.")],
+    "raised_of": "{r} raccolti di {t}", "active": "In corso", "next": "Prossimo", "done": "Raggiunto",
+    "partner": "Organizzazione", "visit": "Sito",
+    "note": "Le organizzazioni indicate sono quelle a cui intendiamo destinare i contributi; non rappresentano una partnership ufficiale.",
+    "why_k": "Non è marketing", "why_h": "Il mare, prima di tutto, <em>da volontari</em>.",
+    "why_p": ["Prima di Reef 7 Lab, Alessandro è stato per diversi anni membro attivo di 2hands Ancona, il gruppo di volontari che ripulisce spiagge e coste dai rifiuti.",
+              "Reef 7 Lab porta lo stesso impegno nel lavoro di ogni giorno: ogni progetto che realizziamo contribuisce a proteggere il mare da cui prendiamo il nome."],
+    "home_k": "Missione", "home_h": f"Il {SHARE}% torna <em>al mare</em>.", "home_p": f"Ogni progetto che realizziamo finanzia la protezione delle barriere coralline. Il prossimo obiettivo:",
+    "home_a": "Scopri la missione",
+},
+"en": {
+    "title": "Mission · Reef 7 Lab", "desc": "5% of revenue from every Reef 7 Lab project goes to organisations protecting marine life.",
+    "h1": f"{SHARE}% of every project <em>goes back to the sea</em>.",
+    "sub": f"Our name comes from the reef, and reefs are in danger: since the 1950s, the world's living coral cover has halved. That's why {SHARE}% of revenue from every project goes to organisations protecting marine flora and fauna.",
+    "stats": [(f"{SHARE}%", "of revenue from every project"), (None, "given to the ocean so far"), (str(len(GOALS)), "reefs to support, one after another")],
+    "how_h": "How it works", "how": [("Every project", f"{SHARE}% of what the client pays is set aside from day one."),
+                                     ("One goal at a time", "The fund goes to the current reef. Once the goal is reached, we move to the next."),
+                                     ("Fully transparent", "This page shows the funds given and the progress of every goal.")],
+    "map_h": "The reefs we'll <em>support</em>", "map_p": "Seven of the most precious coral reefs on the planet, from the Red Sea to Polynesia.",
+    "goals_h": "Next goals", "goals_p": "Like a crowdfunding campaign: every bar fills up with the projects we deliver.",
+    "places": [("Koh Tao", "Thailand", "Coral nurseries and reef restoration in the Gulf of Thailand."),
+               ("Red Sea", "Egypt", "Mooring buoys that protect reefs from anchor damage."),
+               ("Raja Ampat", "Indonesia", "Marine protected areas and patrols against illegal fishing."),
+               ("Bali", "Indonesia", "Conservation and training in the Coral Triangle."),
+               ("Maldives", "Indian Ocean", "Coral transplants onto regrowth frames."),
+               ("Moorea", "French Polynesia", "Growing heat-resistant corals."),
+               ("Great Barrier Reef", "Australia", "Research and restoration of the world's largest reef.")],
+    "raised_of": "{r} raised of {t}", "active": "In progress", "next": "Next", "done": "Reached",
+    "partner": "Organisation", "visit": "Website",
+    "note": "The organisations listed are those we intend to direct our contributions to; this does not represent an official partnership.",
+    "why_k": "Not a marketing line", "why_h": "The sea came first, <em>as volunteers</em>.",
+    "why_p": ["Before Reef 7 Lab, Alessandro spent several years as an active member of 2hands Ancona, the volunteer group that cleans beaches and coastlines of litter.",
+              "Reef 7 Lab brings the same commitment to everyday work: every project we deliver helps protect the sea we're named after."],
+    "home_k": "Mission", "home_h": f"{SHARE}% goes back <em>to the sea</em>.", "home_p": "Every project we deliver funds the protection of coral reefs. Our next goal:",
+    "home_a": "Discover the mission",
+},
 }
-NAV = ["services", "solutions", "studio"]
+
+
+def euro(v, lang):
+    s = f"{v:,.0f}"
+    return (s.replace(",", ".") + " €") if lang == "it" else ("€" + s)
+
+
+def goal_state():
+    """Distribuisce i fondi raccolti sugli obiettivi in ordine: (raccolto, percentuale) per ciascuno, e l'indice di quello in corso."""
+    left, out, active = RAISED, [], None
+    for i, (*_, target, _o, _u) in enumerate(GOALS):
+        got = min(left, target)
+        left -= got
+        out.append((got, round(got / target * 100)))
+        if active is None and got < target:
+            active = i
+    return out, active
+
+
+VERSION = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["styles.css", "alt-overrides.css", "site.js", "mission.js"])).hexdigest()[:8]
+SLUG = {
+    "it": {"home": "index.html", "services": "servizi.html", "solutions": "soluzioni.html", "mission": "missione.html", "studio": "lab.html", "contact": "contatti.html"},
+    "en": {"home": "index.html", "services": "services.html", "solutions": "solutions.html", "mission": "mission.html", "studio": "lab.html", "contact": "contact.html"},
+}
+NAV = ["services", "solutions", "mission", "studio"]
 
 T = {
 "it": {
-    "nav": {"services": "Servizi", "solutions": "Soluzioni", "studio": "Lab", "contact": "Contatti"},
+    "nav": {"services": "Servizi", "solutions": "Soluzioni", "mission": "Missione", "studio": "Lab", "contact": "Contatti"},
     "menu": "Menu", "close": "Chiudi", "pages": "Pagine",
     "foot": "© 2026 Reef 7 Lab · Sviluppo software e intelligenza artificiale",
     "cta_k": "Nuovo progetto", "cta_h": "Pronti a far crescere il vostro <em>reef</em>?",
@@ -106,7 +193,8 @@ T = {
         "seven_p": "Il 7 sta per i giorni della settimana. I sistemi che costruiamo non vanno in ferie e non staccano alle sei: lavorano sette giorni su sette, <span class=\"dim\">anche quando il vostro team riposa.</span>",
         "who_big": "Dietro Reef 7 Lab c'è <em>Alessandro</em>.",
         "who": ["Negli ultimi anni ha progettato software, automazioni e funnel di vendita per aziende in crescita, vedendo da vicino quanto valore si disperde tra strumenti scollegati e processi manuali.",
-                "Ha fondato Reef 7 Lab per portare alle aziende ciò che di solito è riservato ai grandi gruppi: sistemi su misura, intelligenza artificiale applicata e un interlocutore che conosce ogni riga del progetto."],
+                "Ha fondato Reef 7 Lab per portare alle aziende ciò che di solito è riservato ai grandi gruppi: sistemi su misura, intelligenza artificiale applicata e un interlocutore che conosce ogni riga del progetto.",
+                "Il legame con il mare è personale: per diversi anni è stato membro attivo di 2hands Ancona, il gruppo di volontari che ripulisce spiagge e coste dai rifiuti."],
         "sign": ("Alessandro", "Fondatore, Reef 7 Lab"),
         "photo_alt": "Alessandro, fondatore di Reef 7 Lab",
     },
@@ -131,7 +219,7 @@ T = {
     },
 },
 "en": {
-    "nav": {"services": "Services", "solutions": "Solutions", "studio": "Lab", "contact": "Contact"},
+    "nav": {"services": "Services", "solutions": "Solutions", "mission": "Mission", "studio": "Lab", "contact": "Contact"},
     "menu": "Menu", "close": "Close", "pages": "Pages",
     "foot": "© 2026 Reef 7 Lab · Software and AI development",
     "cta_k": "New project", "cta_h": "Ready to grow your <em>reef</em>?",
@@ -218,7 +306,8 @@ T = {
         "seven_p": "The 7 stands for the days of the week. The systems we build don't take holidays or clock off at six: they work seven days a week, <span class=\"dim\">even while your team rests.</span>",
         "who_big": "Behind Reef 7 Lab is <em>Alessandro</em>.",
         "who": ["In recent years he has designed software, automations and sales funnels for growing companies, seeing first-hand how much value leaks away between disconnected tools and manual processes.",
-                "He founded Reef 7 Lab to bring companies what is usually reserved for large groups: custom systems, applied artificial intelligence and a single point of contact who knows every line of the project."],
+                "He founded Reef 7 Lab to bring companies what is usually reserved for large groups: custom systems, applied artificial intelligence and a single point of contact who knows every line of the project.",
+                "His connection to the sea is personal: for several years he was an active member of 2hands Ancona, the volunteer group that cleans beaches and coastlines of litter."],
         "sign": ("Alessandro", "Founder, Reef 7 Lab"),
         "photo_alt": "Alessandro, founder of Reef 7 Lab",
     },
@@ -295,7 +384,7 @@ def build(lang, variant=""):
     u = lambda k: S[k]
     arrow = '<span class="arr" aria-hidden="true">→</span>'
 
-    def page(key, title, desc, body, hero=False):
+    def page(key, title, desc, body, hero=False, extra=""):
         links = "".join(f'<a href="{u(k)}"{" aria-current=\"page\"" if k == key else ""}>{L["nav"][k]}</a>' for k in NAV)
         cur = ' aria-current="page"' if key == "contact" else ""
         foot_links = "".join(f'<a href="{u(k)}">{L["nav"][k]}</a>' for k in NAV + ["contact"])
@@ -339,7 +428,7 @@ def build(lang, variant=""):
   <a class="r" href="mailto:{EMAIL}">{EMAIL}</a>
 </div></footer>
 <script>window.REEF = {{ email: "{EMAIL}" }};</script>
-<script src="{pre}site.js?v={VERSION}"></script>
+<script src="{pre}site.js?v={VERSION}"></script>{extra}
 </body>
 </html>
 """
@@ -351,6 +440,26 @@ def build(lang, variant=""):
 </div></section>"""
 
     out = {}
+
+    # missione: stato degli obiettivi e scheda di ogni reef
+    M = MT[lang]
+    states, active = goal_state()
+    active = active if active is not None else len(GOALS) - 1
+
+    def goal_card(i):
+        lat, lon, target, org, url = GOALS[i]
+        place, country, what = M["places"][i]
+        got, pct = states[i]
+        status = M["done"] if pct >= 100 else M["active"] if i == active else M["next"]
+        cls = "done" if pct >= 100 else "active" if i == active else ""
+        return f"""<article class="goal {cls}" id="g{i + 1}">
+      <div class="goal-top"><span class="goal-n">{i + 1:02d}</span><span class="chip">{status}</span></div>
+      <h3>{place}</h3><p class="goal-country mono">{country}</p>
+      <p class="goal-what">{what}</p>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{pct}"><i style="width:{max(pct, 0)}%"></i></div>
+      <div class="goal-num"><span>{M['raised_of'].format(r=euro(got, lang), t=euro(target, lang))}</span><b>{pct}%</b></div>
+      <p class="goal-org"><span class="mono">{M['partner']}</span> <a href="{url}" target="_blank" rel="noopener">{org} ↗</a></p>
+    </article>"""
 
     # home
     H = L["home"]
@@ -385,6 +494,11 @@ def build(lang, variant=""):
   </div>
   <a class="link" href="{u('solutions')}">{H['sol_all']} {arrow}</a>
 </div></section>
+<section class="block ocean"><div class="wrap ocean-in">
+  <div><p class="mono">{M['home_k']}</p><h2>{M['home_h']}</h2><p class="ocean-p">{M['home_p']}</p>
+    <a class="link" href="{u('mission')}">{M['home_a']} {arrow}</a></div>
+  <div class="goals">{goal_card(active)}</div>
+</div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{H['reef_h']}</h2><p>{H['reef_p']}</p></div>
   <div class="principles">{reef_words}</div>
@@ -414,6 +528,41 @@ def build(lang, variant=""):
     out["solutions"] = page("solutions", SO["title"], SO["desc"], head_block(L["nav"]["solutions"], SO["h1"], SO["sub"]) + f"""
 <section class="wrap" style="padding-bottom:clamp(80px,10vw,150px)">{cases}
 </section>""")
+
+    # missione
+    stats = "".join(f'<div><b>{v if v is not None else euro(RAISED, lang)}</b><p>{t}</p></div>' for v, t in M["stats"])
+    how = "".join(f'<div><span class="mono">0{i}</span><b>{t}</b><p>{d}</p></div>' for i, (t, d) in enumerate(M["how"], 1))
+    points = [{"n": i + 1, "lat": g[0], "lon": g[1], "name": M["places"][i][0], "active": i == active} for i, g in enumerate(GOALS)]
+    import json
+    map_data = json.dumps(points, ensure_ascii=False).replace('"', "&quot;")
+    cards = "".join(goal_card(i) for i in range(len(GOALS)))
+    why = "".join(f"<p>{p}</p>" for p in M["why_p"])
+    libs = """
+<script src="https://cdn.jsdelivr.net/npm/d3-array@3.2.4/dist/d3-array.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-geo@3.1.1/dist/d3-geo.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>"""
+    out["mission"] = page("mission", M["title"], M["desc"], head_block(L["nav"]["mission"], M["h1"], M["sub"]) + f"""
+<section class="wrap"><div class="figures">{stats}</div></section>
+<section class="block" style="border-top:0"><div class="wrap">
+  <div class="head"><h2>{M['how_h']}</h2></div>
+  <div class="how">{how}</div>
+</div></section>
+<section class="block"><div class="wrap">
+  <div class="head"><h2>{M['map_h']}</h2><p>{M['map_p']}</p></div>
+  <div class="reef-map" id="reef-map" data-points="{map_data}" data-world="https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-110m.json">
+    <svg viewBox="0 0 1000 500" role="img" aria-label="{M['map_h'].replace('<em>', '').replace('</em>', '')}"></svg>
+  </div>
+  <ol class="map-legend">{"".join(f'<li><a href="#g{p["n"]}"><span>{p["n"]:02d}</span>{p["name"]}</a></li>' for p in points)}</ol>
+</div></section>
+<section class="block"><div class="wrap">
+  <div class="head"><h2>{M['goals_h']}</h2><p>{M['goals_p']}</p></div>
+  <div class="goals">{cards}</div>
+  <p class="goal-note">{M['note']}</p>
+</div></section>
+<section class="block"><div class="wrap why">
+  <p class="mono">{M['why_k']}</p>
+  <div><h2>{M['why_h']}</h2>{why}</div>
+</div></section>""", extra=libs + f'\n<script src="{pre}mission.js?v={VERSION}"></script>')
 
     # studio
     St = L["studio"]
