@@ -157,12 +157,14 @@ T = {
         "h1": "Il tuo business, <em>connesso</em>.",
         "sub": "Siti, applicazioni e intelligenza artificiale progettati per lavorare insieme. Meno lavoro manuale, decisioni più rapide, una crescita che si accumula nel tempo.",
         "b1": "Parliamo del tuo progetto", "b2": "Scopri i servizi",
-        "eco_k": "Il problema",
-        "eco_h": "I tuoi strumenti, finalmente <em>in squadra</em>.",
-        "eco_p": "Il cliente scrive su WhatsApp, l'ordine arriva dall'e-commerce, la fattura parte da un altro programma e i numeri finiscono in un Excel che nessuno aggiorna. Noi colleghiamo tutto: ogni informazione si inserisce una volta e arriva dove serve.",
+        "eco_k": "Dal caos al controllo",
+        "eco_h": "Smetti di indovinare. <em>Inizia a sapere</em>.",
+        "eco_p": "Clienti su WhatsApp, ordini sull'e-commerce, fatture in un altro programma, numeri in un Excel che nessuno aggiorna: lavori tanto, ma non sai con certezza cosa ti fa guadagnare. Noi costruiamo il sistema che collega tutto. Vedi vendite, margini e clienti in un unico posto, il lavoro ripetitivo si fa da solo e ogni decisione la prendi con i numeri in mano.",
         "tools": ["Email", "WhatsApp", "Excel", "CRM", "E-commerce", "Contabilità"],
-        "before": ("Oggi", ["Dati copiati a mano da un programma all'altro", "Ogni reparto con la sua versione dei numeri", "Decisioni prese su dati vecchi"]),
-        "after": ("Con Reef 7 Lab", ["Ogni dato inserito una volta sola", "Un'unica fonte di verità per tutta l'azienda", "Numeri sempre aggiornati"]),
+        "before": ("Oggi", ["Ore perse a copiare dati da un programma all'altro", "Non sai quali clienti e prodotti ti fanno guadagnare davvero", "Decisioni prese a sensazione, quando ormai è tardi"]),
+        "after": ("Con il tuo sistema", ["Il lavoro manuale lo fa il sistema, tu pensi a crescere", "Vendite, margini e clienti in un'unica dashboard", "Ogni decisione presa con cognizione di causa"]),
+        "card": ("Il tuo sistema", ["Vendite", "Margini", "Clienti"], "Dati aggiornati in tempo reale"),
+        "status": ("6 strumenti · nessuna connessione", "6 strumenti · un unico sistema"),
         "svc_h": "Servizi", "svc_p": "Cinque competenze che lavorano insieme, per un'azienda più veloce e più lucida nelle decisioni.", "svc_all": "Tutti i servizi",
         "sol_h": "Soluzioni", "sol_p": "Ogni settore ha i suoi colli di bottiglia. Ecco quelli che conosciamo meglio.", "sol_all": "Tutte le soluzioni",
         "reef_h": "Progettati come <em>un reef</em>", "reef_p": "Il reef è tra gli ecosistemi più efficienti della Terra. I suoi cinque principi guidano ogni progetto.",
@@ -270,12 +272,14 @@ T = {
         "h1": "Your business, <em>connected</em>.",
         "sub": "Websites, applications and AI designed to work together. Less manual work, faster decisions and growth that compounds over time.",
         "b1": "Let's talk about your project", "b2": "Explore services",
-        "eco_k": "The problem",
-        "eco_h": "Your tools, finally <em>working together</em>.",
-        "eco_p": "A client messages on WhatsApp, the order comes in through your store, the invoice goes out from another program and the numbers end up in a spreadsheet nobody updates. We connect it all: every piece of information is entered once and reaches wherever it's needed.",
+        "eco_k": "From chaos to control",
+        "eco_h": "Stop guessing. <em>Start knowing</em>.",
+        "eco_p": "Clients on WhatsApp, orders in your store, invoices in another program, numbers in a spreadsheet nobody updates: you work hard, but you don't know for sure what actually makes you money. We build the system that connects it all. You see sales, margins and clients in one place, repetitive work runs itself and every decision is backed by real numbers.",
         "tools": ["Email", "WhatsApp", "Spreadsheets", "CRM", "E-commerce", "Accounting"],
-        "before": ("Today", ["Data copied by hand from one program to another", "Every team with its own version of the numbers", "Decisions made on outdated data"]),
-        "after": ("With Reef 7 Lab", ["Every piece of data entered once", "One source of truth for the whole company", "Numbers that are always up to date"]),
+        "before": ("Today", ["Hours lost copying data between programs", "No clear view of which clients and products really make you money", "Decisions made on gut feeling, when it's already too late"]),
+        "after": ("With your system", ["The system handles the manual work, you focus on growth", "Sales, margins and clients in a single dashboard", "Every decision made with full visibility"]),
+        "card": ("Your system", ["Sales", "Margins", "Clients"], "Data updated in real time"),
+        "status": ("6 tools · no connections", "6 tools · one system"),
         "svc_h": "Services", "svc_p": "Five disciplines that work together, for a company that moves faster and decides more clearly.", "svc_all": "All services",
         "sol_h": "Solutions", "sol_p": "Every industry has its bottlenecks. These are the ones we know best.", "sol_all": "All solutions",
         "reef_h": "Designed like <em>a reef</em>", "reef_p": "The reef is one of the most efficient ecosystems on Earth. Its five principles guide every project.",
@@ -351,6 +355,14 @@ def eco(H, pre):
     # dopo: in cerchio attorno al centro, con il flusso dei dati
     ring = [(50 + 36 * math.cos(math.radians(-90 + i * 60)), 50 + 38 * math.sin(math.radians(-90 + i * 60))) for i in range(6)]
     lines = "".join(f'<line x1="50" y1="50" x2="{x:.1f}" y2="{y:.1f}" style="animation-delay:{-i * .35:.2f}s"/>' for i, (x, y) in enumerate(ring))
+    # pacchetti di dati che viaggiano dagli strumenti verso il centro
+    packets = "".join(f'<line x1="{x:.1f}" y1="{y:.1f}" x2="50" y2="50" style="animation-delay:{-i * .45:.2f}s"/>' for i, (x, y) in enumerate(ring))
+    ct, rows, live = H["card"]
+    bars = [(28, 40, 36, 55, 68, 92), (45, 38, 52, 60, 58, 78), (22, 30, 44, 41, 62, 84)]
+    card_rows = "".join(
+        f'<div class="hc-row"><span>{name}</span><i class="spark">{"".join(f"<b style=\"height:{h}%\"></b>" for h in bars[j])}</i></div>'
+        for j, name in enumerate(rows))
+    sb, sa = H["status"]
     # una sola scena: ogni strumento conosce la posizione "prima" e "dopo", il CSS anima il passaggio
     pills = "".join(f'<span class="pill" style="--bx:{bx}%;--by:{by}%;--br:{br}deg;--ax:{ax:.1f}%;--ay:{ay:.1f}%;--d:{i * 70}ms">{t}</span>'
                     for i, (t, (bx, by, br), (ax, ay)) in enumerate(zip(tools, spots, ring)))
@@ -369,9 +381,14 @@ def eco(H, pre):
       <ul class="eco-list after-list">{li(al, "ok")}</ul>
     </div>
     <div class="eco-stage" aria-hidden="true">
-      <svg viewBox="0 0 100 100" preserveAspectRatio="none"><g class="broken">{seg}</g><g class="links">{lines}</g></svg>
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none"><g class="broken">{seg}</g><g class="links">{lines}</g><g class="packets">{packets}</g></svg>
       {pills}
-      <span class="hub"><img src="{pre}assets/reef7-logo.png" alt="" width="64" height="64"></span>
+      <div class="hub-card">
+        <div class="hc-top"><img src="{pre}assets/reef7-logo.png" alt="" width="22" height="22"><b>{ct}</b></div>
+        {card_rows}
+        <p class="hc-live"><span class="dot"></span>{live}</p>
+      </div>
+      <p class="eco-status mono"><span class="s-before">{sb}</span><span class="s-after">{sa}</span></p>
     </div>
   </div>"""
 
