@@ -3,10 +3,14 @@
 Uso:  python build.py
 Testi ed email si cambiano qui sotto; poi si rilancia lo script.
 """
+import hashlib
+import math
 from pathlib import Path
 
 ROOT = Path(__file__).parent
 EMAIL = "lancioni.ale@gmail.com"
+# versione dei file di stile e script: cambia quando cambiano, così il browser non usa copie vecchie
+VERSION = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["styles.css", "alt-overrides.css", "site.js"])).hexdigest()[:8]
 SLUG = {
     "it": {"home": "index.html", "services": "servizi.html", "solutions": "soluzioni.html", "studio": "lab.html", "contact": "contatti.html"},
     "en": {"home": "index.html", "services": "services.html", "solutions": "solutions.html", "studio": "lab.html", "contact": "contact.html"},
@@ -65,9 +69,11 @@ T = {
         "h1": "Il tuo business, <em>connesso</em>.",
         "sub": "Siti, applicazioni e intelligenza artificiale su misura, collegati in un unico ecosistema. Meno lavoro manuale, decisioni più rapide, una crescita che si accumula.",
         "b1": "Parliamo del progetto", "b2": "Scopri i servizi",
-        "problem_k": "Il problema",
-        "problem_h": "Troppi strumenti, nessun sistema.",
-        "problem_p": "La maggior parte delle aziende non ha pochi strumenti: ne ha troppi, e non si parlano tra loro. Dati copiati a mano, informazioni sparse, decisioni prese in ritardo. Noi costruiamo l'ecosistema che li unisce e li fa lavorare per voi.",
+        "eco_h": "Da strumenti sparsi a <em>un unico sistema</em>.",
+        "eco_p": "Alla maggior parte delle aziende non mancano gli strumenti: ne hanno troppi, e non si parlano. Noi li colleghiamo in un ecosistema che lavora per voi.",
+        "tools": ["Email", "Excel", "CRM", "E-commerce", "Contabilità", "Chat del team"],
+        "before": ("Oggi", ["Dati copiati a mano", "Informazioni sparse", "Decisioni in ritardo"]),
+        "after": ("Con Reef 7 Lab", ["Dati inseriti una volta sola", "Tutto in un'unica vista", "Decisioni in tempo reale"]),
         "svc_h": "Servizi", "svc_p": "Cinque discipline, un solo obiettivo: un'azienda più veloce, più informata, più difficile da raggiungere.", "svc_all": "Tutti i servizi",
         "sol_h": "Soluzioni", "sol_p": "Ogni settore ha i suoi colli di bottiglia. Questi sono quelli che trasformiamo più spesso in vantaggi.", "sol_all": "Tutte le soluzioni",
         "reef_h": "Progettati come <em>un reef</em>", "reef_p": "Il reef è uno degli ecosistemi più efficienti della Terra. I suoi cinque principi guidano ogni sistema che costruiamo.",
@@ -107,11 +113,20 @@ T = {
         "title": "Contatti · Reef 7 Lab", "desc": "Contatta Reef 7 Lab per un nuovo progetto.",
         "h1": "Raccontaci dove vuoi <em>arrivare</em>.",
         "sub": "Una prima conversazione di 30 minuti, senza impegno: capiamo il contesto e ti diciamo con franchezza se, e come, possiamo aiutarti.",
-        "or": "Oppure compila il modulo", "or_p": "Il pulsante apre la tua email con il messaggio già pronto.",
-        "f": {"name": "Nome", "company": "Azienda", "want": "Area di interesse", "msg": "Il progetto",
-              "ph": "Obiettivi, tempi, cosa vorresti migliorare",
-              "opts": ["Sito web", "Applicazione su misura", "Intelligenza artificiale", "Company brain", "Dashboard e dati", "Altro"],
-              "note": "Rispondiamo entro un giorno lavorativo.", "send": "Invia"},
+        "info": [("Email", None), ("Tempi di risposta", "Entro un giorno lavorativo"), ("Dove", "Italia · lavoriamo anche da remoto"), ("Lingue", "Italiano, English")],
+        "next_k": "Cosa succede dopo",
+        "next": [("Ci scrivi", "Raccontaci obiettivi, tempi e contesto. Bastano poche righe."),
+                 ("Ti rispondiamo", "Entro un giorno lavorativo, con le prime domande e una proposta di data."),
+                 ("Prima consulenza", "30 minuti, gratuita e senza impegno, per capire se e come possiamo aiutarti.")],
+        "form_h": "Richiedi una consulenza",
+        "f": {"name": "Nome e cognome", "email": "Email di lavoro", "company": "Azienda", "want": "Di cosa hai bisogno",
+              "msg": "Raccontaci il progetto", "ph": "Obiettivi, tempi e cosa vorresti migliorare",
+              "opts": ["Sito web", "Applicazione su misura", "Intelligenza artificiale", "Company brain", "Dashboard e dati", "Non lo so ancora"],
+              "privacy": "Acconsento al trattamento dei miei dati per essere ricontattato in merito alla richiesta.",
+              "req": "Campi obbligatori", "send": "Invia la richiesta", "sending": "Invio in corso…",
+              "ok_h": "Richiesta inviata.", "ok_p": "Grazie! Ti risponderemo entro un giorno lavorativo all'indirizzo che ci hai indicato.",
+              "err": "Invio non riuscito. Riprova o scrivici direttamente a"},
+        "subject": "Nuova richiesta dal sito",
     },
 },
 "en": {
@@ -165,9 +180,11 @@ T = {
         "h1": "Your business, <em>connected</em>.",
         "sub": "Custom websites, applications and AI, connected into a single ecosystem. Less manual work, faster decisions, growth that compounds.",
         "b1": "Start a project", "b2": "Explore services",
-        "problem_k": "The problem",
-        "problem_h": "Too many tools, no system.",
-        "problem_p": "Most companies aren't short of tools: they have too many, and none of them talk to each other. Data copied by hand, scattered information, decisions made too late. We build the ecosystem that connects them and puts them to work for you.",
+        "eco_h": "From scattered tools to <em>one system</em>.",
+        "eco_p": "Most companies aren't short of tools: they have too many, and none of them talk. We connect them into an ecosystem that works for you.",
+        "tools": ["Email", "Spreadsheets", "CRM", "E-commerce", "Accounting", "Team chat"],
+        "before": ("Today", ["Data copied by hand", "Scattered information", "Decisions made too late"]),
+        "after": ("With Reef 7 Lab", ["Data entered once", "Everything in one view", "Real-time decisions"]),
         "svc_h": "Services", "svc_p": "Five disciplines, one goal: a company that's faster, better informed and harder to catch.", "svc_all": "All services",
         "sol_h": "Solutions", "sol_p": "Every industry has its bottlenecks. These are the ones we most often turn into advantages.", "sol_all": "All solutions",
         "reef_h": "Designed like <em>a reef</em>", "reef_p": "The reef is one of the most efficient ecosystems on Earth. Its five principles shape every system we build.",
@@ -207,14 +224,57 @@ T = {
         "title": "Contact · Reef 7 Lab", "desc": "Contact Reef 7 Lab about a new project.",
         "h1": "Tell us where you want to <em>go</em>.",
         "sub": "A first 30-minute conversation, with no commitment: we learn the context and tell you frankly whether, and how, we can help.",
-        "or": "Or use the form", "or_p": "The button opens your email with the message ready to send.",
-        "f": {"name": "Name", "company": "Company", "want": "Area of interest", "msg": "Your project",
-              "ph": "Goals, timeline, what you'd like to improve",
-              "opts": ["Website", "Custom application", "Artificial intelligence", "Company brain", "Dashboards and data", "Other"],
-              "note": "We reply within one business day.", "send": "Send"},
+        "info": [("Email", None), ("Response time", "Within one business day"), ("Based in", "Italy · working remotely"), ("Languages", "English, Italiano")],
+        "next_k": "What happens next",
+        "next": [("You write to us", "Tell us about your goals, timeline and context. A few lines are enough."),
+                 ("We reply", "Within one business day, with a few first questions and a proposed date."),
+                 ("First consultation", "30 minutes, free and with no commitment, to see whether and how we can help.")],
+        "form_h": "Request a consultation",
+        "f": {"name": "Full name", "email": "Work email", "company": "Company", "want": "What do you need",
+              "msg": "Tell us about the project", "ph": "Goals, timeline and what you'd like to improve",
+              "opts": ["Website", "Custom application", "Artificial intelligence", "Company brain", "Dashboards and data", "Not sure yet"],
+              "privacy": "I agree to the processing of my data so you can get back to me about this request.",
+              "req": "Required fields", "send": "Send request", "sending": "Sending…",
+              "ok_h": "Request sent.", "ok_p": "Thank you! We'll reply within one business day at the address you provided.",
+              "err": "Something went wrong. Please try again or email us directly at"},
+        "subject": "New enquiry from the website",
     },
 },
 }
+
+
+def eco(H, pre):
+    """Sezione prima/dopo: strumenti sparsi e scollegati, poi gli stessi collegati a un unico centro."""
+    tools = H["tools"]
+    # prima: posizioni sparse, leggermente ruotate, con collegamenti interrotti
+    spots = [(22, 24, -6), (70, 18, 5), (48, 50, -3), (18, 74, 4), (78, 62, -5), (55, 86, 3)]
+    broken = [(0, 2), (1, 4), (3, 5), (2, 4)]
+    seg = ""
+    for a, b in broken:
+        (x1, y1, _), (x2, y2, _) = spots[a], spots[b]
+        for (sx, sy), (ex, ey) in (((x1, y1), (x2, y2)), ((x2, y2), (x1, y1))):
+            mx, my = sx + (ex - sx) * .38, sy + (ey - sy) * .38
+            seg += f'<line x1="{sx}" y1="{sy}" x2="{mx:.1f}" y2="{my:.1f}"/>'
+    before_pills = "".join(f'<span class="pill" style="left:{x}%;top:{y}%;--r:{r}deg">{t}</span>' for t, (x, y, r) in zip(tools, spots))
+    # dopo: in cerchio attorno al centro, con il flusso dei dati
+    ring = [(50 + 36 * math.cos(math.radians(-90 + i * 60)), 50 + 38 * math.sin(math.radians(-90 + i * 60))) for i in range(6)]
+    lines = "".join(f'<line x1="50" y1="50" x2="{x:.1f}" y2="{y:.1f}" style="animation-delay:{-i * .35:.2f}s"/>' for i, (x, y) in enumerate(ring))
+    after_pills = "".join(f'<span class="pill on" style="left:{x:.1f}%;top:{y:.1f}%">{t}</span>' for t, (x, y) in zip(tools, ring))
+    li = lambda items, cls: "".join(f'<li class="{cls}">{x}</li>' for x in items)
+    (bk, bl), (ak, al) = H["before"], H["after"]
+    return f"""<div class="eco">
+    <figure class="eco-panel before">
+      <figcaption class="mono">{bk}</figcaption>
+      <div class="eco-stage"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">{seg}</svg>{before_pills}</div>
+      <ul class="eco-list">{li(bl, "x")}</ul>
+    </figure>
+    <figure class="eco-panel after">
+      <figcaption class="mono">{ak}</figcaption>
+      <div class="eco-stage"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">{lines}</svg>{after_pills}
+        <span class="hub"><img src="{pre}assets/reef7-logo.png" alt="Reef 7 Lab" width="64" height="64"></span></div>
+      <ul class="eco-list">{li(al, "ok")}</ul>
+    </figure>
+  </div>"""
 
 
 def build(lang, variant=""):
@@ -253,7 +313,7 @@ def build(lang, variant=""):
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{pre}{css}">
+  <link rel="stylesheet" href="{pre}{css}?v={VERSION}">
 </head>
 <body>
 <header class="top{'' if hero else ' solid'}"><div class="wrap top-in">
@@ -271,7 +331,7 @@ def build(lang, variant=""):
   <a class="r" href="mailto:{EMAIL}">{EMAIL}</a>
 </div></footer>
 <script>window.REEF = {{ email: "{EMAIL}" }};</script>
-<script src="{pre}site.js"></script>
+<script src="{pre}site.js?v={VERSION}"></script>
 </body>
 </html>
 """
@@ -302,9 +362,9 @@ def build(lang, variant=""):
     </div>
   </div>
 </section>
-<section class="block problem"><div class="wrap problem-in">
-  <p class="mono">{H['problem_k']}</p>
-  <div><h2>{H['problem_h']}</h2><p>{H['problem_p']}</p></div>
+<section class="block"><div class="wrap">
+  <div class="head"><h2>{H['eco_h']}</h2><p>{H['eco_p']}</p></div>
+  {eco(H, pre)}
 </div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{H['svc_h']}</h2><p>{H['svc_p']}</p></div>
@@ -369,17 +429,31 @@ def build(lang, variant=""):
     # contatti
     C = L["contact"]; F = C["f"]
     opts = "".join(f"<option>{o}</option>" for o in F["opts"])
+    info = "".join(f'<li><span class="mono">{k}</span>{f"<a href=\"mailto:{EMAIL}\">{EMAIL}</a>" if v is None else f"<span>{v}</span>"}</li>' for k, v in C["info"])
+    steps = "".join(f'<li><span class="n">{i}</span><div><b>{t}</b><p>{d}</p></div></li>' for i, (t, d) in enumerate(C["next"], 1))
     out["contact"] = page("contact", C["title"], C["desc"], head_block(L["nav"]["contact"], C["h1"], C["sub"]) + f"""
-<section class="wrap" style="padding-bottom:clamp(56px,7vw,100px)"><a class="big-mail" href="mailto:{EMAIL}">{EMAIL}</a></section>
-<section class="block"><div class="wrap contact-grid">
-  <div><p class="mono">{C['or']}</p><p style="color:var(--muted);margin-top:14px;max-width:340px">{C['or_p']}</p></div>
-  <form class="form" id="contact-form">
-    <label><span class="mono">{F['name']}</span><input name="nome" required autocomplete="name"></label>
-    <label><span class="mono">{F['company']}</span><input name="azienda" autocomplete="organization"></label>
-    <label class="full"><span class="mono">{F['want']}</span><select name="servizio">{opts}</select></label>
-    <label class="full"><span class="mono">{F['msg']}</span><textarea name="messaggio" required placeholder="{F['ph']}"></textarea></label>
-    <div class="send full"><p>{F['note']}</p><button class="btn" type="submit">{F['send']} {arrow}</button></div>
-  </form>
+<section class="block contact"><div class="wrap contact-grid">
+  <aside class="contact-side">
+    <ul class="contact-info">{info}</ul>
+    <p class="mono" style="margin:48px 0 18px">{C['next_k']}</p>
+    <ol class="next-steps">{steps}</ol>
+  </aside>
+  <div class="form-card">
+    <h2>{C['form_h']}</h2>
+    <form class="form" id="contact-form" novalidate data-endpoint="https://formsubmit.co/ajax/{EMAIL}" data-subject="{C['subject']}"
+      data-sending="{F['sending']}" data-err="{F['err']}" data-email="{EMAIL}">
+      <label class="field"><span>{F['name']} *</span><input name="nome" required autocomplete="name"></label>
+      <label class="field"><span>{F['email']} *</span><input name="email" type="email" required autocomplete="email"></label>
+      <label class="field"><span>{F['company']}</span><input name="azienda" autocomplete="organization"></label>
+      <label class="field"><span>{F['want']}</span><select name="servizio">{opts}</select></label>
+      <label class="field full"><span>{F['msg']} *</span><textarea name="messaggio" required rows="5" placeholder="{F['ph']}"></textarea></label>
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label class="check full"><input type="checkbox" name="privacy" required><span>{F['privacy']} *</span></label>
+      <div class="send full"><p>* {F['req']}</p><button class="btn" type="submit">{F['send']} {arrow}</button></div>
+      <p class="form-msg full" role="status" aria-live="polite"></p>
+    </form>
+    <div class="form-ok" hidden><span class="tick" aria-hidden="true">✓</span><h3>{F['ok_h']}</h3><p>{F['ok_p']}</p></div>
+  </div>
 </div></section>""")
 
     base = ROOT / variant if variant else ROOT

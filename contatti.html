@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=6d4b164a">
 </head>
 <body>
 <header class="top solid"><div class="wrap top-in">
@@ -29,16 +29,28 @@
   <p class="mono">Contatti</p>
   <h1>Raccontaci dove vuoi <em>arrivare</em>.</h1><p class="sub">Una prima conversazione di 30 minuti, senza impegno: capiamo il contesto e ti diciamo con franchezza se, e come, possiamo aiutarti.</p>
 </div></section>
-<section class="wrap" style="padding-bottom:clamp(56px,7vw,100px)"><a class="big-mail" href="mailto:lancioni.ale@gmail.com">lancioni.ale@gmail.com</a></section>
-<section class="block"><div class="wrap contact-grid">
-  <div><p class="mono">Oppure compila il modulo</p><p style="color:var(--muted);margin-top:14px;max-width:340px">Il pulsante apre la tua email con il messaggio già pronto.</p></div>
-  <form class="form" id="contact-form">
-    <label><span class="mono">Nome</span><input name="nome" required autocomplete="name"></label>
-    <label><span class="mono">Azienda</span><input name="azienda" autocomplete="organization"></label>
-    <label class="full"><span class="mono">Area di interesse</span><select name="servizio"><option>Sito web</option><option>Applicazione su misura</option><option>Intelligenza artificiale</option><option>Company brain</option><option>Dashboard e dati</option><option>Altro</option></select></label>
-    <label class="full"><span class="mono">Il progetto</span><textarea name="messaggio" required placeholder="Obiettivi, tempi, cosa vorresti migliorare"></textarea></label>
-    <div class="send full"><p>Rispondiamo entro un giorno lavorativo.</p><button class="btn" type="submit">Invia <span class="arr" aria-hidden="true">→</span></button></div>
-  </form>
+<section class="block contact"><div class="wrap contact-grid">
+  <aside class="contact-side">
+    <ul class="contact-info"><li><span class="mono">Email</span><a href="mailto:lancioni.ale@gmail.com">lancioni.ale@gmail.com</a></li><li><span class="mono">Tempi di risposta</span><span>Entro un giorno lavorativo</span></li><li><span class="mono">Dove</span><span>Italia · lavoriamo anche da remoto</span></li><li><span class="mono">Lingue</span><span>Italiano, English</span></li></ul>
+    <p class="mono" style="margin:48px 0 18px">Cosa succede dopo</p>
+    <ol class="next-steps"><li><span class="n">1</span><div><b>Ci scrivi</b><p>Raccontaci obiettivi, tempi e contesto. Bastano poche righe.</p></div></li><li><span class="n">2</span><div><b>Ti rispondiamo</b><p>Entro un giorno lavorativo, con le prime domande e una proposta di data.</p></div></li><li><span class="n">3</span><div><b>Prima consulenza</b><p>30 minuti, gratuita e senza impegno, per capire se e come possiamo aiutarti.</p></div></li></ol>
+  </aside>
+  <div class="form-card">
+    <h2>Richiedi una consulenza</h2>
+    <form class="form" id="contact-form" novalidate data-endpoint="https://formsubmit.co/ajax/lancioni.ale@gmail.com" data-subject="Nuova richiesta dal sito"
+      data-sending="Invio in corso…" data-err="Invio non riuscito. Riprova o scrivici direttamente a" data-email="lancioni.ale@gmail.com">
+      <label class="field"><span>Nome e cognome *</span><input name="nome" required autocomplete="name"></label>
+      <label class="field"><span>Email di lavoro *</span><input name="email" type="email" required autocomplete="email"></label>
+      <label class="field"><span>Azienda</span><input name="azienda" autocomplete="organization"></label>
+      <label class="field"><span>Di cosa hai bisogno</span><select name="servizio"><option>Sito web</option><option>Applicazione su misura</option><option>Intelligenza artificiale</option><option>Company brain</option><option>Dashboard e dati</option><option>Non lo so ancora</option></select></label>
+      <label class="field full"><span>Raccontaci il progetto *</span><textarea name="messaggio" required rows="5" placeholder="Obiettivi, tempi e cosa vorresti migliorare"></textarea></label>
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label class="check full"><input type="checkbox" name="privacy" required><span>Acconsento al trattamento dei miei dati per essere ricontattato in merito alla richiesta. *</span></label>
+      <div class="send full"><p>* Campi obbligatori</p><button class="btn" type="submit">Invia la richiesta <span class="arr" aria-hidden="true">→</span></button></div>
+      <p class="form-msg full" role="status" aria-live="polite"></p>
+    </form>
+    <div class="form-ok" hidden><span class="tick" aria-hidden="true">✓</span><h3>Richiesta inviata.</h3><p>Grazie! Ti risponderemo entro un giorno lavorativo all'indirizzo che ci hai indicato.</p></div>
+  </div>
 </div></section>
 </main>
 <footer class="foot"><div class="wrap foot-in">
@@ -47,6 +59,6 @@
   <a class="r" href="mailto:lancioni.ale@gmail.com">lancioni.ale@gmail.com</a>
 </div></footer>
 <script>window.REEF = { email: "lancioni.ale@gmail.com" };</script>
-<script src="site.js"></script>
+<script src="site.js?v=6d4b164a"></script>
 </body>
 </html>

@@ -1,6 +1,5 @@
-// Reef 7 Lab: luce dell'acqua nell'hero, menu su telefono, modulo contatti che apre l'email.
+// Reef 7 Lab: luce dell'acqua nell'hero, menu su telefono, modulo contatti.
 (() => {
-  const email = (window.REEF || {}).email;
   const top = document.querySelector(".top");
   const menu = document.querySelector(".menu");
   const label = menu.textContent;
@@ -10,13 +9,53 @@
     menu.textContent = open ? menu.dataset.close : label;
   });
 
+  // modulo contatti: invia la richiesta via FormSubmit (arriva nella casella email del Lab) e mostra la conferma
   const form = document.getElementById("contact-form");
-  if (form) form.addEventListener("submit", (e) => {
+  if (form) form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    const d = form.dataset;
+    const msg = form.querySelector(".form-msg");
+    const btn = form.querySelector('button[type="submit"]');
+    msg.textContent = "";
+
+    // controllo dei campi obbligatori, con il campo sbagliato evidenziato
+    let firstBad = null;
+    form.querySelectorAll("[required]").forEach((el) => {
+      const bad = el.type === "checkbox" ? !el.checked : !el.value.trim() || (el.type === "email" && !el.validity.valid);
+      el.closest(".field, .check").classList.toggle("invalid", bad);
+      if (bad && !firstBad) firstBad = el;
+    });
+    if (firstBad) { firstBad.focus(); return; }
+
     const f = new FormData(form);
-    const who = `${f.get("nome")}${f.get("azienda") ? ` (${f.get("azienda")})` : ""}`;
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(`${f.get("servizio")} · ${who}`)}&body=${encodeURIComponent(`${f.get("messaggio")}\n\n${who}`)}`;
+    if (f.get("_honey")) return; // compilato solo dai bot
+    const label = btn.innerHTML;
+    btn.disabled = true;
+    btn.textContent = d.sending;
+    try {
+      const res = await fetch(d.endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `${d.subject}: ${f.get("servizio")} · ${f.get("nome")}`,
+          _replyto: f.get("email"),
+          _template: "table",
+          _captcha: "false",
+          Nome: f.get("nome"), Email: f.get("email"), Azienda: f.get("azienda") || "—",
+          Servizio: f.get("servizio"), Messaggio: f.get("messaggio"),
+        }),
+      });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || out.success === false || out.success === "false") throw new Error(out.message || res.status);
+      form.hidden = true;
+      form.parentElement.querySelector(".form-ok").hidden = false;
+    } catch {
+      msg.innerHTML = `${d.err} <a href="mailto:${d.email}">${d.email}</a>.`;
+      btn.disabled = false;
+      btn.innerHTML = label;
+    }
   });
+  if (form) form.addEventListener("input", (e) => e.target.closest(".field, .check")?.classList.remove("invalid"));
 
   // caustiche: la luce che filtra dalla superficie e danza sul fondale (shader WebGL)
   const canvas = document.getElementById("water");
