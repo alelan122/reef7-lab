@@ -92,3 +92,4 @@
 @media (max-width: 1080px) and (min-width: 761px) {
   .sector:nth-child(3) { padding-left: 0; border-left: 0; }
 }
+.eco-copy h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -.02em; font-size: clamp(44px, 5vw, 80px); line-height: 1; }

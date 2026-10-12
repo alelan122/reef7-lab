@@ -69,11 +69,12 @@ T = {
         "h1": "Il tuo business, <em>connesso</em>.",
         "sub": "Siti, applicazioni e intelligenza artificiale su misura, collegati in un unico ecosistema. Meno lavoro manuale, decisioni più rapide, una crescita che si accumula.",
         "b1": "Parliamo del progetto", "b2": "Scopri i servizi",
-        "eco_h": "Da strumenti sparsi a <em>un unico sistema</em>.",
-        "eco_p": "Alla maggior parte delle aziende non mancano gli strumenti: ne hanno troppi, e non si parlano. Noi li colleghiamo in un ecosistema che lavora per voi.",
-        "tools": ["Email", "Excel", "CRM", "E-commerce", "Contabilità", "Chat del team"],
-        "before": ("Oggi", ["Dati copiati a mano", "Informazioni sparse", "Decisioni in ritardo"]),
-        "after": ("Con Reef 7 Lab", ["Dati inseriti una volta sola", "Tutto in un'unica vista", "Decisioni in tempo reale"]),
+        "eco_k": "Il problema che risolviamo",
+        "eco_h": "I tuoi strumenti, finalmente <em>in squadra</em>.",
+        "eco_p": "Il cliente scrive su WhatsApp, l'ordine arriva dall'e-commerce, la fattura parte da un altro programma e i numeri finiscono in un Excel che nessuno aggiorna. Colleghiamo tutto in un unico sistema: ogni informazione entra una volta sola e arriva dove serve.",
+        "tools": ["Email", "WhatsApp", "Excel", "CRM", "E-commerce", "Contabilità"],
+        "before": ("Oggi", ["Dati copiati a mano da un programma all'altro", "Ogni reparto con la sua versione dei numeri", "Decisioni prese su dati vecchi"]),
+        "after": ("Con Reef 7 Lab", ["Ogni dato inserito una volta sola", "Un'unica fonte di verità per tutta l'azienda", "Numeri aggiornati in tempo reale"]),
         "svc_h": "Servizi", "svc_p": "Cinque discipline, un solo obiettivo: un'azienda più veloce, più informata, più difficile da raggiungere.", "svc_all": "Tutti i servizi",
         "sol_h": "Soluzioni", "sol_p": "Ogni settore ha i suoi colli di bottiglia. Questi sono quelli che trasformiamo più spesso in vantaggi.", "sol_all": "Tutte le soluzioni",
         "reef_h": "Progettati come <em>un reef</em>", "reef_p": "Il reef è uno degli ecosistemi più efficienti della Terra. I suoi cinque principi guidano ogni sistema che costruiamo.",
@@ -180,11 +181,12 @@ T = {
         "h1": "Your business, <em>connected</em>.",
         "sub": "Custom websites, applications and AI, connected into a single ecosystem. Less manual work, faster decisions, growth that compounds.",
         "b1": "Start a project", "b2": "Explore services",
-        "eco_h": "From scattered tools to <em>one system</em>.",
-        "eco_p": "Most companies aren't short of tools: they have too many, and none of them talk. We connect them into an ecosystem that works for you.",
-        "tools": ["Email", "Spreadsheets", "CRM", "E-commerce", "Accounting", "Team chat"],
-        "before": ("Today", ["Data copied by hand", "Scattered information", "Decisions made too late"]),
-        "after": ("With Reef 7 Lab", ["Data entered once", "Everything in one view", "Real-time decisions"]),
+        "eco_k": "The problem we solve",
+        "eco_h": "Your tools, finally <em>working together</em>.",
+        "eco_p": "A client messages on WhatsApp, the order comes in through your store, the invoice goes out from another program and the numbers end up in a spreadsheet nobody updates. We connect everything into one system: every piece of information is entered once and reaches wherever it's needed.",
+        "tools": ["Email", "WhatsApp", "Spreadsheets", "CRM", "E-commerce", "Accounting"],
+        "before": ("Today", ["Data copied by hand from one program to another", "Every team with its own version of the numbers", "Decisions made on outdated data"]),
+        "after": ("With Reef 7 Lab", ["Every piece of data entered once", "One source of truth for the whole company", "Numbers updated in real time"]),
         "svc_h": "Services", "svc_p": "Five disciplines, one goal: a company that's faster, better informed and harder to catch.", "svc_all": "All services",
         "sol_h": "Solutions", "sol_p": "Every industry has its bottlenecks. These are the ones we most often turn into advantages.", "sol_all": "All solutions",
         "reef_h": "Designed like <em>a reef</em>", "reef_p": "The reef is one of the most efficient ecosystems on Earth. Its five principles shape every system we build.",
@@ -255,25 +257,31 @@ def eco(H, pre):
         for (sx, sy), (ex, ey) in (((x1, y1), (x2, y2)), ((x2, y2), (x1, y1))):
             mx, my = sx + (ex - sx) * .38, sy + (ey - sy) * .38
             seg += f'<line x1="{sx}" y1="{sy}" x2="{mx:.1f}" y2="{my:.1f}"/>'
-    before_pills = "".join(f'<span class="pill" style="left:{x}%;top:{y}%;--r:{r}deg">{t}</span>' for t, (x, y, r) in zip(tools, spots))
     # dopo: in cerchio attorno al centro, con il flusso dei dati
     ring = [(50 + 36 * math.cos(math.radians(-90 + i * 60)), 50 + 38 * math.sin(math.radians(-90 + i * 60))) for i in range(6)]
     lines = "".join(f'<line x1="50" y1="50" x2="{x:.1f}" y2="{y:.1f}" style="animation-delay:{-i * .35:.2f}s"/>' for i, (x, y) in enumerate(ring))
-    after_pills = "".join(f'<span class="pill on" style="left:{x:.1f}%;top:{y:.1f}%">{t}</span>' for t, (x, y) in zip(tools, ring))
+    # una sola scena: ogni strumento conosce la posizione "prima" e "dopo", il CSS anima il passaggio
+    pills = "".join(f'<span class="pill" style="--bx:{bx}%;--by:{by}%;--br:{br}deg;--ax:{ax:.1f}%;--ay:{ay:.1f}%;--d:{i * 70}ms">{t}</span>'
+                    for i, (t, (bx, by, br), (ax, ay)) in enumerate(zip(tools, spots, ring)))
     li = lambda items, cls: "".join(f'<li class="{cls}">{x}</li>' for x in items)
     (bk, bl), (ak, al) = H["before"], H["after"]
-    return f"""<div class="eco">
-    <figure class="eco-panel before">
-      <figcaption class="mono">{bk}</figcaption>
-      <div class="eco-stage"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">{seg}</svg>{before_pills}</div>
-      <ul class="eco-list">{li(bl, "x")}</ul>
-    </figure>
-    <figure class="eco-panel after">
-      <figcaption class="mono">{ak}</figcaption>
-      <div class="eco-stage"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">{lines}</svg>{after_pills}
-        <span class="hub"><img src="{pre}assets/reef7-logo.png" alt="Reef 7 Lab" width="64" height="64"></span></div>
-      <ul class="eco-list">{li(al, "ok")}</ul>
-    </figure>
+    return f"""<div class="eco is-after" data-eco>
+    <div class="eco-copy">
+      <p class="mono">{H['eco_k']}</p>
+      <h2>{H['eco_h']}</h2>
+      <p class="eco-lead">{H['eco_p']}</p>
+      <div class="eco-toggle" role="group">
+        <button type="button" data-state="before" aria-pressed="false">{bk}</button>
+        <button type="button" data-state="after" aria-pressed="true">{ak}</button>
+      </div>
+      <ul class="eco-list before-list">{li(bl, "x")}</ul>
+      <ul class="eco-list after-list">{li(al, "ok")}</ul>
+    </div>
+    <div class="eco-stage" aria-hidden="true">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none"><g class="broken">{seg}</g><g class="links">{lines}</g></svg>
+      {pills}
+      <span class="hub"><img src="{pre}assets/reef7-logo.png" alt="" width="64" height="64"></span>
+    </div>
   </div>"""
 
 
@@ -363,7 +371,6 @@ def build(lang, variant=""):
   </div>
 </section>
 <section class="block"><div class="wrap">
-  <div class="head"><h2>{H['eco_h']}</h2><p>{H['eco_p']}</p></div>
   {eco(H, pre)}
 </div></section>
 <section class="block"><div class="wrap">

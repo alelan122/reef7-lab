@@ -217,27 +217,46 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
 
 
 /* prima / dopo: strumenti sparsi contro sistema collegato (home) */
-.eco { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.eco-panel { margin: 0; border: 1px solid var(--rule); border-radius: 14px; background: var(--ink-2); padding: clamp(22px, 2.6vw, 34px); display: flex; flex-direction: column; gap: 18px; }
-.eco-panel.after { border-color: rgba(95, 225, 242, .3); background: radial-gradient(80% 70% at 50% 45%, rgba(47, 123, 255, .16), transparent 70%), var(--ink-2); }
-.eco-panel.after figcaption { color: var(--aqua); }
-.eco-stage { position: relative; aspect-ratio: 5 / 4; }
-.eco-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.before svg line { stroke: rgba(238, 243, 248, .22); stroke-width: 1; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
-.after svg line { stroke: var(--aqua); stroke-width: 1.4; stroke-dasharray: 4 7; vector-effect: non-scaling-stroke; opacity: .75; animation: flow 1.6s linear infinite; }
-@keyframes flow { to { stroke-dashoffset: -22; } }
-.pill { position: absolute; transform: translate(-50%, -50%) rotate(var(--r, 0deg)); white-space: nowrap; font-size: clamp(12px, 1.05vw, 15px); padding: 8px 14px; border-radius: 999px; border: 1px solid var(--rule-2); background: var(--ink); color: var(--muted); }
-.pill.on { color: var(--text); border-color: rgba(95, 225, 242, .45); box-shadow: 0 0 22px -6px rgba(95, 225, 242, .45); }
-.hub { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: clamp(64px, 7vw, 92px); height: clamp(64px, 7vw, 92px); border-radius: 50%; box-shadow: 0 0 0 8px rgba(95, 225, 242, .08), 0 0 50px rgba(47, 123, 255, .6); }
-.hub img { width: 100%; height: 100%; border-radius: 50%; }
-.eco-list { list-style: none; margin: 0; padding: 18px 0 0; border-top: 1px solid var(--rule); display: grid; gap: 10px; }
-.eco-list li { display: flex; gap: 12px; align-items: baseline; font-size: 16px; }
-.eco-list li::before { font: 500 13px var(--mono); flex-shrink: 0; }
+.eco { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(36px, 5vw, 88px); align-items: center; }
+.eco-copy h2 { font: 600 clamp(40px, 5vw, 76px)/.95 var(--sans); letter-spacing: -.05em; margin: 20px 0 22px; }
+.eco-copy h2 em { color: var(--aqua); letter-spacing: -.03em; }
+.eco-lead { color: var(--muted); font-size: clamp(17px, 1.35vw, 19px); max-width: 540px; }
+.eco-toggle { display: inline-flex; gap: 4px; padding: 4px; margin: 32px 0 26px; border: 1px solid var(--rule-2); border-radius: 999px; }
+.eco-toggle button { border: 0; background: none; color: var(--muted); font: 500 14px var(--sans); padding: 10px 18px; border-radius: 999px; cursor: pointer; transition: background .25s, color .25s; }
+.eco-toggle button[aria-pressed="true"] { background: var(--text); color: var(--ink); }
+.eco.is-after .eco-toggle button[aria-pressed="true"] { background: var(--aqua); }
+.eco-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.eco-list li { display: flex; gap: 14px; align-items: baseline; font-size: 17px; }
+.eco-list li::before { font: 500 13px var(--mono); flex-shrink: 0; width: 14px; }
 .eco-list .x { color: var(--muted); }
 .eco-list .x::before { content: "✕"; color: #e88a8a; }
 .eco-list .ok::before { content: "✓"; color: var(--aqua); }
-@media (max-width: 860px) { .eco { grid-template-columns: 1fr; } }
-@media (prefers-reduced-motion: reduce) { .after svg line { animation: none; } }
+.eco .after-list, .eco.is-after .before-list { display: none; }
+.eco.is-after .after-list { display: grid; }
+
+/* la scena */
+.eco-stage { position: relative; aspect-ratio: 1 / 1; max-height: 620px; border: 1px solid var(--rule); border-radius: 16px; overflow: hidden;
+  background: radial-gradient(60% 60% at 50% 50%, rgba(47, 123, 255, 0), transparent), var(--ink-2); transition: border-color .8s, background .8s; }
+.eco.is-after .eco-stage { border-color: rgba(95, 225, 242, .28); background: radial-gradient(55% 55% at 50% 50%, rgba(47, 123, 255, .22), transparent 70%), var(--ink-2); }
+.eco-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.eco-stage line { vector-effect: non-scaling-stroke; }
+.broken line { stroke: rgba(238, 243, 248, .25); stroke-width: 1; stroke-dasharray: 3 4; }
+.links line { stroke: var(--aqua); stroke-width: 1.5; stroke-dasharray: 4 7; animation: flow 1.6s linear infinite; }
+.broken, .links { transition: opacity .6s; }
+.links { opacity: 0; }
+.eco.is-after .broken { opacity: 0; }
+.eco.is-after .links { opacity: .8; transition-delay: .55s; }
+@keyframes flow { to { stroke-dashoffset: -22; } }
+.pill { position: absolute; left: var(--bx); top: var(--by); transform: translate(-50%, -50%) rotate(var(--br)); white-space: nowrap; font-size: clamp(13px, 1.1vw, 15px); padding: 9px 15px; border-radius: 999px;
+  border: 1px solid var(--rule-2); background: var(--ink); color: var(--muted);
+  transition: left .9s cubic-bezier(.65, 0, .25, 1) var(--d), top .9s cubic-bezier(.65, 0, .25, 1) var(--d), transform .9s cubic-bezier(.65, 0, .25, 1) var(--d), color .5s, border-color .5s, box-shadow .5s; }
+.eco.is-after .pill { left: var(--ax); top: var(--ay); transform: translate(-50%, -50%) rotate(0deg); color: var(--text); border-color: rgba(95, 225, 242, .45); box-shadow: 0 0 24px -6px rgba(95, 225, 242, .5); }
+.hub { position: absolute; left: 50%; top: 50%; width: clamp(70px, 8vw, 104px); height: clamp(70px, 8vw, 104px); border-radius: 50%; transform: translate(-50%, -50%) scale(.4); opacity: 0;
+  box-shadow: 0 0 0 10px rgba(95, 225, 242, .08), 0 0 60px rgba(47, 123, 255, .65); transition: transform .7s cubic-bezier(.2, .8, .2, 1.2), opacity .5s; }
+.eco.is-after .hub { transform: translate(-50%, -50%) scale(1); opacity: 1; transition-delay: .45s; }
+.hub img { width: 100%; height: 100%; border-radius: 50%; }
+@media (max-width: 900px) { .eco { grid-template-columns: 1fr; } .eco-stage { max-height: none; } }
+@media (prefers-reduced-motion: reduce) { .links line { animation: none; } .pill, .hub, .broken, .links { transition: none; } }
 
 /* principi del reef */
 .principles { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }

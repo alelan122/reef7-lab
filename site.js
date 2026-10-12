@@ -57,6 +57,26 @@
   });
   if (form) form.addEventListener("input", (e) => e.target.closest(".field, .check")?.classList.remove("invalid"));
 
+  // prima/dopo: gli strumenti partono sparsi e, quando la sezione entra nello schermo, si collegano al centro
+  const eco = document.querySelector("[data-eco]");
+  if (eco) {
+    const buttons = eco.querySelectorAll(".eco-toggle button");
+    const set = (after) => {
+      eco.classList.toggle("is-after", after);
+      buttons.forEach((b) => b.setAttribute("aria-pressed", String((b.dataset.state === "after") === after)));
+    };
+    buttons.forEach((b) => b.addEventListener("click", () => set(b.dataset.state === "after")));
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      set(false);
+      const io = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        setTimeout(() => set(true), 700);
+      }, { threshold: 0.45 });
+      io.observe(eco.querySelector(".eco-stage"));
+    }
+  }
+
   // caustiche: la luce che filtra dalla superficie e danza sul fondale (shader WebGL)
   const canvas = document.getElementById("water");
   if (!canvas || !canvas.offsetParent) return; // nella versione B il canvas è nascosto

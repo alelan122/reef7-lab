@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=6d4b164a">
+  <link rel="stylesheet" href="styles.css?v=de41ae20">
 </head>
 <body>
 <header class="top"><div class="wrap top-in">
@@ -37,19 +37,23 @@
   </div>
 </section>
 <section class="block"><div class="wrap">
-  <div class="head"><h2>Da strumenti sparsi a <em>un unico sistema</em>.</h2><p>Alla maggior parte delle aziende non mancano gli strumenti: ne hanno troppi, e non si parlano. Noi li colleghiamo in un ecosistema che lavora per voi.</p></div>
-  <div class="eco">
-    <figure class="eco-panel before">
-      <figcaption class="mono">Oggi</figcaption>
-      <div class="eco-stage"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="22" y1="24" x2="31.9" y2="33.9"/><line x1="48" y1="50" x2="38.1" y2="40.1"/><line x1="70" y1="18" x2="73.0" y2="34.7"/><line x1="78" y1="62" x2="75.0" y2="45.3"/><line x1="18" y1="74" x2="32.1" y2="78.6"/><line x1="55" y1="86" x2="40.9" y2="81.4"/><line x1="48" y1="50" x2="59.4" y2="54.6"/><line x1="78" y1="62" x2="66.6" y2="57.4"/></svg><span class="pill" style="left:22%;top:24%;--r:-6deg">Email</span><span class="pill" style="left:70%;top:18%;--r:5deg">Excel</span><span class="pill" style="left:48%;top:50%;--r:-3deg">CRM</span><span class="pill" style="left:18%;top:74%;--r:4deg">E-commerce</span><span class="pill" style="left:78%;top:62%;--r:-5deg">Contabilità</span><span class="pill" style="left:55%;top:86%;--r:3deg">Chat del team</span></div>
-      <ul class="eco-list"><li class="x">Dati copiati a mano</li><li class="x">Informazioni sparse</li><li class="x">Decisioni in ritardo</li></ul>
-    </figure>
-    <figure class="eco-panel after">
-      <figcaption class="mono">Con Reef 7 Lab</figcaption>
-      <div class="eco-stage"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="50" y1="50" x2="50.0" y2="12.0" style="animation-delay:0.00s"/><line x1="50" y1="50" x2="81.2" y2="31.0" style="animation-delay:-0.35s"/><line x1="50" y1="50" x2="81.2" y2="69.0" style="animation-delay:-0.70s"/><line x1="50" y1="50" x2="50.0" y2="88.0" style="animation-delay:-1.05s"/><line x1="50" y1="50" x2="18.8" y2="69.0" style="animation-delay:-1.40s"/><line x1="50" y1="50" x2="18.8" y2="31.0" style="animation-delay:-1.75s"/></svg><span class="pill on" style="left:50.0%;top:12.0%">Email</span><span class="pill on" style="left:81.2%;top:31.0%">Excel</span><span class="pill on" style="left:81.2%;top:69.0%">CRM</span><span class="pill on" style="left:50.0%;top:88.0%">E-commerce</span><span class="pill on" style="left:18.8%;top:69.0%">Contabilità</span><span class="pill on" style="left:18.8%;top:31.0%">Chat del team</span>
-        <span class="hub"><img src="assets/reef7-logo.png" alt="Reef 7 Lab" width="64" height="64"></span></div>
-      <ul class="eco-list"><li class="ok">Dati inseriti una volta sola</li><li class="ok">Tutto in un'unica vista</li><li class="ok">Decisioni in tempo reale</li></ul>
-    </figure>
+  <div class="eco is-after" data-eco>
+    <div class="eco-copy">
+      <p class="mono">Il problema che risolviamo</p>
+      <h2>I tuoi strumenti, finalmente <em>in squadra</em>.</h2>
+      <p class="eco-lead">Il cliente scrive su WhatsApp, l'ordine arriva dall'e-commerce, la fattura parte da un altro programma e i numeri finiscono in un Excel che nessuno aggiorna. Colleghiamo tutto in un unico sistema: ogni informazione entra una volta sola e arriva dove serve.</p>
+      <div class="eco-toggle" role="group">
+        <button type="button" data-state="before" aria-pressed="false">Oggi</button>
+        <button type="button" data-state="after" aria-pressed="true">Con Reef 7 Lab</button>
+      </div>
+      <ul class="eco-list before-list"><li class="x">Dati copiati a mano da un programma all'altro</li><li class="x">Ogni reparto con la sua versione dei numeri</li><li class="x">Decisioni prese su dati vecchi</li></ul>
+      <ul class="eco-list after-list"><li class="ok">Ogni dato inserito una volta sola</li><li class="ok">Un'unica fonte di verità per tutta l'azienda</li><li class="ok">Numeri aggiornati in tempo reale</li></ul>
+    </div>
+    <div class="eco-stage" aria-hidden="true">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none"><g class="broken"><line x1="22" y1="24" x2="31.9" y2="33.9"/><line x1="48" y1="50" x2="38.1" y2="40.1"/><line x1="70" y1="18" x2="73.0" y2="34.7"/><line x1="78" y1="62" x2="75.0" y2="45.3"/><line x1="18" y1="74" x2="32.1" y2="78.6"/><line x1="55" y1="86" x2="40.9" y2="81.4"/><line x1="48" y1="50" x2="59.4" y2="54.6"/><line x1="78" y1="62" x2="66.6" y2="57.4"/></g><g class="links"><line x1="50" y1="50" x2="50.0" y2="12.0" style="animation-delay:0.00s"/><line x1="50" y1="50" x2="81.2" y2="31.0" style="animation-delay:-0.35s"/><line x1="50" y1="50" x2="81.2" y2="69.0" style="animation-delay:-0.70s"/><line x1="50" y1="50" x2="50.0" y2="88.0" style="animation-delay:-1.05s"/><line x1="50" y1="50" x2="18.8" y2="69.0" style="animation-delay:-1.40s"/><line x1="50" y1="50" x2="18.8" y2="31.0" style="animation-delay:-1.75s"/></g></svg>
+      <span class="pill" style="--bx:22%;--by:24%;--br:-6deg;--ax:50.0%;--ay:12.0%;--d:0ms">Email</span><span class="pill" style="--bx:70%;--by:18%;--br:5deg;--ax:81.2%;--ay:31.0%;--d:70ms">WhatsApp</span><span class="pill" style="--bx:48%;--by:50%;--br:-3deg;--ax:81.2%;--ay:69.0%;--d:140ms">Excel</span><span class="pill" style="--bx:18%;--by:74%;--br:4deg;--ax:50.0%;--ay:88.0%;--d:210ms">CRM</span><span class="pill" style="--bx:78%;--by:62%;--br:-5deg;--ax:18.8%;--ay:69.0%;--d:280ms">E-commerce</span><span class="pill" style="--bx:55%;--by:86%;--br:3deg;--ax:18.8%;--ay:31.0%;--d:350ms">Contabilità</span>
+      <span class="hub"><img src="assets/reef7-logo.png" alt="" width="64" height="64"></span>
+    </div>
   </div>
 </div></section>
 <section class="block"><div class="wrap">
@@ -87,6 +91,6 @@
   <a class="r" href="mailto:lancioni.ale@gmail.com">lancioni.ale@gmail.com</a>
 </div></footer>
 <script>window.REEF = { email: "lancioni.ale@gmail.com" };</script>
-<script src="site.js?v=6d4b164a"></script>
+<script src="site.js?v=de41ae20"></script>
 </body>
 </html>
