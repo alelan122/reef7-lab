@@ -1,253 +1,237 @@
 """Genera il sito Reef 7 Lab in italiano (cartella principale) e in inglese (cartella en/).
 
 Uso:  python build.py
-Testi, prezzi ed email si cambiano qui sotto; poi si rilancia lo script.
+Testi ed email si cambiano qui sotto; poi si rilancia lo script.
 """
 from pathlib import Path
 
 ROOT = Path(__file__).parent
 EMAIL = "lancioni.ale@gmail.com"
-PAGES = ["home", "work", "services", "pricing", "studio", "contact"]
 SLUG = {
-    "it": {"home": "index.html", "work": "lavori.html", "services": "servizi.html", "pricing": "prezzi.html", "studio": "studio.html", "contact": "contatti.html"},
-    "en": {"home": "index.html", "work": "work.html", "services": "services.html", "pricing": "pricing.html", "studio": "studio.html", "contact": "contact.html"},
+    "it": {"home": "index.html", "services": "servizi.html", "solutions": "soluzioni.html", "studio": "studio.html", "contact": "contatti.html"},
+    "en": {"home": "index.html", "services": "services.html", "solutions": "solutions.html", "studio": "studio.html", "contact": "contact.html"},
 }
+NAV = ["services", "solutions", "studio"]
 
 T = {
 "it": {
-    "nav": {"work": "Lavori", "services": "Servizi", "pricing": "Prezzi", "studio": "Studio", "contact": "Contatti"},
+    "nav": {"services": "Servizi", "solutions": "Soluzioni", "studio": "Studio", "contact": "Contatti"},
     "menu": "Menu", "close": "Chiudi", "pages": "Pagine",
-    "foot_line": "Reef 7 Lab · studio di sviluppo · Italia",
-    "end": 'Hai un progetto in mente? <a href="{contact}">Parliamone.</a>',
-    "free_slot": "Posto libero",
+    "foot": "© 2026 Reef 7 Lab · Studio di sviluppo software",
+    "cta_k": "Nuovo progetto", "cta_h": "Pronti a far crescere il vostro <em>reef</em>?",
     "services": [
-        ("01", "Siti web", "Siti veloci, curati e facili da aggiornare, pensati per trasformare le visite in richieste.", "da 1.490 €", "2-3 settimane",
-         "Un sito che spiega bene cosa fate e porta richieste, veloce da caricare e facile da aggiornare da soli.",
-         ["Fino a 5 pagine, ottimizzate per il telefono", "SEO di base e statistiche delle visite", "Modulo contatti collegato alla vostra email", "30 giorni di assistenza dopo il lancio"]),
-        ("02", "Soluzioni AI", "Prendo un lavoro che oggi fate a mano (email, documenti, report, lead) e lo automatizzo.", "da 990 €", "1-2 settimane",
-         "Scegliamo un'attività ripetitiva che oggi vi porta via ore e la affidiamo all'AI, con controlli dove servono.",
-         ["Un processo alla volta: email, documenti, report, lead", "Prima e dopo misurati in ore risparmiate", "Guida scritta e video per il team", "Possibilità di estenderla ad altri processi"]),
-        ("03", "Company brain", "Procedure e documenti dell'azienda in un assistente che risponde al team e cita le fonti.", "da 2.500 €", "3-4 settimane",
-         "Tutto quello che sa l'azienda, in un assistente che risponde al team citando il documento giusto.",
-         ["Procedure, manuali e documenti in un unico posto", "Risposte con le fonti, niente invenzioni", "Ognuno vede solo ciò a cui ha accesso", "Aggiornamenti mensili (290 €/mese)"]),
-        ("04", "Dashboard", "I numeri che contano in una pagina, collegati ai vostri strumenti e aggiornati da soli.", "da 1.800 €", "2-3 settimane",
-         "I numeri che guardate ogni settimana, in una pagina, senza copiare dati a mano da un foglio all'altro.",
-         ["Collegata ai vostri strumenti (Shopify, Stripe, fogli, CRM)", "Aggiornamento automatico", "Accessi diversi per ruolo", "Manutenzione e nuovi grafici (150 €/mese)"]),
-        ("05", "App su misura", "Dal problema a un'app funzionante: login, database, pannello di gestione.", "da 4.900 €", "4-8 settimane",
-         "Quando un software generico non basta: un'app costruita su come lavorate davvero.",
-         ["Discovery con prototipo cliccabile", "Login, database e pannello di gestione", "Pubblicazione e documentazione", "Codice e dati di vostra proprietà"]),
+        ("01", "Siti web", "Siti che trasformano i visitatori in clienti, non in statistiche.",
+         "Il sito è la prima stretta di mano con un cliente. Lo progettiamo perché trasmetta autorevolezza in pochi secondi, risponda alle obiezioni prima che vengano poste e porti richieste, non solo visite.",
+         ["Strategia, struttura e testi orientati alla conversione", "Design su misura, mai da template", "Velocità di caricamento ai vertici", "Visibilità sui motori di ricerca", "Misurazione di ogni contatto generato"]),
+        ("02", "Applicazioni su misura", "Software costruito sul vostro modo di lavorare. Non il contrario.",
+         "Quando il software generico costringe l'azienda ad adattarsi, è il momento di invertire la rotta. Costruiamo gestionali, portali clienti e strumenti interni modellati esattamente sui vostri processi.",
+         ["Analisi dei processi e prototipo navigabile", "Applicazioni web e desktop", "Ruoli e permessi per ogni utente", "Integrazione con gli strumenti già in uso", "Evoluzione continua dopo il lancio"]),
+        ("03", "Intelligenza artificiale", "Il lavoro ripetitivo lo fa l'AI. Il vostro team torna a ciò che conta.",
+         "Ogni azienda ha attività che consumano ore senza creare valore. Le individuiamo, le affidiamo all'intelligenza artificiale e restituiamo al team il tempo per vendere, creare e decidere.",
+         ["Mappatura delle attività ad alto impatto", "Email, documenti e report gestiti in automatico", "Contatti qualificati e smistati in tempo reale", "Supervisione umana dove serve", "Tempo risparmiato misurato, non stimato"]),
+        ("04", "Company brain", "Tutto ciò che sa la vostra azienda, disponibile in un secondo.",
+         "Procedure, documenti, decisioni passate: il sapere dell'azienda vive in cartelle, chat e nella testa delle persone. Lo riuniamo in un assistente che risponde al team in tempo reale e cita sempre la fonte.",
+         ["Raccolta e organizzazione della conoscenza", "Risposte verificabili, con la fonte", "Accesso calibrato sul ruolo di ciascuno", "Contenuti sempre aggiornati", "Dati aziendali riservati e protetti"]),
+        ("05", "Dashboard e dati", "Smettete di inseguire i numeri. Fateveli arrivare.",
+         "Le decisioni migliori nascono da dati chiari, non da fogli di calcolo aggiornati a mano. Uniamo le fonti sparse in una vista unica che mostra in tempo reale ciò che conta davvero.",
+         ["Definizione degli indicatori che guidano il business", "Collegamento a tutte le fonti di dati", "Aggiornamento automatico", "Viste dedicate per direzione e team", "Avvisi sulle variazioni che richiedono attenzione"]),
     ],
-    "care": ("06", "Reef Care", "Dopo il lancio il progetto non resta solo: hosting, aggiornamenti, backup e piccole modifiche con un canone fisso.",
-             ["Hosting, backup e aggiornamenti di sicurezza", "Piccole modifiche ogni mese", "Supporto diretto, senza ticket", "Reef Care+: sviluppo continuo da 1.490 €/mese"], "continuativo", "149-399 €/mese"),
+    "sectors": [
+        ("E-commerce", "Crescere nelle vendite senza crescere nel lavoro manuale.",
+         ["Dashboard di vendite e margini", "Assistenza clienti automatizzata", "Strumenti per ordini e magazzino"],
+         "Vendite, campagne e assistenza vivono in strumenti separati. I numeri arrivano tardi e le decisioni si prendono a sensazione.",
+         "Un unico sistema che unisce vendite, pubblicità e margini in tempo reale, con l'assistenza di primo livello affidata all'intelligenza artificiale.",
+         "Decisioni prese sui dati di oggi, margini sotto controllo e un team libero di concentrarsi sulla crescita."),
+        ("Studi professionali", "Meno ore sulla burocrazia, più ore sui clienti.",
+         ["Portali clienti riservati", "Archiviazione automatica dei documenti", "Assistente sulle procedure dello studio"],
+         "Documenti, scadenze e richieste ripetitive assorbono le ore che dovrebbero andare alla consulenza.",
+         "Un portale clienti riservato, documenti archiviati e classificati in automatico e un assistente che conosce a fondo le procedure dello studio.",
+         "Più ore fatturabili, meno errori e un servizio percepito come più attento e più rapido."),
+        ("Formazione e coaching", "Esperienze digitali all'altezza dei vostri contenuti.",
+         ["Piattaforme per corsi e community", "Funnel e automazioni di vendita", "Assistente per studenti e team"],
+         "Contenuti di valore dispersi tra piattaforme diverse e processi di vendita gestiti a mano.",
+         "Una piattaforma su misura per corsi e community, collegata a funnel e automazioni che accompagnano ogni studente dal primo contatto al risultato.",
+         "Un'esperienza coerente che fidelizza e un'attività che scala senza moltiplicare il lavoro del team."),
+        ("Aziende in crescita", "Ordine nei processi, fiducia nei numeri.",
+         ["Gestionali su misura", "Integrazione degli strumenti esistenti", "Dashboard per la direzione"],
+         "Fogli di calcolo, email e software scollegati rallentano l'azienda proprio quando dovrebbe accelerare.",
+         "Un gestionale costruito sui vostri processi, integrato con gli strumenti già in uso, con una dashboard che dà alla direzione il quadro completo.",
+         "Un'unica fonte di verità per tutta l'azienda e una crescita che non fa perdere il controllo."),
+    ],
     "home": {
-        "title": "Reef 7 Lab · Siti, app e soluzioni AI",
-        "desc": "Reef 7 Lab è uno studio di sviluppo: siti, app su misura, soluzioni AI, company brain e dashboard per aziende.",
-        "h1": "Costruisco il software su cui <em>gira</em> la tua azienda.",
-        "sub": "Reef 7 Lab è il mio studio di sviluppo. Faccio <b>siti, app su misura, soluzioni AI e dashboard</b>, e seguo pochi progetti alla volta, dalla prima idea alla messa online.",
-        "spec": [("Studio", "Reef 7 Lab, Italia"), ("Lavoro con", "PMI, startup, professionisti"), ("Stack", "Next.js, Supabase, Python, Claude"), ("Si parte da", "Un audit AI gratuito di 30 minuti")],
-        "work_h": "Lavori", "work_p": "Il primo cliente di Reef 7 è Reef 7: il gestionale con cui porto avanti lo studio ogni giorno.",
-        "case_t": "Reef 7 HQ", "case_p": "Calendario, CRM, preventivi e fatture in un'unica app",
-        "slot_h": "Il prossimo caso studio può essere il tuo.", "slot_p": "I primi tre progetti hanno il 30% di sconto, in cambio di una testimonianza.", "slot_a": "Candidati",
-        "svc_h": "Cosa faccio", "svc_p": "Ogni progetto parte da un problema concreto. Il prezzo lo concordiamo per iscritto prima di iniziare.", "svc_all": "Tutti i servizi",
-        "how_h": "Come lavoro", "how_p": "Prima capiamo, poi costruiamo. Ogni settimana vedi a che punto siamo.",
-        "steps": [("Settimana 1", "Discovery", "Analizziamo il problema. Ricevi un prototipo cliccabile, il piano e il preventivo definitivo."),
-                  ("Settimane 2-6", "Sviluppo", "Costruisco a tappe, con una demo ogni settimana. Correggiamo la rotta presto, non alla fine."),
-                  ("Consegna", "Lancio", "Messa online, formazione e documentazione. Codice, dati e accessi restano vostri."),
-                  ("Dopo", "Manutenzione", "Con Reef Care il progetto resta aggiornato, sicuro e cresce quando serve.")],
-    },
-    "work": {
-        "title": "Lavori · Reef 7 Lab", "desc": "Casi studio di Reef 7 Lab.",
-        "h1": "Prima l'ho costruito <em>per me</em>.",
-        "sub": "Reef 7 HQ è il gestionale dello studio. Lo uso ogni giorno per clienti, progetti, preventivi e fatture, ed è il modo più onesto per mostrarti come lavoro.",
-        "facts": [("Progetto", "Reef 7 HQ"), ("Tipo", "App desktop e web"), ("Anno", "2026"), ("Tecnologie", "Electron, JavaScript, Python, Cloudflare Access")],
-        "story": [("Il problema.", "Calendario, attività, clienti, preventivi e fatture stavano in cinque strumenti diversi. Ogni giorno perdevo tempo a passare dall'uno all'altro e i numeri non tornavano mai."),
-                  ("Cosa ho costruito.", "Un'unica app: legge Google Calendar, organizza le attività per priorità, misura il tempo di lavoro, tiene clienti e progetti in un CRM, prepara preventivi e fatture in PDF e pubblica il portfolio con un clic."),
-                  ("Come funziona.", "Gira sul computer e online, con gli stessi dati. I dati sono cifrati e l'accesso alla versione web passa da un login protetto."),
-                  ("Cosa ne puoi ricavare tu.", "Lo stesso approccio funziona per un gestionale interno, un portale clienti o una dashboard: si parte da come lavorate oggi, non da un software generico.")],
-        "slot_h": "Qui ci sarà il tuo progetto.", "slot_p": "Sto cercando i primi tre clienti: 30% di sconto in cambio di una testimonianza e del permesso di raccontare il lavoro.", "slot_a": "Raccontami il progetto",
+        "title": "Reef 7 Lab · Studio di sviluppo software",
+        "desc": "Siti, applicazioni, intelligenza artificiale e dashboard su misura, collegati in un unico ecosistema.",
+        "kicker": "Reef 7 Lab · Studio di sviluppo software",
+        "h1": "Il tuo business, <em>connesso</em>.",
+        "sub": "Siti, applicazioni e intelligenza artificiale su misura, collegati in un unico ecosistema. Meno lavoro manuale, decisioni più rapide, una crescita che si accumula.",
+        "b1": "Parliamo del progetto", "b2": "Scopri i servizi",
+        "marquee": ["Siti web", "Applicazioni", "Intelligenza artificiale", "Company brain", "Dashboard", "Automazioni"],
+        "statement": 'Alla maggior parte delle aziende non mancano gli strumenti. Ne ha troppi, e non si parlano. <span class="dim">Noi costruiamo l\'ecosistema che li unisce e li fa lavorare per voi.</span>',
+        "svc_h": "Servizi", "svc_p": "Cinque discipline, un solo obiettivo: un'azienda più veloce, più informata, più difficile da raggiungere.", "svc_all": "Tutti i servizi",
+        "sol_h": "Soluzioni", "sol_p": "Ogni settore ha i suoi colli di bottiglia. Questi sono quelli che trasformiamo più spesso in vantaggi.", "sol_all": "Tutte le soluzioni",
+        "reef_h": "Progettati come <em>un reef</em>", "reef_p": "Il reef è uno degli ecosistemi più efficienti della Terra. I suoi cinque principi guidano ogni sistema che costruiamo.",
+        "reef_words": ["Diversità", "Simbiosi", "Connessione", "Crescita stratificata", "Resilienza"], "reef_a": "La nostra filosofia",
     },
     "services_p": {
-        "title": "Servizi · Reef 7 Lab", "desc": "Siti web, soluzioni AI, company brain, dashboard, app su misura e manutenzione.",
-        "h1": "Sei modi per lavorare <em>meglio</em>, con meno software.",
-        "sub": "Ogni servizio ha un prezzo di partenza e tempi chiari. Se non sai da dove iniziare, si parte da una Discovery: 490 €, scalati dal progetto.",
-        "end": 'Non sai quale ti serve? <a href="{contact}">Facciamo un audit gratuito.</a>',
+        "title": "Servizi · Reef 7 Lab", "desc": "Siti web, applicazioni su misura, intelligenza artificiale, company brain e dashboard.",
+        "h1": "Tecnologia su misura, <em>senza</em> compromessi.",
+        "sub": "Dal sito che porta clienti al sistema che governa l'azienda: ogni soluzione nasce dai vostri obiettivi, non da un catalogo.",
     },
-    "pricing": {
-        "title": "Prezzi · Reef 7 Lab", "desc": "Prezzi di partenza dei servizi di Reef 7 Lab.",
-        "h1": "Prezzi chiari, <em>prima</em> di iniziare.",
-        "sub": "Questi sono i prezzi di partenza. Quello definitivo lo fissiamo per iscritto dopo la Discovery, e non cambia strada facendo. IVA esclusa.",
-        "cols": ("Servizio", "Cosa include", "Tempi", "Prezzo"),
-        "rows": [("Discovery", "Analisi, prototipo cliccabile, piano e preventivo preciso. Scalata dal progetto.", "3-5 giorni", "490 €"),
-                 ("Sito web", "Fino a 5 pagine, mobile, SEO di base, contatti e statistiche.", "2-3 settimane", "da 1.490 €"),
-                 ("Soluzione AI", "Un processo automatizzato con l'AI, con guida e video.", "1-2 settimane", "da 990 €"),
-                 ("Dashboard", "KPI collegati ai vostri strumenti, accessi per ruolo. + 150 €/mese.", "2-3 settimane", "da 1.800 €"),
-                 ("Company brain", "Le conoscenze dell'azienda in un assistente con le fonti. + 290 €/mese.", "3-4 settimane", "da 2.500 €"),
-                 ("App su misura", "Discovery, MVP con login, database e pannello di gestione.", "4-8 settimane", "da 4.900 €"),
-                 ("Reef Care", "Hosting, aggiornamenti, backup, piccole modifiche e supporto.", "al mese", "149-399 €"),
-                 ("Reef Care+", "Sviluppo continuo in abbonamento, una richiesta alla volta.", "al mese", "da 1.490 €")],
-        "offer_k": "Offerta di lancio", "offer_h": "I primi tre clienti hanno il 30% di sconto.",
-        "offer_p": "In cambio ti chiedo una testimonianza e il permesso di raccontare il progetto nel portfolio.", "offer_a": "Prenota un posto →",
-        "faq_h": "Domande", "faq_p": "Se la tua non c'è, scrivimi.",
-        "faq": [("Cos'è l'audit AI gratuito?", "Una call di 30 minuti in cui guardiamo come lavora la tua azienda e dove l'AI può farvi risparmiare tempo. Esci con due o tre idee concrete, anche se poi non lavoriamo insieme."),
-                ("Perché la Discovery è a pagamento?", "Perché è già lavoro vero: alla fine hai un prototipo, un piano e un preventivo preciso, che restano tuoi. Se poi procediamo, i 490 € vengono scalati dal progetto."),
-                ("Come si paga?", "Di solito 50% all'avvio e 50% alla consegna. Per i progetti più lunghi dividiamo per tappe."),
-                ("E se il progetto va in ritardo?", "Se non consegno entro la data concordata, hai il 10% di sconto. Le date le fissiamo insieme dopo la Discovery."),
-                ("Di chi sono il codice e i dati?", "Tuoi. Alla consegna ricevi codice, accessi e documentazione, e i dati restano nei tuoi account.")],
+    "solutions": {
+        "title": "Soluzioni · Reef 7 Lab", "desc": "Soluzioni software per e-commerce, studi professionali, formazione e aziende in crescita.",
+        "h1": "Dove gli altri vedono limiti, noi vediamo <em>leve</em>.",
+        "sub": "Ogni settore ha i suoi colli di bottiglia. Li conosciamo da vicino, e sappiamo come trasformarli in vantaggi competitivi.",
+        "lbl": ("La sfida", "La soluzione", "Il risultato"),
     },
     "studio": {
-        "title": "Studio · Reef 7 Lab", "desc": "Chi c'è dietro Reef 7 Lab e come lavora.",
-        "h1": "Uno studio piccolo, <em>di proposito</em>.", "photo_alt": "Alessandro, fondatore di Reef 7 Lab",
-        "prose": [("Sono Alessandro e Reef 7 Lab è il mio studio.", "Prima di aprirlo mi sono occupato di software, automazioni e funnel: è lì che ho visto quanto tempo si perde con strumenti scollegati e lavori fatti a mano."),
-                  ("", "Oggi costruisco siti, app e soluzioni AI per aziende che vogliono lavorare meglio senza riempirsi di abbonamenti. Lavoro con pochi clienti alla volta, così parli sempre con chi scrive il codice."),
-                  ("Il nome.", "Una barriera corallina è fatta di tanti organismi diversi che crescono collegati. È così che penso il software: pezzi diversi (un sito, un'automazione, una dashboard) che parlano tra loro invece di restare isolati.")],
-        "rules_h": "Come lavoro", "rules_p": "Quattro regole che valgono per ogni progetto.",
-        "rules": [("Prezzo fisso", "Il preventivo è scritto dopo la Discovery e non cambia strada facendo."),
-                  ("Demo ogni settimana", "Vedi il progetto funzionare mentre cresce, non solo alla fine."),
-                  ("Tutto vostro", "Codice, dati e accessi restano a voi. Nessun vincolo con me."),
-                  ("Risultati misurati", "Ogni progetto ha un obiettivo in ore risparmiate o richieste in più, e lo controlliamo.")],
-        "tools_h": "Strumenti", "tools_p": "Tecnologie moderne, leggere da mantenere e senza costi nascosti.",
-        "tools": [("Siti e app", "Next.js, React, TypeScript"), ("Dati e accessi", "Supabase, Postgres"), ("AI", "Claude, MCP, Python"), ("Pubblicazione", "Vercel, Cloudflare")],
+        "title": "Studio · Reef 7 Lab", "desc": "La filosofia del reef: come Reef 7 Lab progetta software che cresce connesso.",
+        "h1": "La filosofia <em>del reef</em>.",
+        "sub": "Una barriera corallina copre meno dell'1% dei fondali, eppure ospita un quarto di tutta la vita marina. Il suo segreto non è la grandezza: è l'architettura. È il modello che seguiamo in ogni sistema che costruiamo.",
+        "principles": [
+            ("01", "Diversità", "In un reef convivono migliaia di specie, ognuna con un ruolo preciso. Nessuna fa tutto, ognuna fa una cosa in modo eccellente. Nel software è lo stesso: un sito, un'automazione, un assistente, una dashboard. Strumenti diversi, scelti per ciò che sanno fare meglio. Mai tecnologia fine a se stessa."),
+            ("02", "Simbiosi", "Il corallo vive grazie alle alghe che ospita, e le alghe vivono grazie al corallo. Due organismi che, insieme, costruiscono ciò che da soli non potrebbero. Così lavorano persone e tecnologia nei nostri sistemi: l'intelligenza artificiale si prende il lavoro ripetitivo, le persone ciò che richiede giudizio, creatività e relazioni."),
+            ("03", "Connessione", "In un reef nulla vive isolato. Correnti, nutrienti e specie si muovono in un'unica rete, e ogni parte rafforza le altre. I nostri sistemi parlano tra loro: un dato entra una volta sola e arriva ovunque serva. Niente silos, niente copia e incolla, niente versioni diverse della stessa verità."),
+            ("04", "Crescita stratificata", "Il corallo cresce pochi millimetri l'anno, strato su strato, e costruisce strutture che durano secoli. Progettiamo con la stessa pazienza: fondamenta solide prima di tutto, poi funzioni che si aggiungono nel tempo. Il risultato è software che accumula valore, invece di invecchiare."),
+            ("05", "Resilienza", "Un reef sano resiste alle tempeste e si adatta al cambiamento delle correnti. Il software deve fare lo stesso. Costruiamo architetture flessibili, pronte a evolvere con l'azienda, con il mercato e con le tecnologie che ancora devono arrivare."),
+        ],
+        "seven_k": "Perché 7",
+        "seven_p": "Il 7 è un omaggio ai cantieri navali, dove ogni scafo è costruito su misura, con precisione artigianale, per affrontare il mare aperto. È lo spirito con cui costruiamo software: <span class=\"dim\">fatto a mano, pensato per durare, pronto per le acque difficili.</span>",
+        "who_big": "Dietro Reef 7 Lab c'è <em>Alessandro</em>.",
+        "who": ["Negli ultimi anni ha progettato software, automazioni e funnel di vendita per aziende in crescita, vedendo da vicino quanto valore si disperde tra strumenti scollegati e processi manuali.",
+                "Ha fondato Reef 7 Lab per portare alle aziende ciò che di solito è riservato ai grandi gruppi: sistemi su misura, intelligenza artificiale applicata e un interlocutore che conosce ogni riga del progetto."],
+        "sign": ("Alessandro", "Fondatore, Reef 7 Lab"),
+        "photo_alt": "Alessandro, fondatore di Reef 7 Lab",
     },
     "contact": {
-        "title": "Contatti · Reef 7 Lab", "desc": "Scrivi a Reef 7 Lab per un audit AI gratuito o un preventivo.",
-        "h1": "Raccontami cosa vorresti <em>migliorare</em>.",
-        "sub": "Anche solo un'idea va bene. Ti rispondo con una proposta per l'audit gratuito di 30 minuti.",
-        "or": "Oppure compila qui", "or_p": "Il pulsante apre la tua email con il messaggio già pronto.",
-        "f": {"name": "Nome", "company": "Azienda", "want": "Ti interessa", "msg": "Il progetto",
-              "ph": "Es. rispondiamo ogni giorno alle stesse domande dei clienti e vorremmo automatizzarlo",
-              "opts": ["Audit AI gratuito", "Sito web", "Soluzione AI", "Company brain", "Dashboard", "App su misura", "Non lo so ancora"],
-              "note": "Rispondo di solito entro un giorno lavorativo.", "send": "Invia →"},
-        "end": 'Preferisci una call? <a href="{contact}">Scrivimi e la fissiamo.</a>',
+        "title": "Contatti · Reef 7 Lab", "desc": "Contatta Reef 7 Lab per un nuovo progetto.",
+        "h1": "Raccontaci dove vuoi <em>arrivare</em>.",
+        "sub": "Una prima conversazione di 30 minuti, senza impegno: capiamo il contesto e ti diciamo con franchezza se, e come, possiamo aiutarti.",
+        "or": "Oppure compila il modulo", "or_p": "Il pulsante apre la tua email con il messaggio già pronto.",
+        "f": {"name": "Nome", "company": "Azienda", "want": "Area di interesse", "msg": "Il progetto",
+              "ph": "Obiettivi, tempi, cosa vorresti migliorare",
+              "opts": ["Sito web", "Applicazione su misura", "Intelligenza artificiale", "Company brain", "Dashboard e dati", "Altro"],
+              "note": "Rispondiamo entro un giorno lavorativo.", "send": "Invia"},
     },
 },
 "en": {
-    "nav": {"work": "Work", "services": "Services", "pricing": "Pricing", "studio": "Studio", "contact": "Contact"},
+    "nav": {"services": "Services", "solutions": "Solutions", "studio": "Studio", "contact": "Contact"},
     "menu": "Menu", "close": "Close", "pages": "Pages",
-    "foot_line": "Reef 7 Lab · development studio · Italy",
-    "end": 'Got a project in mind? <a href="{contact}">Let\'s talk.</a>',
-    "free_slot": "Open slot",
+    "foot": "© 2026 Reef 7 Lab · Software development studio",
+    "cta_k": "New project", "cta_h": "Ready to grow your <em>reef</em>?",
     "services": [
-        ("01", "Websites", "Fast, well-crafted sites that are easy to update and built to turn visits into enquiries.", "from €1,490", "2-3 weeks",
-         "A site that explains clearly what you do and brings in enquiries. Quick to load, easy to update yourself.",
-         ["Up to 5 pages, built for mobile", "Basic SEO and visitor analytics", "Contact form wired to your inbox", "30 days of support after launch"]),
-        ("02", "AI solutions", "I take a task you still do by hand (email, documents, reports, leads) and automate it.", "from €990", "1-2 weeks",
-         "We pick a repetitive task that eats your team's hours and hand it to AI, with checks where they matter.",
-         ["One process at a time: email, documents, reports, leads", "Before and after measured in hours saved", "Written guide and video for the team", "Easy to extend to other processes"]),
-        ("03", "Company brain", "Your procedures and documents in an assistant that answers the team and cites its sources.", "from €2,500", "3-4 weeks",
-         "Everything your company knows, in an assistant that answers your team and points to the right document.",
-         ["Procedures, manuals and docs in one place", "Answers with sources, no guessing", "Everyone sees only what they're allowed to", "Monthly updates (€290/month)"]),
-        ("04", "Dashboards", "The numbers that matter on one page, connected to your tools and updated automatically.", "from €1,800", "2-3 weeks",
-         "The numbers you check every week, on one page, without copying data between spreadsheets.",
-         ["Connected to your tools (Shopify, Stripe, sheets, CRM)", "Updates automatically", "Role-based access", "Maintenance and new charts (€150/month)"]),
-        ("05", "Custom apps", "From a problem to a working app: login, database and admin panel.", "from €4,900", "4-8 weeks",
-         "When off-the-shelf software doesn't fit: an app built around how you actually work.",
-         ["Discovery with a clickable prototype", "Login, database and admin panel", "Deployment and documentation", "You own the code and the data"]),
+        ("01", "Websites", "Sites that turn visitors into clients, not statistics.",
+         "Your website is the first handshake with a client. We design it to project authority in seconds, answer objections before they're raised and bring in enquiries, not just traffic.",
+         ["Conversion-focused strategy, structure and copy", "Custom design, never templates", "Top-tier loading speed", "Search engine visibility", "Every lead tracked and measured"]),
+        ("02", "Custom applications", "Software built around the way you work. Not the other way round.",
+         "When off-the-shelf software forces your business to adapt, it's time to change course. We build management systems, client portals and internal tools shaped precisely around your processes.",
+         ["Process analysis and clickable prototype", "Web and desktop applications", "Roles and permissions for every user", "Integration with the tools you already use", "Continuous evolution after launch"]),
+        ("03", "Artificial intelligence", "AI handles the repetitive work. Your team gets back to what matters.",
+         "Every company has tasks that eat hours without creating value. We find them, hand them to AI and give your team back the time to sell, create and decide.",
+         ["Mapping high-impact tasks", "Email, documents and reports handled automatically", "Leads qualified and routed in real time", "Human oversight where it counts", "Time saved measured, not estimated"]),
+        ("04", "Company brain", "Everything your company knows, available in a second.",
+         "Procedures, documents, past decisions: company knowledge lives in folders, chats and people's heads. We bring it together in an assistant that answers your team instantly and always cites the source.",
+         ["Collecting and structuring knowledge", "Verifiable answers, with sources", "Access tailored to each role", "Always up-to-date content", "Company data kept private and secure"]),
+        ("05", "Dashboards and data", "Stop chasing the numbers. Let them come to you.",
+         "Great decisions come from clear data, not hand-updated spreadsheets. We bring scattered sources into a single view that shows what really matters, in real time.",
+         ["Defining the metrics that drive the business", "Connecting every data source", "Automatic updates", "Dedicated views for leadership and teams", "Alerts on changes that need attention"]),
     ],
-    "care": ("06", "Reef Care", "After launch your project isn't left alone: hosting, updates, backups and small changes for a flat monthly fee.",
-             ["Hosting, backups and security updates", "Small changes every month", "Direct support, no ticket queue", "Reef Care+: ongoing development from €1,490/month"], "ongoing", "€149-399/month"),
+    "sectors": [
+        ("E-commerce", "Grow sales without growing manual work.",
+         ["Sales and margin dashboards", "Automated customer support", "Tools for orders and inventory"],
+         "Sales, campaigns and support live in separate tools. The numbers arrive late and decisions are made on gut feel.",
+         "One system that brings sales, advertising and margins together in real time, with first-line support handled by AI.",
+         "Decisions made on today's data, margins under control and a team free to focus on growth."),
+        ("Professional firms", "Fewer hours on paperwork, more hours with clients.",
+         ["Private client portals", "Automatic document filing", "Assistant trained on the firm's procedures"],
+         "Documents, deadlines and repetitive requests absorb the hours that should go to advisory work.",
+         "A private client portal, documents filed and classified automatically, and an assistant that knows the firm's procedures inside out.",
+         "More billable hours, fewer errors and a service clients perceive as more attentive and faster."),
+        ("Education and coaching", "Digital experiences that match the quality of your content.",
+         ["Course and community platforms", "Sales funnels and automation", "Assistant for students and team"],
+         "Valuable content scattered across platforms, with sales processes run by hand.",
+         "A custom course and community platform, connected to funnels and automations that guide every student from first contact to results.",
+         "A consistent experience that builds loyalty, and a business that scales without multiplying the team's workload."),
+        ("Growing companies", "Order in your processes, confidence in your numbers.",
+         ["Custom management systems", "Integration of existing tools", "Executive dashboards"],
+         "Spreadsheets, email and disconnected software slow the company down just when it should accelerate.",
+         "A management system built on your processes, integrated with your existing tools, with a dashboard that gives leadership the full picture.",
+         "A single source of truth for the whole company, and growth that never costs you control."),
+    ],
     "home": {
-        "title": "Reef 7 Lab · Websites, apps and AI solutions",
-        "desc": "Reef 7 Lab is a development studio building websites, custom apps, AI solutions, company brains and dashboards.",
-        "h1": "I build the software your business <em>runs</em> on.",
-        "sub": "Reef 7 Lab is my development studio. I make <b>websites, custom apps, AI solutions and dashboards</b>, and I take on a few projects at a time, from first idea to launch.",
-        "spec": [("Studio", "Reef 7 Lab, Italy"), ("I work with", "SMBs, startups, professionals"), ("Stack", "Next.js, Supabase, Python, Claude"), ("Start with", "A free 30-minute AI audit")],
-        "work_h": "Work", "work_p": "Reef 7's first client is Reef 7: the system I use to run the studio every day.",
-        "case_t": "Reef 7 HQ", "case_p": "Calendar, CRM, proposals and invoices in one app",
-        "slot_h": "Your project could be the next case study.", "slot_p": "The first three projects get 30% off in exchange for a testimonial.", "slot_a": "Apply",
-        "svc_h": "What I do", "svc_p": "Every project starts from a real problem. We agree on the price in writing before any work begins.", "svc_all": "All services",
-        "how_h": "How I work", "how_p": "Understand first, then build. Every week you see where things stand.",
-        "steps": [("Week 1", "Discovery", "We dig into the problem. You get a clickable prototype, a plan and a fixed quote."),
-                  ("Weeks 2-6", "Build", "I build in stages with a demo every week, so we adjust early, not at the end."),
-                  ("Handover", "Launch", "Deployment, training and documentation. Code, data and access stay yours."),
-                  ("After", "Care", "With Reef Care your project stays updated, secure and keeps growing when you need it.")],
-    },
-    "work": {
-        "title": "Work · Reef 7 Lab", "desc": "Reef 7 Lab case studies.",
-        "h1": "I built it <em>for myself</em> first.",
-        "sub": "Reef 7 HQ is the studio's operating system. I use it every day for clients, projects, proposals and invoices, and it's the most honest way to show you how I work.",
-        "facts": [("Project", "Reef 7 HQ"), ("Type", "Desktop and web app"), ("Year", "2026"), ("Built with", "Electron, JavaScript, Python, Cloudflare Access")],
-        "story": [("The problem.", "Calendar, tasks, clients, proposals and invoices lived in five different tools. I lost time every day switching between them, and the numbers never added up."),
-                  ("What I built.", "One app: it reads Google Calendar, ranks tasks by priority, tracks working time, keeps clients and projects in a CRM, generates proposals and invoices as PDFs and publishes the portfolio in one click."),
-                  ("How it works.", "It runs on desktop and on the web with the same data. Data is encrypted, and the web version sits behind a protected login."),
-                  ("What it means for you.", "The same approach works for an internal tool, a client portal or a dashboard: we start from how you work today, not from generic software.")],
-        "slot_h": "Your project goes here.", "slot_p": "I'm looking for my first three clients: 30% off in exchange for a testimonial and permission to share the work.", "slot_a": "Tell me about your project",
+        "title": "Reef 7 Lab · Software development studio",
+        "desc": "Custom websites, applications, AI and dashboards, connected into a single ecosystem.",
+        "kicker": "Reef 7 Lab · Software development studio",
+        "h1": "Your business, <em>connected</em>.",
+        "sub": "Custom websites, applications and AI, connected into a single ecosystem. Less manual work, faster decisions, growth that compounds.",
+        "b1": "Start a project", "b2": "Explore services",
+        "marquee": ["Websites", "Applications", "Artificial intelligence", "Company brain", "Dashboards", "Automation"],
+        "statement": 'Most companies aren\'t short of tools. They have too many, and none of them talk. <span class="dim">We build the ecosystem that connects them and puts them to work for you.</span>',
+        "svc_h": "Services", "svc_p": "Five disciplines, one goal: a company that's faster, better informed and harder to catch.", "svc_all": "All services",
+        "sol_h": "Solutions", "sol_p": "Every industry has its bottlenecks. These are the ones we most often turn into advantages.", "sol_all": "All solutions",
+        "reef_h": "Designed like <em>a reef</em>", "reef_p": "The reef is one of the most efficient ecosystems on Earth. Its five principles shape every system we build.",
+        "reef_words": ["Diversity", "Symbiosis", "Connection", "Layered growth", "Resilience"], "reef_a": "Our philosophy",
     },
     "services_p": {
-        "title": "Services · Reef 7 Lab", "desc": "Websites, AI solutions, company brains, dashboards, custom apps and maintenance.",
-        "h1": "Six ways to work <em>better</em>, with less software.",
-        "sub": "Every service has a starting price and a clear timeline. Not sure where to begin? Start with a Discovery: €490, credited toward the project.",
-        "end": 'Not sure which one you need? <a href="{contact}">Book a free audit.</a>',
+        "title": "Services · Reef 7 Lab", "desc": "Websites, custom applications, artificial intelligence, company brain and dashboards.",
+        "h1": "Custom technology, <em>no</em> compromises.",
+        "sub": "From the website that brings in clients to the system that runs the company: every solution starts from your goals, not from a catalogue.",
     },
-    "pricing": {
-        "title": "Pricing · Reef 7 Lab", "desc": "Starting prices for Reef 7 Lab services.",
-        "h1": "Clear prices, <em>before</em> we start.",
-        "sub": "These are starting prices. The final price is set in writing after the Discovery and doesn't change along the way. VAT excluded.",
-        "cols": ("Service", "What's included", "Timeline", "Price"),
-        "rows": [("Discovery", "Analysis, clickable prototype, plan and fixed quote. Credited toward the project.", "3-5 days", "€490"),
-                 ("Website", "Up to 5 pages, mobile-ready, basic SEO, contact form and analytics.", "2-3 weeks", "from €1,490"),
-                 ("AI solution", "One process automated with AI, with a guide and video.", "1-2 weeks", "from €990"),
-                 ("Dashboard", "KPIs connected to your tools, role-based access. + €150/month.", "2-3 weeks", "from €1,800"),
-                 ("Company brain", "Your company's knowledge in an assistant that cites sources. + €290/month.", "3-4 weeks", "from €2,500"),
-                 ("Custom app", "Discovery, MVP with login, database and admin panel.", "4-8 weeks", "from €4,900"),
-                 ("Reef Care", "Hosting, updates, backups, small changes and support.", "per month", "€149-399"),
-                 ("Reef Care+", "Ongoing development on subscription, one request at a time.", "per month", "from €1,490")],
-        "offer_k": "Launch offer", "offer_h": "The first three clients get 30% off.",
-        "offer_p": "In return I ask for a testimonial and permission to feature the project in my portfolio.", "offer_a": "Claim a spot →",
-        "faq_h": "Questions", "faq_p": "If yours isn't here, just ask.",
-        "faq": [("What's the free AI audit?", "A 30-minute call where we look at how your company works and where AI could save you time. You leave with two or three concrete ideas, even if we never work together."),
-                ("Why is the Discovery paid?", "Because it's real work: you end up with a prototype, a plan and a fixed quote that are yours to keep. If we go ahead, the €490 is credited toward the project."),
-                ("How does payment work?", "Usually 50% upfront and 50% on delivery. Longer projects are split into milestones."),
-                ("What if the project runs late?", "If I miss the agreed delivery date, you get 10% off. We set the dates together after the Discovery."),
-                ("Who owns the code and the data?", "You do. At handover you get the code, access and documentation, and the data stays in your accounts.")],
+    "solutions": {
+        "title": "Solutions · Reef 7 Lab", "desc": "Software solutions for e-commerce, professional firms, education and growing companies.",
+        "h1": "Where others see limits, we see <em>leverage</em>.",
+        "sub": "Every industry has its bottlenecks. We know them up close, and we know how to turn them into competitive advantages.",
+        "lbl": ("The challenge", "The solution", "The outcome"),
     },
     "studio": {
-        "title": "Studio · Reef 7 Lab", "desc": "Who's behind Reef 7 Lab and how it works.",
-        "h1": "A small studio, <em>on purpose</em>.", "photo_alt": "Alessandro, founder of Reef 7 Lab",
-        "prose": [("I'm Alessandro, and Reef 7 Lab is my studio.", "Before starting it I worked on software, automations and funnels, and saw how much time companies lose to disconnected tools and manual work."),
-                  ("", "Today I build websites, apps and AI solutions for companies that want to work better without piling up subscriptions. I take on a few clients at a time, so you always talk to the person writing the code."),
-                  ("The name.", "A coral reef is made of many different organisms growing together, connected. That's how I think about software: different pieces (a site, an automation, a dashboard) that talk to each other instead of sitting in silos.")],
-        "rules_h": "How I work", "rules_p": "Four rules for every project.",
-        "rules": [("Fixed price", "The quote is written after the Discovery and doesn't change along the way."),
-                  ("Weekly demos", "You see the project working as it grows, not just at the end."),
-                  ("You own it", "Code, data and access are yours. No lock-in."),
-                  ("Measured results", "Every project has a goal in hours saved or extra enquiries, and we check it.")],
-        "tools_h": "Tools", "tools_p": "Modern technology that's light to maintain, with no hidden costs.",
-        "tools": [("Sites and apps", "Next.js, React, TypeScript"), ("Data and auth", "Supabase, Postgres"), ("AI", "Claude, MCP, Python"), ("Hosting", "Vercel, Cloudflare")],
+        "title": "Studio · Reef 7 Lab", "desc": "The reef philosophy: how Reef 7 Lab designs software that grows connected.",
+        "h1": "The reef <em>philosophy</em>.",
+        "sub": "Coral reefs cover less than 1% of the ocean floor, yet they're home to a quarter of all marine life. Their secret isn't size: it's architecture. That's the model behind every system we build.",
+        "principles": [
+            ("01", "Diversity", "Thousands of species share a reef, each with a precise role. None does everything; each does one thing exceptionally well. Software works the same way: a website, an automation, an assistant, a dashboard. Different tools, each chosen for what it does best. Never technology for its own sake."),
+            ("02", "Symbiosis", "Coral lives thanks to the algae it hosts, and the algae live thanks to the coral. Together they build what neither could alone. That's how people and technology work in our systems: AI takes on the repetitive work, people take on what needs judgment, creativity and relationships."),
+            ("03", "Connection", "Nothing on a reef lives in isolation. Currents, nutrients and species move through a single network, and every part strengthens the others. Our systems talk to each other: data is entered once and reaches everywhere it's needed. No silos, no copy and paste, no competing versions of the truth."),
+            ("04", "Layered growth", "Coral grows a few millimetres a year, layer upon layer, building structures that last for centuries. We design with the same patience: solid foundations first, then features added over time. The result is software that compounds in value instead of ageing."),
+            ("05", "Resilience", "A healthy reef weathers storms and adapts as currents shift. Software should do the same. We build flexible architectures, ready to evolve with the business, the market and the technologies yet to come."),
+        ],
+        "seven_k": "Why 7",
+        "seven_p": "The 7 is a tribute to shipyards, where every hull is built to measure, with craftsman's precision, to face the open sea. It's the spirit in which we build software: <span class=\"dim\">made by hand, built to last, ready for rough waters.</span>",
+        "who_big": "Behind Reef 7 Lab is <em>Alessandro</em>.",
+        "who": ["In recent years he has designed software, automations and sales funnels for growing companies, seeing first-hand how much value leaks away between disconnected tools and manual processes.",
+                "He founded Reef 7 Lab to bring companies what is usually reserved for large groups: custom systems, applied artificial intelligence and a single point of contact who knows every line of the project."],
+        "sign": ("Alessandro", "Founder, Reef 7 Lab"),
+        "photo_alt": "Alessandro, founder of Reef 7 Lab",
     },
     "contact": {
-        "title": "Contact · Reef 7 Lab", "desc": "Get in touch with Reef 7 Lab for a free AI audit or a quote.",
-        "h1": "Tell me what you'd like to <em>improve</em>.",
-        "sub": "A rough idea is fine. I'll reply with a time for the free 30-minute audit.",
-        "or": "Or fill this in", "or_p": "The button opens your email with the message ready to send.",
-        "f": {"name": "Name", "company": "Company", "want": "Interested in", "msg": "Your project",
-              "ph": "E.g. we answer the same customer questions every day and want to automate it",
-              "opts": ["Free AI audit", "Website", "AI solution", "Company brain", "Dashboard", "Custom app", "Not sure yet"],
-              "note": "I usually reply within one business day.", "send": "Send →"},
-        "end": 'Prefer a call? <a href="{contact}">Email me and we\'ll set one up.</a>',
+        "title": "Contact · Reef 7 Lab", "desc": "Contact Reef 7 Lab about a new project.",
+        "h1": "Tell us where you want to <em>go</em>.",
+        "sub": "A first 30-minute conversation, with no commitment: we learn the context and tell you frankly whether, and how, we can help.",
+        "or": "Or use the form", "or_p": "The button opens your email with the message ready to send.",
+        "f": {"name": "Name", "company": "Company", "want": "Area of interest", "msg": "Your project",
+              "ph": "Goals, timeline, what you'd like to improve",
+              "opts": ["Website", "Custom application", "Artificial intelligence", "Company brain", "Dashboards and data", "Other"],
+              "note": "We reply within one business day.", "send": "Send"},
     },
 },
 }
-
-APP_SHOT = """<div class="shot"><div class="grid"></div>
-        <div class="app"><div class="side"><i></i><i></i><i></i><i></i><i></i></div>
-          <div class="main"><div class="hd"></div><div class="kp"><span></span><span></span><span></span></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div></div>
-      </div>"""
 
 
 def build(lang):
     L, S = T[lang], SLUG[lang]
     other = "en" if lang == "it" else "it"
-    pre = "" if lang == "it" else "../"           # percorso degli asset
-    alt_dir = "en/" if lang == "it" else "../"     # cartella dell'altra lingua
+    pre = "" if lang == "it" else "../"
+    alt_dir = "en/" if lang == "it" else "../"
     u = lambda k: S[k]
-    kicker = lambda txt: f'<p class="mono" style="margin-bottom:22px">{txt}</p>'
+    arrow = '<span class="arr" aria-hidden="true">→</span>'
 
-    def page(key, title, desc, body, end_line=None):
-        links = "".join(f'<a href="{u(k)}"{" aria-current=\"page\"" if k == key else ""}>{L["nav"][k]}</a>' for k in ["work", "services", "pricing", "studio"])
+    def page(key, title, desc, body, hero=False):
+        links = "".join(f'<a href="{u(k)}"{" aria-current=\"page\"" if k == key else ""}>{L["nav"][k]}</a>' for k in NAV)
         cur = ' aria-current="page"' if key == "contact" else ""
-        foot_links = "".join(f'<a href="{u(k)}">{L["nav"][k]}</a>' for k in ["work", "services", "pricing", "studio", "contact"])
-        end_html = (end_line or L["end"]).format(contact=u("contact"))
+        foot_links = "".join(f'<a href="{u(k)}">{L["nav"][k]}</a>' for k in NAV + ["contact"])
         alt = f"{alt_dir}{SLUG[other][key]}"
+        band = "" if key == "contact" else f"""
+<section class="cta-band"><div class="wrap"><a href="{u('contact')}">
+  <div><p class="mono">{L['cta_k']}</p><h2>{L['cta_h']}</h2></div><span class="circle" aria-hidden="true">→</span>
+</a></div></section>"""
         return f"""<!doctype html>
 <html lang="{lang}">
 <head>
@@ -255,7 +239,7 @@ def build(lang):
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{title}</title>
   <meta name="description" content="{desc}">
-  <meta name="theme-color" content="#060c15">
+  <meta name="theme-color" content="#04080f">
   <meta property="og:title" content="{title}">
   <meta property="og:description" content="{desc}">
   <meta property="og:image" content="{pre}assets/reef7-logo.png">
@@ -264,185 +248,134 @@ def build(lang):
   <link rel="apple-touch-icon" href="{pre}assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{pre}styles.css">
 </head>
 <body>
-<div class="page">
-<header class="top">
-  <a class="logo" href="{u('home')}"><img src="{pre}assets/reef7-logo.png" alt="" width="30" height="30">Reef 7 Lab</a>
+<header class="top{'' if hero else ' solid'}"><div class="wrap top-in">
+  <a class="logo" href="{u('home')}"><img src="{pre}assets/reef7-logo.png" alt="" width="34" height="34">Reef 7 Lab</a>
   <nav aria-label="{L['pages']}">{links}<a href="{u('contact')}" class="cta"{cur}>{L['nav']['contact']}</a></nav>
   <a class="lang" href="{alt}" hreflang="{other}" lang="{other}">{other.upper()}</a>
   <button class="menu" aria-expanded="false" data-close="{L['close']}">{L['menu']}</button>
-</header>
+</div></header>
 <main>
 {body}
-</main>
-<footer class="end">
-  <h2>{end_html}</h2>
-  <div class="end-row">
-    <span>{L['foot_line']}</span>
-    <nav aria-label="{L['pages']}">{foot_links}</nav>
-    <a class="r" href="mailto:{EMAIL}">{EMAIL}</a>
-  </div>
-</footer>
-</div>
+</main>{band}
+<footer class="foot"><div class="wrap foot-in">
+  <span>{L['foot']}</span>
+  <nav aria-label="{L['pages']}">{foot_links}</nav>
+  <a class="r" href="mailto:{EMAIL}">{EMAIL}</a>
+</div></footer>
 <script>window.REEF = {{ email: "{EMAIL}" }};</script>
 <script src="{pre}site.js"></script>
 </body>
 </html>
 """
 
+    def head_block(kicker, h1, sub=""):
+        return f"""<section class="page-head"><div class="wrap">
+  <p class="mono">{kicker}</p>
+  <h1>{h1}</h1>{f'<p class="sub">{sub}</p>' if sub else ''}
+</div></section>"""
+
     out = {}
+
     # home
     H = L["home"]
     rows = "".join(f"""
-      <a class="row" href="{u('services')}#s{n}"><span class="mono">{n}</span><h3>{t}</h3><p>{d}</p><span class="price-tag">{p}<small>{w}</small></span></a>""" for n, t, d, p, w, *_ in L["services"])
-    spec = "".join(f'<div><p class="mono">{a}</p><p>{b}</p></div>' for a, b in H["spec"])
-    steps = "".join(f'<li><span class="mono">{a}</span><h3>{b}</h3><p>{c}</p></li>' for a, b, c in H["steps"])
-    out["home"] = page("home", H["title"], H["desc"], f"""  <section class="intro">
+    <a class="svc-row" href="{u('services')}#s{n}"><span class="mono">{n}</span><h3>{t}</h3><p>{d}</p><span class="go" aria-hidden="true">→</span></a>""" for n, t, d, *_ in L["services"])
+    words = "".join(f"<span>{w}</span>" for w in H["marquee"])
+    sectors = "".join(f"""
+    <a class="sector" href="{u('solutions')}#k{i}"><span class="mono">0{i}</span><h3>{t}</h3><p>{d}</p><ul>{"".join(f"<li>{x}</li>" for x in li)}</ul></a>""" for i, (t, d, li, *_) in enumerate(L["sectors"][:3], 1))
+    reef_words = "".join(f'<div><span class="mono">0{i}</span><b>{w}</b></div>' for i, w in enumerate(H["reef_words"], 1))
+    out["home"] = page("home", H["title"], H["desc"], f"""<section class="hero">
+  <canvas id="water" aria-hidden="true"></canvas>
+  <div class="wrap hero-in">
+    <p class="mono">{H['kicker']}</p>
     <h1>{H['h1']}</h1>
-    <p class="sub">{H['sub']}</p>
-    <img class="art" src="{pre}assets/reef-deco.svg" alt="" aria-hidden="true">
-  </section>
-  <div class="spec">{spec}</div>
-  <section class="block">
-    <div class="block-head"><h2>{H['work_h']}</h2><p>{H['work_p']}</p></div>
-    <div class="work">
-      <a class="work-card" href="{u('work')}">
-        {APP_SHOT}
-        <div class="meta"><div><h3>{H['case_t']}</h3><p>{H['case_p']}</p></div><span class="mono">2026</span></div>
-      </a>
-      <div class="slot">
-        <span class="mono">{L['free_slot']}</span>
-        <div><h3>{H['slot_h']}</h3><p>{H['slot_p']}</p></div>
-        <a class="more u" href="{u('contact')}">{H['slot_a']}</a>
-      </div>
+    <div class="hero-foot">
+      <p>{H['sub']}</p>
+      <div class="actions"><a class="btn" href="{u('contact')}">{H['b1']} {arrow}</a><a class="btn ghost" href="{u('services')}">{H['b2']}</a></div>
     </div>
-  </section>
-  <section class="block">
-    <div class="block-head"><h2>{H['svc_h']}</h2><p>{H['svc_p']}</p></div>
-    <div class="rows">{rows}
-    </div>
-    <a class="more u" href="{u('services')}">{H['svc_all']}</a>
-  </section>
-  <section class="block">
-    <div class="block-head"><h2>{H['how_h']}</h2><p>{H['how_p']}</p></div>
-    <ol class="steps">{steps}</ol>
-  </section>""")
+  </div>
+</section>
+<div class="marquee" aria-hidden="true"><div class="marquee-track">{words}{words}</div></div>
+<section class="statement"><div class="wrap"><p>{H['statement']}</p></div></section>
+<section class="block"><div class="wrap">
+  <div class="head"><h2>{H['svc_h']}</h2><p>{H['svc_p']}</p></div>
+  <div class="svc-list">{rows}
+  </div>
+  <a class="link" href="{u('services')}">{H['svc_all']} {arrow}</a>
+</div></section>
+<section class="block"><div class="wrap">
+  <div class="head"><h2>{H['sol_h']}</h2><p>{H['sol_p']}</p></div>
+  <div class="sectors">{sectors}
+  </div>
+  <a class="link" href="{u('solutions')}">{H['sol_all']} {arrow}</a>
+</div></section>
+<section class="block"><div class="wrap">
+  <div class="head"><h2>{H['reef_h']}</h2><p>{H['reef_p']}</p></div>
+  <div class="principles">{reef_words}</div>
+  <a class="link" href="{u('studio')}">{H['reef_a']} {arrow}</a>
+</div></section>""", hero=True)
 
-    # work
-    W = L["work"]
-    facts = "".join(f'<li><p class="mono">{a}</p><p>{b}</p></li>' for a, b in W["facts"])
-    story = "".join(f"<p><b>{a}</b> {b}</p>" for a, b in W["story"])
-    out["work"] = page("work", W["title"], W["desc"], f"""  <section class="intro small">
-    {kicker(L['nav']['work'])}
-    <h1>{W['h1']}</h1>
-    <p class="sub">{W['sub']}</p>
-  </section>
-  <section class="block" style="padding-top:0"><div class="work-card">{APP_SHOT}</div></section>
-  <section class="block" id="reef7-hq">
-    <div class="two"><ul class="list">{facts}</ul><div class="prose">{story}</div></div>
-  </section>
-  <section class="block">
-    <div class="slot" style="min-height:0;gap:28px">
-      <span class="mono">{L['free_slot']}</span>
-      <div><h3>{W['slot_h']}</h3><p>{W['slot_p']}</p></div>
-      <a class="more u" href="{u('contact')}">{W['slot_a']}</a>
-    </div>
-  </section>""")
-
-    # services
+    # servizi
     SP = L["services_p"]
-    items = [(n, t, long, li, w, p) for n, t, _, p, w, long, li in L["services"]] + [L["care"][:4] + (L["care"][4], L["care"][5])]
     svc = "".join(f"""
-    <article class="svc" id="s{n}">
-      <span class="mono">{n}</span>
-      <div><h2>{t}</h2><p class="lead">{d}</p></div>
-      <div><ul>{"".join(f"<li>{x}</li>" for x in li)}</ul><div class="foot"><span>{w}</span><span>{p}</span></div></div>
-    </article>""" for n, t, d, li, w, p in items)
-    out["services"] = page("services", SP["title"], SP["desc"], f"""  <section class="intro small">
-    {kicker(L['nav']['services'])}
-    <h1>{SP['h1']}</h1>
-    <p class="sub">{SP['sub']}</p>
-  </section>
-  <section style="padding-bottom:clamp(72px,9vw,128px)">{svc}
-  </section>""", SP["end"])
+  <article class="svc" id="s{n}">
+    <span class="mono">{n}</span>
+    <div><h2>{t}</h2><p class="tag">{short}</p><p class="lead">{long}</p></div>
+    <div><ul>{"".join(f"<li>{x}</li>" for x in li)}</ul></div>
+  </article>""" for n, t, short, long, li in L["services"])
+    out["services"] = page("services", SP["title"], SP["desc"], head_block(L["nav"]["services"], SP["h1"], SP["sub"]) + f"""
+<section class="wrap" style="padding-bottom:clamp(80px,10vw,150px)">{svc}
+</section>""")
 
-    # pricing
-    P = L["pricing"]
-    trs = "".join(f'<tr><td>{a}</td><td>{b}</td><td>{c}</td><td class="num">{d}</td></tr>' for a, b, c, d in P["rows"])
-    faq = "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in P["faq"])
-    c = P["cols"]
-    out["pricing"] = page("pricing", P["title"], P["desc"], f"""  <section class="intro small">
-    {kicker(L['nav']['pricing'])}
-    <h1>{P['h1']}</h1>
-    <p class="sub">{P['sub']}</p>
-  </section>
-  <section class="block" style="padding-top:0">
-    <table class="table">
-      <thead><tr><th>{c[0]}</th><th>{c[1]}</th><th>{c[2]}</th><th class="num">{c[3]}</th></tr></thead>
-      <tbody>{trs}</tbody>
-    </table>
-  </section>
-  <section class="block">
-    <div class="paper">
-      <div><p class="mono" style="margin-bottom:18px">{P['offer_k']}</p><h2>{P['offer_h']}</h2></div>
-      <div><p>{P['offer_p']}</p><p style="margin-top:22px"><a class="btn" href="{u('contact')}">{P['offer_a']}</a></p></div>
-    </div>
-  </section>
-  <section class="block">
-    <div class="block-head"><h2>{P['faq_h']}</h2><p>{P['faq_p']}</p></div>
-    <div class="faq">{faq}</div>
-  </section>""")
+    # soluzioni
+    SO = L["solutions"]; lb = SO["lbl"]
+    cases = "".join(f"""
+  <article class="case" id="k{i}">
+    <span class="mono">0{i}</span>
+    <div><h2>{t}</h2><p class="lead">{d}</p></div>
+    <div><dl><div><dt>{lb[0]}</dt><dd>{a}</dd></div><div><dt>{lb[1]}</dt><dd>{b}</dd></div><div><dt>{lb[2]}</dt><dd>{c}</dd></div></dl></div>
+  </article>""" for i, (t, d, _, a, b, c) in enumerate(L["sectors"], 1))
+    out["solutions"] = page("solutions", SO["title"], SO["desc"], head_block(L["nav"]["solutions"], SO["h1"], SO["sub"]) + f"""
+<section class="wrap" style="padding-bottom:clamp(80px,10vw,150px)">{cases}
+</section>""")
 
     # studio
     St = L["studio"]
-    prose = "".join(f"<p>{f'<b>{a}</b> ' if a else ''}{b}</p>" for a, b in St["prose"])
-    rules = "".join(f'<li><p class="mono">{a}</p><p>{b}</p></li>' for a, b in St["rules"])
-    tools = "".join(f'<li><p class="mono">{a}</p><p>{b}</p></li>' for a, b in St["tools"])
-    out["studio"] = page("studio", St["title"], St["desc"], f"""  <section class="intro small">
-    {kicker(L['nav']['studio'])}
-    <h1>{St['h1']}</h1>
-  </section>
-  <section class="block" style="padding-top:0">
-    <div class="two">
-      <div class="portrait"><img src="{pre}assets/alessandro.jpg" alt="{St['photo_alt']}" width="512" height="512"></div>
-      <div class="prose">{prose}</div>
-    </div>
-  </section>
-  <section class="block">
-    <div class="block-head"><h2>{St['rules_h']}</h2><p>{St['rules_p']}</p></div>
-    <ul class="list">{rules}</ul>
-  </section>
-  <section class="block">
-    <div class="block-head"><h2>{St['tools_h']}</h2><p>{St['tools_p']}</p></div>
-    <ul class="list">{tools}</ul>
-  </section>""")
+    pr = "".join(f"""
+  <article class="principle"><span class="mono">{n}</span><h2>{t}</h2><p>{d}</p></article>""" for n, t, d in St["principles"])
+    who = "".join(f"<p>{p}</p>" for p in St["who"])
+    out["studio"] = page("studio", St["title"], St["desc"], head_block(L["nav"]["studio"], St["h1"], St["sub"]) + f"""
+<section class="wrap principle-list">{pr}
+</section>
+<section class="statement" style="border-top:1px solid var(--rule)"><div class="wrap">
+  <p class="mono" style="margin-bottom:28px">{St['seven_k']}</p>
+  <p>{St['seven_p']}</p>
+</div></section>
+<section class="block"><div class="wrap about">
+  <div class="portrait"><img src="{pre}assets/alessandro.jpg" alt="{St['photo_alt']}" width="512" height="512"></div>
+  <div><p class="big">{St['who_big']}</p>{who}
+    <div class="sign"><b>{St['sign'][0]}</b><span>{St['sign'][1]}</span></div></div>
+</div></section>""")
 
-    # contact
+    # contatti
     C = L["contact"]; F = C["f"]
     opts = "".join(f"<option>{o}</option>" for o in F["opts"])
-    out["contact"] = page("contact", C["title"], C["desc"], f"""  <section class="intro small">
-    {kicker(L['nav']['contact'])}
-    <h1>{C['h1']}</h1>
-    <p class="sub">{C['sub']}</p>
-  </section>
-  <section class="block" style="padding-top:0">
-    <a class="big-mail" href="mailto:{EMAIL}">{EMAIL}</a>
-  </section>
-  <section class="block">
-    <div class="two">
-      <div><p class="mono">{C['or']}</p><p style="color:var(--muted);margin-top:14px;max-width:340px">{C['or_p']}</p></div>
-      <form class="form" id="contact-form">
-        <label><span class="mono">{F['name']}</span><input name="nome" required autocomplete="name"></label>
-        <label><span class="mono">{F['company']}</span><input name="azienda" autocomplete="organization"></label>
-        <label class="full"><span class="mono">{F['want']}</span><select name="servizio">{opts}</select></label>
-        <label class="full"><span class="mono">{F['msg']}</span><textarea name="messaggio" required placeholder="{F['ph']}"></textarea></label>
-        <div class="send full"><p>{F['note']}</p><button class="btn" type="submit">{F['send']}</button></div>
-      </form>
-    </div>
-  </section>""", C["end"])
+    out["contact"] = page("contact", C["title"], C["desc"], head_block(L["nav"]["contact"], C["h1"], C["sub"]) + f"""
+<section class="wrap" style="padding-bottom:clamp(56px,7vw,100px)"><a class="big-mail" href="mailto:{EMAIL}">{EMAIL}</a></section>
+<section class="block"><div class="wrap contact-grid">
+  <div><p class="mono">{C['or']}</p><p style="color:var(--muted);margin-top:14px;max-width:340px">{C['or_p']}</p></div>
+  <form class="form" id="contact-form">
+    <label><span class="mono">{F['name']}</span><input name="nome" required autocomplete="name"></label>
+    <label><span class="mono">{F['company']}</span><input name="azienda" autocomplete="organization"></label>
+    <label class="full"><span class="mono">{F['want']}</span><select name="servizio">{opts}</select></label>
+    <label class="full"><span class="mono">{F['msg']}</span><textarea name="messaggio" required placeholder="{F['ph']}"></textarea></label>
+    <div class="send full"><p>{F['note']}</p><button class="btn" type="submit">{F['send']} {arrow}</button></div>
+  </form>
+</div></section>""")
 
     folder = ROOT if lang == "it" else ROOT / "en"
     folder.mkdir(exist_ok=True)
@@ -452,5 +385,8 @@ def build(lang):
 
 
 if __name__ == "__main__":
+    # toglie le pagine delle versioni precedenti (prezzi e lavori)
+    for old in ["lavori.html", "prezzi.html", "en/work.html", "en/pricing.html"]:
+        (ROOT / old).unlink(missing_ok=True)
     for lang in T:
         build(lang)

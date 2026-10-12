@@ -1,4 +1,4 @@
-// Reef 7 Lab: menu su telefono, anno, modulo contatti che apre l'email.
+// Reef 7 Lab: luce dell'acqua nell'hero, menu su telefono, modulo contatti che apre l'email.
 (() => {
   const email = (window.REEF || {}).email;
   const top = document.querySelector(".top");
@@ -15,8 +15,68 @@
     e.preventDefault();
     const f = new FormData(form);
     const who = `${f.get("nome")}${f.get("azienda") ? ` (${f.get("azienda")})` : ""}`;
-    const subject = `${f.get("servizio")} · ${who}`;
-    const body = `${f.get("messaggio")}\n\n${who}`;
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(`${f.get("servizio")} · ${who}`)}&body=${encodeURIComponent(`${f.get("messaggio")}\n\n${who}`)}`;
   });
+
+  // caustiche: la luce che filtra dalla superficie e danza sul fondale (shader WebGL)
+  const canvas = document.getElementById("water");
+  if (!canvas) return;
+  const gl = canvas.getContext("webgl", { antialias: false, alpha: true, premultipliedAlpha: false });
+  if (!gl) return;
+  const vs = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
+  const fs = `precision mediump float;
+uniform vec2 r;uniform float t;
+float caustic(vec2 uv,float time){
+  vec2 p=mod(uv*6.2831,6.2831)-250.;vec2 i=p;float c=1.;float inten=.005;
+  for(int n=0;n<4;n++){float tt=time*(1.-(3.5/float(n+1)));
+    i=p+vec2(cos(tt-i.x)+sin(tt+i.y),sin(tt-i.y)+cos(tt+i.x));
+    c+=1./length(vec2(p.x/(sin(i.x+tt)/inten),p.y/(cos(i.y+tt)/inten)));}
+  c/=4.;c=1.17-pow(c,1.4);return pow(abs(c),8.);}
+void main(){
+  vec2 uv=gl_FragCoord.xy/r;vec2 q=vec2(uv.x*r.x/r.y,uv.y)*.55;
+  float c=caustic(q,t*.18);
+  float depth=smoothstep(0.,1.,uv.y);
+  vec3 deep=vec3(.016,.031,.059);vec3 mid=vec3(.03,.16,.32);vec3 lit=vec3(.37,.88,.95);
+  vec3 col=mix(deep,mid,depth*.9);
+  col+=lit*c*(.18+.55*depth);
+  float rays=pow(max(0.,sin((uv.x+uv.y*.35)*9.+t*.25)*.5+.5),6.)*depth*.12;
+  col+=lit*rays;
+  gl_FragColor=vec4(col,1.);}`;
+  const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
+  const prog = gl.createProgram();
+  gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+  gl.useProgram(prog);
+  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, "p");
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const uR = gl.getUniformLocation(prog, "r"), uT = gl.getUniformLocation(prog, "t");
+
+  // risoluzione ridotta: l'effetto è morbido e resta leggero anche sui portatili
+  const resize = () => {
+    const scale = Math.min(window.devicePixelRatio || 1, 1) * 0.6;
+    canvas.width = Math.max(1, canvas.clientWidth * scale);
+    canvas.height = Math.max(1, canvas.clientHeight * scale);
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  };
+  resize();
+  window.addEventListener("resize", resize);
+
+  const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let visible = true;
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(canvas);
+  const start = performance.now();
+  const frame = (now) => {
+    if (visible) {
+      gl.uniform2f(uR, canvas.width, canvas.height);
+      gl.uniform1f(uT, still ? 12 : (now - start) / 1000 + 12);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    }
+    if (!still) requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
 })();
