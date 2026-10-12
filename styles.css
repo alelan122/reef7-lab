@@ -229,7 +229,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
 .eco-list li { display: flex; gap: 14px; align-items: baseline; font-size: 17px; }
 .eco-list li::before { font: 500 13px var(--mono); flex-shrink: 0; width: 14px; }
 .eco-list .x { color: var(--muted); }
-.eco-list .x::before { content: "✕"; color: #e88a8a; }
+.eco-list .x::before { content: "–"; color: var(--faint); }
 .eco-list .ok::before { content: "✓"; color: var(--aqua); }
 .eco .after-list, .eco.is-after .before-list { display: none; }
 .eco.is-after .after-list { display: grid; }
@@ -274,13 +274,12 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
 .hc-live { display: flex; align-items: center; gap: 7px; margin-top: 8px; font-size: 11px; color: var(--aqua); }
 .hc-live .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--aqua); box-shadow: 0 0 8px var(--aqua); animation: blink 1.6s ease-in-out infinite; }
 @keyframes blink { 50% { opacity: .3; } }
-/* riga di stato del cantiere */
-.eco-status { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; margin: 0; font-size: 11px; }
+/* didascalia sotto la scena: spiega cosa si vede */
+.eco-status { margin: 14px 2px 0; font-size: 14.5px; color: var(--muted); line-height: 1.5; }
 .eco-status .s-after, .eco.is-after .eco-status .s-before { display: none; }
-.eco.is-after .eco-status .s-after { display: inline; color: var(--aqua); }
-.eco-status .s-before { color: #e88a8a; }
+.eco.is-after .eco-status .s-after { display: inline; }
 @media (max-width: 900px) { .eco { grid-template-columns: 1fr; } .eco-stage { max-height: none; } }
-@media (max-width: 520px) { .eco-stage { aspect-ratio: 4 / 5; } .pill { font-size: 12px; padding: 7px 10px; } .hub-card { width: 34%; min-width: 0; padding: 8px; } .hc-top { font-size: 11px; margin-bottom: 4px; gap: 6px; } .hc-top img { width: 16px; height: 16px; } .hc-row { font-size: 9.5px; padding: 4px 0; gap: 6px; } .spark { height: 14px; width: 50%; gap: 2px; } .hc-live { display: none; } .eco-status { font-size: 9.5px; } }
+@media (max-width: 520px) { .eco-stage { aspect-ratio: 4 / 5; } .pill { font-size: 12px; padding: 7px 10px; } .hub-card { width: 34%; min-width: 0; padding: 8px; } .hc-top { font-size: 11px; margin-bottom: 4px; gap: 6px; } .hc-top img { width: 16px; height: 16px; } .hc-row { font-size: 9.5px; padding: 4px 0; gap: 6px; } .spark { height: 14px; width: 50%; gap: 2px; } .hc-live { display: none; } .eco-status { font-size: 13.5px; } }
 @media (prefers-reduced-motion: reduce) { .links line { animation: none; } .pill, .hub, .broken, .links { transition: none; } }
 
 /* missione: obiettivi stile raccolta fondi */

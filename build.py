@@ -157,14 +157,14 @@ T = {
         "h1": "Il tuo business, <em>connesso</em>.",
         "sub": "Siti, applicazioni e intelligenza artificiale progettati per lavorare insieme. Meno lavoro manuale, decisioni più rapide, una crescita che si accumula nel tempo.",
         "b1": "Parliamo del tuo progetto", "b2": "Scopri i servizi",
-        "eco_k": "Dal caos al controllo",
-        "eco_h": "Smetti di indovinare. <em>Inizia a sapere</em>.",
-        "eco_p": "Clienti su WhatsApp, ordini sull'e-commerce, fatture in un altro programma, numeri in un Excel che nessuno aggiorna: lavori tanto, ma non sai con certezza cosa ti fa guadagnare. Noi costruiamo il sistema che collega tutto. Vedi vendite, margini e clienti in un unico posto, il lavoro ripetitivo si fa da solo e ogni decisione la prendi con i numeri in mano.",
+        "eco_k": "Integrazione dei sistemi",
+        "eco_h": "Un unico sistema per <em>tutta l'azienda</em>.",
+        "eco_p": "Nella maggior parte delle aziende i dati vivono in strumenti separati: messaggi, ordini, fatture, fogli di calcolo. Colleghiamo questi strumenti in un'unica piattaforma, così le informazioni si aggiornano da sole e gli indicatori che contano sono sempre disponibili in un solo posto.",
         "tools": ["Email", "WhatsApp", "Excel", "CRM", "E-commerce", "Contabilità"],
-        "before": ("Oggi", ["Ore perse a copiare dati da un programma all'altro", "Non sai quali clienti e prodotti ti fanno guadagnare davvero", "Decisioni prese a sensazione, quando ormai è tardi"]),
-        "after": ("Con il tuo sistema", ["Il lavoro manuale lo fa il sistema, tu pensi a crescere", "Vendite, margini e clienti in un'unica dashboard", "Ogni decisione presa con cognizione di causa"]),
-        "card": ("Il tuo sistema", ["Vendite", "Margini", "Clienti"], "Dati aggiornati in tempo reale"),
-        "status": ("6 strumenti · nessuna connessione", "6 strumenti · un unico sistema"),
+        "before": ("Prima", ["Gli stessi dati inseriti più volte, in programmi diversi", "Informazioni sparse e difficili da confrontare", "Report preparati a mano, spesso già superati"]),
+        "after": ("Dopo", ["Ogni dato inserito una sola volta", "Informazioni collegate e sempre aggiornate", "Indicatori chiari per decisioni consapevoli"]),
+        "card": ("Dashboard", ["Vendite", "Margini", "Clienti"], "Aggiornata in tempo reale"),
+        "status": ("Prima: ogni strumento lavora da solo e i dati restano isolati.", "Dopo: gli strumenti condividono i dati e tutto è visibile in un'unica dashboard."),
         "svc_h": "Servizi", "svc_p": "Cinque competenze che lavorano insieme, per un'azienda più veloce e più lucida nelle decisioni.", "svc_all": "Tutti i servizi",
         "sol_h": "Soluzioni", "sol_p": "Ogni settore ha i suoi colli di bottiglia. Ecco quelli che conosciamo meglio.", "sol_all": "Tutte le soluzioni",
         "reef_h": "Progettati come <em>un reef</em>", "reef_p": "Il reef è tra gli ecosistemi più efficienti della Terra. I suoi cinque principi guidano ogni progetto.",
@@ -272,14 +272,14 @@ T = {
         "h1": "Your business, <em>connected</em>.",
         "sub": "Websites, applications and AI designed to work together. Less manual work, faster decisions and growth that compounds over time.",
         "b1": "Let's talk about your project", "b2": "Explore services",
-        "eco_k": "From chaos to control",
-        "eco_h": "Stop guessing. <em>Start knowing</em>.",
-        "eco_p": "Clients on WhatsApp, orders in your store, invoices in another program, numbers in a spreadsheet nobody updates: you work hard, but you don't know for sure what actually makes you money. We build the system that connects it all. You see sales, margins and clients in one place, repetitive work runs itself and every decision is backed by real numbers.",
+        "eco_k": "Systems integration",
+        "eco_h": "One system for <em>the whole company</em>.",
+        "eco_p": "In most companies, data lives in separate tools: messages, orders, invoices, spreadsheets. We connect these tools into a single platform, so information updates itself and the metrics that matter are always available in one place.",
         "tools": ["Email", "WhatsApp", "Spreadsheets", "CRM", "E-commerce", "Accounting"],
-        "before": ("Today", ["Hours lost copying data between programs", "No clear view of which clients and products really make you money", "Decisions made on gut feeling, when it's already too late"]),
-        "after": ("With your system", ["The system handles the manual work, you focus on growth", "Sales, margins and clients in a single dashboard", "Every decision made with full visibility"]),
-        "card": ("Your system", ["Sales", "Margins", "Clients"], "Data updated in real time"),
-        "status": ("6 tools · no connections", "6 tools · one system"),
+        "before": ("Before", ["The same data entered several times, in different programs", "Scattered information that's hard to compare", "Reports prepared by hand, often already out of date"]),
+        "after": ("After", ["Every piece of data entered once", "Connected information, always up to date", "Clear metrics for informed decisions"]),
+        "card": ("Dashboard", ["Sales", "Margins", "Clients"], "Updated in real time"),
+        "status": ("Before: each tool works on its own and data stays isolated.", "After: the tools share their data and everything is visible in a single dashboard."),
         "svc_h": "Services", "svc_p": "Five disciplines that work together, for a company that moves faster and decides more clearly.", "svc_all": "All services",
         "sol_h": "Solutions", "sol_p": "Every industry has its bottlenecks. These are the ones we know best.", "sol_all": "All solutions",
         "reef_h": "Designed like <em>a reef</em>", "reef_p": "The reef is one of the most efficient ecosystems on Earth. Its five principles guide every project.",
@@ -380,6 +380,7 @@ def eco(H, pre):
       <ul class="eco-list before-list">{li(bl, "x")}</ul>
       <ul class="eco-list after-list">{li(al, "ok")}</ul>
     </div>
+    <div class="eco-visual">
     <div class="eco-stage" aria-hidden="true">
       <svg viewBox="0 0 100 100" preserveAspectRatio="none"><g class="broken">{seg}</g><g class="links">{lines}</g><g class="packets">{packets}</g></svg>
       {pills}
@@ -388,7 +389,8 @@ def eco(H, pre):
         {card_rows}
         <p class="hc-live"><span class="dot"></span>{live}</p>
       </div>
-      <p class="eco-status mono"><span class="s-before">{sb}</span><span class="s-after">{sa}</span></p>
+    </div>
+    <p class="eco-status"><span class="s-before">{sb}</span><span class="s-after">{sa}</span></p>
     </div>
   </div>"""
 
