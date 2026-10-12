@@ -16,13 +16,13 @@ SHARE = 5        # percentuale degli introiti di ogni progetto destinata al mare
 RAISED = 0       # euro già destinati finora: aggiornalo dopo ogni donazione e rilancia lo script
 # obiettivi in ordine: (latitudine, longitudine, obiettivo in euro, organizzazione, sito)
 GOALS = [
-    (10.09, 99.84, 1000, "New Heaven Reef Conservation", "https://www.newheavenreefconservation.org"),
-    (27.26, 33.81, 1500, "HEPCA", "https://www.hepca.org"),
-    (-1.90, 130.20, 2500, "Misool Foundation", "https://www.misoolfoundation.org"),
-    (-8.70, 115.20, 2500, "Coral Triangle Center", "https://coraltrianglecenter.org"),
-    (4.17, 73.50, 3000, "Reefscapers", "https://reefscapers.com"),
-    (-17.53, -149.83, 4000, "Coral Gardeners", "https://coralgardeners.org"),
-    (-18.30, 147.70, 5000, "Great Barrier Reef Foundation", "https://www.barrierreef.org"),
+    (10.09, 99.84, 5000, "New Heaven Reef Conservation", "https://www.newheavenreefconservation.org"),
+    (27.26, 33.81, 7500, "HEPCA", "https://www.hepca.org"),
+    (-1.90, 130.20, 10000, "Misool Foundation", "https://www.misoolfoundation.org"),
+    (-8.70, 115.20, 12500, "Coral Triangle Center", "https://coraltrianglecenter.org"),
+    (4.17, 73.50, 15000, "Reefscapers", "https://reefscapers.com"),
+    (-17.53, -149.83, 20000, "Coral Gardeners", "https://coralgardeners.org"),
+    (-18.30, 147.70, 30000, "Great Barrier Reef Foundation", "https://www.barrierreef.org"),
 ]
 MT = {
 "it": {
