@@ -26,15 +26,15 @@ GOALS = [
 ]
 MT = {
 "it": {
-    "title": "Missione · Reef 7 Lab", "desc": "Il 5% degli introiti di ogni progetto di Reef 7 Lab va a chi protegge la flora e la fauna marina.",
-    "h1": f"Il {SHARE}% di ogni progetto <em>torna al mare</em>.",
-    "sub": f"Il nostro nome viene dal reef, e il reef è in pericolo: dagli anni '50 la copertura di corallo vivo nel mondo si è dimezzata. Per questo il {SHARE}% degli introiti di ogni progetto va a organizzazioni che proteggono la flora e la fauna marina.",
+    "title": "Missione · Reef 7 Lab", "desc": "Ogni progetto di Reef 7 Lab contribuisce a proteggere la flora e la fauna marina.",
+    "h1": "Ogni progetto <em>protegge il mare</em>.",
+    "sub": f"Il nostro nome viene dal reef, e il reef è in pericolo: dagli anni '50 la copertura di corallo vivo nel mondo si è dimezzata. Per questo ogni progetto che realizziamo sostiene le organizzazioni che proteggono la flora e la fauna marina.",
     "stats": [(f"{SHARE}%", "degli introiti di ogni progetto"), (None, "destinati al mare finora"), (str(len(GOALS)), "reef da sostenere, uno dopo l'altro")],
-    "how_h": "Come funziona", "how": [("Ogni progetto", f"Il {SHARE}% di ciò che il cliente paga viene accantonato fin dal primo giorno."),
-                                      ("Un obiettivo alla volta", "Il fondo va al reef in corso. Raggiunto l'obiettivo, si passa al successivo."),
-                                      ("Tutto trasparente", "Questa pagina mostra i fondi destinati e l'avanzamento di ogni obiettivo.")],
+    "how_h": "Come funziona", "how": [("Ogni progetto", "Una parte di ciò che il cliente investe viene destinata al mare, fin dal primo giorno."),
+                                      ("Un reef alla volta", "Sosteniamo un reef per volta. Raggiunto l'obiettivo, passiamo al successivo."),
+                                      ("Tutto trasparente", "Aggiorniamo questa pagina a ogni obiettivo raggiunto.")],
     "map_h": "I reef che <em>sosterremo</em>", "map_p": "Sette barriere coralline tra le più preziose del pianeta, dal Mar Rosso alla Polinesia.",
-    "goals_h": "Prossimi obiettivi", "goals_p": "Come una raccolta fondi: ogni barra si riempie con i progetti che realizziamo.",
+    "goals_h": "Prossimi obiettivi", "goals_p": "Un reef alla volta: ogni progetto che realizziamo ci avvicina al prossimo.",
     "places": [("Koh Tao", "Thailandia", "Vivai e restauro dei coralli nel Golfo di Thailandia."),
                ("Mar Rosso", "Egitto", "Boe d'ormeggio e protezione delle barriere dalle ancore."),
                ("Raja Ampat", "Indonesia", "Aree marine protette e pattugliamento contro la pesca illegale."),
@@ -48,19 +48,19 @@ MT = {
     "why_k": "Non è marketing", "why_h": "Il mare, prima di tutto, <em>da volontari</em>.",
     "why_p": ["Prima di Reef 7 Lab, Alessandro è stato per diversi anni membro attivo di 2hands Ancona, il gruppo di volontari che ripulisce spiagge e coste dai rifiuti.",
               "Reef 7 Lab porta lo stesso impegno nel lavoro di ogni giorno: ogni progetto che realizziamo contribuisce a proteggere il mare da cui prendiamo il nome."],
-    "home_k": "Missione", "home_h": f"Il {SHARE}% torna <em>al mare</em>.", "home_p": f"Ogni progetto che realizziamo finanzia la protezione delle barriere coralline. Il prossimo obiettivo:",
+    "home_k": "Missione", "home_h": "Ogni progetto <em>protegge il mare</em>.", "home_p": "Ogni progetto che realizziamo contribuisce a proteggere le barriere coralline. Il reef che stiamo sostenendo ora:",
     "home_a": "Scopri la missione",
 },
 "en": {
-    "title": "Mission · Reef 7 Lab", "desc": "5% of revenue from every Reef 7 Lab project goes to organisations protecting marine life.",
-    "h1": f"{SHARE}% of every project <em>goes back to the sea</em>.",
-    "sub": f"Our name comes from the reef, and reefs are in danger: since the 1950s, the world's living coral cover has halved. That's why {SHARE}% of revenue from every project goes to organisations protecting marine flora and fauna.",
+    "title": "Mission · Reef 7 Lab", "desc": "Every Reef 7 Lab project helps protect marine flora and fauna.",
+    "h1": "Every project <em>protects the sea</em>.",
+    "sub": f"Our name comes from the reef, and reefs are in danger: since the 1950s, the world's living coral cover has halved. That's why every project we deliver supports organisations that protect marine flora and fauna.",
     "stats": [(f"{SHARE}%", "of revenue from every project"), (None, "given to the ocean so far"), (str(len(GOALS)), "reefs to support, one after another")],
-    "how_h": "How it works", "how": [("Every project", f"{SHARE}% of what the client pays is set aside from day one."),
-                                     ("One goal at a time", "The fund goes to the current reef. Once the goal is reached, we move to the next."),
-                                     ("Fully transparent", "This page shows the funds given and the progress of every goal.")],
+    "how_h": "How it works", "how": [("Every project", "Part of what each client invests goes to the sea, from day one."),
+                                     ("One reef at a time", "We support one reef at a time. Once the goal is reached, we move to the next."),
+                                     ("Fully transparent", "We update this page every time a goal is reached.")],
     "map_h": "The reefs we'll <em>support</em>", "map_p": "Seven of the most precious coral reefs on the planet, from the Red Sea to Polynesia.",
-    "goals_h": "Next goals", "goals_p": "Like a crowdfunding campaign: every bar fills up with the projects we deliver.",
+    "goals_h": "Next goals", "goals_p": "One reef at a time: every project we deliver brings us closer to the next.",
     "places": [("Koh Tao", "Thailand", "Coral nurseries and reef restoration in the Gulf of Thailand."),
                ("Red Sea", "Egypt", "Mooring buoys that protect reefs from anchor damage."),
                ("Raja Ampat", "Indonesia", "Marine protected areas and patrols against illegal fishing."),
@@ -74,7 +74,7 @@ MT = {
     "why_k": "Not a marketing line", "why_h": "The sea came first, <em>as volunteers</em>.",
     "why_p": ["Before Reef 7 Lab, Alessandro spent several years as an active member of 2hands Ancona, the volunteer group that cleans beaches and coastlines of litter.",
               "Reef 7 Lab brings the same commitment to everyday work: every project we deliver helps protect the sea we're named after."],
-    "home_k": "Mission", "home_h": f"{SHARE}% goes back <em>to the sea</em>.", "home_p": "Every project we deliver funds the protection of coral reefs. Our next goal:",
+    "home_k": "Mission", "home_h": "Every project <em>protects the sea</em>.", "home_p": "Every project we deliver helps protect coral reefs. The reef we're supporting now:",
     "home_a": "Discover the mission",
 },
 }
@@ -456,8 +456,6 @@ def build(lang, variant=""):
       <div class="goal-top"><span class="goal-n">{i + 1:02d}</span><span class="chip">{status}</span></div>
       <h3>{place}</h3><p class="goal-country mono">{country}</p>
       <p class="goal-what">{what}</p>
-      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{pct}"><i style="width:{max(pct, 0)}%"></i></div>
-      <div class="goal-num"><span>{M['raised_of'].format(r=euro(got, lang), t=euro(target, lang))}</span><b>{pct}%</b></div>
       <p class="goal-org"><span class="mono">{M['partner']}</span> <a href="{url}" target="_blank" rel="noopener">{org} ↗</a></p>
     </article>"""
 
@@ -542,8 +540,7 @@ def build(lang, variant=""):
 <script src="https://cdn.jsdelivr.net/npm/d3-geo@3.1.1/dist/d3-geo.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>"""
     out["mission"] = page("mission", M["title"], M["desc"], head_block(L["nav"]["mission"], M["h1"], M["sub"]) + f"""
-<section class="wrap"><div class="figures">{stats}</div></section>
-<section class="block" style="border-top:0"><div class="wrap">
+<section class="block" style="border-top:0;padding-top:0"><div class="wrap">
   <div class="head"><h2>{M['how_h']}</h2></div>
   <div class="how">{how}</div>
 </div></section>
