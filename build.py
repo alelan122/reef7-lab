@@ -311,9 +311,12 @@ T = {
         "seven_k": "Perché 7", "seven_h": "Sette reef, <em>un nome</em>.", "seven_a": "Scopri i sette reef",
         "seven_p": "Il 7 sono sette barriere coralline, dal Mar Rosso alla Polinesia, che vogliamo aiutare a proteggere. Ogni progetto che realizziamo ci avvicina a questo obiettivo: è il numero che ci ricorda per chi lavoriamo, oltre che per i nostri clienti.",
         "who_big": "Dietro Reef 7 Lab c'è <em>Alessandro</em>.",
-        "who": ["Negli ultimi anni ha progettato software, automazioni e funnel di vendita per aziende in crescita, vedendo da vicino quanto valore si perde tra strumenti scollegati e processi manuali.",
-                "Ha fondato Reef 7 Lab per offrire alle aziende ciò che di solito è riservato ai grandi gruppi: sistemi su misura, intelligenza artificiale applicata e un unico interlocutore che conosce ogni riga del progetto.",
+        "who": ["Costruisce software per le aziende dal 2023, quando ha fondato la sua prima startup di sviluppo, Tupitago: il progetto ha vinto un bando regionale da 20.000 € e si è fatto strada in diverse competizioni per startup.",
+                "Da allora ha guidato la gestione e lo sviluppo del software di tre brand e-commerce, Veneziana, Breeez e Full Peak, e da quasi un anno lavora al fianco di Asia Baldoni Fitness e Tartufoli Group su infrastruttura digitale e intelligenza artificiale. Ha visto da vicino quanto valore si perde tra strumenti scollegati e processi manuali, e come recuperarlo.",
+                "Laureato in Mediazione linguistica, lavora in italiano, inglese, spagnolo, tedesco e cinese: un vantaggio concreto per le aziende che vendono, comprano o crescono all'estero.",
                 "Il legame con il mare è personale: per diversi anni è stato membro attivo di 2hands Ancona, il gruppo di volontari che ripulisce spiagge e coste dai rifiuti."],
+        "creds": [("2023", "Fonda Tupitago, startup di sviluppo software"), ("Bando regionale", "Vinto da Tupitago, oltre a diverse competizioni"),
+                  ("3 brand e-commerce", "Veneziana, Breeez, Full Peak"), ("5 lingue", "Laurea in Mediazione linguistica")],
         "sign": ("Alessandro", "Fondatore, Reef 7 Lab"),
         "photo_alt": "Alessandro, fondatore di Reef 7 Lab",
     },
@@ -463,9 +466,12 @@ T = {
         "seven_k": "Why 7", "seven_h": "Seven reefs, <em>one name</em>.", "seven_a": "Meet the seven reefs",
         "seven_p": "The 7 is seven coral reefs, from the Red Sea to Polynesia, that we want to help protect. Every project we build brings us closer to that goal: it's the number that reminds us who we work for, beyond our clients.",
         "who_big": "Behind Reef 7 Lab is <em>Alessandro</em>.",
-        "who": ["In recent years he has designed software, automations and sales funnels for growing companies, seeing first-hand how much value gets lost between disconnected tools and manual processes.",
-                "He founded Reef 7 Lab to give companies what is usually reserved for large groups: custom systems, applied artificial intelligence and a single point of contact who knows every line of the project.",
+        "who": ["He has been building software for companies since 2023, when he founded his first software development startup, Tupitago: the project won a €20,000 regional grant and made its way through several startup competitions.",
+                "Since then he has led software management and development for three e-commerce brands, Veneziana, Breeez and Full Peak, and for almost a year he has worked alongside Asia Baldoni Fitness and Tartufoli Group on digital infrastructure and artificial intelligence. He has seen first-hand how much value gets lost between disconnected tools and manual processes, and how to win it back.",
+                "With a degree in Language Mediation, he works in Italian, English, Spanish, German and Chinese: a real advantage for companies that sell, source or grow abroad.",
                 "His connection to the sea is personal: for several years he was an active member of 2hands Ancona, the volunteer group that cleans beaches and coastlines of litter."],
+        "creds": [("2023", "Founds Tupitago, a software development startup"), ("Regional grant", "Won by Tupitago, plus several competitions"),
+                  ("3 e-commerce brands", "Veneziana, Breeez, Full Peak"), ("5 languages", "Degree in Language Mediation")],
         "sign": ("Alessandro", "Founder, Reef 7 Lab"),
         "photo_alt": "Alessandro, founder of Reef 7 Lab",
     },
@@ -843,6 +849,7 @@ def build(lang, variant=""):
 <section class="block"><div class="wrap about">
   <div class="portrait"><img src="{pre}assets/alessandro.jpg" alt="{St['photo_alt']}" width="512" height="512"></div>
   <div><p class="big">{St['who_big']}</p>{who}
+    <ul class="creds">{"".join(f"<li><b>{k}</b><span>{v}</span></li>" for k, v in St['creds'])}</ul>
     <div class="sign"><b>{St['sign'][0]}</b><span>{St['sign'][1]}</span></div></div>
 </div></section>""", extra=libs + f'\n<script src="{pre}mission.js?v={VERSION}"></script>')
 
