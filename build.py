@@ -119,6 +119,9 @@ WT = {
                           "note": "Anteprima navigabile del sito."},
     },
     "home_h": "Projects", "home_p": "Una selezione di progetti recenti, da esplorare dal vivo.", "home_a": "Tutti i progetti",
+    "partners_k": "Partner", "partners_h": "Le aziende con cui <em>lavoriamo</em>.",
+    "partners": [("Asia Baldoni Fitness", "Brand di fitness femminile online", "Ricerca e sviluppo di strumenti interni, automazioni e soluzioni di intelligenza artificiale."),
+                 ("Tartufoli Group", "La società a cui fa capo Asia Baldoni Fitness", "Infrastruttura digitale e intelligenza artificiale al servizio dei brand del gruppo.")],
 },
 "en": {
     "title": "Projects · Reef 7 Lab", "desc": "A selection of Reef 7 Lab projects: applications, websites and tools for businesses.",
@@ -151,6 +154,9 @@ WT = {
                           "note": "Browsable website preview."},
     },
     "home_h": "Projects", "home_p": "A selection of recent projects, ready to explore live.", "home_a": "All projects",
+    "partners_k": "Partners", "partners_h": "The companies we <em>work with</em>.",
+    "partners": [("Asia Baldoni Fitness", "Online women's fitness brand", "Research and development of internal tools, automations and AI solutions."),
+                 ("Tartufoli Group", "The company behind Asia Baldoni Fitness", "Digital infrastructure and artificial intelligence for the group's brands.")],
 },
 }
 
@@ -660,9 +666,15 @@ def build(lang, variant=""):
         return f'<a class="work-card2" href="{u("work")}#{w["key"]}"><div class="wc-img">{img}</div><div class="wc-meta"><h3>{p["name"]}</h3><p>{p["type"]}</p></div></a>'
 
     work_cards = "".join(work_card(w) for w in WORK)
+    partners = "".join(f'<div class="partner"><b class="partner-name">{n}</b><span class="partner-what">{w}</span><p>{d}</p></div>' for n, w, d in W["partners"])
+    partners_html = f"""<section class="block partners-block"><div class="wrap partners-in">
+  <div><p class="mono">{W['partners_k']}</p><h2>{W['partners_h']}</h2></div>
+  <div class="partners">{partners}</div>
+</div></section>"""
     out["work"] = page("work", W["title"], W["desc"], head_block(L["nav"]["work"], W["h1"], W["sub"]) + f"""
 <section class="wrap projects">{"".join(project(i, w) for i, w in enumerate(WORK, 1))}
-</section>""")
+</section>
+{partners_html}""")
 
     # home
     H = L["home"]
@@ -690,6 +702,7 @@ def build(lang, variant=""):
   <div class="work-grid">{work_cards}</div>
   <a class="link" href="{u('work')}">{W['home_a']} {arrow}</a>
 </div></section>
+{partners_html}
 <section class="block"><div class="wrap">
   <div class="head"><h2>{H['svc_h']}</h2><p>{H['svc_p']}</p></div>
   <div class="svc-list">{rows}
