@@ -10,25 +10,32 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-  :root { --bg: #f6f7f9; --panel: #fff; --ink: #0f172a; --muted: #64748b; --faint: #94a3b8; --line: #e6e9ef; --soft: #f1f4f8; --blue: #2f7bff; --aqua: #14b8c9; --green: #16a34a; --red: #e11d48; --amber: #d97706; --violet: #7c3aed; --sans: "Geist", "Segoe UI", system-ui, sans-serif; --mono: "Geist Mono", ui-monospace, monospace; }
+  :root { --bg: #111417; --panel: #171b1f; --ink: #e8ebee; --muted: #9aa3ad; --faint: #6b7480; --line: #272c32; --soft: #1e2328; --col: #15191d; --em: #34c38f; --em-ink: #062b1d; --blue: #2f7bff; --aqua: #14b8c9; --green: #34c38f; --red: #f0627a; --amber: #f59e0b; --orange: #f08a5d; --violet: #a78bfa; --side: #111417; --sans: "Geist", "Segoe UI", system-ui, sans-serif; --mono: "Geist Mono", ui-monospace, monospace; color-scheme: dark; }
+  :root[data-theme="light"] { --bg: #f6f7f9; --panel: #fff; --ink: #0f172a; --muted: #64748b; --faint: #94a3b8; --line: #e6e9ef; --soft: #f1f4f8; --col: #edf0f4; --em: #16a36f; --em-ink: #fff; --green: #16a36f; --red: #e11d48; --side: #fff; color-scheme: light; }
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; }
   body { background: var(--bg); color: var(--ink); font: 14px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
   button, input, select, textarea { font: inherit; color: inherit; }
   .app { display: grid; grid-template-columns: 228px minmax(0, 1fr); height: 100vh; }
-  .side { background: #0b1220; color: #cbd5e1; padding: 18px 12px; display: flex; flex-direction: column; gap: 3px; }
-  .brand { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 600; padding: 4px 10px 6px; }
-  .brand i { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(135deg, var(--blue), var(--aqua)); display: grid; place-items: center; font: 600 12px var(--mono); font-style: normal; }
-  .brand small { display: block; font-weight: 400; color: #64748b; font-size: 11.5px; }
+  .side { background: var(--side); color: var(--muted); border-right: 1px solid var(--line); padding: 18px 12px; display: flex; flex-direction: column; gap: 3px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 600; padding: 4px 10px 14px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+  .brand .sales { margin-left: auto; font: 600 10px var(--mono); letter-spacing: .06em; color: var(--em); background: rgba(52, 195, 143, .14); padding: 3px 8px; border-radius: 999px; }
+  .brand i { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(135deg, #1f9d74, var(--em)); color: #fff; display: grid; place-items: center; font: 600 12px var(--mono); font-style: normal; }
+  .brand small { display: block; font-weight: 400; color: var(--faint); font-size: 11.5px; }
+  .grp { height: 1px; background: var(--line); margin: 8px 10px; }
   .sec { font: 500 10.5px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: #475569; padding: 16px 10px 6px; }
   .nav { all: unset; display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 9px; cursor: pointer; font-weight: 500; }
   .nav svg { width: 17px; height: 17px; flex: none; }
-  .nav:hover { background: rgba(255, 255, 255, .06); color: #fff; }
-  .nav[aria-current="page"] { background: rgba(47, 123, 255, .2); color: #fff; }
-  .nav .count { margin-left: auto; font: 500 11px var(--mono); background: rgba(255, 255, 255, .1); padding: 1px 7px; border-radius: 999px; }
-  .side .foot { margin-top: auto; padding: 12px 10px 0; border-top: 1px solid rgba(255, 255, 255, .08); font-size: 12px; color: #64748b; }
-  .side .foot a { color: #7dd3fc; }
-  .reset { all: unset; cursor: pointer; display: block; margin-top: 8px; color: #94a3b8; }
+  .nav:hover { background: var(--soft); color: var(--ink); }
+  .nav[aria-current="page"] { background: var(--soft); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+  .nav .count { margin-left: auto; font: 600 11px var(--mono); background: var(--em); color: var(--em-ink); padding: 1px 7px; border-radius: 999px; }
+  .side .foot { margin-top: auto; padding: 12px 6px 0; border-top: 1px solid var(--line); font-size: 12px; color: var(--faint); display: grid; gap: 8px; }
+  .side .foot a { color: var(--em); }
+  .user { color: var(--ink); font-weight: 600; font-size: 14px; padding: 0 4px; }
+  .theme { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); border-radius: 10px; padding: 3px; }
+  .theme button { all: unset; text-align: center; padding: 5px; border-radius: 7px; cursor: pointer; font-size: 13px; }
+  .theme button[aria-pressed="true"] { background: var(--soft); color: var(--ink); }
+  .reset { all: unset; cursor: pointer; display: block; color: var(--muted); padding: 0 4px; }
   .main { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
   .top { display: flex; align-items: center; gap: 10px; padding: 14px 24px; border-bottom: 1px solid var(--line); background: var(--panel); }
   .top h1 { font-size: 18px; margin: 0; font-weight: 600; letter-spacing: -.01em; }
@@ -38,11 +45,11 @@
   .search { width: 230px; background: var(--soft); }
   .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 13px; border-radius: 9px; border: 1px solid var(--line); background: var(--panel); cursor: pointer; font-weight: 500; white-space: nowrap; }
   .btn:hover { border-color: #cbd2dc; }
-  .btn.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .btn.primary { background: var(--em); color: var(--em-ink); border-color: var(--em); font-weight: 600; }
   .btn.sm { padding: 5px 10px; font-size: 12.5px; }
   .seg { display: inline-flex; background: var(--soft); border-radius: 9px; padding: 3px; }
   .seg button { all: unset; padding: 5px 11px; border-radius: 7px; cursor: pointer; font-weight: 500; font-size: 13px; color: var(--muted); }
-  .seg button[aria-pressed="true"] { background: var(--panel); color: var(--ink); box-shadow: 0 1px 3px rgba(15, 23, 42, .1); }
+  .seg button[aria-pressed="true"] { background: var(--panel); color: var(--ink); box-shadow: 0 0 0 1px var(--line); }
   .tog { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); cursor: pointer; }
   .tog input { accent-color: var(--blue); width: 16px; height: 16px; }
   .view { flex: 1; overflow: auto; padding: 20px 24px 30px; }
@@ -61,25 +68,26 @@
   .cash b.big { font-size: 40px; font-weight: 700; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
   .cash .of { color: var(--muted); font-size: 15px; }
   .traj { position: relative; height: 14px; border-radius: 8px; background: var(--soft); margin: 16px 0 8px; overflow: visible; }
-  .traj i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 8px; background: linear-gradient(90deg, var(--blue), var(--aqua)); transition: width .6s ease; }
+  .traj i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 8px; background: var(--em); transition: width .6s ease; }
   .traj u { position: absolute; top: -5px; bottom: -5px; width: 2px; background: var(--ink); border-radius: 2px; }
   .traj u::after { content: attr(data-l); position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font: 500 11px var(--mono); color: var(--muted); white-space: nowrap; }
   .legend { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--muted); }
   .light { display: inline-flex; align-items: center; gap: 7px; font-weight: 600; font-size: 13px; padding: 4px 10px; border-radius: 999px; }
   .light::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
-  .light.g { background: #dcfce7; color: #15803d; } .light.a { background: #fef3c7; color: #b45309; } .light.r { background: #ffe4e6; color: #be123c; }
+  .light.g { color: var(--em); box-shadow: inset 0 0 0 1px rgba(52, 195, 143, .5); } .light.a { color: var(--amber); box-shadow: inset 0 0 0 1px rgba(245, 158, 11, .5); } .light.r { color: var(--orange); box-shadow: inset 0 0 0 1px rgba(240, 138, 93, .55); }
+  .light::before { display: none; }
   .diag { border-left: 3px solid var(--amber); background: #fffbeb; border-radius: 0 12px 12px 0; padding: 14px 16px; margin-top: 12px; }
   .diag b { display: block; margin-bottom: 6px; }
   .diag ol { margin: 0; padding-left: 18px; display: grid; gap: 4px; color: #78350f; }
   .seg-p { margin-left: auto; }
   /* pipeline */
   .board { display: grid; grid-auto-flow: column; grid-auto-columns: 232px; gap: 10px; align-items: start; padding-bottom: 6px; }
-  .col { background: #edf0f4; border-radius: 12px; padding: 9px; min-height: 280px; transition: background .15s, box-shadow .15s; }
-  .col.won { background: #ecfdf3; } .col.lost { background: #fff1f3; }
+  .col { background: var(--col); border: 1px solid var(--line); border-radius: 12px; padding: 9px; min-height: 280px; transition: background .15s, box-shadow .15s; }
+  .col.won { background: rgba(52, 195, 143, .07); } .col.lost { background: rgba(240, 98, 122, .07); }
   .col.folded { grid-column: span 1; min-height: 0; width: 46px; padding: 9px 6px; cursor: pointer; }
   .col.folded h2 { writing-mode: vertical-rl; transform: rotate(180deg); margin: 0; }
   .col.folded .cards, .col.folded h2 em { display: none; }
-  .col.over { box-shadow: inset 0 0 0 2px var(--blue); background: #e2ebfa; }
+  .col.over { box-shadow: inset 0 0 0 2px var(--em); }
   .col h2 { display: flex; align-items: center; gap: 7px; font-size: 12.5px; margin: 2px 3px 9px; font-weight: 600; }
   .col h2 i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
   .col h2 span { color: var(--muted); font-weight: 500; }
@@ -96,13 +104,13 @@
   .lead .age.stale { color: var(--red); font-weight: 600; }
   .av { width: 22px; height: 22px; border-radius: 50%; display: inline-grid; place-items: center; font: 600 9.5px var(--sans); color: #fff; flex: none; }
   .pill { font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 999px; white-space: nowrap; }
-  .p-pro { background: #ede9fe; color: #6d28d9; } .p-coach { background: #e0f2fe; color: #0369a1; } .p-prio { background: #ffe4e6; color: #be123c; } .p-dd { background: #fef3c7; color: #b45309; }
+  .p-pro { background: rgba(167, 139, 250, .16); color: var(--violet); } .p-coach { background: rgba(56, 189, 248, .15); color: #38bdf8; } .p-prio { background: rgba(240, 98, 122, .16); color: var(--red); } .p-dd { background: rgba(245, 158, 11, .16); color: var(--amber); }
   .ghost { position: fixed; z-index: 100; pointer-events: none; width: 220px; transform: rotate(2deg); box-shadow: 0 18px 40px rgba(15, 23, 42, .25); }
   table { width: 100%; border-collapse: collapse; }
   th, td { text-align: left; padding: 11px 16px; border-top: 1px solid var(--line); }
-  th { font-size: 12px; color: var(--muted); font-weight: 500; border-top: 0; background: #fafbfc; white-space: nowrap; }
+  th { font-size: 12px; color: var(--muted); font-weight: 500; border-top: 0; background: var(--col); white-space: nowrap; }
   td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
-  tbody tr { cursor: pointer; } tbody tr:hover { background: #fafbfd; }
+  tbody tr { cursor: pointer; } tbody tr:hover { background: var(--soft); }
   .who { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
   /* scheda lead */
   .scrim { position: fixed; inset: 0; background: rgba(15, 23, 42, .35); z-index: 40; animation: fade .2s; }
@@ -120,7 +128,7 @@
   .db { padding: 14px 16px 24px; overflow: auto; flex: 1; display: grid; gap: 12px; align-content: start; }
   .box { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
   .box h4 { margin: 0 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; display: flex; align-items: center; gap: 8px; }
-  .box h4 .ai { font: 600 10px var(--mono); padding: 2px 6px; border-radius: 6px; background: linear-gradient(135deg, #ede9fe, #e0f2fe); color: #5b21b6; letter-spacing: 0; }
+  .box h4 .ai { font: 600 10px var(--mono); padding: 2px 6px; border-radius: 6px; background: rgba(52, 195, 143, .15); color: var(--em); letter-spacing: 0; }
   .kv { display: grid; grid-template-columns: 120px 1fr; gap: 6px 10px; font-size: 13px; }
   .kv span { color: var(--muted); }
   .call { border-top: 1px solid var(--line); padding-top: 10px; margin-top: 10px; font-size: 13px; }
@@ -138,11 +146,11 @@
   .boards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .rank { display: grid; gap: 4px; }
   .rk { display: grid; grid-template-columns: 26px 1fr 100px; gap: 10px; align-items: center; padding: 9px 10px; border-radius: 10px; }
-  .rk.me { background: #eef4ff; }
+  .rk.me { background: rgba(52, 195, 143, .08); box-shadow: inset 0 0 0 1px rgba(52, 195, 143, .3); }
   .rk .pos { font: 600 13px var(--mono); color: var(--muted); text-align: center; }
   .rk .nm { display: flex; align-items: center; gap: 8px; font-weight: 500; min-width: 0; }
   .rk .bar { grid-column: 2 / 3; height: 6px; border-radius: 4px; background: var(--soft); overflow: hidden; margin-top: 4px; }
-  .rk .bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--blue), var(--aqua)); border-radius: inherit; transition: width .6s; }
+  .rk .bar i { display: block; height: 100%; background: var(--em); border-radius: inherit; transition: width .6s; }
   .rk b { text-align: right; font-variant-numeric: tabular-nums; grid-row: 1 / 3; grid-column: 3; }
   .rk .nmw { grid-column: 2; }
   .mark { display: flex; align-items: center; gap: 8px; font: 500 11px var(--mono); color: var(--amber); padding: 2px 10px; }
@@ -150,7 +158,47 @@
   .tiers { display: flex; gap: 6px; margin: 12px 0 6px; }
   .tiers div { flex: 1; text-align: center; padding: 8px 4px; border-radius: 9px; background: var(--soft); font-size: 12px; color: var(--muted); }
   .tiers div b { display: block; font-size: 15px; color: var(--ink); }
-  .tiers div.on { background: var(--ink); color: #cbd5e1; } .tiers div.on b { color: #fff; }
+  .tiers div.on { background: var(--em); color: var(--em-ink); } .tiers div.on b { color: var(--em-ink); }
+  .res-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+  .ico { width: 40px; height: 40px; border-radius: 10px; background: var(--soft); display: grid; place-items: center; color: var(--em); flex: none; }
+  .ico svg { width: 20px; height: 20px; }
+  .res-head b { display: block; font-size: 18px; }
+  .res-head small { color: var(--muted); font-size: 12.5px; }
+  .periods { margin-left: auto; display: flex; gap: 8px; }
+  .periods button { all: unset; cursor: pointer; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); font-weight: 500; }
+  .periods button[aria-pressed="true"] { background: var(--em); border-color: var(--em); color: var(--em-ink); font-weight: 600; }
+  .cashc { display: grid; grid-template-columns: auto 1fr auto; gap: 4px 16px; align-items: start; }
+  .cashc .lbl { color: var(--muted); }
+  .cashc .val { font-size: 40px; font-weight: 700; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+  .cashc .proj { color: var(--muted); }
+  .cashc .proj b { color: var(--ink); }
+  .pbar { height: 8px; border-radius: 6px; background: var(--soft); margin: 18px 0 10px; overflow: hidden; }
+  .pbar i { display: block; height: 100%; border-radius: inherit; transition: width .6s ease; }
+  .pfoot { font-size: 12.5px; color: var(--muted); } .pfoot b { color: var(--ink); }
+  .kpi3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 12px 0; }
+  .kpi3 .card { display: flex; gap: 14px; align-items: flex-start; }
+  .kpi3 span { color: var(--muted); } .kpi3 b { display: block; font-size: 24px; font-weight: 700; margin-top: 2px; font-variant-numeric: tabular-nums; } .kpi3 small { color: var(--muted); font-size: 12px; }
+  .today { background: #ecfdf5; color: #0f172a; border: 2px solid #34d399; border-radius: 14px; padding: 18px 20px; margin-bottom: 12px; }
+  .today .sub { color: #475569; font-size: 12.5px; margin: 2px 0 14px; }
+  .today .two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .today .k { font: 600 11px var(--mono); letter-spacing: .06em; color: #475569; text-transform: uppercase; }
+  .today .big { font-size: 34px; font-weight: 700; } .today .big small { font-size: 18px; color: #64748b; font-weight: 500; }
+  .today .tb { height: 7px; border-radius: 5px; background: #fff; overflow: hidden; margin: 6px 0; } .today .tb i { display: block; height: 100%; background: #1e293b; border-radius: inherit; }
+  .today .plus { font-size: 34px; font-weight: 700; color: #047857; }
+  .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 16px; align-items: end; height: 120px; position: relative; }
+  .days div { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 4px; font-size: 11.5px; color: #475569; }
+  .days div b { font-size: 12px; color: #0f172a; }
+  .days div i { width: 100%; border-radius: 4px 4px 0 0; background: #334155; }
+  .days div.low i { background: #94a3b8; }
+  .days .tline { position: absolute; left: 0; right: 0; border-top: 1px dashed #64748b; pointer-events: none; }
+  .rem h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; font-size: 16px; }
+  .rem h3 em { font: 600 11px var(--mono); font-style: normal; background: var(--em); color: var(--em-ink); padding: 1px 7px; border-radius: 999px; }
+  .rem .k { font: 600 11px var(--mono); letter-spacing: .06em; color: var(--muted); display: flex; align-items: center; gap: 8px; margin: 10px 0 8px; }
+  .rem .k::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--dot, var(--red)); }
+  .ritem { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; margin-bottom: 8px; cursor: pointer; }
+  .ritem:hover { border-color: var(--em); }
+  .ritem .t { flex: 1; } .ritem .t b { display: block; font-size: 13.5px; } .ritem .t small { color: var(--muted); }
+  @media (max-width: 1000px) { .kpi3, .today .two { grid-template-columns: 1fr; } .cashc { grid-template-columns: auto 1fr; } .cashc .light { grid-column: 1 / -1; justify-self: start; } }
   .note { color: var(--muted); font-size: 12.5px; margin: 12px 2px 0; }
   .modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: rgba(15, 23, 42, .35); padding: 16px; animation: fade .2s; }
   .modal form { width: min(440px, 100%); background: var(--panel); border-radius: 16px; padding: 22px; display: grid; gap: 14px; box-shadow: 0 30px 80px rgba(15, 23, 42, .3); }
@@ -159,7 +207,7 @@
   .field input, .field select, .field textarea { padding: 9px 11px; border: 1px solid var(--line); border-radius: 9px; outline: none; color: var(--ink); background: var(--panel); }
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .mact { display: flex; justify-content: flex-end; gap: 8px; }
-  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 60; background: var(--ink); color: #fff; padding: 12px 16px; border-radius: 12px; box-shadow: 0 16px 40px rgba(15, 23, 42, .3); animation: up .3s ease; max-width: calc(100vw - 32px); }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 60; background: #0b0e10; border: 1px solid var(--line); color: #e8ebee; padding: 12px 16px; border-radius: 12px; box-shadow: 0 16px 40px rgba(15, 23, 42, .3); animation: up .3s ease; max-width: calc(100vw - 32px); }
   .toast b { color: #5eead4; }
   @keyframes up { from { transform: translate(-50%, 12px); opacity: 0; } }
   .menu-btn { display: none; }
@@ -179,31 +227,33 @@
 <body>
 <div class="app">
   <aside class="side" id="side">
-    <div class="brand"><i>N</i><div>Nova Academy<small>CRM vendite</small></div></div>
-    <p class="sec">Vendite</p>
+    <div class="brand"><i>N</i><div>Nova Academy<small>Corsi online</small></div><span class="sales">SALES</span></div>
     <button class="nav" data-view="dash" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>Dashboard</button>
     <button class="nav" data-view="leads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="7" rx="1.5"/></svg>Lead<span class="count" id="c-leads"></span></button>
+    <button class="nav" data-view="pay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Pagamenti</button>
+    <div class="grp"></div>
     <button class="nav" data-view="rank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>Classifica</button>
     <button class="nav" data-view="comm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.6-1-1.7-1.5-3-1.5-1.7 0-3 .9-3 2.2 0 3 6 1.6 6 4.6 0 1.3-1.3 2.2-3 2.2-1.4 0-2.6-.6-3.2-1.6M12 6v2M12 16v2"/></svg>Commissioni</button>
-    <button class="nav" data-view="pay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Pagamenti</button>
-    <div class="foot">Demo di <a href="../../lavori.html" target="_top">Reef 7 Lab</a>: azienda, persone e numeri sono di esempio.<button class="reset" id="reset">↺ Ripristina la demo</button></div>
+    <div class="foot"><span class="user">Giulia Bianchi</span><button class="nav" id="go-rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>Promemoria<span class="count" id="c-rem"></span></button>
+      <div class="theme" role="group" aria-label="Tema"><button data-t="light" aria-pressed="false" title="Chiaro">☀</button><button data-t="dark" aria-pressed="true" title="Scuro">☾</button></div>
+      <span>Demo di <a href="../../lavori.html" target="_top">Reef 7 Lab</a>: azienda, persone e numeri sono di esempio.</span><button class="reset" id="reset">↺ Ripristina la demo</button></div>
   </aside>
   <div class="main">
     <header class="top">
       <button class="btn menu-btn" id="menu" aria-label="Menu">☰</button>
-      <h1 id="title">Dashboard</h1>
+      <h1 id="title">Dashboard vendite</h1>
       <span class="sp"></span>
       <input class="ctl search" id="q" type="search" placeholder="Cerca nome, telefono, fonte…" aria-label="Cerca">
       <button class="btn primary" id="add">+ Nuovo lead</button>
     </header>
 
     <section class="view" id="v-dash">
-      <div class="hero">
-        <div class="card pad cash" id="cash"></div>
-        <div class="card pad" id="proj"></div>
-      </div>
-      <div class="grid4" id="kpis"></div>
-      <div id="diag"></div>
+      <div class="res-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span><div><b>Risultato</b><small id="per-label">Ottobre 2026</small></div>
+        <div class="periods" id="periods"><button data-p="m" aria-pressed="true">Mese corrente</button><button data-p="q" aria-pressed="false">Trimestre</button><button data-p="y" aria-pressed="false">Anno 2026</button></div></div>
+      <div class="card pad" id="cash"></div>
+      <div class="kpi3" id="kpi3"></div>
+      <div class="today" id="today"></div>
+      <div class="card pad rem" id="rem"></div>
     </section>
 
     <section class="view" id="v-leads" hidden>
@@ -314,25 +364,49 @@
   const tierOf = (gross) => TIERS.filter(([t]) => gross >= t).pop();
   const commOf = (gross) => (gross / 1.1) * (tierOf(gross)[1] / 100);
 
+  // periodo della dashboard: mese, trimestre o anno (storico di esempio per i mesi passati)
+  let period = "m";
+  const PER = { m: { label: "Ottobre 2026", target: TARGET, past: 0, day: TODAY, days: MONTH_DAYS }, q: { label: "Ottobre – dicembre 2026", target: TARGET * 3, past: 0, day: TODAY, days: 92 }, y: { label: "Anno 2026", target: TARGET * 12, past: 1004500, day: 286, days: 365 } };
+  const I = { cash: '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/>', doc: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="m9 15 2 2 4-4"/>', rec: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M12 8v8M9.5 10.2c0-.9 1.1-1.6 2.5-1.6s2.5.7 2.5 1.6c0 2.2-5 1.2-5 3.4 0 .9 1.1 1.6 2.5 1.6s2.5-.7 2.5-1.6"/>', heart: '<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/>' };
+  const ico = (k) => `<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">${I[k]}</svg></span>`;
   function renderDash() {
-    const cash = cashOf(db.pays), expected = TARGET * TODAY / MONTH_DAYS, ratio = cash / expected;
+    const P = PER[period], monthCash = cashOf(db.pays), cash = monthCash + P.past;
+    const expected = P.target * P.day / P.days, ratio = cash / expected, perDay = cash / P.day;
     const lc = ratio >= 1 ? ["g", "In traiettoria"] : ratio >= .9 ? ["a", "Attenzione"] : ["r", "Sotto traiettoria"];
-    $("#cash").innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><p class="h" style="margin:0">Cash incassato · ottobre</p><span class="light ${lc[0]}">${lc[1]}</span></div>
-      <div style="margin-top:10px"><b class="big">${eur(cash)}</b> <span class="of">di ${eur(TARGET)}</span></div>
-      <div class="traj"><i style="width:${Math.min(100, cash / TARGET * 100)}%"></i><u style="left:${expected / TARGET * 100}%" data-l="atteso oggi"></u></div>
-      <div class="legend"><span>${Math.round(cash / TARGET * 100)}% del target</span><span>Atteso a oggi: ${eur(expected)} (${Math.round(ratio * 100)}%)</span></div>`;
-    const proj = cash / TODAY * MONTH_DAYS, contracts = new Set(db.pays.map((p) => p.client)).size;
-    $("#proj").innerHTML = `<p class="h">Proiezione a fine mese</p><b style="font-size:32px;font-weight:700;letter-spacing:-.02em">${eur(proj)}</b>
-      <p style="margin:4px 0 14px;color:var(--muted);font-size:13px">Ritmo attuale proiettato sui ${MONTH_DAYS} giorni. Non è un obiettivo.</p>
-      <div class="kv"><span>Contratti chiusi</span><b>${contracts}</b><span>Scontrino medio</span><b>${eur(cash / Math.max(1, contracts))}</b><span>Mancano</span><b>${eur(Math.max(0, TARGET - cash))}</b></div>`;
-    const open = db.leads.filter((l) => !["won", "lost"].includes(l.stage)), calls = db.leads.reduce((a, l) => a + l.calls.length, 0);
-    $("#kpis").innerHTML = [["Call fatte (settimana)", 46 + calls, "+12% vs scorsa", "up"], ["Show-up", "78%", "-6 punti vs scorsa", "down"], ["Tasso di chiusura", "24%", "contratti su demo", ""], ["Pipeline aperta", eur(open.reduce((a, l) => a + VAL[l.interest], 0)), `${open.length} lead attivi`, ""]]
-      .map(([k, b, s, c]) => `<div class="card pad kpi"><span>${k}</span><b>${b}</b><small class="${c}">${s}</small></div>`).join("");
-    const stuck = db.leads.filter((l) => l.stage === "nego" && l.days > 3).length;
-    $("#diag").innerHTML = ratio < 1 ? `<div class="diag"><b>Perché siamo sotto?</b><ol>
-      <li>Lo show-up è sceso al 78% (era 84%): circa ${eur(3 * 2900)} di vendite non avvenute.</li>
-      <li>Elisa ha il ${Math.round((1 - cashOf(db.pays, "EL") / Math.max(1, cashOf(db.pays, "GB"))) * 100)}% di cash in meno rispetto alla prima in classifica.</li>
-      ${stuck ? `<li>${stuck} trattative ferme da più di 3 giorni in "In trattativa": da sollecitare oggi.</li>` : ""}</ol></div>` : "";
+    $("#per-label").textContent = P.label;
+    $("#cash").innerHTML = `<div class="cashc">${ico("cash")}<div><div class="lbl">Cash incassato</div><div class="val">${eur(cash)}</div>
+        <div class="proj">Proiezione fine periodo: <b>${eur(perDay * P.days)}</b> con questo trend (${eur(perDay)}/giorno, giorno ${P.day} di ${P.days})</div></div>
+        <span class="light ${lc[0]}">${lc[1]} · ${Math.round(ratio * 100)}%</span></div>
+      <div class="pbar"><i style="width:${Math.min(100, cash / P.target * 100)}%;background:${ratio >= 1 ? "var(--em)" : ratio >= .9 ? "var(--amber)" : "var(--orange)"}"></i></div>
+      <div class="pfoot">Incassato <b>${eur(cash)}</b> · atteso a oggi <b>${eur(expected)}</b> · ${Math.round(ratio * 100)}% · target periodo ${eur(P.target)}</div>`;
+    const contracts = new Set(db.pays.map((p) => p.client)).size + (period === "y" ? 341 : 0);
+    $("#kpi3").innerHTML = [["doc", "Contratti chiusi", contracts, ""], ["rec", "Scontrino medio", eur(cash / Math.max(1, contracts)), ""], ["heart", "LTV medio", eur(2140), "mediana 1.900 € · 362 clienti"]]
+      .map(([i, k, v, sub]) => `<div class="card pad">${ico(i)}<div><span>${k}</span><b>${v}</b>${sub ? `<small>${sub}</small>` : ""}</div></div>`).join("");
+    // call prenotate: oggi e ultimi 7 giorni rispetto al target giornaliero
+    const T = 30, booked = db.leads.filter((l) => ["disco", "demo"].includes(l.stage)).length + 22, days = [28, 33, 31, 36, 29, 27, 35], lbl = ["mar 6", "mer 7", "gio 8", "ven 9", "sab 10", "dom 11", "lun 12"], max = 40;
+    $("#today").innerHTML = `<div style="display:flex;justify-content:space-between"><b style="font-size:16px">Call prenotate oggi</b><span style="font-size:12.5px;color:#475569">Dettaglio</span></div>
+      <p class="sub">Target ${T} al giorno, weekend compreso: il 95% della capienza dei calendari dei prossimi 7 giorni.</p>
+      <div class="two"><div><div class="k">Oggi</div><div class="big">${booked} <small>/ ${T}</small></div><div class="tb"><i style="width:${Math.min(100, booked / T * 100)}%"></i></div>
+        <small style="color:#475569">${booked - 6} da candidatura · 6 da link personali</small></div>
+        <div><div class="k">Ultimi 7 giorni, sul target</div><div class="plus">${(() => { const d = days.reduce((a, v) => a + v - T, 0); return (d >= 0 ? "+" : "") + d; })()}</div><small style="color:#047857">In linea: l'attesa per una call resta tra 1 e 3 giorni.</small></div></div>
+      <div class="days"><span class="tline" style="bottom:${20 + T / max * .82 * 120}px"></span>${days.map((v, i) => `<div class="${v < T ? "low" : ""}"><b>${v}</b><i style="height:${v / max * 82}%"></i><span>${lbl[i]}</span></div>`).join("")}</div>`;
+    renderRem();
+  }
+
+  // promemoria: rate scadute, trattative ferme, lead da richiamare
+  function remList() {
+    const late = [["Rata scaduta da 7 giorni: Monica Riva", "600 € · Elisa Longo", null], ["Rata scaduta da 3 giorni: Teresa Lodi", "400 € · Giulia Bianchi", null]];
+    const stuck = db.leads.filter((l) => l.stage === "nego" && l.days >= 3).map((l) => [`Trattativa ferma da ${l.days} giorni: ${l.name}`, `In trattativa · ${REPS[l.owner][0]}`, l.id]);
+    const todo = db.leads.filter((l) => l.stage === "call" && l.prio).map((l) => [`Chiamare oggi: ${l.name}`, `Lead prioritario da ${l.source.toLowerCase()} · ${REPS[l.owner][0]}`, l.id]);
+    return { late: [...late, ...stuck], today: todo };
+  }
+  function renderRem() {
+    const r = remList(), n = r.late.length + r.today.length;
+    $("#c-rem").textContent = n;
+    const row = ([t, sub, id]) => `<div class="ritem"${id ? ` data-id="${id}"` : ""}><span class="t"><b>${esc(t)}</b><small>${esc(sub)}</small></span><span>→</span></div>`;
+    $("#rem").innerHTML = `<h3>🔔 I tuoi promemoria <em>${n}</em></h3>
+      ${r.late.length ? `<div class="k">SCADUTI · ${r.late.length}</div>${r.late.map(row).join("")}` : ""}
+      ${r.today.length ? `<div class="k" style="--dot:var(--amber)">OGGI · ${r.today.length}</div>${r.today.map(row).join("")}` : ""}`;
   }
 
   // ---- lead ----
@@ -480,9 +554,9 @@
   const renderAll = () => { renderDash(); renderLeads(); renderRank(); renderComm(); renderPays(); };
 
   // ---- eventi ----
-  const TITLES = { dash: "Dashboard", leads: "Lead", rank: "Classifica", comm: "Commissioni", pay: "Pagamenti" };
-  document.querySelectorAll(".nav").forEach((b) => b.onclick = () => {
-    document.querySelectorAll(".nav").forEach((x) => x.removeAttribute("aria-current")); b.setAttribute("aria-current", "page");
+  const TITLES = { dash: "Dashboard vendite", leads: "Lead", rank: "Classifica", comm: "Commissioni", pay: "Pagamenti" };
+  document.querySelectorAll(".nav[data-view]").forEach((b) => b.onclick = () => {
+    document.querySelectorAll(".nav[data-view]").forEach((x) => x.removeAttribute("aria-current")); b.setAttribute("aria-current", "page");
     document.querySelectorAll(".view").forEach((v) => { v.hidden = v.id !== `v-${b.dataset.view}`; });
     $("#title").textContent = TITLES[b.dataset.view]; $("#side").classList.remove("open");
   });
@@ -513,6 +587,12 @@
   });
   $("#scrim").onclick = closeAll;
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") { closeAll(); document.querySelectorAll(".modal").forEach((m) => { m.hidden = true; }); pendingLost = null; } });
+  $("#periods").onclick = (e) => { const b = e.target.closest("button"); if (!b) return; period = b.dataset.p; $("#periods").querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b)); renderDash(); };
+  $("#rem").addEventListener("click", (e) => { const r = e.target.closest(".ritem[data-id]"); if (r) openLead(+r.dataset.id); else if (e.target.closest(".ritem")) document.querySelector('[data-view="pay"]').click(); });
+  $("#go-rem").onclick = () => { document.querySelector('[data-view="dash"]').click(); setTimeout(() => $("#rem").scrollIntoView({ behavior: "smooth" }), 50); };
+  const setTheme = (t) => { document.documentElement.dataset.theme = t; document.querySelectorAll(".theme button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.t === t)); try { localStorage.setItem("r7-crm-theme", t); } catch {} };
+  document.querySelectorAll(".theme button").forEach((b) => b.onclick = () => setTheme(b.dataset.t));
+  try { setTheme(localStorage.getItem("r7-crm-theme") || "dark"); } catch { setTheme("dark"); }
   $("#reset").onclick = () => { db = seed(); save(); closeAll(); renderAll(); toast("Demo ripristinata"); };
 
   renderAll();
