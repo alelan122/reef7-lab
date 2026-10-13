@@ -780,6 +780,8 @@ def build(lang, variant=""):
 
     work_cards = "".join(work_card(w) for w in WORK)
     # home: solo tre progetti in evidenza, uno grande e due affiancati
+    # home: una sola riga di quattro progetti
+    HOME_WORK = ["tenka", "fullpeak", "maisenzagioie3d", "kasinolatino"]
     FEAT = ["maisenzagioie3d", "tenka", "fullpeak"]
     FEAT_IMG = {"maisenzagioie3d": "assets/work/feat-maisenzagioie3d.jpg"}
     def feat_card(i, key):
@@ -828,7 +830,7 @@ def build(lang, variant=""):
 </a></div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{W['home_h']}</h2><p>{W['home_p']}</p></div>
-  <div class="feat">{feat_cards}</div>
+  <div class="work-grid">{"".join(work_card(next(x for x in WORK if x["key"] == k)) for k in HOME_WORK)}</div>
   <a class="link" href="{u('work')}">{W['home_a']} ({len(WORK)}) {arrow}</a>
 </div></section>
 {partners_html}
