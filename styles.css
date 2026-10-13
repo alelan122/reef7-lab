@@ -472,3 +472,13 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
 .svc-group:first-child { margin-top: 0; }
 .svc-group + .svc { border-top: 1px solid var(--rule-2); }
 .svc-row .mono { color: var(--aqua); }
+
+/* soluzioni: servizi coinvolti e cosa costruiamo */
+.case-svc-k { margin: 26px 0 10px; font-size: 11px; }
+.case-svc { display: flex; flex-wrap: wrap; gap: 8px; }
+.case-svc a { font-size: 13.5px; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--rule-2); color: var(--text); transition: border-color .2s, color .2s; }
+.case-svc a:hover { border-color: var(--aqua); color: var(--aqua); }
+.case-build { list-style: none; padding: 0; margin: 0; display: grid; gap: 7px; }
+.case-build li { display: flex; gap: 10px; }
+.case-build li::before { content: "—"; color: var(--aqua); }
+.case-out { color: var(--text); font-weight: 500; }

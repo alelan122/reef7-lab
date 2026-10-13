@@ -218,31 +218,30 @@ T = {
          ["Analisi dei software in uso e dei costi", "Piano di migrazione senza interruzioni", "Dati trasferiti e verificati", "Strumenti integrati tra loro", "Meno costi ricorrenti nel tempo"]),
     ],
     "sectors": [
-        ("Team commerciali", "Più tempo in chiamata, meno tempo su Excel.",
-         ["CRM con provvigioni automatiche", "Prenotazioni distribuite tra i commerciali", "Classifica e KPI in tempo reale"],
-         "I commerciali passano ore ad aggiornare fogli di calcolo, i contatti si perdono tra un'agenda e l'altra e le provvigioni si calcolano a mano a fine mese.",
-         "Un CRM costruito sul tuo processo di vendita, collegato a prenotazioni ed email, con provvigioni e classifica calcolate in automatico.",
-         "Un team che passa più tempo con i clienti e una direzione che vede i risultati in tempo reale."),
-        ("E-commerce", "Vendi di più senza assumere qualcuno per gestire il caos.",
-         ["Dashboard di vendite e margini", "Assistenza clienti automatizzata", "Strumenti per ordini e magazzino"],
-         "Ordini, campagne e assistenza vivono in strumenti diversi. Scopri a fine mese cosa ha funzionato, quando è troppo tardi per correggere.",
-         "Un sistema che riunisce vendite, pubblicità e margini in un'unica vista, con le domande più frequenti dei clienti gestite dall'intelligenza artificiale.",
-         "Sai ogni giorno quanto guadagni davvero, e il team si occupa di crescere invece di rincorrere gli ordini."),
-        ("Studi professionali", "Meno burocrazia, più tempo per i clienti.",
-         ["Portali clienti riservati", "Archiviazione automatica dei documenti", "Assistente sulle procedure dello studio"],
-         "Documenti da cercare, scadenze da ricordare, le stesse domande dei clienti ogni settimana: ore preziose che non puoi fatturare.",
-         "Un portale riservato per i clienti, documenti che si archiviano da soli e un assistente che conosce a fondo le procedure dello studio.",
-         "Più ore dedicate alla consulenza, meno errori e clienti che si sentono davvero seguiti."),
-        ("Formazione e coaching", "Un'esperienza digitale all'altezza di ciò che insegni.",
-         ["Piattaforme per corsi e community", "Funnel e automazioni di vendita", "Assistente per studenti e team"],
-         "Corsi su una piattaforma, community su un'altra, vendite gestite a mano: gli studenti si perdono tra un passaggio e l'altro.",
-         "Un'unica piattaforma per corsi e community, collegata a funnel e automazioni che accompagnano ogni studente dall'iscrizione al risultato.",
-         "Studenti più coinvolti, più rinnovi e un'attività che cresce senza moltiplicare il lavoro."),
-        ("Aziende in crescita", "Cresci senza perdere il controllo.",
-         ["Gestionali su misura", "Integrazione degli strumenti esistenti", "Dashboard per la direzione"],
-         "Più clienti vogliono dire più fogli di calcolo, più email, più errori. Gli strumenti che bastavano due anni fa oggi rallentano tutto.",
-         "Un gestionale costruito sui tuoi processi, collegato agli strumenti che usi già, con una dashboard che mostra alla direzione il quadro completo.",
-         "Un'unica fonte di verità per tutta l'azienda e decisioni prese su dati certi."),
+        {"t": "Team commerciali", "d": "Più tempo in chiamata, meno tempo su Excel.",
+         "pain": "I commerciali aggiornano fogli di calcolo invece di vendere, i contatti si perdono tra un'agenda e l'altra e le provvigioni si calcolano a mano a fine mese.",
+         "build": ["Un CRM costruito sul tuo processo di vendita", "Prenotazioni distribuite automaticamente tra i commerciali", "Sequenze email che seguono ogni contatto dopo la call", "Provvigioni e classifica calcolate in automatico"],
+         "out": "Un team che passa più tempo con i clienti e una direzione che vede i risultati in tempo reale.", "svc": ["03", "04", "05", "08"]},
+        {"t": "E-commerce", "d": "Più vendite, senza più lavoro manuale.",
+         "pain": "Ordini, campagne e assistenza vivono in strumenti diversi. Scopri a fine mese cosa ha funzionato, quando è troppo tardi per correggere.",
+         "build": ["Pagine prodotto pensate per convertire", "Dashboard con vendite, spesa pubblicitaria e margine reale", "Assistenza ai clienti gestita dall'intelligenza artificiale", "App per i clienti dopo l'acquisto, integrata nel negozio"],
+         "out": "Sai ogni giorno quanto guadagni davvero, e il team si concentra sulla crescita invece di rincorrere gli ordini.", "svc": ["01", "08", "06", "02"]},
+        {"t": "Studi professionali", "d": "Meno burocrazia, più tempo per i clienti.",
+         "pain": "Documenti da cercare, scadenze da ricordare e le stesse domande dei clienti ogni settimana: ore preziose che non puoi fatturare.",
+         "build": ["Un portale riservato per i clienti", "Documenti archiviati e classificati in automatico", "Un assistente che conosce le procedure dello studio", "Promemoria automatici per scadenze e appuntamenti"],
+         "out": "Più ore dedicate alla consulenza, meno errori e clienti che si sentono davvero seguiti.", "svc": ["02", "07", "06", "04"]},
+        {"t": "Formazione e coaching", "d": "Un percorso digitale all'altezza di ciò che insegni.",
+         "pain": "Corsi su una piattaforma, community su un'altra, vendite gestite a mano: gli studenti si perdono tra un passaggio e l'altro.",
+         "build": ["Landing page e funnel per le iscrizioni", "Call di vendita prenotate e assegnate in automatico", "Email che accompagnano ogni studente dall'iscrizione al risultato", "Un assistente che risponde alle domande degli studenti"],
+         "out": "Più iscrizioni, studenti più coinvolti e un'attività che cresce senza moltiplicare il lavoro.", "svc": ["01", "04", "05", "07"]},
+        {"t": "Agenzie e servizi B2B", "d": "Clienti seguiti meglio, con meno passaggi a mano.",
+         "pain": "Richieste via email, stato dei lavori in un foglio condiviso, report preparati a mano ogni mese per ogni cliente.",
+         "build": ["Un portale clienti con stato dei lavori e documenti", "Report per i clienti generati in automatico", "Richieste smistate al referente giusto", "Una knowledge base interna per il team"],
+         "out": "Clienti informati senza doverlo chiedere, e un team che lavora sui progetti invece che sulle email.", "svc": ["02", "08", "06", "07"]},
+        {"t": "Aziende in crescita", "d": "Cresci senza perdere il controllo.",
+         "pain": "Più clienti vogliono dire più fogli di calcolo, più abbonamenti e più errori. Gli strumenti che bastavano due anni fa oggi rallentano tutto.",
+         "build": ["Un hub interno con tutti gli strumenti e un unico database", "Dashboard per la direzione su vendite, cassa e margini", "Software in abbonamento sostituiti da strumenti tuoi", "Gestionali costruiti sui tuoi processi"],
+         "out": "Un'unica fonte di verità per tutta l'azienda, decisioni prese su dati certi e meno costi ricorrenti.", "svc": ["09", "08", "10", "02"]},
     ],
     "home": {
         "title": "Reef 7 Lab · Sviluppo software e intelligenza artificiale",
@@ -268,7 +267,7 @@ T = {
         ],
         "flow_lbl": ("Dati in entrata", "Il sistema", "Il risultato"),
         "svc_h": "Services", "svc_p": "Dal sito al CRM, dall'intelligenza artificiale al controllo di gestione: competenze diverse che lavorano insieme.", "svc_all": "Tutti i servizi",
-        "sol_h": "Solutions", "sol_p": "Ogni settore ha i suoi colli di bottiglia. Ecco quelli che conosciamo meglio.", "sol_all": "Tutte le soluzioni",
+        "sol_h": "Solutions", "sol_p": "Per ogni settore combiniamo i servizi giusti in un unico sistema. Ecco alcuni esempi.", "sol_all": "Tutte le soluzioni",
         "reef_h": "Progettati come <em>un reef</em>", "reef_p": "Il reef è tra gli ecosistemi più efficienti della Terra. I suoi cinque principi guidano ogni progetto.",
         "reef_words": ["Diversità", "Simbiosi", "Connessione", "Crescita stratificata", "Resilienza"], "reef_a": "La nostra filosofia",
     },
@@ -279,9 +278,9 @@ T = {
     },
     "solutions": {
         "title": "Solutions · Reef 7 Lab", "desc": "Soluzioni software per e-commerce, studi professionali, formazione e aziende in crescita.",
-        "h1": "Ogni settore ha il suo <em>collo di bottiglia</em>.",
-        "sub": "Lo conosciamo da vicino, e sappiamo come trasformarlo in un vantaggio. Questi sono i casi che affrontiamo più spesso.",
-        "lbl": ("La sfida", "La soluzione", "Il risultato"),
+        "h1": "Soluzioni costruite <em>sul tuo settore</em>.",
+        "sub": "Ogni settore ha i suoi colli di bottiglia. Per ognuno combiniamo i servizi giusti in un sistema unico: ecco i casi che affrontiamo più spesso.",
+        "lbl": ("La sfida", "Cosa costruiamo", "Il risultato", "Servizi coinvolti"),
     },
     "studio": {
         "title": "Lab · Reef 7 Lab", "desc": "La filosofia del reef: come Reef 7 Lab progetta software che cresce connesso.",
@@ -361,31 +360,30 @@ T = {
          ["Review of the software you use and what it costs", "Migration plan with no downtime", "Data transferred and verified", "Tools that work together", "Lower recurring costs over time"]),
     ],
     "sectors": [
-        ("Sales teams", "More time on calls, less time in spreadsheets.",
-         ["CRM with automatic commissions", "Bookings distributed across the team", "Real-time leaderboard and KPIs"],
-         "Sales reps spend hours updating spreadsheets, contacts get lost between calendars and commissions are calculated by hand at the end of the month.",
-         "A CRM built around your sales process, connected to bookings and email, with commissions and rankings calculated automatically.",
-         "A team that spends more time with clients, and leadership that sees results in real time."),
-        ("E-commerce", "Sell more without hiring someone to manage the chaos.",
-         ["Sales and margin dashboards", "Automated customer support", "Tools for orders and inventory"],
-         "Orders, campaigns and support live in different tools. You find out what worked at the end of the month, when it's too late to fix.",
-         "One system that brings sales, advertising and margins into a single view, with the most common customer questions handled by AI.",
-         "You know every day how much you're really making, and your team focuses on growth instead of chasing orders."),
-        ("Professional firms", "Less paperwork, more time for clients.",
-         ["Private client portals", "Automatic document filing", "Assistant trained on the firm's procedures"],
-         "Documents to find, deadlines to remember, the same client questions every week: valuable hours you can't bill.",
-         "A private client portal, documents that file themselves and an assistant that knows the firm's procedures inside out.",
-         "More hours for advisory work, fewer mistakes and clients who feel genuinely looked after."),
-        ("Education and coaching", "A digital experience as good as what you teach.",
-         ["Course and community platforms", "Sales funnels and automation", "Assistant for students and team"],
-         "Courses on one platform, community on another, sales handled by hand: students get lost between one step and the next.",
-         "One platform for courses and community, connected to funnels and automations that guide every student from sign-up to results.",
-         "More engaged students, more renewals and a business that grows without multiplying the workload."),
-        ("Growing companies", "Grow without losing control.",
-         ["Custom management systems", "Integration of existing tools", "Executive dashboards"],
-         "More clients mean more spreadsheets, more emails, more mistakes. The tools that were enough two years ago now slow everything down.",
-         "A management system built around your processes, connected to the tools you already use, with a dashboard that gives leadership the full picture.",
-         "A single source of truth for the whole company, and decisions made on solid data."),
+        {"t": "Sales teams", "d": "More time on calls, less time in spreadsheets.",
+         "pain": "Reps update spreadsheets instead of selling, contacts get lost between calendars and commissions are calculated by hand at the end of the month.",
+         "build": ["A CRM built around your sales process", "Bookings distributed automatically across the team", "Email sequences that follow up every contact after the call", "Commissions and leaderboard calculated automatically"],
+         "out": "A team that spends more time with clients, and leadership that sees results in real time.", "svc": ["03", "04", "05", "08"]},
+        {"t": "E-commerce", "d": "More sales, without more manual work.",
+         "pain": "Orders, campaigns and support live in different tools. You find out what worked at the end of the month, when it's too late to fix.",
+         "build": ["Product pages built to convert", "A dashboard with sales, ad spend and real margin", "Customer support handled by AI", "A post-purchase customer app built into the store"],
+         "out": "You know every day how much you're really making, and your team focuses on growth instead of chasing orders.", "svc": ["01", "08", "06", "02"]},
+        {"t": "Professional firms", "d": "Less paperwork, more time for clients.",
+         "pain": "Documents to find, deadlines to remember and the same client questions every week: valuable hours you can't bill.",
+         "build": ["A private client portal", "Documents filed and classified automatically", "An assistant that knows the firm's procedures", "Automatic reminders for deadlines and appointments"],
+         "out": "More hours for advisory work, fewer mistakes and clients who feel genuinely looked after.", "svc": ["02", "07", "06", "04"]},
+        {"t": "Education and coaching", "d": "A digital journey as good as what you teach.",
+         "pain": "Courses on one platform, community on another, sales handled by hand: students get lost between one step and the next.",
+         "build": ["Landing pages and funnels for sign-ups", "Sales calls booked and assigned automatically", "Emails that guide every student from sign-up to results", "An assistant that answers students' questions"],
+         "out": "More sign-ups, more engaged students and a business that grows without multiplying the workload.", "svc": ["01", "04", "05", "07"]},
+        {"t": "Agencies and B2B services", "d": "Clients looked after better, with fewer manual steps.",
+         "pain": "Requests by email, project status in a shared spreadsheet, reports put together by hand every month for every client.",
+         "build": ["A client portal with project status and documents", "Client reports generated automatically", "Requests routed to the right person", "An internal knowledge base for the team"],
+         "out": "Clients stay informed without having to ask, and the team works on projects instead of email.", "svc": ["02", "08", "06", "07"]},
+        {"t": "Growing companies", "d": "Grow without losing control.",
+         "pain": "More clients mean more spreadsheets, more subscriptions and more mistakes. The tools that were enough two years ago now slow everything down.",
+         "build": ["An internal hub with every tool on a single database", "Leadership dashboards for sales, cash and margins", "Subscription software replaced by tools you own", "Management systems built around your processes"],
+         "out": "A single source of truth for the whole company, decisions made on solid data and lower recurring costs.", "svc": ["09", "08", "10", "02"]},
     ],
     "home": {
         "title": "Reef 7 Lab · Software and AI development",
@@ -411,7 +409,7 @@ T = {
         ],
         "flow_lbl": ("Incoming data", "The system", "The result"),
         "svc_h": "Services", "svc_p": "From websites to CRM, from AI to financial control: different disciplines that work together.", "svc_all": "All services",
-        "sol_h": "Solutions", "sol_p": "Every industry has its bottlenecks. These are the ones we know best.", "sol_all": "All solutions",
+        "sol_h": "Solutions", "sol_p": "For each industry we combine the right services into a single system. Here are a few examples.", "sol_all": "All solutions",
         "reef_h": "Designed like <em>a reef</em>", "reef_p": "The reef is one of the most efficient ecosystems on Earth. Its five principles guide every project.",
         "reef_words": ["Diversity", "Symbiosis", "Connection", "Layered growth", "Resilience"], "reef_a": "Our philosophy",
     },
@@ -422,9 +420,9 @@ T = {
     },
     "solutions": {
         "title": "Solutions · Reef 7 Lab", "desc": "Software solutions for e-commerce, professional firms, education and growing companies.",
-        "h1": "Every industry has its <em>bottleneck</em>.",
-        "sub": "We know them up close, and we know how to turn them into an advantage. These are the cases we tackle most often.",
-        "lbl": ("The challenge", "The solution", "The outcome"),
+        "h1": "Solutions built <em>for your industry</em>.",
+        "sub": "Every industry has its bottlenecks. For each one we combine the right services into a single system: here are the cases we tackle most often.",
+        "lbl": ("The challenge", "What we build", "The outcome", "Services involved"),
     },
     "studio": {
         "title": "Lab · Reef 7 Lab", "desc": "The reef philosophy: how Reef 7 Lab designs software that grows connected.",
@@ -659,7 +657,7 @@ def build(lang, variant=""):
     rows = "".join(f"""
     <a class="svc-row" href="{u('services')}#s{n}"><span class="mono">{g}</span><h3>{t}</h3><p>{d}</p><span class="go" aria-hidden="true">→</span></a>""" for n, g, t, d, *_ in L["services"] if n in ("01", "02", "03", "06", "07", "08"))
     sectors = "".join(f"""
-    <a class="sector" href="{u('solutions')}#k{i}"><span class="mono">0{i}</span><h3>{t}</h3><p>{d}</p><ul>{"".join(f"<li>{x}</li>" for x in li)}</ul></a>""" for i, (t, d, li, *_) in enumerate(L["sectors"][:3], 1))
+    <a class="sector" href="{u('solutions')}#k{i}"><span class="mono">0{i}</span><h3>{x['t']}</h3><p>{x['d']}</p><ul>{"".join(f"<li>{b}</li>" for b in x['build'][:3])}</ul></a>""" for i, x in enumerate(L["sectors"][:3], 1))
     reef_words = "".join(f'<div><span class="mono">0{i}</span><b>{w}</b></div>' for i, w in enumerate(H["reef_words"], 1))
     out["home"] = page("home", H["title"], H["desc"], f"""<section class="hero">
   <canvas id="water" aria-hidden="true"></canvas>
@@ -723,12 +721,19 @@ def build(lang, variant=""):
 
     # soluzioni
     SO = L["solutions"]; lb = SO["lbl"]
+    svc_name = {n: t for n, _g, t, *_ in L["services"]}
     cases = "".join(f"""
   <article class="case" id="k{i}">
     <span class="mono">0{i}</span>
-    <div><h2>{t}</h2><p class="lead">{d}</p></div>
-    <div><dl><div><dt>{lb[0]}</dt><dd>{a}</dd></div><div><dt>{lb[1]}</dt><dd>{b}</dd></div><div><dt>{lb[2]}</dt><dd>{c}</dd></div></dl></div>
-  </article>""" for i, (t, d, _, a, b, c) in enumerate(L["sectors"], 1))
+    <div><h2>{x['t']}</h2><p class="lead">{x['d']}</p>
+      <p class="case-svc-k mono">{lb[3]}</p>
+      <div class="case-svc">{"".join(f'<a href="{u("services")}#s{n}">{svc_name[n]}</a>' for n in x['svc'])}</div></div>
+    <div><dl>
+      <div><dt>{lb[0]}</dt><dd>{x['pain']}</dd></div>
+      <div><dt>{lb[1]}</dt><dd><ul class="case-build">{"".join(f"<li>{b}</li>" for b in x['build'])}</ul></dd></div>
+      <div><dt>{lb[2]}</dt><dd class="case-out">{x['out']}</dd></div>
+    </dl></div>
+  </article>""" for i, x in enumerate(L["sectors"], 1))
     out["solutions"] = page("solutions", SO["title"], SO["desc"], head_block(L["nav"]["solutions"], SO["h1"], SO["sub"]) + f"""
 <section class="wrap" style="padding-bottom:clamp(80px,10vw,150px)">{cases}
 </section>""")
