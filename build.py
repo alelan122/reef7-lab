@@ -90,7 +90,7 @@ WORK = [
 WT = {
 "it": {
     "title": "Projects · Reef 7 Lab", "desc": "Una selezione di progetti di Reef 7 Lab: applicazioni, siti e strumenti per aziende.",
-    "h1": "Progetti veri, <em>da esplorare</em>.",
+    "h1": "Il nostro lavoro, <em>dal vivo</em>.",
     "sub": "Una selezione di sistemi che abbiamo progettato e sviluppato, dall'idea alla messa online. Dove possibile, puoi navigarli direttamente da questa pagina.",
     "labels": {"client": "Cliente", "type": "Tipo", "year": "Anno"},
     "open": {"browser": "Apri il sito", "phone": "Apri la demo", "scroll": "Visita il negozio"},
@@ -122,7 +122,7 @@ WT = {
 },
 "en": {
     "title": "Projects · Reef 7 Lab", "desc": "A selection of Reef 7 Lab projects: applications, websites and tools for businesses.",
-    "h1": "Real projects, <em>ready to explore</em>.",
+    "h1": "Our work, <em>live</em>.",
     "sub": "A selection of systems we've designed and built, from first idea to launch. Where possible, you can browse them right from this page.",
     "labels": {"client": "Client", "type": "Type", "year": "Year"},
     "open": {"browser": "Open the website", "phone": "Open the demo", "scroll": "Visit the store"},
