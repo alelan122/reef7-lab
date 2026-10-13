@@ -49,6 +49,10 @@
   input:focus-visible + .sw, input:focus-visible + span { outline: 2px solid var(--oro); outline-offset: 3px; }
   .note { font-size: 13px; color: var(--muted); margin: 18px 0 0; }
   .note a { color: var(--vino); }
+  /* ?clean=1: solo la collana, per immagini e anteprime */
+  .clean .top, .clean .panel, .clean .hint, .clean .stage-actions { display: none !important; }
+  .clean .cfg { display: block; min-height: 100vh; }
+  .clean .stage { position: fixed; inset: 0; }
   @media (max-width: 860px) {
     .cfg { grid-template-columns: 1fr; }
     .stage { min-height: 58vh; }
@@ -115,6 +119,7 @@ const LUNGHEZZE = [["corta", "Corta", 0.86], ["media", "Media", 1], ["lunga", "L
 const st = { modello: "dna", filo: "azzurro", centro: "ametista", lunghezza: "media" };
 // la collana disegnata finisce nell'indirizzo della pagina: si può condividere o salvare
 const qs = new URLSearchParams(location.search);
+if (qs.has("clean")) document.body.classList.add("clean");
 for (const [k, list] of [["modello", MODELLI], ["filo", FILI], ["centro", CENTRI], ["lunghezza", LUNGHEZZE]]) if (list.some((x) => x[0] === qs.get(k))) st[k] = qs.get(k);
 
 // interfaccia: pulsanti e campioni colore

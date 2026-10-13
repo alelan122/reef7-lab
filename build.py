@@ -779,6 +779,16 @@ def build(lang, variant=""):
         return f'<a class="work-card2" href="{u("work")}#{w["key"]}"><div class="wc-img">{img}</div><div class="wc-meta"><h3>{p["name"]}</h3><p>{p["type"]}</p></div></a>'
 
     work_cards = "".join(work_card(w) for w in WORK)
+    # home: solo tre progetti in evidenza, uno grande e due affiancati
+    FEAT = ["maisenzagioie3d", "tenka", "fullpeak"]
+    FEAT_IMG = {"maisenzagioie3d": "assets/work/feat-maisenzagioie3d.jpg"}
+    def feat_card(i, key):
+        w = next(x for x in WORK if x["key"] == key)
+        p = W["projects"][key]
+        return f"""<a class="feat-card" href="{u('work')}#{key}"><img src="{pre}{FEAT_IMG.get(key, w['thumb'])}" alt="" loading="lazy">
+      <span class="feat-n mono">0{i}</span>
+      <div class="feat-meta"><div><h3>{p['name']}</h3><p>{p['type']}</p></div><span class="feat-go" aria-hidden="true">→</span></div></a>"""
+    feat_cards = "".join(feat_card(i, k) for i, k in enumerate(FEAT, 1))
     partners = "".join(f'<div class="partner"><span class="partner-tag">{tag}</span><b class="partner-name">{n}</b><span class="partner-what">{w}</span><p>{d}</p></div>' for n, tag, w, d in W["partners"])
     cq, ca = W["partners_cta"]
     partners_html = f"""<section class="block partners-block"><div class="wrap partners-in">
@@ -818,8 +828,8 @@ def build(lang, variant=""):
 </a></div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{W['home_h']}</h2><p>{W['home_p']}</p></div>
-  <div class="work-grid">{work_cards}</div>
-  <a class="link" href="{u('work')}">{W['home_a']} {arrow}</a>
+  <div class="feat">{feat_cards}</div>
+  <a class="link" href="{u('work')}">{W['home_a']} ({len(WORK)}) {arrow}</a>
 </div></section>
 {partners_html}
 <section class="block"><div class="wrap">

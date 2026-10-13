@@ -726,3 +726,33 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
   .au-prio li, .au-plan li { border-color: #ddd; break-inside: avoid; }
   .au-report section { break-inside: avoid; }
 }
+
+/* home: progetti in evidenza */
+.feat { display: grid; grid-template-columns: 1.3fr 1fr; grid-template-rows: 1fr 1fr; gap: 18px; height: clamp(520px, 50vw, 700px); margin-bottom: 34px; }
+.feat-card { position: relative; display: block; border-radius: 22px; overflow: hidden; background: #0b1320; isolation: isolate; border: 1px solid var(--rule); }
+.feat-card:first-child { grid-row: 1 / 3; }
+.feat-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .9s cubic-bezier(.2, .7, .2, 1); }
+.feat-card:first-child { background: linear-gradient(180deg, #f2eadd 0%, #f4eee2 30%, #f4eee2 60%, #f0e9d9 75%, #ece1cf 100%); }
+.feat-card:first-child img { object-fit: contain; object-position: 50% 30%; }
+.feat-card:first-child::after { display: none; }
+.feat-card:first-child .feat-meta h3 { color: #2a1d18; }
+.feat-card:first-child .feat-meta p { color: #7a6a60; }
+.feat-card:first-child .feat-go { border-color: rgba(42, 29, 24, .3); color: #2a1d18; }
+.feat-card:first-child .feat-n { background: rgba(255, 255, 255, .6); color: #2a1d18; }
+.feat-card:first-child:hover img { transform: scale(1.06) rotate(-1.5deg); }
+.feat-card::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(4, 8, 15, 0) 40%, rgba(4, 8, 15, .55) 68%, rgba(4, 8, 15, .94)); transition: opacity .4s; }
+.feat-card:hover img { transform: scale(1.045); }
+.feat-n { position: absolute; top: 18px; left: 20px; z-index: 2; padding: 6px 10px; border-radius: 999px; background: rgba(4, 8, 15, .6); backdrop-filter: blur(8px); color: var(--text); font-size: 11px; }
+.feat-meta { position: absolute; left: 24px; right: 22px; bottom: 22px; z-index: 2; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.feat-meta h3 { font: 600 clamp(22px, 2.2vw, 32px)/1.05 var(--sans); letter-spacing: -.025em; color: var(--text); }
+.feat-card:first-child .feat-meta h3 { font-size: clamp(28px, 3vw, 44px); }
+.feat-meta p { margin-top: 6px; font-size: 14.5px; color: var(--muted); }
+.feat-go { flex: none; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--rule-2); color: var(--text); font-size: 18px; transition: background .3s, color .3s, border-color .3s, transform .3s; }
+.feat-card:hover .feat-go { background: var(--aqua); border-color: var(--aqua); color: var(--ink); transform: rotate(-45deg); }
+@media (max-width: 760px) {
+  .feat { display: flex; height: auto; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin-inline: -16px; padding: 0 16px 6px; scrollbar-width: none; }
+  .feat::-webkit-scrollbar { display: none; }
+  .feat-card { flex: 0 0 84%; aspect-ratio: 4 / 5; scroll-snap-align: start; }
+  .feat-card:first-child img { height: calc(100% - 118px); object-position: 50% 60%; }
+  .feat-card:first-child { background: linear-gradient(180deg, #f2eadd, #f4eee2 45%, #ece1cf 70%, #ece1cf); }
+}
