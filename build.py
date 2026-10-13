@@ -369,7 +369,8 @@ T = {
         "k": "Audit gratuito", "h1": "Quanto tempo può <em>recuperare</em> il tuo team?",
         "sub": "Rispondi a poche domande sul lavoro che fate ancora a mano. Ricevi una stima delle ore recuperabili, le priorità e un piano in 3 passi, anche in PDF.",
         "pts": ["2 minuti", "Report personalizzato", "Gratis, senza impegno"],
-        "home_k": "Audit gratuito", "home_h": "Quante ore perde ogni settimana <em>il tuo team</em>?", "home_p": "In due minuti scopri cosa conviene automatizzare per primo e quanto tempo potresti recuperare.", "home_a": "Fai l'audit",
+        "home_k": "Audit gratuito", "home_h": "Quante ore perde ogni settimana <em>il tuo team</em>?", "home_p": "In due minuti scopri cosa conviene automatizzare per primo e quanto tempo potresti recuperare.", "home_a": "Fai l'audit", "home_k2": "2 minuti · gratis",
+        "vis_k": "Esempio di report", "vis_u": "ore a settimana recuperabili", "vis": [("Copiare dati tra programmi", 8), ("Rispondere ai nuovi contatti", 4.8), ("Preparare report e numeri", 3)],
         "contact_p": "Non sai ancora da dove partire?", "contact_a": "Fai prima l'audit gratuito",
     },
     "contact": {
@@ -552,7 +553,8 @@ T = {
         "k": "Free audit", "h1": "How much time could your team <em>win back</em>?",
         "sub": "Answer a few questions about the work you still do by hand. Get an estimate of the hours you could recover, your priorities and a 3-step plan, also as a PDF.",
         "pts": ["2 minutes", "Personalised report", "Free, no commitment"],
-        "home_k": "Free audit", "home_h": "How many hours does <em>your team</em> lose every week?", "home_p": "In two minutes, find out what's worth automating first and how much time you could win back.", "home_a": "Take the audit",
+        "home_k": "Free audit", "home_h": "How many hours does <em>your team</em> lose every week?", "home_p": "In two minutes, find out what's worth automating first and how much time you could win back.", "home_a": "Take the audit", "home_k2": "2 minutes · free",
+        "vis_k": "Sample report", "vis_u": "hours a week to win back", "vis": [("Copying data between tools", 8), ("Replying to new leads", 4.8), ("Putting together reports", 3)],
         "contact_p": "Not sure where to start yet?", "contact_a": "Take the free audit first",
     },
     "contact": {
@@ -825,8 +827,13 @@ def build(lang, variant=""):
   {eco(H, pre)}
 </div></section>
 <section class="block au-promo-block"><div class="wrap"><a class="au-promo" href="{u('audit')}">
-  <div><p class="mono">{L['audit']['home_k']}</p><h2>{L['audit']['home_h']}</h2><p>{L['audit']['home_p']}</p></div>
-  <span class="btn">{L['audit']['home_a']} {arrow}</span>
+  <div class="au-promo-txt"><p class="mono">{L['audit']['home_k']} · {L['audit']['home_k2']}</p><h2>{L['audit']['home_h']}</h2><p>{L['audit']['home_p']}</p>
+    <span class="btn">{L['audit']['home_a']} {arrow}</span></div>
+  <div class="au-promo-vis" aria-hidden="true"><div class="apv">
+    <p class="mono">{L['audit']['vis_k']}</p>
+    <div class="apv-num"><b>{str(sum(h for _, h in L['audit']['vis'])).replace('.', ',' if lang == 'it' else '.')}</b><span>{L['audit']['vis_u']}</span></div>
+    {"".join(f'<div class="apv-row"><span>{t}</span><em>{str(h).replace(".", "," if lang == "it" else ".")}</em><i><b style="width:{h / 8 * 100:.0f}%"></b></i></div>' for t, h in L['audit']['vis'])}
+  </div></div>
 </a></div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{W['home_h']}</h2><p>{W['home_p']}</p></div>
