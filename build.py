@@ -148,13 +148,14 @@ WT = {
     "partners_k": "Partner", "partners_h": "Partner, <em>non semplici clienti</em>.",
     "partners_p": "Lavoriamo al fianco di aziende che hanno scelto la tecnologia e l'intelligenza artificiale come leva di crescita. Con loro non ci limitiamo a consegnare un progetto: costruiamo insieme, giorno dopo giorno, i sistemi su cui si regge il loro business.",
     "partners_cta": ("Vuoi crescere con noi?", "Diventa partner"),
-    "case": {"k": "Caso studio · Asia Baldoni Fitness × Tartufoli Group", "h": "Da 54 software a <em>un'unica piattaforma</em>.",
-             "p": "Insieme a Tartufoli Group abbiamo sostituito gli strumenti a canone con una piattaforma costruita in casa: CRM vendite, email marketing, area clienti e automazioni, tutti collegati tra loro.",
-             "kpis": [("−83%", "spesa software", "da circa 60.000 a circa 10.000 l'anno"), ("~50k", "risparmiati ogni anno", "che tornano nella crescita dell'azienda"),
-                      ("−99%", "costo delle email", "100.000 invii: da quasi 1.000 $ a circa 10 €"), ("0", "dati copiati a mano", "integrazioni native, niente Zapier nel mezzo")],
-             "before_k": "Prima", "before": ["54 software attivi, spesso due o tre per la stessa cosa", "Close CRM, ActiveCampaign, Mailchimp", "Zapier e Make a collegare tutto", "Spesa software al 6,3% dei ricavi"],
-             "after_k": "Oggi", "after": ["Una piattaforma interna, costruita su misura", "CRM vendite e email su infrastruttura propria", "Dati collegati in tempo reale, dal lead alla cliente", "Spesa software ridotta di oltre l'80%"],
-             "src": "Dati comunicati da Tartufoli Group, settembre 2026."},
+    "case": {"k": "Caso studio · Asia Baldoni Fitness × Tartufoli Group", "h": "Meno costi, <em>molto più tempo</em>.",
+             "p": "Insieme a Tartufoli Group abbiamo portato 54 software sparsi dentro un'unica piattaforma costruita su misura: CRM vendite, email marketing, area clienti e automazioni, tutti collegati tra loro.",
+             "hero": [("−83%", "spesa software", "Da circa 60.000 a circa 10.000 l'anno: oltre 50.000 risparmiati, ogni anno."),
+                      ("40×", "più veloce", "Il lavoro operativo che prima si faceva a mano, saltando da un software all'altro, oggi richiede una frazione del tempo.")],
+             "kpis": [("−99%", "costo delle email", "100.000 invii: da quasi 1.000 $ a circa 10 €"), ("1", "sola fonte dei dati", "dal primo contatto alla cliente, in tempo reale"), ("0", "dati copiati a mano", "integrazioni native, niente Zapier nel mezzo")],
+             "before_k": "Prima", "before": ["54 software attivi, spesso due o tre per la stessa cosa", "Ogni attività fatta a mano, passando da un tool all'altro", "Dati sparsi e nessuna visione d'insieme", "Spesa software al 6,3% dei ricavi"],
+             "after_k": "Oggi", "after": ["Una piattaforma interna, costruita su misura", "Lavoro operativo 40 volte più veloce", "Tutti i dati in un posto, con la visione d'insieme dell'azienda", "Spesa software ridotta di oltre l'80%"],
+             "src": "Spesa software comunicata da Tartufoli Group (settembre 2026); tempi stimati sul lavoro operativo prima e dopo la migrazione."},
     "partners": [("Asia Baldoni Fitness", "Partner tecnologico", "Fitness femminile online",
                   "Al fianco del team nello sviluppo di strumenti interni, automazioni e soluzioni di intelligenza artificiale che supportano vendite e operations."),
                  ("Tartufoli Group", "Partner strategico", "Il gruppo di Asia Baldoni Fitness",
@@ -214,13 +215,14 @@ WT = {
     "partners_k": "Partners", "partners_h": "Partners, <em>not just clients</em>.",
     "partners_p": "We work alongside companies that have chosen technology and artificial intelligence as a lever for growth. We don't deliver a project and disappear: together, day after day, we build the systems their business runs on.",
     "partners_cta": ("Want to grow with us?", "Become a partner"),
-    "case": {"k": "Case study · Asia Baldoni Fitness × Tartufoli Group", "h": "From 54 tools to <em>one platform</em>.",
-             "p": "Together with Tartufoli Group we replaced subscription tools with a platform built in-house: sales CRM, email marketing, client area and automations, all connected.",
-             "kpis": [("−83%", "software spend", "from about 60,000 to about 10,000 a year"), ("~50k", "saved every year", "reinvested in the company's growth"),
-                      ("−99%", "email costs", "100,000 sends: from almost $1,000 to about €10"), ("0", "data copied by hand", "native integrations, no Zapier in between")],
-             "before_k": "Before", "before": ["54 active tools, often two or three for the same job", "Close CRM, ActiveCampaign, Mailchimp", "Zapier and Make holding it all together", "Software at 6.3% of revenue"],
-             "after_k": "Today", "after": ["One in-house platform, built to measure", "Sales CRM and email on their own infrastructure", "Data connected in real time, from lead to client", "Software spend down by more than 80%"],
-             "src": "Figures provided by Tartufoli Group, September 2026."},
+    "case": {"k": "Case study · Asia Baldoni Fitness × Tartufoli Group", "h": "Lower costs, <em>far more time</em>.",
+             "p": "Together with Tartufoli Group we brought 54 scattered tools into a single platform built to measure: sales CRM, email marketing, client area and automations, all connected.",
+             "hero": [("−83%", "software spend", "From about 60,000 to about 10,000 a year: over 50,000 saved, every single year."),
+                      ("40×", "faster", "Operational work that used to be done by hand, jumping from one tool to another, now takes a fraction of the time.")],
+             "kpis": [("−99%", "email costs", "100,000 sends: from almost $1,000 to about €10"), ("1", "single source of data", "from first contact to client, in real time"), ("0", "data copied by hand", "native integrations, no Zapier in between")],
+             "before_k": "Before", "before": ["54 active tools, often two or three for the same job", "Every task done by hand, jumping between tools", "Scattered data and no overall view", "Software at 6.3% of revenue"],
+             "after_k": "Today", "after": ["One in-house platform, built to measure", "Operational work 40 times faster", "All data in one place, with a complete view of the business", "Software spend down by more than 80%"],
+             "src": "Software spend provided by Tartufoli Group (September 2026); time estimated on operational work before and after the migration."},
     "partners": [("Asia Baldoni Fitness", "Technology partner", "Online women's fitness",
                   "Working alongside the team to develop internal tools, automations and AI solutions that support sales and operations."),
                  ("Tartufoli Group", "Strategic partner", "The group behind Asia Baldoni Fitness",
@@ -839,6 +841,7 @@ def build(lang, variant=""):
 </div>
 <div class="wrap"><div class="pcase">
   <div class="case-head"><p class="mono">{CS['k']}</p><h2>{CS['h']}</h2><p>{CS['p']}</p></div>
+  <div class="case-hero">{"".join(f'<div><b>{a}</b><span>{b}</span><p>{c}</p></div>' for a, b, c in CS['hero'])}</div>
   <div class="case-kpis">{"".join(f'<div><b>{a}</b><span>{b}</span><small>{c}</small></div>' for a, b, c in CS['kpis'])}</div>
   <div class="case-ba"><div class="ba-b"><p class="mono">{CS['before_k']}</p><ul>{"".join(f"<li>{x}</li>" for x in CS['before'])}</ul></div>
     <span class="ba-arrow" aria-hidden="true">→</span>
