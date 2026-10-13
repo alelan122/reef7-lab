@@ -242,6 +242,59 @@
   .lead:hover { transform: translateY(-2px); border-color: rgba(245, 183, 64, .35); box-shadow: 0 10px 24px rgba(0, 0, 0, .25); }
   .av { box-shadow: 0 0 0 2px var(--panel); }
   .periods button { transition: background .2s, color .2s; }
+  /* stile professionale: sobrio, poche luci, gerarchia chiara */
+  body { background: var(--bg) !important; }
+  .side, .top { backdrop-filter: none !important; }
+  .side { background: #0a0f1d !important; }
+  :root[data-theme="light"] .side { background: #fff !important; }
+  .top { background: var(--bg) !important; padding: 12px 24px; }
+  .crumb { display: flex; align-items: center; gap: 8px; color: var(--faint); font-size: 13px; }
+  .crumb h1 { font-size: 15px; font-weight: 600; color: var(--ink); }
+  .today-d { color: var(--faint); font-size: 12.5px; margin-right: 6px; }
+  .glabel { font: 600 10.5px var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--faint); margin: 14px 10px 6px; }
+  .grp { display: none; }
+  .nav { font-weight: 500; font-size: 13.5px; padding: 7px 10px; }
+  .nav[aria-current="page"] { background: var(--soft); box-shadow: none; }
+  .card, .box, .col { box-shadow: none !important; }
+  .card { background: var(--panel) !important; border-radius: 12px; }
+  .ico { width: 34px; height: 34px; border-radius: 9px; background: var(--soft); border: 1px solid var(--line); color: var(--muted); }
+  .ico svg { width: 17px; height: 17px; }
+  .res-head .ico { color: var(--em); }
+  .res-head b { font-size: 16px; }
+  .periods button { padding: 6px 12px; font-size: 13px; border-radius: 8px; }
+  .periods button[aria-pressed="true"] { background: var(--soft); border-color: #33405e; color: var(--ink); font-weight: 600; }
+  :root[data-theme="light"] .periods button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .cashc .lbl { font-size: 12.5px; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; color: var(--faint); }
+  .cashc .val { font-size: 40px; font-weight: 600; background: none !important; color: var(--ink) !important; letter-spacing: -.025em; }
+  .cashc .proj { font-size: 13px; }
+  .light { font-size: 12px; padding: 4px 10px; border-radius: 6px; }
+  .sp-l { filter: none; stroke-width: 2; }
+  .spark { height: 96px; }
+  .pbar { height: 6px; }
+  .pbar i { box-shadow: none; background-image: none !important; }
+  .kpi3 .card:hover, .lead:hover, .ritem:hover { transform: none; }
+  .kpi3 span { font-size: 12.5px; text-transform: uppercase; letter-spacing: .05em; font-weight: 600; color: var(--faint); }
+  .kpi3 b { font-size: 22px; font-weight: 600; margin-top: 4px; }
+  .today { background: var(--panel) !important; border: 1px solid var(--line) !important; box-shadow: none !important; border-radius: 12px; }
+  .today .plus { font-size: 30px; font-weight: 600; color: var(--ink); }
+  .today .big { font-size: 30px; font-weight: 600; }
+  .today .ok { color: var(--green); }
+  .today .tb i { background: var(--blue); }
+  .days { height: 110px; }
+  .days div i { background: #3b6fd8; border-radius: 3px 3px 0 0; }
+  .days div.low i { background: #2a3550; }
+  .rem h3 { font-size: 15px; font-weight: 600; }
+  .rem h3 em { background: var(--soft); color: var(--muted); }
+  .ritem { background: transparent; border-radius: 8px; padding: 11px 12px; }
+  .ritem:hover { border-color: #33405e; background: var(--soft); }
+  .ritem > span:last-child { background: transparent; width: auto; height: auto; }
+  .lead { border-radius: 8px; }
+  .lead:hover { border-color: #33405e; box-shadow: none; }
+  .col { border-radius: 10px; }
+  .btn.primary { border-radius: 8px; }
+  .rk .pos { font-size: 12px; }
+  .rk:first-of-type .pos { color: var(--em); }
+  .toast { border-radius: 10px; font-size: 13.5px; }
   .note { color: var(--muted); font-size: 12.5px; margin: 12px 2px 0; }
   .modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: rgba(15, 23, 42, .35); padding: 16px; animation: fade .2s; }
   .modal form { width: min(440px, 100%); background: var(--panel); border-radius: 16px; padding: 22px; display: grid; gap: 14px; box-shadow: 0 30px 80px rgba(15, 23, 42, .3); }
@@ -265,16 +318,84 @@
     .view { padding: 14px; }
     .asg { grid-template-columns: 1fr; }
   }
+
+  /* ===== high end: nero, grigi, bianco come unico accento ===== */
+  :root:not([data-theme="light"]) { --bg: #09090b; --panel: #0e0e11; --ink: #fafafa; --muted: #a1a1aa; --faint: #71717a; --line: #1e1e22; --soft: #17171a; --col: #0b0b0e; --em: #fafafa; --em-ink: #09090b; --blue: #d4d4d8; --green: #4ade80; --red: #f87171; --amber: #fbbf24; --orange: #fbbf24; --violet: #d4d4d8; --side: #09090b; }
+  body { font-feature-settings: "ss01", "cv11"; letter-spacing: -.005em; }
+  .side { background: #09090b !important; border-right-color: var(--line); }
+  .brand { border-bottom-color: var(--line); }
+  .brand i { background: #fafafa !important; color: #09090b !important; border-radius: 8px; }
+  .brand .sales { background: transparent !important; color: var(--faint) !important; border: 1px solid var(--line); }
+  .nav { color: var(--muted); }
+  .nav[aria-current="page"] { background: #17171a; color: #fafafa; }
+  .nav[aria-current="page"]::before { background: #fafafa; }
+  .nav .count { background: #1f1f23 !important; color: #d4d4d8 !important; font-weight: 500; }
+  .btn { background: transparent; border-color: var(--line); }
+  .btn:hover { border-color: #3f3f46; }
+  .btn.primary { background: #fafafa !important; color: #09090b !important; border-color: #fafafa !important; }
+  .ctl { background: transparent; border-color: var(--line); }
+  .search { background: #0e0e11; }
+  .card, .box { border-color: var(--line) !important; background: #0e0e11 !important; }
+  .ico { background: transparent !important; border-color: var(--line) !important; color: var(--muted) !important; }
+  .res-head .ico { color: #fafafa !important; }
+  .cashc .val { font-weight: 500 !important; font-size: 44px !important; letter-spacing: -.035em !important; }
+  .kpi3 b, .today .big, .today .plus { font-weight: 500 !important; letter-spacing: -.025em; color: #fafafa !important; }
+  .light { box-shadow: none !important; border: 1px solid var(--line); background: transparent !important; }
+  .light.g { color: #86efac; } .light.a { color: #fcd34d; } .light.r { color: #fca5a5; }
+  .pbar { background: #17171a; height: 4px !important; }
+  .pbar i { background: #fafafa !important; }
+  .sp-l { stroke: #fafafa !important; stroke-width: 1.6 !important; }
+  .sp-d { fill: #fafafa !important; stroke: #0e0e11 !important; }
+  .sp-t { stroke: #3f3f46 !important; }
+  .today .tb { background: #17171a !important; } .today .tb i { background: #fafafa !important; }
+  .today .ok { color: var(--muted) !important; }
+  .days div i { background: #71717a !important; width: 30px !important; border-radius: 4px 4px 0 0 !important; }
+  .days div:last-child i { background: #fafafa !important; }
+  .days div.low i { background: #27272a !important; }
+  .days div b { font-weight: 500; }
+  .days .tline { border-top-color: #52525b !important; }
+  .periods button[aria-pressed="true"] { background: #fafafa !important; color: #09090b !important; border-color: #fafafa !important; }
+  .seg { background: #0e0e11; border: 1px solid var(--line); }
+  .seg button[aria-pressed="true"] { background: #1f1f23; box-shadow: none; }
+  .col { background: #0b0b0e !important; border-color: var(--line) !important; }
+  .col.won, .col.lost { background: #0b0b0e !important; }
+  .col h2 i { filter: grayscale(1) brightness(1.4); opacity: .7; }
+  .col.won h2 i { filter: none; background: #4ade80 !important; opacity: 1; }
+  .col.lost h2 i { filter: none; background: #f87171 !important; opacity: 1; }
+  .lead { background: #0e0e11 !important; border-color: var(--line) !important; }
+  .lead:hover { border-color: #3f3f46 !important; }
+  .pill { background: transparent !important; border: 1px solid var(--line); color: var(--muted) !important; font-weight: 500; }
+  .p-prio { color: #fca5a5 !important; border-color: rgba(248, 113, 113, .3); }
+  .av { background: #1f1f23 !important; color: #d4d4d8 !important; box-shadow: 0 0 0 1px #2a2a2f !important; font-weight: 500; }
+  .lead .age.stale { color: #fca5a5; font-weight: 500; }
+  .box h4 .ai { background: transparent !important; color: var(--muted) !important; border: 1px solid var(--line); }
+  .rk.me { background: #131316 !important; box-shadow: inset 0 0 0 1px var(--line) !important; }
+  .rk .bar i, .lb-row .bar i, .traj i { background: #fafafa !important; }
+  .rk:first-of-type .pos { color: #fafafa; }
+  .mark { color: var(--faint); } .mark::before, .mark::after { background: repeating-linear-gradient(90deg, #3f3f46 0 6px, transparent 6px 10px); }
+  .tiers div { background: #0b0b0e; border: 1px solid var(--line); }
+  .tiers div.on { background: #fafafa !important; color: #09090b !important; } .tiers div.on b { color: #09090b !important; }
+  .rem h3 em { background: #1f1f23 !important; color: #d4d4d8 !important; }
+  .ritem:hover { background: #121215 !important; border-color: #3f3f46 !important; }
+  th { background: #0b0b0e !important; }
+  tbody tr:hover { background: #121215 !important; }
+  .drawer { background: #09090b; } .dh { background: #0e0e11; }
+  .theme { border-color: var(--line); } .theme button[aria-pressed="true"] { background: #1f1f23; }
+  .side .foot a { color: #d4d4d8; text-decoration: underline; text-underline-offset: 3px; }
+  .toast { background: #fafafa !important; color: #09090b !important; border: 0 !important; }
+  .toast b { color: #09090b !important; }
+  :root[data-theme="light"] .brand i { background: #09090b !important; color: #fff !important; }
 </style>
 </head>
 <body>
 <div class="app">
   <aside class="side" id="side">
     <div class="brand"><i>H</i><div>Helios Energia<small>Fotovoltaico</small></div><span class="sales">SALES</span></div>
+    <p class="glabel">Vendite</p>
     <button class="nav" data-view="dash" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>Dashboard</button>
     <button class="nav" data-view="leads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="7" rx="1.5"/></svg>Clienti<span class="count" id="c-leads"></span></button>
     <button class="nav" data-view="pay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Pagamenti</button>
-    <div class="grp"></div>
+    <p class="glabel">Team</p>
     <button class="nav" data-view="rank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>Classifica</button>
     <button class="nav" data-view="comm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.6-1-1.7-1.5-3-1.5-1.7 0-3 .9-3 2.2 0 3 6 1.6 6 4.6 0 1.3-1.3 2.2-3 2.2-1.4 0-2.6-.6-3.2-1.6M12 6v2M12 16v2"/></svg>Commissioni</button>
     <div class="foot"><span class="user">Giulia Bianchi</span><button class="nav" id="go-rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>Promemoria<span class="count" id="c-rem"></span></button>
@@ -284,8 +405,9 @@
   <div class="main">
     <header class="top">
       <button class="btn menu-btn" id="menu" aria-label="Menu">☰</button>
-      <h1 id="title">Dashboard vendite</h1>
+      <div class="crumb"><span>Helios Energia</span><span>/</span><h1 id="title">Dashboard vendite</h1></div>
       <span class="sp"></span>
+      <span class="today-d" id="tdate">Martedì 13 ottobre</span>
       <input class="ctl search" id="q" type="search" placeholder="Cerca cliente, telefono, fonte…" aria-label="Cerca">
       <button class="btn primary" id="add">+ Nuovo cliente</button>
     </header>
@@ -422,7 +544,7 @@
     const line = cum.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
     const area = `${line} L${x(cum.length - 1).toFixed(1)},${H} L0,${H} Z`;
     return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">
-      <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5b740" stop-opacity=".35"/><stop offset="1" stop-color="#f5b740" stop-opacity="0"/></linearGradient></defs>
+      <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".14"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs>
       <path d="M0,${H} L${W},${y(TARGET)}" class="sp-t"/><path d="${area}" fill="url(#sg)"/><path d="${line}" class="sp-l"/>
       <circle cx="${x(cum.length - 1)}" cy="${y(acc)}" r="4.5" class="sp-d"/></svg>`;
   }
@@ -462,7 +584,7 @@
     const r = remList(), n = r.late.length + r.today.length;
     $("#c-rem").textContent = n;
     const row = ([t, sub, id]) => `<div class="ritem"${id ? ` data-id="${id}"` : ""}><span class="t"><b>${esc(t)}</b><small>${esc(sub)}</small></span><span>→</span></div>`;
-    $("#rem").innerHTML = `<h3>🔔 I tuoi promemoria <em>${n}</em></h3>
+    $("#rem").innerHTML = `<h3><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:var(--muted)"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>I tuoi promemoria <em>${n}</em></h3>
       ${r.late.length ? `<div class="k">SCADUTI · ${r.late.length}</div>${r.late.map(row).join("")}` : ""}
       ${r.today.length ? `<div class="k" style="--dot:var(--amber)">OGGI · ${r.today.length}</div>${r.today.map(row).join("")}` : ""}`;
   }
@@ -504,7 +626,7 @@
       db.pays.push({ id: db.pays.length + 1, day: TODAY, client: l.name, amount, owner: closer, method: "Carta" });
       const after = commOf(cashOf(db.pays, closer));
       l.log.unshift(["€", `Pagamento registrato: ${eur(amount)}`, "adesso"]);
-      msg = `${stage === "won" ? "⚡ Impianto installato" : "Contratto firmato"}: ${esc(l.name)} · ${eur(amount)} incassati · commissione di ${REPS[closer][0].split(" ")[0]} <b>+${eur(after - before)}</b>`;
+      msg = `${stage === "won" ? "Impianto installato" : "Contratto firmato"}: ${esc(l.name)} · ${eur(amount)} incassati · commissione di ${REPS[closer][0].split(" ")[0]} <b>+${eur(after - before)}</b>`;
     }
     save(); renderAll(); toast(msg);
     if (!$("#drawer").hidden) openLead(id);
@@ -561,7 +683,7 @@
       </div>`;
     $("#drawer").hidden = $("#scrim").hidden = false;
     $("#d-stage").onchange = (e) => moveLead(id, e.target.value);
-    $("#drawer").querySelectorAll("[data-a]").forEach((s) => s.onchange = () => { l[s.dataset.a] = s.value; if (s.dataset.a === "demo" && s.value) l.owner = s.value; l.log.unshift(["👤", `${s.previousSibling.textContent.trim()}: ${s.value ? REPS[s.value][0] : "nessuno"}`, "adesso"]); save(); renderAll(); openLead(id); });
+    $("#drawer").querySelectorAll("[data-a]").forEach((s) => s.onchange = () => { l[s.dataset.a] = s.value; if (s.dataset.a === "demo" && s.value) l.owner = s.value; l.log.unshift(["●", `${s.previousSibling.textContent.trim()}: ${s.value ? REPS[s.value][0] : "nessuno"}`, "adesso"]); save(); renderAll(); openLead(id); });
     $("#d-ai")?.addEventListener("click", (e) => { e.target.disabled = true; e.target.textContent = "Analisi in corso…"; setTimeout(() => { l.ai = { avatar: AVATARS[l.id % 3], aware: AWARE[l.id % 3], pain: "Non riesce a essere costante" }; l.log.unshift(["✦", "Profilo classificato con AI", "adesso"]); save(); openLead(id); toast("Profilo classificato"); }, 1400); });
     $("#drawer").querySelectorAll("[data-copy]").forEach((b) => b.onclick = () => { const txt = `Buongiorno ${l.name.split(" ")[0]}, come le dicevo durante il sopralluogo le giro questo: ${b.dataset.copy}. Resto a disposizione per qualsiasi dubbio.`; navigator.clipboard?.writeText(txt).catch(() => {}); toast("Messaggio WhatsApp copiato"); });
   }
@@ -574,7 +696,7 @@
       const total = rows.reduce((a, r) => a + r[1], 0);
       let html = `<div style="display:flex;justify-content:space-between;margin-bottom:10px;font-size:13px"><span style="color:var(--muted)">Team</span><b>${eur(total)} <span style="color:var(--muted);font-weight:400">/ ${eur(target)}</span></b></div>`;
       rows.forEach(([k, v], i) => {
-        html += `<div class="rk${k === ME ? " me" : ""}"><span class="pos">${i === 0 ? "👑" : i + 1}</span><span class="nm nmw">${av(k)}${REPS[k][0]}</span><b>${eur(v)}</b><span class="bar"><i style="width:${v / max * 100}%"></i></span></div>`;
+        html += `<div class="rk${k === ME ? " me" : ""}"><span class="pos">${i + 1}</span><span class="nm nmw">${av(k)}${REPS[k][0]}</span><b>${eur(v)}</b><span class="bar"><i style="width:${v / max * 100}%"></i></span></div>`;
         marks.filter((m) => v >= m && (rows[i + 1] ? rows[i + 1][1] < m : true)).forEach((m) => { html += `<div class="mark">soglia bonus ${eur(m)}</div>`; });
       });
       return html;
@@ -592,7 +714,7 @@
       <div class="tiers">${TIERS.map(([t, r]) => `<div class="${r === rate ? "on" : ""}"><b>${r}%</b>${t ? `da ${eur(t)}` : "base"}</div>`).join("")}</div>
       <p style="margin:6px 0 0;font-size:13px">${next ? `Ti mancano <b>${eur(next[0] - gross)}</b> per il ${next[1]}%` : "Hai raggiunto lo scaglione più alto"}</p>`;
     const team = cashOf(db.pays), pct = Math.min(100, team / BONUS_TEAM * 100);
-    $("#bonus").innerHTML = `<p class="h">Bonus aziendale</p><b style="font-size:22px">${pct >= 100 ? "Obiettivo raggiunto 🎉" : `${Math.round(pct)}% dell'obiettivo`}</b>
+    $("#bonus").innerHTML = `<p class="h">Bonus aziendale</p><b style="font-size:22px">${pct >= 100 ? "Obiettivo raggiunto" : `${Math.round(pct)}% dell'obiettivo`}</b>
       <div class="traj" style="margin:14px 0 8px"><i style="width:${pct}%"></i></div>
       <p style="margin:0;color:var(--muted);font-size:13px">Sopra ${eur(BONUS_TEAM)} incassati dal team, ogni consulente con almeno 100 € di commissioni riceve <b style="color:var(--ink)">+${eur(BONUS_EACH)}</b>.</p>`;
     const rows = repKeys.map((k) => { const g = cashOf(db.pays, k); return [k, g, tierOf(g)[1], commOf(g)]; }).sort((a, b) => b[1] - a[1]);
