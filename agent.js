@@ -9,7 +9,7 @@
   const endpoint = `https://formsubmit.co/ajax/${(window.REEF && window.REEF.email) || "lancioni.ale@gmail.com"}`;
 
   const T = en ? {
-    open: "Talk to our AI agent", title: "Reef 7 agent", status: "Demo · replies in seconds", ph: "Type a message…", send: "Send",
+    open: "AI Agent", title: "AI Agent", status: "Demo · replies in seconds", ph: "Type a message…", send: "Send",
     teaser: "Want to find out in 30 seconds what we could automate in your business?",
     hello: "Hi! I'm a demo of the sales agents we build. I'll ask you a few quick questions and tell you how we can help. What does your business need most?",
     goals: {
@@ -38,7 +38,7 @@
     need: { sales: ["CRM and sales", "AI agents and voice assistants"], manual: ["Automation (with or without AI)"], data: ["Dashboards and financial control"], abroad: ["Multilingual or China projects"], unsure: ["Not sure yet"] },
     subject: "New lead from the AI agent", typing: "typing",
   } : {
-    open: "Parla con il nostro agente AI", title: "Agente Reef 7", status: "Demo · risponde in pochi secondi", ph: "Scrivi un messaggio…", send: "Invia",
+    open: "Agent AI", title: "Agent AI", status: "Demo · risponde in pochi secondi", ph: "Scrivi un messaggio…", send: "Invia",
     teaser: "Vuoi scoprire in 30 secondi cosa potremmo automatizzare nella tua azienda?",
     hello: "Ciao! Sono una demo degli agenti di vendita che costruiamo. Ti faccio qualche domanda veloce e ti dico come possiamo aiutarti. Di cosa ha più bisogno la tua azienda?",
     goals: {
