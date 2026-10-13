@@ -191,7 +191,7 @@ SLUG = {
     "it": {"home": "index.html", "work": "lavori.html", "services": "servizi.html", "solutions": "soluzioni.html", "mission": "missione.html", "studio": "lab.html", "contact": "contatti.html"},
     "en": {"home": "index.html", "work": "work.html", "services": "services.html", "solutions": "solutions.html", "mission": "mission.html", "studio": "lab.html", "contact": "contact.html"},
 }
-NAV = ["work", "services", "solutions", "mission", "studio"]
+NAV = ["work", "services", "solutions", "studio", "mission"]
 
 T = {
 "it": {
