@@ -73,6 +73,8 @@
     r_tools: "Notes on your tools", r_pain: "You told us", r_note: "Indicative estimate based on your answers and on conservative assumptions about how much of each activity can be automated (shown next to each one). We check the real numbers together, with your data.",
     pdf: "Download PDF", call: "Book a free call", restart: "Start over", sent_fail: "We couldn't send your details, but here's your report anyway.",
     auto: (p) => `automatable: about ${p}%`, subject: "New automation audit",
+    live_k: "Live estimate", live_empty: "Select the activities your team does by hand: the estimate updates as you go.",
+    live_get: "What you'll get", get: ["Hours and value you could win back", "What to automate first", "A 3-step plan, also as a PDF"],
   } : {
     steps: ["La tua azienda", "Lavoro manuale", "Strumenti", "Il tuo report"], step_of: "Passo {a} di {b}",
     sector: "In che settore lavori?", sectors: ["E-commerce", "Studio o consulenza", "Formazione e coaching", "Vendita B2B", "Attività locale", "Altro"],
@@ -94,16 +96,32 @@
     r_tools: "Note sui vostri strumenti", r_pain: "Ci hai detto", r_note: "Stima indicativa basata sulle tue risposte e su ipotesi prudenti su quanto di ogni attività si può automatizzare (indicato accanto a ciascuna). I numeri reali li verifichiamo insieme, sui tuoi dati.",
     pdf: "Scarica il PDF", call: "Prenota una call gratuita", restart: "Ricomincia", sent_fail: "Non siamo riusciti a inviare i tuoi dati, ma ecco comunque il tuo report.",
     auto: (p) => `automatizzabile: circa il ${p}%`, subject: "Nuovo audit di automazione",
+    live_k: "Stima in diretta", live_empty: "Seleziona le attività che il tuo team fa a mano: la stima si aggiorna mentre scegli.",
+    live_get: "Cosa ricevi", get: ["Ore e valore che puoi recuperare", "Cosa automatizzare per primo", "Un piano in 3 passi, anche in PDF"],
   };
 
+  const ICON = {
+    leads: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+    data: '<rect x="8" y="8" width="13" height="13" rx="2"/><path d="M4 16V5a1 1 0 0 1 1-1h11"/>',
+    reports: '<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/>',
+    booking: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/>',
+    followup: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+    docs: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+    questions: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+    support: '<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2" y="14" width="5" height="6" rx="2"/><rect x="17" y="14" width="5" height="6" rx="2"/>',
+    orders: '<path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/>',
+    phone: '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',
+  };
+  const icon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICON[k]}</svg>`;
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const fmt = (n) => (Math.round(n * 2) / 2).toLocaleString(en ? "en-GB" : "it-IT");
   const money = (n) => (en ? "€" : "") + (Math.round(n / 100) * 100).toLocaleString(en ? "en-GB" : "it-IT") + (en ? "" : " €");
   const pills = (name, opts, type = "radio") => `<div class="picks">${opts.map((o, i) => `<label class="pick"><input type="${type}" name="${name}" value="${i}"><span>${esc(o)}</span></label>`).join("")}</div>`;
 
   root.innerHTML = `
+  <div class="au-layout">
   <div class="form-card au-card">
-    <div class="q-progress"><span class="q-count"></span><span class="q-name"></span><i><b></b></i></div>
+    <ol class="au-stepper">${T.steps.map((x, i) => `<li><span>${i + 1}</span><b>${x}</b></li>`).join("")}</ol>
     <form class="au-form" novalidate>
       <fieldset class="au-step" data-i="0">
         <div class="q-field" data-req="sector"><p class="q-label">${T.sector}</p>${pills("sector", T.sectors)}</div>
@@ -113,7 +131,7 @@
         <p class="q-label">${T.tasks_q}<small>${T.tasks_hint}</small></p>
         <div class="au-tasks">${TASKS.map(([k, label], i) => `
           <div class="au-task" data-i="${i}">
-            <label class="au-check"><input type="checkbox" name="task" value="${i}"><span>${esc(label)}</span></label>
+            <label class="au-check"><input type="checkbox" name="task" value="${i}"><i class="au-ico">${icon(k)}</i><span>${esc(label)}</span></label>
             <div class="au-hours"><input type="range" min="1" max="40" step="1" value="5" aria-label="${esc(label)} · ${T.hours}"><output>5</output><small>${T.hours}</small></div>
           </div>`).join("")}</div>
       </fieldset>
@@ -138,6 +156,15 @@
       </form>
     </div>
   </div>
+  <aside class="au-live" aria-live="polite">
+    <p class="mono">${T.live_k}</p>
+    <div class="au-live-num"><b>0</b><span>${T.k_week}</span></div>
+    <p class="au-live-days"><b>0</b> ${T.k_year}</p>
+    <div class="au-live-bars"></div>
+    <p class="au-live-empty">${T.live_empty}</p>
+    <div class="au-live-get"><p class="mono">${T.live_get}</p><ul>${T.get.map((x) => `<li>${x}</li>`).join("")}</ul></div>
+  </aside>
+  </div>
   <article class="au-report" hidden></article>`;
 
   const card = root.querySelector(".au-card"), form = root.querySelector(".au-form");
@@ -147,9 +174,8 @@
   let cur = 0;
 
   const progress = (i) => {
-    card.querySelector(".q-count").textContent = T.step_of.replace("{a}", i + 1).replace("{b}", 4);
-    card.querySelector(".q-name").textContent = T.steps[i];
-    card.querySelector(".q-progress b").style.width = `${((i + 1) / 4) * 100}%`;
+    card.querySelectorAll(".au-stepper li").forEach((li, j) => { li.classList.toggle("done", j < i); li.classList.toggle("now", j === i); });
+    root.classList.toggle("live-on", i >= 1);
   };
   const show = (i) => {
     cur = i;
@@ -195,6 +221,29 @@
       tools: f.getAll("tool").map((i) => TOOLS[+i]), pain: (f.get("pain") || "").toString().trim(), cost,
     };
   };
+
+  const live = root.querySelector(".au-live");
+  let shown = 0, raf = null;
+  const updateLive = () => {
+    const a = answers();
+    const target = a.saved;
+    live.classList.toggle("has", a.tasks.length > 0);
+    live.querySelector(".au-live-days b").textContent = Math.round((target * WEEKS) / 8).toLocaleString(en ? "en-GB" : "it-IT");
+    const max = Math.max(1, ...a.tasks.map((t) => t.hours));
+    live.querySelector(".au-live-bars").innerHTML = a.tasks.slice(0, 4).map((t) =>
+      `<div><span>${icon(t.key)}${esc(t.label)}</span><i><b style="width:${(t.saved / max) * 100}%"></b></i><em>${fmt(t.saved)}</em></div>`).join("");
+    cancelAnimationFrame(raf);
+    const from = shown, t0 = performance.now();
+    const step = (now) => {
+      const k = Math.min(1, (now - t0) / 450), e = 1 - Math.pow(1 - k, 3);
+      shown = from + (target - from) * e;
+      live.querySelector(".au-live-num b").textContent = fmt(shown);
+      if (k < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+  };
+  form.addEventListener("input", updateLive);
+  form.addEventListener("change", updateLive);
 
   next.addEventListener("click", () => {
     if (!valid()) return;
@@ -242,6 +291,8 @@
 
   function renderReport(a, who, sentOk) {
     card.hidden = true;
+    root.querySelector(".au-layout").hidden = true;
+    root.classList.remove("live-on");
     const top = a.tasks.slice(0, 3);
     const max = Math.max(...a.tasks.map((t) => t.hours));
     const date = new Date().toLocaleDateString(en ? "en-GB" : "it-IT", { day: "numeric", month: "long", year: "numeric" });
