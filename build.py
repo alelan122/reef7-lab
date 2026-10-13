@@ -181,28 +181,48 @@ NAV = ["work", "services", "solutions", "mission", "studio"]
 
 T = {
 "it": {
-    "nav": {"work": "Projects", "services": "Capabilities", "solutions": "Industries", "mission": "Mission", "studio": "Lab", "contact": "Contact"},
+    "nav": {"work": "Projects", "services": "Services", "solutions": "Solutions", "mission": "Mission", "studio": "Lab", "contact": "Contact"},
     "menu": "Menu", "close": "Chiudi", "pages": "Pagine",
     "foot": "© 2026 Reef 7 Lab · Sviluppo software e intelligenza artificiale",
     "cta_k": "Nuovo progetto", "cta_h": "Costruiamo il tuo <em>reef</em>.",
     "services": [
-        ("01", "Siti web", "Il primo venditore della tua azienda, attivo giorno e notte.",
-         "Chi arriva sul tuo sito decide in pochi secondi se fidarsi. Costruiamo siti che rispondono subito alle domande giuste, accompagnano verso il contatto e si aggiornano senza dover chiamare nessuno.",
-         ["Struttura e testi pensati per convertire", "Design su misura, nessun template", "Caricamento rapido su ogni dispositivo", "Ottimizzazione per Google", "Ogni richiesta tracciata"]),
-        ("02", "Applicazioni su misura", "Il software si adatta a come lavori. Non il contrario.",
+        ("01", "Digitale", "Siti web e landing page", "Siti e pagine di vendita che trasformano le visite in contatti.",
+         "Il sito è spesso il primo contatto con un cliente. Progettiamo siti e landing page che spiegano subito il valore, accompagnano verso il contatto e si aggiornano senza dover chiamare nessuno.",
+         ["Struttura e testi pensati per convertire", "Design su misura, nessun template", "Landing page e funnel per le campagne", "Ottimizzazione per Google e per il telefono", "Ogni richiesta tracciata"]),
+        ("02", "Digitale", "Applicazioni su misura", "Il software si adatta a come lavori. Non il contrario.",
          "Se il tuo team passa più tempo ad aggirare un gestionale che a usarlo, il problema non è il team. Progettiamo gestionali, portali clienti e strumenti interni attorno ai processi reali della tua azienda.",
          ["Analisi dei processi e prototipo cliccabile", "Applicazioni web e desktop", "Accessi e permessi per ruolo", "Integrazione con gli strumenti che usi già", "Nuove funzioni man mano che cresci"]),
-        ("03", "Intelligenza artificiale", "Le ore spese in lavoro ripetitivo tornano al tuo team.",
+        ("03", "Vendite", "CRM su misura", "Lead, trattative e provvigioni in un unico strumento, costruito sul tuo modo di vendere.",
+         "Un CRM generico costringe il team commerciale ad adattarsi. Costruiamo CRM su misura: ogni lead arriva già assegnato, le trattative avanzano per fasi, pagamenti e provvigioni si calcolano da soli e la direzione vede risultati e classifica in tempo reale.",
+         ["Pipeline e fasi definite sul tuo processo", "Assegnazione automatica dei lead", "Pagamenti e provvigioni calcolati in automatico", "Classifica e KPI del team, anche su uno schermo in ufficio", "Collegato a sito, prenotazioni ed email"]),
+        ("04", "Vendite", "Prenotazioni e agenda commerciale", "Un sistema di prenotazione tuo, che assegna ogni appuntamento alla persona giusta.",
+         "I potenziali clienti prenotano da soli una call. Il sistema distribuisce gli appuntamenti tra i commerciali, riporta ogni contatto al suo referente e invia i promemoria, così diminuiscono le assenze.",
+         ["Pagina di prenotazione con il tuo brand", "Distribuzione automatica tra i commerciali", "Ogni contatto torna sempre al suo referente", "Promemoria automatici", "Appuntamenti registrati direttamente nel CRM"]),
+        ("05", "Vendite", "Email marketing e automazioni", "Sequenze email che lavorano per te, con la consegna sotto controllo.",
+         "Dal benvenuto al follow-up dopo una call, le email partono al momento giusto in base a ciò che fa ogni contatto. Curiamo anche la parte tecnica che decide se un'email arriva in casella o finisce nello spam.",
+         ["Sequenze automatiche per ogni fase del cliente", "Segmentazione in base al comportamento", "Riscaldamento dei domini e gestione delle liste", "Statistiche di apertura e risposta", "Un'alternativa alle piattaforme a canone"]),
+        ("06", "Intelligenza artificiale", "Automazioni con l'AI", "Le ore spese in lavoro ripetitivo tornano al tuo team.",
          "Rispondere alle stesse email, copiare dati, compilare report: è lavoro che non fa crescere nessuno. Lo affidiamo all'intelligenza artificiale, con un controllo umano dove serve, e misuriamo quanto tempo ti restituisce.",
          ["Analisi delle attività che costano più tempo", "Email, documenti e report automatici", "Contatti qualificati e smistati da soli", "Controllo umano nei passaggi delicati", "Tempo risparmiato misurato"]),
-        ("04", "Company brain", "Tutto quello che sa la tua azienda, a una domanda di distanza.",
+        ("07", "Intelligenza artificiale", "Company brain", "Tutto quello che sa la tua azienda, a una domanda di distanza.",
          "Procedure, documenti, risposte già date ai clienti: il sapere della tua azienda è sparso tra cartelle, chat e persone. Lo raccogliamo in un assistente che risponde al team in pochi secondi e indica sempre da dove viene l'informazione.",
          ["Raccolta e organizzazione dei documenti", "Risposte con la fonte, sempre verificabili", "Ognuno vede solo ciò che gli compete", "Contenuti aggiornati nel tempo", "Dati riservati e protetti"]),
-        ("05", "Dashboard e dati", "I numeri che contano, senza aprire dieci programmi.",
-         "Se per sapere come sta andando il mese devi chiedere a tre persone e aspettare un Excel, decidi sempre in ritardo. Colleghiamo le tue fonti di dati in un'unica dashboard, aggiornata da sola e leggibile in un colpo d'occhio.",
-         ["Scelta degli indicatori che guidano il business", "Collegamento a tutte le fonti di dati", "Aggiornamento automatico", "Viste diverse per direzione e team", "Avvisi quando qualcosa cambia"]),
+        ("08", "Gestione", "Dashboard e controllo di gestione", "Vendite, cassa e margini in un'unica vista, sempre aggiornata.",
+         "Se per capire come sta andando l'azienda servono tre persone e un Excel, decidi sempre in ritardo. Colleghiamo le tue fonti in dashboard per la direzione: indicatori commerciali, flussi di cassa, marginalità e bilancio, aggiornati da soli.",
+         ["Indicatori commerciali e di marketing", "Flussi di cassa e marginalità", "Viste dedicate per direzione e team", "Aggiornamento automatico dalle tue fonti", "Accessi protetti per ruolo"]),
+        ("09", "Gestione", "Hub aziendale e integrazioni", "Tutti gli strumenti dell'azienda collegati e raggiungibili da un unico punto.",
+         "Un portale interno da cui ogni persona accede agli strumenti che le servono, con un unico database alla base. Colleghiamo i software tra loro tramite API e webhook, così i dati si muovono da soli.",
+         ["Portale interno con accessi per ruolo", "Un unico database per tutte le applicazioni", "Integrazioni via API e webhook", "Organigramma e procedure sempre a portata di mano", "Sicurezza e backup inclusi"]),
+        ("10", "Gestione", "Dagli abbonamenti a strumenti tuoi", "Sostituiamo i software a canone con strumenti tuoi, integrati tra loro.",
+         "CRM, email, prenotazioni, automazioni: molte aziende pagano ogni mese più abbonamenti che fanno cose simili e non si parlano. Analizziamo i costi e sostituiamo quelli che conviene con strumenti tuoi, più semplici e collegati.",
+         ["Analisi dei software in uso e dei costi", "Piano di migrazione senza interruzioni", "Dati trasferiti e verificati", "Strumenti integrati tra loro", "Meno costi ricorrenti nel tempo"]),
     ],
     "sectors": [
+        ("Team commerciali", "Più tempo in chiamata, meno tempo su Excel.",
+         ["CRM con provvigioni automatiche", "Prenotazioni distribuite tra i commerciali", "Classifica e KPI in tempo reale"],
+         "I commerciali passano ore ad aggiornare fogli di calcolo, i contatti si perdono tra un'agenda e l'altra e le provvigioni si calcolano a mano a fine mese.",
+         "Un CRM costruito sul tuo processo di vendita, collegato a prenotazioni ed email, con provvigioni e classifica calcolate in automatico.",
+         "Un team che passa più tempo con i clienti e una direzione che vede i risultati in tempo reale."),
         ("E-commerce", "Vendi di più senza assumere qualcuno per gestire il caos.",
          ["Dashboard di vendite e margini", "Assistenza clienti automatizzata", "Strumenti per ordini e magazzino"],
          "Ordini, campagne e assistenza vivono in strumenti diversi. Scopri a fine mese cosa ha funzionato, quando è troppo tardi per correggere.",
@@ -233,24 +253,32 @@ T = {
         "b1": "Parliamo del tuo progetto", "b2": "Scopri i servizi",
         "eco_k": "Integrazione dei sistemi",
         "eco_h": "Un unico sistema per <em>tutta l'azienda</em>.",
-        "eco_p": "Nella maggior parte delle aziende i dati vivono in strumenti separati: messaggi, ordini, fatture, fogli di calcolo. Colleghiamo questi strumenti in un'unica piattaforma, così le informazioni si aggiornano da sole e gli indicatori che contano sono sempre disponibili in un solo posto.",
-        "tools": ["Email", "WhatsApp", "Excel", "CRM", "E-commerce", "Contabilità"],
-        "before": ("Prima", ["Gli stessi dati inseriti più volte, in programmi diversi", "Informazioni sparse e difficili da confrontare", "Report preparati a mano, spesso già superati"]),
-        "after": ("Dopo", ["Ogni dato inserito una sola volta", "Informazioni collegate e sempre aggiornate", "Indicatori chiari per decisioni consapevoli"]),
-        "card": ("Dashboard", ["Vendite", "Margini", "Clienti"], "Aggiornata in tempo reale"),
-        "status": ("Prima: ogni strumento lavora da solo e i dati restano isolati.", "Dopo: gli strumenti condividono i dati e tutto è visibile in un'unica dashboard."),
-        "svc_h": "Capabilities", "svc_p": "Cinque competenze che lavorano insieme, per un'azienda più veloce e più lucida nelle decisioni.", "svc_all": "Tutte le capabilities",
-        "sol_h": "Industries", "sol_p": "Ogni settore ha i suoi colli di bottiglia. Ecco quelli che conosciamo meglio.", "sol_all": "Tutti i settori",
+        "eco_p": "Colleghiamo gli strumenti che usi già e automatizziamo i passaggi tra l'uno e l'altro. I dati entrano una volta sola e arrivano dove servono, già pronti per essere usati. Ecco tre esempi di ciò che costruiamo:",
+        "values": ["Nessun dato inserito due volte", "Numeri affidabili, aggiornati da soli", "Il team libero dal lavoro ripetitivo"],
+        "flows": [
+            {"tab": "Vendite e marketing", "in": ["Shopify", "Meta Ads"], "core": "Sincronizzazione automatica", "out": "Margine di oggi", "kind": "dash",
+             "rows": ["Vendite", "Spesa pubblicitaria", "Margine reale"], "live": "Aggiornato in automatico",
+             "value": "Sai ogni giorno quanto guadagni davvero, senza aprire un foglio di calcolo."},
+            {"tab": "Clienti", "in": ["WhatsApp", "Email"], "core": "Risposta e qualifica con l'AI", "out": "Nuovo contatto nel CRM", "kind": "crm",
+             "rows": ["Richiesta ricevuta", "Risposta inviata in automatico", "Follow-up programmato"], "live": "Assegnato al commerciale",
+             "value": "Ogni richiesta riceve una risposta immediata e nessun contatto si perde per strada."},
+            {"tab": "Amministrazione", "in": ["Ordini", "Pagamenti"], "core": "Documenti generati in automatico", "out": "Fattura e report pronti", "kind": "doc",
+             "rows": ["Fattura", "Registrazione contabile", "Report mensile"], "live": "Pronto da inviare",
+             "value": "Fatture e report si preparano da soli, senza errori di trascrizione."},
+        ],
+        "flow_lbl": ("Dati in entrata", "Il sistema", "Il risultato"),
+        "svc_h": "Services", "svc_p": "Dal sito al CRM, dall'intelligenza artificiale al controllo di gestione: competenze diverse che lavorano insieme.", "svc_all": "Tutti i servizi",
+        "sol_h": "Solutions", "sol_p": "Ogni settore ha i suoi colli di bottiglia. Ecco quelli che conosciamo meglio.", "sol_all": "Tutte le soluzioni",
         "reef_h": "Progettati come <em>un reef</em>", "reef_p": "Il reef è tra gli ecosistemi più efficienti della Terra. I suoi cinque principi guidano ogni progetto.",
         "reef_words": ["Diversità", "Simbiosi", "Connessione", "Crescita stratificata", "Resilienza"], "reef_a": "La nostra filosofia",
     },
     "services_p": {
-        "title": "Capabilities · Reef 7 Lab", "desc": "Siti web, applicazioni su misura, intelligenza artificiale, company brain e dashboard.",
-        "h1": "Cinque competenze, <em>un solo</em> sistema.",
-        "sub": "Dal sito che porta clienti al gestionale che fa girare l'azienda: ogni soluzione parte dai tuoi obiettivi, mai da un pacchetto preconfezionato.",
+        "title": "Services · Reef 7 Lab", "desc": "Siti web, applicazioni su misura, intelligenza artificiale, company brain e dashboard.",
+        "h1": "Dieci competenze, <em>un solo</em> sistema.",
+        "sub": "Dal sito che porta clienti al gestionale che fa girare l'azienda: le combiniamo in base ai tuoi obiettivi, mai partendo da un pacchetto preconfezionato.",
     },
     "solutions": {
-        "title": "Industries · Reef 7 Lab", "desc": "Soluzioni software per e-commerce, studi professionali, formazione e aziende in crescita.",
+        "title": "Solutions · Reef 7 Lab", "desc": "Soluzioni software per e-commerce, studi professionali, formazione e aziende in crescita.",
         "h1": "Ogni settore ha il suo <em>collo di bottiglia</em>.",
         "sub": "Lo conosciamo da vicino, e sappiamo come trasformarlo in un vantaggio. Questi sono i casi che affrontiamo più spesso.",
         "lbl": ("La sfida", "La soluzione", "Il risultato"),
@@ -287,7 +315,7 @@ T = {
         "form_h": "Parliamo del tuo progetto",
         "f": {"name": "Nome e cognome", "email": "Email di lavoro", "company": "Azienda", "want": "Di cosa hai bisogno",
               "msg": "Raccontaci il progetto", "ph": "Obiettivi, tempi e cosa vorresti migliorare",
-              "opts": ["Sito web", "Applicazione su misura", "Intelligenza artificiale", "Company brain", "Dashboard e dati", "Non lo so ancora"],
+              "opts": ["Sito web o landing page", "Applicazione su misura", "CRM e vendite", "Prenotazioni ed email marketing", "Intelligenza artificiale", "Company brain", "Dashboard e controllo di gestione", "Integrazioni e software di proprietà", "Non lo so ancora"],
               "privacy": "Acconsento al trattamento dei miei dati per essere ricontattato in merito alla richiesta.",
               "req": "Campi obbligatori", "send": "Invia la richiesta", "sending": "Invio in corso…",
               "ok_h": "Richiesta inviata.", "ok_p": "Grazie! Ti risponderemo entro un giorno lavorativo all'indirizzo che ci hai indicato.",
@@ -296,28 +324,48 @@ T = {
     },
 },
 "en": {
-    "nav": {"work": "Projects", "services": "Capabilities", "solutions": "Industries", "mission": "Mission", "studio": "Lab", "contact": "Contact"},
+    "nav": {"work": "Projects", "services": "Services", "solutions": "Solutions", "mission": "Mission", "studio": "Lab", "contact": "Contact"},
     "menu": "Menu", "close": "Close", "pages": "Pages",
     "foot": "© 2026 Reef 7 Lab · Software and AI development",
     "cta_k": "New project", "cta_h": "Let's build your <em>reef</em>.",
     "services": [
-        ("01", "Websites", "Your company's best salesperson, working day and night.",
-         "Visitors decide in seconds whether to trust you. We build websites that answer the right questions straight away, guide people towards getting in touch, and can be updated without calling anyone.",
-         ["Structure and copy built to convert", "Custom design, no templates", "Fast loading on every device", "Optimised for Google", "Every enquiry tracked"]),
-        ("02", "Custom applications", "Software that fits the way you work. Not the other way round.",
+        ("01", "Digital", "Websites and landing pages", "Websites and sales pages that turn visits into enquiries.",
+         "Your website is often the first contact a client has with you. We design websites and landing pages that explain the value straight away, guide people towards getting in touch, and can be updated without calling anyone.",
+         ["Structure and copy built to convert", "Custom design, no templates", "Landing pages and funnels for campaigns", "Optimised for Google and for mobile", "Every enquiry tracked"]),
+        ("02", "Digital", "Custom applications", "Software that fits the way you work. Not the other way round.",
          "If your team spends more time working around a system than using it, the problem isn't the team. We design management tools, client portals and internal software around the way your company really works.",
          ["Process analysis and clickable prototype", "Web and desktop applications", "Role-based access and permissions", "Integration with the tools you already use", "New features as you grow"]),
-        ("03", "Artificial intelligence", "The hours lost to repetitive work go back to your team.",
+        ("03", "Sales", "Custom CRM", "Leads, deals and commissions in one tool, built around the way you sell.",
+         "A generic CRM forces your sales team to adapt. We build custom CRMs: every lead arrives already assigned, deals move through clear stages, payments and commissions calculate themselves, and leadership sees results and rankings in real time.",
+         ["Pipeline and stages designed around your process", "Automatic lead assignment", "Payments and commissions calculated automatically", "Team leaderboard and KPIs, even on a screen in the office", "Connected to your website, bookings and email"]),
+        ("04", "Sales", "Bookings and sales calendar", "Your own booking system, assigning every appointment to the right person.",
+         "Prospects book a call on their own. The system distributes appointments across your sales team, sends every contact back to their own rep and sends reminders, so fewer people miss their call.",
+         ["Booking page with your branding", "Automatic distribution across the sales team", "Every contact always returns to their rep", "Automatic reminders", "Appointments logged straight into the CRM"]),
+        ("05", "Sales", "Email marketing and automation", "Email sequences that work for you, with deliverability under control.",
+         "From the welcome email to the follow-up after a call, emails go out at the right moment based on what each contact does. We also handle the technical side that decides whether an email lands in the inbox or in spam.",
+         ["Automated sequences for every customer stage", "Segmentation based on behaviour", "Domain warm-up and list management", "Open and reply statistics", "An alternative to subscription platforms"]),
+        ("06", "AI", "AI automation", "The hours lost to repetitive work go back to your team.",
          "Answering the same emails, copying data, filling in reports: work that helps no one grow. We hand it to AI, with human checks where they matter, and measure exactly how much time it gives back.",
          ["Finding the tasks that cost the most time", "Automated email, documents and reports", "Leads qualified and routed automatically", "Human review at the critical steps", "Time saved, measured"]),
-        ("04", "Company brain", "Everything your company knows, one question away.",
+        ("07", "AI", "Company brain", "Everything your company knows, one question away.",
          "Procedures, documents, answers already given to clients: your company's knowledge is scattered across folders, chats and people. We bring it together in an assistant that answers your team in seconds and always shows where the information comes from.",
          ["Collecting and organising documents", "Answers with sources, always verifiable", "Everyone sees only what they should", "Content that stays up to date", "Private, protected data"]),
-        ("05", "Dashboards and data", "The numbers that matter, without opening ten programs.",
-         "If finding out how the month is going means asking three people and waiting for a spreadsheet, you'll always decide too late. We connect your data sources into a single dashboard that updates itself and reads at a glance.",
-         ["Choosing the metrics that drive the business", "Connecting every data source", "Automatic updates", "Different views for leadership and teams", "Alerts when something changes"]),
+        ("08", "Operations", "Dashboards and financial control", "Sales, cash and margins in one view, always up to date.",
+         "If understanding how the company is doing takes three people and a spreadsheet, you'll always decide too late. We connect your sources into dashboards for leadership: sales metrics, cash flow, margins and financial statements, updated on their own.",
+         ["Sales and marketing metrics", "Cash flow and margins", "Dedicated views for leadership and teams", "Automatic updates from your sources", "Role-based secure access"]),
+        ("09", "Operations", "Company hub and integrations", "All your company's tools connected and reachable from one place.",
+         "An internal portal where everyone accesses the tools they need, built on a single database. We connect your software through APIs and webhooks, so data moves on its own.",
+         ["Internal portal with role-based access", "One database for every application", "Integrations through APIs and webhooks", "Org chart and procedures always at hand", "Security and backups included"]),
+        ("10", "Operations", "From subscriptions to your own tools", "We replace subscription software with tools you own, all connected.",
+         "CRM, email, bookings, automation: many companies pay for several monthly subscriptions that do similar things and don't talk to each other. We analyse the costs and replace the ones worth replacing with your own tools, simpler and connected.",
+         ["Review of the software you use and what it costs", "Migration plan with no downtime", "Data transferred and verified", "Tools that work together", "Lower recurring costs over time"]),
     ],
     "sectors": [
+        ("Sales teams", "More time on calls, less time in spreadsheets.",
+         ["CRM with automatic commissions", "Bookings distributed across the team", "Real-time leaderboard and KPIs"],
+         "Sales reps spend hours updating spreadsheets, contacts get lost between calendars and commissions are calculated by hand at the end of the month.",
+         "A CRM built around your sales process, connected to bookings and email, with commissions and rankings calculated automatically.",
+         "A team that spends more time with clients, and leadership that sees results in real time."),
         ("E-commerce", "Sell more without hiring someone to manage the chaos.",
          ["Sales and margin dashboards", "Automated customer support", "Tools for orders and inventory"],
          "Orders, campaigns and support live in different tools. You find out what worked at the end of the month, when it's too late to fix.",
@@ -348,24 +396,32 @@ T = {
         "b1": "Let's talk about your project", "b2": "Explore services",
         "eco_k": "Systems integration",
         "eco_h": "One system for <em>the whole company</em>.",
-        "eco_p": "In most companies, data lives in separate tools: messages, orders, invoices, spreadsheets. We connect these tools into a single platform, so information updates itself and the metrics that matter are always available in one place.",
-        "tools": ["Email", "WhatsApp", "Spreadsheets", "CRM", "E-commerce", "Accounting"],
-        "before": ("Before", ["The same data entered several times, in different programs", "Scattered information that's hard to compare", "Reports prepared by hand, often already out of date"]),
-        "after": ("After", ["Every piece of data entered once", "Connected information, always up to date", "Clear metrics for informed decisions"]),
-        "card": ("Dashboard", ["Sales", "Margins", "Clients"], "Updated in real time"),
-        "status": ("Before: each tool works on its own and data stays isolated.", "After: the tools share their data and everything is visible in a single dashboard."),
-        "svc_h": "Capabilities", "svc_p": "Five disciplines that work together, for a company that moves faster and decides more clearly.", "svc_all": "All capabilities",
-        "sol_h": "Industries", "sol_p": "Every industry has its bottlenecks. These are the ones we know best.", "sol_all": "All industries",
+        "eco_p": "We connect the tools you already use and automate the steps between them. Data is entered once and reaches wherever it's needed, ready to use. Here are three examples of what we build:",
+        "values": ["No data entered twice", "Reliable numbers that update themselves", "A team freed from repetitive work"],
+        "flows": [
+            {"tab": "Sales and marketing", "in": ["Shopify", "Meta Ads"], "core": "Automatic sync", "out": "Today's margin", "kind": "dash",
+             "rows": ["Sales", "Ad spend", "Real margin"], "live": "Updated automatically",
+             "value": "You know every day how much you're really making, without opening a spreadsheet."},
+            {"tab": "Customers", "in": ["WhatsApp", "Email"], "core": "AI replies and qualifies", "out": "New contact in the CRM", "kind": "crm",
+             "rows": ["Request received", "Reply sent automatically", "Follow-up scheduled"], "live": "Assigned to sales",
+             "value": "Every request gets an immediate reply and no lead slips through the cracks."},
+            {"tab": "Admin", "in": ["Orders", "Payments"], "core": "Documents generated automatically", "out": "Invoice and report ready", "kind": "doc",
+             "rows": ["Invoice", "Accounting entry", "Monthly report"], "live": "Ready to send",
+             "value": "Invoices and reports prepare themselves, with no copy-and-paste errors."},
+        ],
+        "flow_lbl": ("Incoming data", "The system", "The result"),
+        "svc_h": "Services", "svc_p": "From websites to CRM, from AI to financial control: different disciplines that work together.", "svc_all": "All services",
+        "sol_h": "Solutions", "sol_p": "Every industry has its bottlenecks. These are the ones we know best.", "sol_all": "All solutions",
         "reef_h": "Designed like <em>a reef</em>", "reef_p": "The reef is one of the most efficient ecosystems on Earth. Its five principles guide every project.",
         "reef_words": ["Diversity", "Symbiosis", "Connection", "Layered growth", "Resilience"], "reef_a": "Our philosophy",
     },
     "services_p": {
-        "title": "Capabilities · Reef 7 Lab", "desc": "Websites, custom applications, artificial intelligence, company brain and dashboards.",
-        "h1": "Five disciplines, <em>one</em> system.",
-        "sub": "From the website that brings in clients to the system that runs the company: every solution starts from your goals, never from an off-the-shelf package.",
+        "title": "Services · Reef 7 Lab", "desc": "Websites, custom applications, artificial intelligence, company brain and dashboards.",
+        "h1": "Ten disciplines, <em>one</em> system.",
+        "sub": "From the website that brings in clients to the system that runs the company: we combine them around your goals, never starting from an off-the-shelf package.",
     },
     "solutions": {
-        "title": "Industries · Reef 7 Lab", "desc": "Software solutions for e-commerce, professional firms, education and growing companies.",
+        "title": "Solutions · Reef 7 Lab", "desc": "Software solutions for e-commerce, professional firms, education and growing companies.",
         "h1": "Every industry has its <em>bottleneck</em>.",
         "sub": "We know them up close, and we know how to turn them into an advantage. These are the cases we tackle most often.",
         "lbl": ("The challenge", "The solution", "The outcome"),
@@ -402,7 +458,7 @@ T = {
         "form_h": "Let's talk about your project",
         "f": {"name": "Full name", "email": "Work email", "company": "Company", "want": "What do you need",
               "msg": "Tell us about the project", "ph": "Goals, timeline and what you'd like to improve",
-              "opts": ["Website", "Custom application", "Artificial intelligence", "Company brain", "Dashboards and data", "Not sure yet"],
+              "opts": ["Website or landing page", "Custom application", "CRM and sales", "Bookings and email marketing", "Artificial intelligence", "Company brain", "Dashboards and financial control", "Integrations and owned software", "Not sure yet"],
               "privacy": "I agree to the processing of my data so you can get back to me about this request.",
               "req": "Required fields", "send": "Send request", "sending": "Sending…",
               "ok_h": "Request sent.", "ok_p": "Thank you! We'll reply within one business day at the address you provided.",
@@ -415,56 +471,43 @@ T = {
 
 
 def eco(H, pre):
-    """Sezione prima/dopo: strumenti sparsi e scollegati, poi gli stessi collegati a un unico centro."""
-    tools = H["tools"]
-    # prima: posizioni sparse, leggermente ruotate, con collegamenti interrotti
-    spots = [(22, 24, -6), (70, 18, 5), (48, 50, -3), (18, 74, 4), (78, 62, -5), (55, 86, 3)]
-    broken = [(0, 2), (1, 4), (3, 5), (2, 4)]
-    seg = ""
-    for a, b in broken:
-        (x1, y1, _), (x2, y2, _) = spots[a], spots[b]
-        for (sx, sy), (ex, ey) in (((x1, y1), (x2, y2)), ((x2, y2), (x1, y1))):
-            mx, my = sx + (ex - sx) * .38, sy + (ey - sy) * .38
-            seg += f'<line x1="{sx}" y1="{sy}" x2="{mx:.1f}" y2="{my:.1f}"/>'
-    # dopo: in cerchio attorno al centro, con il flusso dei dati
-    ring = [(50 + 36 * math.cos(math.radians(-90 + i * 60)), 50 + 38 * math.sin(math.radians(-90 + i * 60))) for i in range(6)]
-    lines = "".join(f'<line x1="50" y1="50" x2="{x:.1f}" y2="{y:.1f}" style="animation-delay:{-i * .35:.2f}s"/>' for i, (x, y) in enumerate(ring))
-    # pacchetti di dati che viaggiano dagli strumenti verso il centro
-    packets = "".join(f'<line x1="{x:.1f}" y1="{y:.1f}" x2="50" y2="50" style="animation-delay:{-i * .45:.2f}s"/>' for i, (x, y) in enumerate(ring))
-    ct, rows, live = H["card"]
-    bars = [(28, 40, 36, 55, 68, 92), (45, 38, 52, 60, 58, 78), (22, 30, 44, 41, 62, 84)]
-    card_rows = "".join(
-        f'<div class="hc-row"><span>{name}</span><i class="spark">{"".join(f"<b style=\"height:{h}%\"></b>" for h in bars[j])}</i></div>'
-        for j, name in enumerate(rows))
-    sb, sa = H["status"]
-    # una sola scena: ogni strumento conosce la posizione "prima" e "dopo", il CSS anima il passaggio
-    pills = "".join(f'<span class="pill" style="--bx:{bx}%;--by:{by}%;--br:{br}deg;--ax:{ax:.1f}%;--ay:{ay:.1f}%;--d:{i * 70}ms">{t}</span>'
-                    for i, (t, (bx, by, br), (ax, ay)) in enumerate(zip(tools, spots, ring)))
-    li = lambda items, cls: "".join(f'<li class="{cls}">{x}</li>' for x in items)
-    (bk, bl), (ak, al) = H["before"], H["after"]
-    return f"""<div class="eco is-after" data-eco>
+    """Sezione 'Un unico sistema': tre flussi concreti, ognuno da dati in entrata a sistema a risultato, con schede."""
+    li, lc, lo = H["flow_lbl"]
+
+    def mini(f):
+        rows = f["rows"]
+        if f["kind"] == "dash":
+            bars = (30, 44, 38, 56, 52, 70, 86)
+            spark = "".join(f'<b style="height:{h}%"></b>' for h in bars)
+            body = f'<div class="mu-spark">{spark}</div>' + "".join(f'<div class="mu-row"><span>{r}</span><i style="--w:{w}%"></i></div>' for r, w in zip(rows, (78, 46, 64)))
+        elif f["kind"] == "crm":
+            body = '<div class="mu-contact"><span class="mu-avatar"></span><div><b></b><i></i></div></div>' + "".join(f'<div class="mu-step"><span class="tick">✓</span>{r}</div>' for r in rows)
+        else:
+            body = '<div class="mu-doc"><div class="mu-doc-head"><b></b><i></i></div><i></i><i></i><i class="short"></i></div>' + "".join(f'<div class="mu-step"><span class="tick">✓</span>{r}</div>' for r in rows)
+        return f'<div class="mu mu-{f["kind"]}">{body}<p class="mu-live"><span class="dot"></span>{f["live"]}</p></div>'
+
+    tabs = "".join(f'<button type="button" aria-pressed="{"true" if i == 0 else "false"}">{f["tab"]}</button>' for i, f in enumerate(H["flows"]))
+    panels = "".join(f"""
+      <div class="flow-panel"{"" if i == 0 else " hidden"}>
+        <div class="fl-col fl-in"><span class="mono">{li}</span>{"".join(f'<span class="chip-src">{x}</span>' for x in f["in"])}</div>
+        <div class="fl-link"><i></i></div>
+        <div class="fl-col fl-core"><span class="mono">{lc}</span><span class="core"><img src="{pre}assets/reef7-logo.png" alt="" width="40" height="40"><b>{f["core"]}</b></span></div>
+        <div class="fl-link"><i></i></div>
+        <div class="fl-col fl-out"><span class="mono">{lo}</span><div class="out-card"><b class="out-title">{f["out"]}</b>{mini(f)}</div></div>
+        <p class="fl-value">{f["value"]}</p>
+      </div>""" for i, f in enumerate(H["flows"]))
+    values = "".join(f"<li>{v}</li>" for v in H["values"])
+    return f"""<div class="eco2">
     <div class="eco-copy">
       <p class="mono">{H['eco_k']}</p>
       <h2>{H['eco_h']}</h2>
       <p class="eco-lead">{H['eco_p']}</p>
-      <div class="eco-toggle" role="group">
-        <button type="button" data-state="before" aria-pressed="false">{bk}</button>
-        <button type="button" data-state="after" aria-pressed="true">{ak}</button>
-      </div>
-      <ul class="eco-list before-list">{li(bl, "x")}</ul>
-      <ul class="eco-list after-list">{li(al, "ok")}</ul>
+      <ul class="eco-values">{values}</ul>
     </div>
-    <div class="eco-visual">
-    <div class="eco-stage" aria-hidden="true">
-      <svg viewBox="0 0 100 100" preserveAspectRatio="none"><g class="broken">{seg}</g><g class="links">{lines}</g><g class="packets">{packets}</g></svg>
-      {pills}
-      <div class="hub-card">
-        <div class="hc-top"><img src="{pre}assets/reef7-logo.png" alt="" width="22" height="22"><b>{ct}</b></div>
-        {card_rows}
-        <p class="hc-live"><span class="dot"></span>{live}</p>
+    <div class="flow" data-flow>
+      <div class="flow-tabs" role="group">{tabs}</div>
+      <div class="flow-stage">{panels}
       </div>
-    </div>
-    <p class="eco-status"><span class="s-before">{sb}</span><span class="s-after">{sa}</span></p>
     </div>
   </div>"""
 
@@ -614,7 +657,7 @@ def build(lang, variant=""):
     # home
     H = L["home"]
     rows = "".join(f"""
-    <a class="svc-row" href="{u('services')}#s{n}"><span class="mono">{n}</span><h3>{t}</h3><p>{d}</p><span class="go" aria-hidden="true">→</span></a>""" for n, t, d, *_ in L["services"])
+    <a class="svc-row" href="{u('services')}#s{n}"><span class="mono">{g}</span><h3>{t}</h3><p>{d}</p><span class="go" aria-hidden="true">→</span></a>""" for n, g, t, d, *_ in L["services"] if n in ("01", "02", "03", "06", "07", "08"))
     sectors = "".join(f"""
     <a class="sector" href="{u('solutions')}#k{i}"><span class="mono">0{i}</span><h3>{t}</h3><p>{d}</p><ul>{"".join(f"<li>{x}</li>" for x in li)}</ul></a>""" for i, (t, d, li, *_) in enumerate(L["sectors"][:3], 1))
     reef_words = "".join(f'<div><span class="mono">0{i}</span><b>{w}</b></div>' for i, w in enumerate(H["reef_words"], 1))
@@ -662,12 +705,18 @@ def build(lang, variant=""):
 
     # servizi
     SP = L["services_p"]
-    svc = "".join(f"""
+    # servizi divisi per gruppo: un'etichetta all'inizio di ogni gruppo
+    svc, last = "", None
+    for n, g, t, short, long, li in L["services"]:
+        if g != last:
+            svc += f'\n  <p class="svc-group mono">{g}</p>'
+            last = g
+        svc += f"""
   <article class="svc" id="s{n}">
     <span class="mono">{n}</span>
     <div><h2>{t}</h2><p class="tag">{short}</p><p class="lead">{long}</p></div>
     <div><ul>{"".join(f"<li>{x}</li>" for x in li)}</ul></div>
-  </article>""" for n, t, short, long, li in L["services"])
+  </article>"""
     out["services"] = page("services", SP["title"], SP["desc"], head_block(L["nav"]["services"], SP["h1"], SP["sub"]) + f"""
 <section class="wrap" style="padding-bottom:clamp(80px,10vw,150px)">{svc}
 </section>""")

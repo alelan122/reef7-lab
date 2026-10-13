@@ -67,23 +67,25 @@
   });
   if (form) form.addEventListener("input", (e) => e.target.closest(".field, .check")?.classList.remove("invalid"));
 
-  // prima/dopo: gli strumenti partono sparsi e, quando la sezione entra nello schermo, si collegano al centro
-  const eco = document.querySelector("[data-eco]");
-  if (eco) {
-    const buttons = eco.querySelectorAll(".eco-toggle button");
-    const set = (after) => {
-      eco.classList.toggle("is-after", after);
-      buttons.forEach((b) => b.setAttribute("aria-pressed", String((b.dataset.state === "after") === after)));
+  // un unico sistema: le schede mostrano un flusso alla volta e scorrono da sole finché non ne scegli una
+  const flow = document.querySelector("[data-flow]");
+  if (flow) {
+    const tabs = flow.querySelectorAll(".flow-tabs button");
+    const panels = flow.querySelectorAll(".flow-panel");
+    let current = 0, timer = null;
+    const show = (i) => {
+      current = i;
+      panels.forEach((p, j) => { p.hidden = j !== i; });
+      tabs.forEach((t, j) => t.setAttribute("aria-pressed", String(j === i)));
     };
-    buttons.forEach((b) => b.addEventListener("click", () => set(b.dataset.state === "after")));
+    tabs.forEach((t, i) => t.addEventListener("click", () => { clearInterval(timer); show(i); }));
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      set(false);
       const io = new IntersectionObserver(([e]) => {
-        if (!e.isIntersecting) return;
-        io.disconnect();
-        setTimeout(() => set(true), 700);
-      }, { threshold: 0.45 });
-      io.observe(eco.querySelector(".eco-stage"));
+        clearInterval(timer);
+        if (e.isIntersecting && !flow.dataset.picked) timer = setInterval(() => show((current + 1) % panels.length), 6000);
+      }, { threshold: 0.4 });
+      io.observe(flow);
+      tabs.forEach((t) => t.addEventListener("click", () => { flow.dataset.picked = "1"; }));
     }
   }
 
