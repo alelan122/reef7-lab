@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact · Reef 7 Lab</title>
-  <meta name="description" content="Contact Reef 7 Lab about a new project.">
+  <meta name="description" content="Tell us about your project: we'll reply within one business day with first ideas.">
   <meta name="theme-color" content="#04080f">
   <meta property="og:title" content="Contact · Reef 7 Lab">
-  <meta property="og:description" content="Contact Reef 7 Lab about a new project.">
+  <meta property="og:description" content="Tell us about your project: we'll reply within one business day with first ideas.">
   <meta property="og:image" content="../assets/reef7-logo.png">
   <link rel="alternate" hreflang="it" href="../contatti.html">
   <link rel="icon" href="../assets/favicon.png">
@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=0161cd24">
+  <link rel="stylesheet" href="../styles.css?v=4aa2882b">
 </head>
 <body>
 <header class="top solid"><div class="wrap top-in">
@@ -27,29 +27,49 @@
 <main>
 <section class="page-head"><div class="wrap">
   <p class="mono">Contact</p>
-  <h1>Tell us where you want to <em>go</em>.</h1><p class="sub">A few lines about your goals and obstacles are enough. In a first 30-minute conversation, with no commitment, we learn the context and tell you frankly whether, and how, we can help.</p>
+  <h1>Let's talk about your <em>next step</em>.</h1><p class="sub">Answer a few questions: in two minutes you give us the picture of your business, and we come to the first call prepared, with concrete ideas.</p>
 </div></section>
 <section class="block contact"><div class="wrap contact-grid">
   <aside class="contact-side">
-    <ul class="contact-info"><li><span class="mono">Email</span><a href="mailto:lancioni.ale@gmail.com">lancioni.ale@gmail.com</a></li><li><span class="mono">Response time</span><span>Within one business day</span></li><li><span class="mono">Based in</span><span>Italy · working remotely</span></li><li><span class="mono">Languages</span><span>English, Italiano</span></li></ul>
-    <p class="mono" style="margin:48px 0 18px">What happens next</p>
-    <ol class="next-steps"><li><span class="n">1</span><div><b>You write to us</b><p>Tell us about your goals, timeline and context. A few lines are plenty.</p></div></li><li><span class="n">2</span><div><b>We reply</b><p>Within one business day, with a few first questions and a proposed date.</p></div></li><li><span class="n">3</span><div><b>First consultation</b><p>30 minutes, free and with no commitment, to work out together whether and how we can help.</p></div></li></ol>
+    <p class="mono" style="margin-bottom:18px">How it works</p>
+    <ol class="next-steps"><li><span class="n">1</span><div><b>Fill in the form</b><p>Two minutes to tell us about your goals, current setup and timeline.</p></div></li><li><span class="n">2</span><div><b>We review your case</b><p>Within one business day we send you first ideas and a proposed date.</p></div></li><li><span class="n">3</span><div><b>Free strategy call</b><p>30 minutes to show you what could be built or automated in your business, and where to start.</p></div></li></ol>
+    <ul class="contact-info" style="margin-top:44px"><li><span class="mono">Email</span><a href="mailto:lancioni.ale@gmail.com">lancioni.ale@gmail.com</a></li><li><span class="mono">Reply</span><span>Within one business day</span></li><li><span class="mono">Based in</span><span>Italy · working remotely</span></li><li><span class="mono">Languages</span><span>English, Italiano</span></li></ul>
   </aside>
   <div class="form-card">
-    <h2>Let's talk about your project</h2>
-    <form class="form" id="contact-form" novalidate data-endpoint="https://formsubmit.co/ajax/lancioni.ale@gmail.com" data-subject="New enquiry from the website"
-      data-sending="Sending…" data-err="Something went wrong. Please try again or email us directly at" data-email="lancioni.ale@gmail.com">
-      <label class="field"><span>Full name *</span><input name="nome" required autocomplete="name"></label>
-      <label class="field"><span>Work email *</span><input name="email" type="email" required autocomplete="email"></label>
-      <label class="field"><span>Company</span><input name="azienda" autocomplete="organization"></label>
-      <label class="field"><span>What do you need</span><select name="servizio"><option>Website or landing page</option><option>Custom application</option><option>CRM and sales</option><option>Bookings and email marketing</option><option>Artificial intelligence</option><option>Company brain</option><option>Dashboards and financial control</option><option>Integrations and owned software</option><option>Not sure yet</option></select></label>
-      <label class="field full"><span>Tell us about the project *</span><textarea name="messaggio" required rows="5" placeholder="Goals, timeline and what you'd like to improve"></textarea></label>
+    <h2>Let's start with your project</h2>
+    <form class="form qform" id="contact-form" novalidate data-endpoint="https://formsubmit.co/ajax/lancioni.ale@gmail.com" data-subject="New enquiry from the website"
+      data-sending="Sending…" data-err="Something went wrong. Please try again or email us directly at" data-email="lancioni.ale@gmail.com" data-step-of="Step {a} of {b}">
+      <div class="q-progress"><span class="q-count">Step 1 of 3</span><span class="q-name">The project</span><i><b style="width:33%"></b></i></div>
+      <fieldset class="q-step" data-step="1" data-name="The project">
+        <div class="q-field full" data-group="need" data-required><p class="q-label">What do you need? <em class="req">· Required</em><small>You can pick more than one</small></p><div class="picks"><label class="pick"><input type="checkbox" name="need" value="Website or landing page"><span>Website or landing page</span></label><label class="pick"><input type="checkbox" name="need" value="Custom app or management system"><span>Custom app or management system</span></label><label class="pick"><input type="checkbox" name="need" value="CRM and sales"><span>CRM and sales</span></label><label class="pick"><input type="checkbox" name="need" value="Bookings and email marketing"><span>Bookings and email marketing</span></label><label class="pick"><input type="checkbox" name="need" value="AI automation"><span>AI automation</span></label><label class="pick"><input type="checkbox" name="need" value="Company brain"><span>Company brain</span></label><label class="pick"><input type="checkbox" name="need" value="Dashboards and financial control"><span>Dashboards and financial control</span></label><label class="pick"><input type="checkbox" name="need" value="Software integrations"><span>Software integrations</span></label><label class="pick"><input type="checkbox" name="need" value="Not sure yet"><span>Not sure yet</span></label></div></div>
+        <label class="field full"><span>What's your main goal? <em class="req">· Required</em></span><textarea name="goal" required rows="4" placeholder="E.g. we want to stop managing leads in spreadsheets and know every day how much each rep is selling"></textarea></label>
+      </fieldset>
+      <fieldset class="q-step" data-step="2" data-name="Your company" hidden>
+        <label class="field"><span>Company name <em class="req">· Required</em></span><input name="company" required autocomplete="organization"></label>
+        <label class="field"><span>Website</span><input name="site" placeholder="www.yourcompany.com" autocomplete="url"></label>
+        <label class="field full"><span>Industry</span><input name="sector" placeholder="E.g. e-commerce, professional services, education"></label>
+        <div class="q-field full" data-group="team"><p class="q-label">How many people work at the company?</p><div class="picks"><label class="pick"><input type="radio" name="team" value="1-5"><span>1-5</span></label><label class="pick"><input type="radio" name="team" value="6-20"><span>6-20</span></label><label class="pick"><input type="radio" name="team" value="21-50"><span>21-50</span></label><label class="pick"><input type="radio" name="team" value="50+"><span>50+</span></label></div></div>
+        <label class="field full"><span>Which tools do you use today?</span><input name="tools" placeholder="E.g. Shopify, spreadsheets, HubSpot, WhatsApp, Calendly"></label>
+      </fieldset>
+      <fieldset class="q-step" data-step="3" data-name="Timeline and contact" hidden>
+        <div class="q-field full" data-group="when" data-required><p class="q-label">When would you like to start? <em class="req">· Required</em></p><div class="picks"><label class="pick"><input type="radio" name="when" value="Right away"><span>Right away</span></label><label class="pick"><input type="radio" name="when" value="Within 1-3 months"><span>Within 1-3 months</span></label><label class="pick"><input type="radio" name="when" value="Within 6 months"><span>Within 6 months</span></label><label class="pick"><input type="radio" name="when" value="Just exploring"><span>Just exploring</span></label></div></div>
+        <div class="q-field full" data-group="budget"><p class="q-label">Indicative budget</p><div class="picks"><label class="pick"><input type="radio" name="budget" value="Up to €5,000"><span>Up to €5,000</span></label><label class="pick"><input type="radio" name="budget" value="€5,000 – €15,000"><span>€5,000 – €15,000</span></label><label class="pick"><input type="radio" name="budget" value="€15,000 – €50,000"><span>€15,000 – €50,000</span></label><label class="pick"><input type="radio" name="budget" value="Over €50,000"><span>Over €50,000</span></label><label class="pick"><input type="radio" name="budget" value="To be defined together"><span>To be defined together</span></label></div></div>
+        <label class="field"><span>Full name <em class="req">· Required</em></span><input name="nome" required autocomplete="name"></label>
+        <label class="field"><span>Role</span><input name="role" placeholder="E.g. owner, head of sales" autocomplete="organization-title"></label>
+        <label class="field"><span>Work email <em class="req">· Required</em></span><input name="email" type="email" required autocomplete="email"></label>
+        <label class="field"><span>Phone</span><input name="phone" type="tel" placeholder="Optional" autocomplete="tel"></label>
+        <label class="field full"><span>How did you hear about us?</span><select name="source"><option value=""></option><option>Word of mouth</option><option>Google</option><option>Social media</option><option>LinkedIn</option><option>Other</option></select></label>
+        <label class="check full"><input type="checkbox" name="privacy" required><span>I agree to the processing of my data so you can get back to me about this request.</span></label>
+      </fieldset>
       <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <label class="check full"><input type="checkbox" name="privacy" required><span>I agree to the processing of my data so you can get back to me about this request. *</span></label>
-      <div class="send full"><p>* Required fields</p><button class="btn" type="submit">Send request <span class="arr" aria-hidden="true">→</span></button></div>
+      <div class="q-nav full">
+        <button type="button" class="btn ghost q-back" hidden>Back</button>
+        <button type="button" class="btn q-next">Next <span class="arr" aria-hidden="true">→</span></button>
+        <button type="submit" class="btn q-send" hidden>Send request <span class="arr" aria-hidden="true">→</span></button>
+      </div>
       <p class="form-msg full" role="status" aria-live="polite"></p>
     </form>
-    <div class="form-ok" hidden><span class="tick" aria-hidden="true">✓</span><h3>Request sent.</h3><p>Thank you! We'll reply within one business day at the address you provided.</p></div>
+    <div class="form-ok" hidden><span class="tick" aria-hidden="true">✓</span><h3>Request received.</h3><p>Thank you! We'll review your situation and get back to you within one business day with first ideas and a proposed date for the call.</p></div>
   </div>
 </div></section>
 </main>
@@ -59,6 +79,6 @@
   <a class="r" href="mailto:lancioni.ale@gmail.com">lancioni.ale@gmail.com</a>
 </div></footer>
 <script>window.REEF = { email: "lancioni.ale@gmail.com" };</script>
-<script src="../site.js?v=0161cd24"></script>
+<script src="../site.js?v=4aa2882b"></script>
 </body>
 </html>

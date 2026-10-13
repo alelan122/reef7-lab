@@ -19,53 +19,85 @@
     }));
   });
 
-  // modulo contatti: invia la richiesta via FormSubmit (arriva nella casella email del Lab) e mostra la conferma
+  // modulo contatti in tre passi: controlla ogni passo, poi invia tutte le risposte via FormSubmit (arrivano nella casella del Lab)
   const form = document.getElementById("contact-form");
-  if (form) form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  if (form) {
     const d = form.dataset;
+    const steps = [...form.querySelectorAll(".q-step")];
+    const back = form.querySelector(".q-back"), next = form.querySelector(".q-next"), send = form.querySelector(".q-send");
     const msg = form.querySelector(".form-msg");
-    const btn = form.querySelector('button[type="submit"]');
-    msg.textContent = "";
+    let cur = 0;
 
-    // controllo dei campi obbligatori, con il campo sbagliato evidenziato
-    let firstBad = null;
-    form.querySelectorAll("[required]").forEach((el) => {
-      const bad = el.type === "checkbox" ? !el.checked : !el.value.trim() || (el.type === "email" && !el.validity.valid);
-      el.closest(".field, .check").classList.toggle("invalid", bad);
-      if (bad && !firstBad) firstBad = el;
-    });
-    if (firstBad) { firstBad.focus(); return; }
+    const show = (i) => {
+      cur = i;
+      steps.forEach((s, j) => { s.hidden = j !== i; });
+      back.hidden = i === 0;
+      next.hidden = i === steps.length - 1;
+      send.hidden = i !== steps.length - 1;
+      form.querySelector(".q-count").textContent = d.stepOf.replace("{a}", i + 1).replace("{b}", steps.length);
+      form.querySelector(".q-name").textContent = steps[i].dataset.name;
+      form.querySelector(".q-progress b").style.width = `${((i + 1) / steps.length) * 100}%`;
+      msg.textContent = "";
+    };
 
-    const f = new FormData(form);
-    if (f.get("_honey")) return; // compilato solo dai bot
-    const label = btn.innerHTML;
-    btn.disabled = true;
-    btn.textContent = d.sending;
-    try {
-      const res = await fetch(d.endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          _subject: `${d.subject}: ${f.get("servizio")} · ${f.get("nome")}`,
-          _replyto: f.get("email"),
-          _template: "table",
-          _captcha: "false",
-          Nome: f.get("nome"), Email: f.get("email"), Azienda: f.get("azienda") || "—",
-          Servizio: f.get("servizio"), Messaggio: f.get("messaggio"),
-        }),
+    // campi obbligatori del passo: testo, email, consenso e gruppi di scelta
+    const valid = (step) => {
+      let first = null;
+      step.querySelectorAll("input[required], textarea[required]").forEach((el) => {
+        const bad = el.type === "checkbox" ? !el.checked : !el.value.trim() || (el.type === "email" && !el.validity.valid);
+        el.closest(".field, .check").classList.toggle("invalid", bad);
+        if (bad && !first) first = el;
       });
-      const out = await res.json().catch(() => ({}));
-      if (!res.ok || out.success === false || out.success === "false") throw new Error(out.message || res.status);
-      form.hidden = true;
-      form.parentElement.querySelector(".form-ok").hidden = false;
-    } catch {
-      msg.innerHTML = `${d.err} <a href="mailto:${d.email}">${d.email}</a>.`;
-      btn.disabled = false;
-      btn.innerHTML = label;
-    }
-  });
-  if (form) form.addEventListener("input", (e) => e.target.closest(".field, .check")?.classList.remove("invalid"));
+      step.querySelectorAll(".q-field[data-required]").forEach((g) => {
+        const bad = !g.querySelector("input:checked");
+        g.classList.toggle("invalid", bad);
+        if (bad && !first) first = g.querySelector("input");
+      });
+      if (first) first.focus();
+      return !first;
+    };
+
+    next.addEventListener("click", () => { if (valid(steps[cur])) { show(cur + 1); form.scrollIntoView({ block: "nearest", behavior: "smooth" }); } });
+    back.addEventListener("click", () => show(cur - 1));
+    form.addEventListener("input", (e) => e.target.closest(".field, .check, .q-field")?.classList.remove("invalid"));
+    form.addEventListener("change", (e) => e.target.closest(".q-field")?.classList.remove("invalid"));
+    form.addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.tagName === "INPUT" && cur < steps.length - 1) { e.preventDefault(); next.click(); } });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!valid(steps[cur])) return;
+      const f = new FormData(form);
+      if (f.get("_honey")) return; // compilato solo dai bot
+      const all = (k) => f.getAll(k).join(", ") || "—";
+      const one = (k) => (f.get(k) || "").toString().trim() || "—";
+      const label = send.innerHTML;
+      send.disabled = true;
+      send.textContent = d.sending;
+      try {
+        const res = await fetch(d.endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            _subject: `${d.subject}: ${one("company")} · ${all("need")}`,
+            _replyto: one("email"), _template: "table", _captcha: "false",
+            "Di cosa ha bisogno": all("need"), "Obiettivo": one("goal"),
+            "Azienda": one("company"), "Sito": one("site"), "Settore": one("sector"), "Persone in azienda": one("team"), "Strumenti usati": one("tools"),
+            "Quando partire": one("when"), "Budget indicativo": one("budget"),
+            "Nome": one("nome"), "Ruolo": one("role"), "Email": one("email"), "Telefono": one("phone"), "Come ci ha conosciuto": one("source"),
+          }),
+        });
+        const out = await res.json().catch(() => ({}));
+        if (!res.ok || out.success === false || out.success === "false") throw new Error(out.message || res.status);
+        form.hidden = true;
+        form.parentElement.querySelector(".form-ok").hidden = false;
+        form.parentElement.querySelector("h2").hidden = true;
+      } catch {
+        msg.innerHTML = `${d.err} <a href="mailto:${d.email}">${d.email}</a>.`;
+        send.disabled = false;
+        send.innerHTML = label;
+      }
+    });
+  }
 
   // un unico sistema: le schede mostrano un flusso alla volta e scorrono da sole finché non ne scegli una
   const flow = document.querySelector("[data-flow]");

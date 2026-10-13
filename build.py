@@ -318,22 +318,31 @@ T = {
         "photo_alt": "Alessandro, fondatore di Reef 7 Lab",
     },
     "contact": {
-        "title": "Contact · Reef 7 Lab", "desc": "Contatta Reef 7 Lab per un nuovo progetto.",
-        "h1": "Raccontaci dove vuoi <em>arrivare</em>.",
-        "sub": "Bastano poche righe su obiettivi e ostacoli. Nella prima conversazione, 30 minuti senza impegno, capiamo il contesto e ti diciamo con franchezza se e come possiamo aiutarti.",
-        "info": [("Email", None), ("Tempi di risposta", "Entro un giorno lavorativo"), ("Dove", "Italia · lavoriamo anche da remoto"), ("Lingue", "Italiano, English")],
-        "next_k": "Cosa succede dopo",
-        "next": [("Ci scrivi", "Raccontaci obiettivi, tempi e contesto. Poche righe sono più che sufficienti."),
-                 ("Ti rispondiamo", "Entro un giorno lavorativo, con qualche prima domanda e una proposta di data."),
-                 ("Prima consulenza", "30 minuti, gratuita e senza impegno, per capire insieme se e come possiamo aiutarti.")],
-        "form_h": "Parliamo del tuo progetto",
-        "f": {"name": "Nome e cognome", "email": "Email di lavoro", "company": "Azienda", "want": "Di cosa hai bisogno",
-              "msg": "Raccontaci il progetto", "ph": "Obiettivi, tempi e cosa vorresti migliorare",
-              "opts": ["Sito web o landing page", "Applicazione su misura", "CRM e vendite", "Prenotazioni ed email marketing", "Intelligenza artificiale", "Company brain", "Dashboard e controllo di gestione", "Integrazioni e software di proprietà", "Non lo so ancora"],
+        "title": "Contact · Reef 7 Lab", "desc": "Raccontaci il tuo progetto: ti rispondiamo entro un giorno lavorativo con le prime idee.",
+        "h1": "Parliamo del tuo <em>prossimo passo</em>.",
+        "sub": "Rispondi a qualche domanda: in due minuti ci dai il quadro della tua azienda e noi arriviamo alla prima call già preparati, con idee concrete.",
+        "info": [("Email", None), ("Risposta", "Entro un giorno lavorativo"), ("Dove", "Italia · lavoriamo anche da remoto"), ("Lingue", "Italiano, English")],
+        "next_k": "Come funziona",
+        "next": [("Compili il modulo", "Due minuti per raccontarci obiettivi, situazione attuale e tempi."),
+                 ("Analizziamo il tuo caso", "Entro un giorno lavorativo ti scriviamo con le prime idee e una proposta di data."),
+                 ("Call strategica gratuita", "30 minuti per mostrarti cosa si può costruire o automatizzare nella tua azienda, e da dove conviene partire.")],
+        "form_h": "Iniziamo dal tuo progetto",
+        "steps": ["Il progetto", "La tua azienda", "Tempi e contatti"],
+        "f": {"need": "Di cosa hai bisogno?", "need_hint": "Puoi sceglierne più di uno",
+              "need_opts": ["Sito web o landing page", "App o gestionale su misura", "CRM e vendite", "Prenotazioni ed email marketing", "Automazioni con l'AI", "Company brain", "Dashboard e controllo di gestione", "Integrazioni tra software", "Non lo so ancora"],
+              "goal": "Qual è l'obiettivo principale?", "goal_ph": "Es. vogliamo smettere di gestire i contatti su Excel e sapere ogni giorno quanto vende ogni commerciale",
+              "company": "Nome dell'azienda", "site": "Sito web", "site_ph": "www.tuazienda.it",
+              "sector": "Settore", "sector_ph": "Es. e-commerce, studio professionale, formazione",
+              "team": "Quante persone lavorano in azienda?", "team_opts": ["1-5", "6-20", "21-50", "Oltre 50"],
+              "tools": "Quali strumenti usate oggi?", "tools_ph": "Es. Shopify, Excel, HubSpot, WhatsApp, Calendly",
+              "when": "Quando vorresti partire?", "when_opts": ["Subito", "Entro 1-3 mesi", "Entro 6 mesi", "Sto valutando"],
+              "budget": "Budget indicativo", "budget_opts": ["Fino a 5.000 €", "5.000 – 15.000 €", "15.000 – 50.000 €", "Oltre 50.000 €", "Da definire insieme"],
+              "name": "Nome e cognome", "role": "Ruolo", "role_ph": "Es. titolare, direttore commerciale", "email": "Email di lavoro", "phone": "Telefono", "phone_ph": "Facoltativo",
+              "source": "Come ci hai conosciuto?", "source_opts": ["Passaparola", "Google", "Social", "LinkedIn", "Altro"],
               "privacy": "Acconsento al trattamento dei miei dati per essere ricontattato in merito alla richiesta.",
-              "req": "Campi obbligatori", "send": "Invia la richiesta", "sending": "Invio in corso…",
-              "ok_h": "Richiesta inviata.", "ok_p": "Grazie! Ti risponderemo entro un giorno lavorativo all'indirizzo che ci hai indicato.",
-              "err": "Invio non riuscito. Riprova o scrivici direttamente a"},
+              "next": "Avanti", "back": "Indietro", "send": "Invia la richiesta", "sending": "Invio in corso…", "req": "Obbligatorio",
+              "ok_h": "Richiesta ricevuta.", "ok_p": "Grazie! Analizziamo la tua situazione e ti scriviamo entro un giorno lavorativo con le prime idee e una proposta di data per la call.",
+              "err": "Invio non riuscito. Riprova o scrivici direttamente a", "step_of": "Passo {a} di {b}"},
         "subject": "Nuova richiesta dal sito",
     },
 },
@@ -461,22 +470,31 @@ T = {
         "photo_alt": "Alessandro, founder of Reef 7 Lab",
     },
     "contact": {
-        "title": "Contact · Reef 7 Lab", "desc": "Contact Reef 7 Lab about a new project.",
-        "h1": "Tell us where you want to <em>go</em>.",
-        "sub": "A few lines about your goals and obstacles are enough. In a first 30-minute conversation, with no commitment, we learn the context and tell you frankly whether, and how, we can help.",
-        "info": [("Email", None), ("Response time", "Within one business day"), ("Based in", "Italy · working remotely"), ("Languages", "English, Italiano")],
-        "next_k": "What happens next",
-        "next": [("You write to us", "Tell us about your goals, timeline and context. A few lines are plenty."),
-                 ("We reply", "Within one business day, with a few first questions and a proposed date."),
-                 ("First consultation", "30 minutes, free and with no commitment, to work out together whether and how we can help.")],
-        "form_h": "Let's talk about your project",
-        "f": {"name": "Full name", "email": "Work email", "company": "Company", "want": "What do you need",
-              "msg": "Tell us about the project", "ph": "Goals, timeline and what you'd like to improve",
-              "opts": ["Website or landing page", "Custom application", "CRM and sales", "Bookings and email marketing", "Artificial intelligence", "Company brain", "Dashboards and financial control", "Integrations and owned software", "Not sure yet"],
+        "title": "Contact · Reef 7 Lab", "desc": "Tell us about your project: we'll reply within one business day with first ideas.",
+        "h1": "Let's talk about your <em>next step</em>.",
+        "sub": "Answer a few questions: in two minutes you give us the picture of your business, and we come to the first call prepared, with concrete ideas.",
+        "info": [("Email", None), ("Reply", "Within one business day"), ("Based in", "Italy · working remotely"), ("Languages", "English, Italiano")],
+        "next_k": "How it works",
+        "next": [("Fill in the form", "Two minutes to tell us about your goals, current setup and timeline."),
+                 ("We review your case", "Within one business day we send you first ideas and a proposed date."),
+                 ("Free strategy call", "30 minutes to show you what could be built or automated in your business, and where to start.")],
+        "form_h": "Let's start with your project",
+        "steps": ["The project", "Your company", "Timeline and contact"],
+        "f": {"need": "What do you need?", "need_hint": "You can pick more than one",
+              "need_opts": ["Website or landing page", "Custom app or management system", "CRM and sales", "Bookings and email marketing", "AI automation", "Company brain", "Dashboards and financial control", "Software integrations", "Not sure yet"],
+              "goal": "What's your main goal?", "goal_ph": "E.g. we want to stop managing leads in spreadsheets and know every day how much each rep is selling",
+              "company": "Company name", "site": "Website", "site_ph": "www.yourcompany.com",
+              "sector": "Industry", "sector_ph": "E.g. e-commerce, professional services, education",
+              "team": "How many people work at the company?", "team_opts": ["1-5", "6-20", "21-50", "50+"],
+              "tools": "Which tools do you use today?", "tools_ph": "E.g. Shopify, spreadsheets, HubSpot, WhatsApp, Calendly",
+              "when": "When would you like to start?", "when_opts": ["Right away", "Within 1-3 months", "Within 6 months", "Just exploring"],
+              "budget": "Indicative budget", "budget_opts": ["Up to €5,000", "€5,000 – €15,000", "€15,000 – €50,000", "Over €50,000", "To be defined together"],
+              "name": "Full name", "role": "Role", "role_ph": "E.g. owner, head of sales", "email": "Work email", "phone": "Phone", "phone_ph": "Optional",
+              "source": "How did you hear about us?", "source_opts": ["Word of mouth", "Google", "Social media", "LinkedIn", "Other"],
               "privacy": "I agree to the processing of my data so you can get back to me about this request.",
-              "req": "Required fields", "send": "Send request", "sending": "Sending…",
-              "ok_h": "Request sent.", "ok_p": "Thank you! We'll reply within one business day at the address you provided.",
-              "err": "Something went wrong. Please try again or email us directly at"},
+              "next": "Next", "back": "Back", "send": "Send request", "sending": "Sending…", "req": "Required",
+              "ok_h": "Request received.", "ok_p": "Thank you! We'll review your situation and get back to you within one business day with first ideas and a proposed date for the call.",
+              "err": "Something went wrong. Please try again or email us directly at", "step_of": "Step {a} of {b}"},
         "subject": "New enquiry from the website",
     },
 },
@@ -828,32 +846,55 @@ def build(lang, variant=""):
     <div class="sign"><b>{St['sign'][0]}</b><span>{St['sign'][1]}</span></div></div>
 </div></section>""", extra=libs + f'\n<script src="{pre}mission.js?v={VERSION}"></script>')
 
-    # contatti
+    # contatti: modulo in tre passi
     C = L["contact"]; F = C["f"]
-    opts = "".join(f"<option>{o}</option>" for o in F["opts"])
     info = "".join(f'<li><span class="mono">{k}</span>{f"<a href=\"mailto:{EMAIL}\">{EMAIL}</a>" if v is None else f"<span>{v}</span>"}</li>' for k, v in C["info"])
-    steps = "".join(f'<li><span class="n">{i}</span><div><b>{t}</b><p>{d}</p></div></li>' for i, (t, d) in enumerate(C["next"], 1))
+    steps_side = "".join(f'<li><span class="n">{i}</span><div><b>{t}</b><p>{d}</p></div></li>' for i, (t, d) in enumerate(C["next"], 1))
+    pills = lambda name, opts, kind="radio": "".join(f'<label class="pick"><input type="{kind}" name="{name}" value="{o}"><span>{o}</span></label>' for o in opts)
+    req = f'<em class="req">· {F["req"]}</em>'
+    st = C["steps"]
+    form = f"""<form class="form qform" id="contact-form" novalidate data-endpoint="https://formsubmit.co/ajax/{EMAIL}" data-subject="{C['subject']}"
+      data-sending="{F['sending']}" data-err="{F['err']}" data-email="{EMAIL}" data-step-of="{F['step_of']}">
+      <div class="q-progress"><span class="q-count">{F['step_of'].format(a=1, b=3)}</span><span class="q-name">{st[0]}</span><i><b style="width:33%"></b></i></div>
+      <fieldset class="q-step" data-step="1" data-name="{st[0]}">
+        <div class="q-field full" data-group="need" data-required><p class="q-label">{F['need']} {req}<small>{F['need_hint']}</small></p><div class="picks">{pills("need", F['need_opts'], "checkbox")}</div></div>
+        <label class="field full"><span>{F['goal']} {req}</span><textarea name="goal" required rows="4" placeholder="{F['goal_ph']}"></textarea></label>
+      </fieldset>
+      <fieldset class="q-step" data-step="2" data-name="{st[1]}" hidden>
+        <label class="field"><span>{F['company']} {req}</span><input name="company" required autocomplete="organization"></label>
+        <label class="field"><span>{F['site']}</span><input name="site" placeholder="{F['site_ph']}" autocomplete="url"></label>
+        <label class="field full"><span>{F['sector']}</span><input name="sector" placeholder="{F['sector_ph']}"></label>
+        <div class="q-field full" data-group="team"><p class="q-label">{F['team']}</p><div class="picks">{pills("team", F['team_opts'])}</div></div>
+        <label class="field full"><span>{F['tools']}</span><input name="tools" placeholder="{F['tools_ph']}"></label>
+      </fieldset>
+      <fieldset class="q-step" data-step="3" data-name="{st[2]}" hidden>
+        <div class="q-field full" data-group="when" data-required><p class="q-label">{F['when']} {req}</p><div class="picks">{pills("when", F['when_opts'])}</div></div>
+        <div class="q-field full" data-group="budget"><p class="q-label">{F['budget']}</p><div class="picks">{pills("budget", F['budget_opts'])}</div></div>
+        <label class="field"><span>{F['name']} {req}</span><input name="nome" required autocomplete="name"></label>
+        <label class="field"><span>{F['role']}</span><input name="role" placeholder="{F['role_ph']}" autocomplete="organization-title"></label>
+        <label class="field"><span>{F['email']} {req}</span><input name="email" type="email" required autocomplete="email"></label>
+        <label class="field"><span>{F['phone']}</span><input name="phone" type="tel" placeholder="{F['phone_ph']}" autocomplete="tel"></label>
+        <label class="field full"><span>{F['source']}</span><select name="source"><option value=""></option>{"".join(f"<option>{o}</option>" for o in F['source_opts'])}</select></label>
+        <label class="check full"><input type="checkbox" name="privacy" required><span>{F['privacy']}</span></label>
+      </fieldset>
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="q-nav full">
+        <button type="button" class="btn ghost q-back" hidden>{F['back']}</button>
+        <button type="button" class="btn q-next">{F['next']} {arrow}</button>
+        <button type="submit" class="btn q-send" hidden>{F['send']} {arrow}</button>
+      </div>
+      <p class="form-msg full" role="status" aria-live="polite"></p>
+    </form>"""
     out["contact"] = page("contact", C["title"], C["desc"], head_block(L["nav"]["contact"], C["h1"], C["sub"]) + f"""
 <section class="block contact"><div class="wrap contact-grid">
   <aside class="contact-side">
-    <ul class="contact-info">{info}</ul>
-    <p class="mono" style="margin:48px 0 18px">{C['next_k']}</p>
-    <ol class="next-steps">{steps}</ol>
+    <p class="mono" style="margin-bottom:18px">{C['next_k']}</p>
+    <ol class="next-steps">{steps_side}</ol>
+    <ul class="contact-info" style="margin-top:44px">{info}</ul>
   </aside>
   <div class="form-card">
     <h2>{C['form_h']}</h2>
-    <form class="form" id="contact-form" novalidate data-endpoint="https://formsubmit.co/ajax/{EMAIL}" data-subject="{C['subject']}"
-      data-sending="{F['sending']}" data-err="{F['err']}" data-email="{EMAIL}">
-      <label class="field"><span>{F['name']} *</span><input name="nome" required autocomplete="name"></label>
-      <label class="field"><span>{F['email']} *</span><input name="email" type="email" required autocomplete="email"></label>
-      <label class="field"><span>{F['company']}</span><input name="azienda" autocomplete="organization"></label>
-      <label class="field"><span>{F['want']}</span><select name="servizio">{opts}</select></label>
-      <label class="field full"><span>{F['msg']} *</span><textarea name="messaggio" required rows="5" placeholder="{F['ph']}"></textarea></label>
-      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <label class="check full"><input type="checkbox" name="privacy" required><span>{F['privacy']} *</span></label>
-      <div class="send full"><p>* {F['req']}</p><button class="btn" type="submit">{F['send']} {arrow}</button></div>
-      <p class="form-msg full" role="status" aria-live="polite"></p>
-    </form>
+    {form}
     <div class="form-ok" hidden><span class="tick" aria-hidden="true">✓</span><h3>{F['ok_h']}</h3><p>{F['ok_p']}</p></div>
   </div>
 </div></section>""")
