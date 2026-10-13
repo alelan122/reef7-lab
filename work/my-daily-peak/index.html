@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Daily Peak · Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/full-peak-reset.css">
+  <style>body { margin: 0; background: #F4F7FA; }</style>
+</head>
+<body>
+  <div class="fpr-wrap">
+    <div class="fpr" id="app" data-fpr data-unlock-hash="2971f4100b65fd92e26663dc037cb86fb3f27fd487396ee619f98c79488f37bd" data-product-url="https://fullpeak.store/products/full-peak-magnesium-complex" data-debug="false">
+      <div class="fpr-skeleton" aria-hidden="true"><div></div><div></div></div>
+    </div>
+
+    <div class="fpr" id="gate-login" hidden>
+      <section class="fpr-card fpr-gate">
+        <div class="fpr-logo fpr-logo-lg" aria-label="My Daily Peak">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 21 9 8.5l4.2 7 2.6-4.2L22.5 21z" fill="currentColor"/><circle cx="18.5" cy="5" r="2.2" fill="currentColor"/></svg>
+          <span>My Daily <strong>Peak</strong></span>
+        </div>
+        <h1 class="fpr-h2">Your personal plan is waiting</h1>
+        <p>Log in with the email you used for your order. Your plan, check-ins and progress stay private to you.</p>
+        <a class="fpr-btn" href="#">Log in to my plan</a>
+        <p class="fpr-small">New here? My Daily Peak comes free with every PeakMag order. <a href="#">See PeakMag</a></p>
+      </section>
+    </div>
+
+    <div class="fpr" id="gate-purchase" hidden>
+      <section class="fpr-card fpr-gate">
+        <div class="fpr-logo fpr-logo-lg" aria-label="My Daily Peak">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 21 9 8.5l4.2 7 2.6-4.2L22.5 21z" fill="currentColor"/><circle cx="18.5" cy="5" r="2.2" fill="currentColor"/></svg>
+          <span>My Daily <strong>Peak</strong></span>
+        </div>
+        <h1 class="fpr-h2">My Daily Peak comes with PeakMag</h1>
+        <p>Your plan unlocks with your first order. Already ordered? Make sure you're logged in with the same email you used at checkout.</p>
+        <a class="fpr-btn" href="#">Get PeakMag</a>
+        <p class="fpr-small"><a href="#">Log in with a different email</a></p>
+      </section>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var q = new URLSearchParams(location.search), app = document.getElementById('app');
+      var gate = q.get('gate');
+      if (gate) {
+        app.remove();
+        var g = document.getElementById('gate-' + gate);
+        if (g) g.hidden = false;
+        return;
+      }
+      if (q.get('customer')) {
+        app.setAttribute('data-customer-id', '7001');
+        app.setAttribute('data-customer-email', 'sam@example.com');
+        app.setAttribute('data-customer-name', 'Sam');
+        app.setAttribute('data-bottles-owned', '2');
+      }
+    })();
+  </script>
+  <script src="assets/full-peak-reset.js" defer></script>
+</body>
+</html>

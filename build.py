@@ -79,6 +79,78 @@ MT = {
 },
 }
 
+# ---------------- Lavori: progetti reali, senza dati privati ----------------
+# frame: "browser" (sito navigabile dentro il portfolio), "phone" (app navigabile), "scroll" (schermata da scorrere), "mock" (grafica senza dati)
+WORK = [
+    {"key": "tenka", "frame": "mock", "url": None, "src": None, "thumb": None},
+    {"key": "dailypeak", "frame": "phone", "url": "work/my-daily-peak/index.html", "src": "work/my-daily-peak/index.html", "thumb": "assets/work/thumb-dailypeak.jpg"},
+    {"key": "fullpeak", "frame": "scroll", "url": "https://fullpeak.store", "src": "assets/work/fullpeak-full.jpg", "thumb": "assets/work/thumb-fullpeak.jpg"},
+    {"key": "maisenzagioie", "frame": "browser", "url": "work/maisenzagioie/index.html", "src": "work/maisenzagioie/index.html", "thumb": "assets/work/thumb-maisenzagioie.jpg"},
+]
+WT = {
+"it": {
+    "title": "Lavori · Reef 7 Lab", "desc": "Progetti realizzati da Reef 7 Lab: applicazioni, siti e strumenti per aziende.",
+    "h1": "Progetti che lavorano <em>ogni giorno</em>.",
+    "sub": "Alcuni dei sistemi che abbiamo progettato e costruito. I siti qui sotto sono veri: puoi esplorarli e cliccarli direttamente in questa pagina.",
+    "labels": {"client": "Cliente", "type": "Tipo", "year": "Anno"},
+    "open": {"browser": "Apri il sito", "phone": "Apri la demo", "scroll": "Visita il sito"},
+    "hint": {"browser": "Sito navigabile: clicca e scorri", "phone": "Demo interattiva: prova l'app", "scroll": "Scorri per vedere la pagina", "mock": "Applicazione privata"},
+    "projects": {
+        "tenka": {"name": "Tenka OS", "client": "Tenka", "type": "Applicazione web su misura", "year": "2026",
+                  "lead": "Il sistema operativo di un business e-commerce, in un'unica piattaforma.",
+                  "text": "Vendite e spesa pubblicitaria si sincronizzano da sole, i margini di ogni offerta si calcolano in automatico e il team lavora su obiettivi condivisi, con tutte le procedure dell'azienda raccolte in una knowledge base interna.",
+                  "points": ["Dati di vendita e advertising sincronizzati in automatico", "Margini e redditività di ogni offerta", "Knowledge base interna con procedure e documenti", "Accesso protetto con verifica in due passaggi"],
+                  "note": "Applicazione privata: i dati restano riservati. Demo disponibile su richiesta."},
+        "dailypeak": {"name": "My Daily Peak", "client": "Full Peak", "type": "Web app per i clienti, integrata in Shopify", "year": "2026",
+                      "lead": "Un piano giornaliero personale che accompagna il cliente dopo l'acquisto.",
+                      "text": "Chi acquista sceglie un obiettivo, fa un check-in di pochi secondi al giorno e vede i propri progressi settimana dopo settimana. L'app è riservata ai clienti, vive dentro il negozio e ricorda il riordino al momento giusto.",
+                      "points": ["Piano costruito sull'obiettivo del cliente", "Accesso riservato a chi ha acquistato", "Progressi e traguardi settimanali", "Integrata nel tema Shopify, senza app esterne"],
+                      "note": "Demo con dati di prova."},
+        "fullpeak": {"name": "Full Peak", "client": "Full Peak", "type": "Negozio online Shopify", "year": "2026",
+                     "lead": "Il negozio online di un brand di integratori, pensato per convertire.",
+                     "text": "Una pagina prodotto che spiega il valore in pochi secondi, offerte chiare, recensioni dei clienti in primo piano e un'esperienza costruita per chi acquista dal telefono.",
+                     "points": ["Pagina prodotto orientata alla conversione", "Offerte e bundle", "Recensioni e prova sociale", "Esperienza ottimizzata per mobile"],
+                     "note": "Il negozio non può essere incorporato: scorri l'anteprima o visitalo dal pulsante."},
+        "maisenzagioie": {"name": "Maisenzagioie", "client": "Marica Viciglione", "type": "Sito su misura per un brand artigianale", "year": "2026",
+                          "lead": "Il sito di un brand di gioielli in macramè fatti a mano.",
+                          "text": "Catalogo per collezioni, un configuratore per creare la propria collana scegliendo fili e pietre e un pannello privato con cui la titolare aggiorna prodotti e prezzi in autonomia.",
+                          "points": ["Configuratore \"Crea la tua collana\"", "Catalogo per collezioni", "Pannello di gestione privato", "Design su misura e caricamento rapido"],
+                          "note": "Anteprima del sito."},
+    },
+    "home_h": "Lavori", "home_p": "Alcuni progetti recenti. Puoi esplorarli dal vivo nella pagina Lavori.", "home_a": "Tutti i lavori",
+},
+"en": {
+    "title": "Work · Reef 7 Lab", "desc": "Projects by Reef 7 Lab: applications, websites and tools for businesses.",
+    "h1": "Projects that work <em>every day</em>.",
+    "sub": "A few of the systems we've designed and built. The websites below are real: you can explore and click through them right on this page.",
+    "labels": {"client": "Client", "type": "Type", "year": "Year"},
+    "open": {"browser": "Open the website", "phone": "Open the demo", "scroll": "Visit the website"},
+    "hint": {"browser": "Live website: click and scroll", "phone": "Interactive demo: try the app", "scroll": "Scroll to see the page", "mock": "Private application"},
+    "projects": {
+        "tenka": {"name": "Tenka OS", "client": "Tenka", "type": "Custom web application", "year": "2026",
+                  "lead": "The operating system of an e-commerce business, in a single platform.",
+                  "text": "Sales and ad spend sync automatically, the margins of every offer are calculated on their own, and the team works towards shared goals, with all company procedures gathered in an internal knowledge base.",
+                  "points": ["Sales and advertising data synced automatically", "Margins and profitability for every offer", "Internal knowledge base with procedures and documents", "Secure access with two-step verification"],
+                  "note": "Private application: data stays confidential. Demo available on request."},
+        "dailypeak": {"name": "My Daily Peak", "client": "Full Peak", "type": "Customer web app, built into Shopify", "year": "2026",
+                      "lead": "A personal daily plan that stays with customers after they buy.",
+                      "text": "Customers pick a goal, check in for a few seconds a day and see their progress week after week. The app is reserved for customers, lives inside the store and reminds them to reorder at the right moment.",
+                      "points": ["A plan built around each customer's goal", "Access reserved for people who bought", "Weekly progress and milestones", "Built into the Shopify theme, no external apps"],
+                      "note": "Demo with sample data."},
+        "fullpeak": {"name": "Full Peak", "client": "Full Peak", "type": "Shopify online store", "year": "2026",
+                     "lead": "The online store of a supplement brand, built to convert.",
+                     "text": "A product page that explains the value in seconds, clear offers, customer reviews front and centre, and an experience designed for people who shop on their phone.",
+                     "points": ["Conversion-focused product page", "Offers and bundles", "Reviews and social proof", "Optimised for mobile"],
+                     "note": "The store can't be embedded: scroll the preview or visit it with the button."},
+        "maisenzagioie": {"name": "Maisenzagioie", "client": "Marica Viciglione", "type": "Custom website for an artisan brand", "year": "2026",
+                          "lead": "The website of a brand of handmade macramé jewellery.",
+                          "text": "A catalogue by collection, a configurator to design your own necklace by choosing threads and stones, and a private panel the owner uses to update products and prices on her own.",
+                          "points": ["\"Design your necklace\" configurator", "Catalogue by collection", "Private management panel", "Custom design and fast loading"],
+                          "note": "Website preview."},
+    },
+    "home_h": "Work", "home_p": "A few recent projects. You can explore them live on the Work page.", "home_a": "All work",
+},
+}
 
 
 def euro(v, lang):
@@ -100,14 +172,14 @@ def goal_state():
 
 VERSION = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["styles.css", "alt-overrides.css", "site.js", "mission.js"])).hexdigest()[:8]
 SLUG = {
-    "it": {"home": "index.html", "services": "servizi.html", "solutions": "soluzioni.html", "mission": "missione.html", "studio": "lab.html", "contact": "contatti.html"},
-    "en": {"home": "index.html", "services": "services.html", "solutions": "solutions.html", "mission": "mission.html", "studio": "lab.html", "contact": "contact.html"},
+    "it": {"home": "index.html", "work": "lavori.html", "services": "servizi.html", "solutions": "soluzioni.html", "mission": "missione.html", "studio": "lab.html", "contact": "contatti.html"},
+    "en": {"home": "index.html", "work": "work.html", "services": "services.html", "solutions": "solutions.html", "mission": "mission.html", "studio": "lab.html", "contact": "contact.html"},
 }
-NAV = ["services", "solutions", "mission", "studio"]
+NAV = ["work", "services", "solutions", "mission", "studio"]
 
 T = {
 "it": {
-    "nav": {"services": "Servizi", "solutions": "Soluzioni", "mission": "Missione", "studio": "Lab", "contact": "Contatti"},
+    "nav": {"work": "Lavori", "services": "Servizi", "solutions": "Soluzioni", "mission": "Missione", "studio": "Lab", "contact": "Contatti"},
     "menu": "Menu", "close": "Chiudi", "pages": "Pagine",
     "foot": "© 2026 Reef 7 Lab · Sviluppo software e intelligenza artificiale",
     "cta_k": "Nuovo progetto", "cta_h": "Costruiamo il tuo <em>reef</em>.",
@@ -222,7 +294,7 @@ T = {
     },
 },
 "en": {
-    "nav": {"services": "Services", "solutions": "Solutions", "mission": "Mission", "studio": "Lab", "contact": "Contact"},
+    "nav": {"work": "Work", "services": "Services", "solutions": "Solutions", "mission": "Mission", "studio": "Lab", "contact": "Contact"},
     "menu": "Menu", "close": "Close", "pages": "Pages",
     "foot": "© 2026 Reef 7 Lab · Software and AI development",
     "cta_k": "New project", "cta_h": "Let's build your <em>reef</em>.",
@@ -480,6 +552,58 @@ def build(lang, variant=""):
       <p class="goal-org"><span class="mono">{M['partner']}</span> <a href="{url}" target="_blank" rel="noopener">{org} ↗</a></p>
     </article>"""
 
+    # lavori: cornici navigabili (browser, telefono), schermata da scorrere o grafica senza dati
+    W = WT[lang]
+
+    def tenka_mock():
+        side = "".join(f"<i>{x}</i>" for x in (["Dashboard", "Numeri", "Offerte", "Tracker", "Knowledge"] if lang == "it" else ["Dashboard", "Numbers", "Offers", "Tracker", "Knowledge"]))
+        kpis = "".join(f'<div><span>{x}</span><b></b></div>' for x in (["Fatturato", "ROAS", "Margine"] if lang == "it" else ["Revenue", "ROAS", "Margin"]))
+        return f"""<div class="tk"><div class="tk-side"><span class="tk-logo"></span>{side}</div>
+        <div class="tk-main"><div class="tk-kpis">{kpis}</div>
+          <div class="tk-chart">{"".join(f'<b style="height:{h}%"></b>' for h in (34, 42, 38, 51, 47, 58, 63, 60, 71, 69, 78, 84))}</div>
+          <div class="tk-rows"><span></span><span></span><span></span></div></div></div>"""
+
+    def frame(w):
+        p = W["projects"][w["key"]]
+        kind = w["frame"]
+        bar = f'<div class="fr-bar"><i></i><i></i><i></i><span>{w["url"].replace("https://", "") if w["url"] and w["url"].startswith("http") else "reef7lab · " + p["name"]}</span></div>'
+        if kind == "browser":
+            return f'<div class="fr fr-browser">{bar}<iframe src="{pre}{w["src"]}" title="{p["name"]}" loading="lazy"></iframe></div>'
+        if kind == "phone":
+            return f'<div class="fr-phone-wrap"><div class="fr fr-phone"><span class="notch"></span><iframe src="{pre}{w["src"]}" title="{p["name"]}" loading="lazy"></iframe></div></div>'
+        if kind == "scroll":
+            return f'<div class="fr fr-browser">{bar}<div class="fr-scroll" tabindex="0" aria-label="{p["name"]}"><img src="{pre}{w["src"]}" alt="{p["name"]}" loading="lazy" width="1200"></div></div>'
+        return f'<div class="fr fr-browser fr-mock">{bar}{tenka_mock()}</div>'
+
+    def project(i, w):
+        p = W["projects"][w["key"]]
+        lb = W["labels"]
+        href = w["url"] if (w["url"] or "").startswith("http") else (pre + w["url"] if w["url"] else None)
+        link = f'<a class="link" href="{href}" target="_blank" rel="noopener">{W["open"][w["frame"]]} ↗</a>' if href else ""
+        return f"""<article class="project" id="{w['key']}">
+  <div class="project-info">
+    <span class="mono">{i:02d} · {W['hint'][w['frame']]}</span>
+    <h2>{p['name']}</h2>
+    <p class="project-lead">{p['lead']}</p>
+    <p>{p['text']}</p>
+    <ul class="project-points">{"".join(f"<li>{x}</li>" for x in p['points'])}</ul>
+    <dl class="project-meta"><div><dt>{lb['client']}</dt><dd>{p['client']}</dd></div><div><dt>{lb['type']}</dt><dd>{p['type']}</dd></div><div><dt>{lb['year']}</dt><dd>{p['year']}</dd></div></dl>
+    {link}
+    <p class="project-note">{p['note']}</p>
+  </div>
+  <div class="project-frame">{frame(w)}</div>
+</article>"""
+
+    def work_card(w):
+        p = W["projects"][w["key"]]
+        img = f'<img src="{pre}{w["thumb"]}" alt="" loading="lazy">' if w["thumb"] else tenka_mock()
+        return f'<a class="work-card2" href="{u("work")}#{w["key"]}"><div class="wc-img">{img}</div><div class="wc-meta"><h3>{p["name"]}</h3><p>{p["type"]}</p></div></a>'
+
+    work_cards = "".join(work_card(w) for w in WORK)
+    out["work"] = page("work", W["title"], W["desc"], head_block(L["nav"]["work"], W["h1"], W["sub"]) + f"""
+<section class="wrap projects">{"".join(project(i, w) for i, w in enumerate(WORK, 1))}
+</section>""")
+
     # home
     H = L["home"]
     rows = "".join(f"""
@@ -500,6 +624,11 @@ def build(lang, variant=""):
 </section>
 <section class="block"><div class="wrap">
   {eco(H, pre)}
+</div></section>
+<section class="block"><div class="wrap">
+  <div class="head"><h2>{W['home_h']}</h2><p>{W['home_p']}</p></div>
+  <div class="work-grid">{work_cards}</div>
+  <a class="link" href="{u('work')}">{W['home_a']} {arrow}</a>
 </div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{H['svc_h']}</h2><p>{H['svc_p']}</p></div>
@@ -641,7 +770,7 @@ def build(lang, variant=""):
 
 if __name__ == "__main__":
     # toglie le pagine delle versioni precedenti (prezzi e lavori)
-    for old in ["lavori.html", "prezzi.html", "studio.html", "en/work.html", "en/pricing.html", "en/studio.html"]:
+    for old in ["prezzi.html", "studio.html", "en/pricing.html", "en/studio.html"]:
         (ROOT / old).unlink(missing_ok=True)
         (ROOT / "alt" / old).unlink(missing_ok=True)
     for lang in T:

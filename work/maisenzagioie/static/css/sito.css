@@ -1,0 +1,3164 @@
+/* ==========================================================================
+   Maisenzagioie · foglio di stile
+
+   Scritto per il telefono prima di tutto (390 px di larghezza). Le regole per
+   gli schermi più grandi stanno in fondo, dentro i blocchi @media: si leggono
+   come "da questa larghezza in su, cambia così".
+
+   Indice
+     1. Font
+     2. Colori e misure (le "variabili")
+     3. Base
+     4. Pezzi riutilizzabili: contenitore, titoli, bottoni, filo
+     5. Le sezioni, nell'ordine della pagina
+     6. Animazioni
+     7. Schermi più grandi
+   ========================================================================== */
+
+
+/* 1. FONT ------------------------------------------------------------------
+   Sono file nella cartella static/font: nessun servizio esterno. */
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("../font/fraunces-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("../font/fraunces-latin-ext-wght-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../font/dm-sans-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../font/dm-sans-latin-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../font/dm-sans-latin-ext-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../font/dm-sans-latin-ext-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+
+/* 2. COLORI E MISURE -------------------------------------------------------
+   Per cambiare un colore in tutto il sito basta cambiarlo qui. */
+
+:root {
+  --vino: #5b111a;         /* il colore del brand */
+  --vino-scuro: #3a1016;
+  --mare: #1d6f78;
+  --oro: #d4a017;          /* solo per piccoli dettagli */
+  --sabbia: #dcc6a6;
+  --terracotta: #b85a3c;
+  --avorio: #f7f3ec;       /* lo sfondo principale */
+  --crema: #efe6d6;
+  --beige: #d9c9ae;        /* linee e bordi */
+  --terra: #3a2a24;        /* il testo */
+  --terra-chiara: #6b5648; /* il testo secondario */
+
+  --font-titoli: "Fraunces", "Iowan Old Style", Palatino, Georgia, serif;
+  --font-testo: "DM Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  /* Margine laterale: 20 px sul telefono, cresce con lo schermo fino a 72 px */
+  --margine: clamp(20px, 5vw, 72px);
+  --larghezza-massima: 1280px;
+}
+
+
+/* 3. BASE ---------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--avorio);
+  color: var(--terra);
+  font-family: var(--font-testo);
+  font-size: 16px; /* mai meno: sotto i 16 px l'iPhone zooma da solo sui campi */
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, p, ul, ol {
+  margin: 0;
+}
+
+ul, ol {
+  padding: 0;
+  list-style: none;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-titoli);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Il contorno del focus non si nasconde mai: serve a chi naviga da tastiera */
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--vino);
+  color: var(--avorio);
+}
+
+/* "Vai al contenuto": invisibile finché non ci si arriva col tasto Tab */
+.salta {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 100;
+  padding: 12px 16px;
+  background: var(--vino);
+  color: var(--avorio);
+}
+.salta:focus {
+  top: 16px;
+}
+
+main:focus {
+  outline: none;
+}
+
+.solo-grande {
+  display: none;
+}
+
+
+/* 4. PEZZI RIUTILIZZABILI ----------------------------------------------- */
+
+.contenitore {
+  width: 100%;
+  max-width: var(--larghezza-massima);
+  margin-inline: auto;
+  padding-inline: var(--margine);
+}
+
+.occhiello {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--terra-chiara);
+  margin-bottom: 12px;
+}
+
+/* Il titolo grande dell'hero */
+.titolone {
+  font-size: clamp(46px, 12vw, 118px);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: var(--vino);
+}
+
+/* I titoli delle sezioni */
+.titolo {
+  font-size: clamp(36px, 10vw, 64px);
+  line-height: 0.93;
+  text-transform: uppercase;
+}
+.titolo--grande {
+  font-size: clamp(40px, 12vw, 72px);
+  line-height: 0.92;
+}
+
+/* Bottoni: tre tipi soli. Alti almeno 48 px, per il pollice. */
+.bottoni {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 28px;
+}
+
+.bottone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 32px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: var(--vino);
+  color: var(--avorio);
+  font-family: var(--font-testo);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.bottone:hover {
+  background: var(--mare);
+}
+
+/* su sfondi scuri */
+.bottone--chiaro {
+  background: var(--avorio);
+  color: var(--vino);
+}
+.bottone--chiaro:hover {
+  background: var(--oro);
+  color: var(--terra);
+}
+
+/* solo bordo */
+.bottone--bordo {
+  background: transparent;
+  color: var(--vino);
+  border-color: currentColor;
+}
+.bottone--bordo:hover {
+  background: var(--vino);
+  color: var(--avorio);
+  border-color: var(--vino);
+}
+
+/* solo testo con freccia: nessun margine, si allinea al testo sopra */
+.bottone--testo {
+  min-height: 48px;
+  padding: 0;
+  background: transparent;
+  color: var(--vino);
+}
+.bottone--testo:hover {
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+/* Il filo (vedi filo.py). Si allarga col contenitore mantenendo le proporzioni,
+   così le perline, posizionate in percentuale, restano sulla curva. */
+.filo {
+  position: relative;
+  display: block;
+}
+.filo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.filo path {
+  fill: none;
+  stroke-linecap: round;
+}
+.perlina {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: inset 0 0 0 1.5px rgba(0, 0, 0, 0.14);
+}
+
+.sottolineatura {
+  width: 150px;
+  margin-top: 14px;
+  opacity: 0.8;
+}
+.sottolineatura--lunga {
+  width: 210px;
+}
+
+
+/* 5. LE SEZIONI ---------------------------------------------------------- */
+
+/* --- Barra in alto --- */
+.annuncio {
+  background: var(--vino);
+  color: var(--avorio);
+}
+.annuncio p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* --- Testata --- */
+.testata {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(247, 243, 236, 0.96);
+  border-bottom: 1px solid rgba(58, 42, 36, 0.08);
+  backdrop-filter: blur(6px);
+}
+.testata__riga {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.testata__lato {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.testata__lato--destra {
+  justify-content: flex-end;
+}
+.testata__logo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* abbastanza alto da toccare col pollice */
+  font-family: var(--font-titoli);
+  font-size: 19px;
+  letter-spacing: -0.01em;
+}
+.testata__voci {
+  display: none;
+  gap: 28px;
+}
+.testata__voci a,
+.testata__carrello {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.testata__voci a:hover {
+  color: var(--vino);
+}
+.testata__carrello {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 48px;
+  margin-right: -8px;
+  padding: 0 8px;
+}
+/* sul telefono la borsa con il numero; la scritta "Carrello" solo da computer */
+.testata__borsa {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+.testata__carrello-testo {
+  display: none;
+}
+.testata__carrello-numero {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+.testata__menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 48px;
+  height: 48px;
+  margin-left: -14px;
+  padding: 0 14px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.testata__menu span {
+  display: block;
+  height: 1px;
+  background: var(--terra);
+}
+.testata__menu span:last-child {
+  width: 60%;
+}
+
+/* --- Menu a tutto schermo --- */
+.menu {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--vino);
+  color: var(--avorio);
+}
+.menu[open] {
+  display: flex;
+  flex-direction: column;
+}
+.menu::backdrop {
+  background: var(--vino);
+}
+.menu__testa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.menu__logo {
+  font-family: var(--font-titoli);
+  font-size: 17px;
+}
+.menu__chiudi {
+  width: 48px;
+  height: 48px;
+  margin-right: -12px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-size: 22px;
+  cursor: pointer;
+}
+.menu__voci {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding-bottom: 64px;
+}
+.menu__voci a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 56px;
+  font-family: var(--font-titoli);
+  font-size: 30px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.menu__perlina {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--oro);
+}
+.menu__filo {
+  margin-top: 32px;
+  opacity: 0.5;
+}
+
+/* --- 1. Hero ---
+   Telefono: foto in alto che esce dal bordo destro, poi il testo. */
+.hero {
+  padding: 16px 0 48px;
+  overflow: hidden;
+}
+.hero__griglia {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.hero__foto {
+  overflow: hidden;
+  background: var(--crema);
+}
+.hero__foto img {
+  aspect-ratio: 4 / 3;
+  object-position: 50% 22%; /* tiene la collana e il sole, non la pelle sotto */
+}
+.hero__filo {
+  width: 170px;
+  margin: 22px 0 20px;
+}
+.hero__sotto {
+  max-width: 38ch;
+  margin-bottom: 26px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--terra-chiara);
+}
+
+/* --- 2. Catalogo --- */
+.catalogo {
+  padding: 40px 0 64px;
+}
+.catalogo__testa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 32px;
+}
+.catalogo__conto {
+  max-width: 30ch;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--terra-chiara);
+}
+
+/* Le schede delle categorie. Restano attaccate sotto la testata mentre si
+   scorre il catalogo: si cambia categoria senza dover tornare su.
+   Sul telefono tre colonne uguali, sempre su una riga. */
+.categorie {
+  position: sticky;
+  top: 64px; /* l'altezza della testata */
+  z-index: 30;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 24px calc(-1 * var(--margine)) 0;
+  padding: 10px var(--margine);
+  background: var(--avorio);
+}
+.filtro {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 8px;
+  white-space: nowrap;
+  border: 1px solid rgba(58, 42, 36, 0.2);
+  border-radius: 4px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: border-color 0.2s, color 0.2s;
+}
+.filtro:hover {
+  border-color: var(--vino);
+  color: var(--vino);
+}
+/* la scheda aperta, o la pagina in cui ci si trova */
+.filtro[aria-selected="true"],
+.filtro[aria-current="page"] {
+  background: var(--vino);
+  border-color: var(--vino);
+  color: var(--avorio);
+}
+.filtro[aria-selected="true"] .filtro__conto,
+.filtro[aria-current="page"] .filtro__conto {
+  color: rgba(247, 243, 236, 0.7);
+}
+/* il numero di pezzi accanto al nome della categoria */
+.filtro__conto {
+  margin-left: 8px;
+  font-size: 12px;
+  letter-spacing: 0;
+  color: var(--terra-chiara);
+}
+
+/* il contenuto di una scheda */
+.pannello {
+  scroll-margin-top: 136px; /* testata + schede: l'inizio non finisce sotto */
+}
+.pannello:focus-visible {
+  outline-offset: 8px;
+}
+.pannello__vuoto {
+  margin-top: 28px;
+  max-width: 40ch;
+  font-family: var(--font-titoli);
+  font-size: 19px;
+  font-style: italic;
+  line-height: 1.35;
+  color: var(--terra-chiara);
+}
+
+.griglia-prodotti {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px 16px;
+  margin-top: 20px;
+}
+.scheda {
+  display: block;
+}
+.scheda__foto {
+  position: relative;
+  overflow: hidden;
+  background: var(--crema);
+}
+.scheda__foto img {
+  transition: transform 0.5s ease-out;
+}
+.scheda__esaurito {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 6px 12px;
+  background: var(--avorio);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.scheda__riga {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+}
+.scheda__nome {
+  font-size: 17px;
+  letter-spacing: 0;
+  line-height: 1.15;
+}
+.scheda__prezzo {
+  flex-shrink: 0;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: var(--terra-chiara);
+}
+.scheda__colori {
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--terra-chiara);
+}
+
+/* --- 3. Manifesto --- */
+.manifesto {
+  padding: 72px 0;
+  background: var(--vino);
+  color: var(--avorio);
+  overflow: hidden;
+}
+.manifesto__griglia {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.manifesto__testo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 44ch;
+  margin-top: 36px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(247, 243, 236, 0.85);
+}
+.manifesto__forte {
+  font-size: 19px;
+  color: var(--avorio);
+}
+
+/* --- 4. Pezzi unici --- */
+.unici {
+  padding: 64px 0;
+  background: var(--sabbia);
+}
+.unici__intro {
+  max-width: 52ch;
+  margin-top: 24px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--terra-chiara);
+}
+/* la parete: tre colonne fitte sul telefono */
+.parete {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 36px;
+}
+/* i pezzi unici sono pochi: due per riga sul telefono, foto più grandi */
+.parete--quattro {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.parete li {
+  overflow: hidden;
+  background: var(--crema);
+}
+/* il nome si vede solo da tablet in su: sul telefono è troppo piccolo per servire */
+.parete__nome {
+  display: none;
+}
+.unici__chiusa a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.unici__chiusa {
+  max-width: 46ch;
+  margin-top: 36px;
+  font-family: var(--font-titoli);
+  font-size: 21px;
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--vino);
+}
+
+/* --- 5. Come nasce --- */
+.passaggi {
+  padding: 64px 0;
+  background: var(--crema);
+}
+.passaggi__testa .titolo {
+  color: var(--vino);
+}
+.passaggi__elenco {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 40px;
+}
+/* telefono: foto piccola a sinistra, testo a destra */
+.passaggio {
+  display: grid;
+  grid-template-columns: 38% minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
+}
+.passaggio__foto {
+  overflow: hidden;
+  background: var(--sabbia);
+}
+.passaggio__numero {
+  font-family: var(--font-titoli);
+  font-size: 15px;
+  color: var(--terracotta);
+}
+.passaggio__titolo {
+  margin-top: 4px;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+.passaggio__testo {
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--terra-chiara);
+}
+
+/* --- 6. Crea la tua --- */
+.crea {
+  padding: 64px 0;
+  background: var(--mare);
+  color: var(--avorio);
+  overflow: hidden;
+}
+.crea .occhiello {
+  color: rgba(247, 243, 236, 0.7);
+}
+.crea__griglia {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+.crea__testo {
+  max-width: 38ch;
+  margin-top: 24px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(247, 243, 236, 0.85);
+}
+.crea__nota {
+  margin: 12px 0 28px;
+  font-family: var(--font-titoli);
+  font-size: 19px;
+  font-style: italic;
+  color: var(--avorio);
+}
+.crea__foto {
+  position: relative;
+}
+.crea__coppia {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 12px;
+}
+.crea__coppia picture:last-child {
+  margin-top: 32px;
+}
+/* il filo passa sopra le due foto e le lega */
+.crea__filo {
+  position: absolute;
+  left: -12px;
+  right: -12px;
+  top: 44%;
+}
+
+/* --- 7. Chi c'è dietro --- */
+.storia {
+  padding: 64px 0;
+}
+.storia__griglia {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.storia__foto {
+  overflow: hidden;
+  background: var(--crema);
+}
+.storia__testo {
+  max-width: 38ch;
+  margin-top: 24px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+.storia__frase {
+  margin: 16px 0 28px;
+  font-family: var(--font-titoli);
+  font-size: 21px;
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--vino);
+}
+.storia__segnaposto {
+  margin: 16px 0 28px;
+  font-size: 17px;
+  color: var(--terra-chiara);
+}
+
+/* --- Pagina Marica --- */
+.marica-testa {
+  padding: 32px 0 64px;
+}
+.marica-testa__griglia,
+.marica-blocco__griglia {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.marica-testa__foto,
+.marica-blocco__foto {
+  overflow: hidden;
+  background: var(--crema);
+}
+.marica__attacco {
+  max-width: 34ch;
+  font-family: var(--font-titoli);
+  font-size: clamp(21px, 5vw, 26px);
+  font-style: italic;
+  line-height: 1.35;
+  color: var(--vino);
+}
+.marica-blocco {
+  padding: 64px 0;
+}
+.marica-blocco--crema {
+  background: var(--crema);
+}
+.marica-blocco__colonna {
+  max-width: 820px;
+}
+.marica__testo {
+  display: grid;
+  gap: 16px;
+  max-width: 60ch;
+  margin-top: 28px;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.impegni {
+  padding: 64px 0;
+  background: var(--vino);
+  color: var(--avorio);
+}
+.impegni .occhiello {
+  color: var(--sabbia);
+}
+.impegni__elenco {
+  display: grid;
+  gap: 40px;
+  margin-top: 40px;
+}
+.impegno {
+  padding-top: 24px;
+  border-top: 1px solid rgba(247, 243, 236, 0.25);
+}
+.impegno__numero {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--oro);
+  color: var(--terra);
+  font-size: 14px;
+  font-weight: 500;
+}
+.impegno__titolo {
+  margin: 18px 0 12px;
+  font-size: 26px;
+  line-height: 1.1;
+}
+.impegno p {
+  font-size: 16px;
+  line-height: 1.65;
+  opacity: 0.9;
+}
+
+.firma {
+  display: flex;
+  flex-direction: column;
+  margin: 32px 0 36px;
+  color: var(--vino);
+}
+.firma__saluto {
+  font-size: 15px;
+  color: var(--terra-chiara);
+}
+.firma__nome {
+  font-family: var(--font-titoli);
+  font-size: 34px;
+  font-style: italic;
+  line-height: 1.2;
+}
+
+/* --- 8. Newsletter --- */
+.newsletter {
+  padding: 64px 0;
+  background: var(--vino);
+  color: var(--avorio);
+}
+.newsletter__griglia {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.newsletter__testo {
+  max-width: 38ch;
+  margin-top: 20px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(247, 243, 236, 0.78);
+}
+.modulo .occhiello {
+  display: block;
+  color: rgba(247, 243, 236, 0.75);
+}
+.modulo__riga {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.modulo input {
+  min-height: 52px;
+  width: 100%;
+  padding: 0 16px;
+  border: 1px solid rgba(247, 243, 236, 0.3);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--avorio);
+  font: inherit;
+  font-size: 16px;
+}
+.modulo input::placeholder {
+  color: rgba(247, 243, 236, 0.4);
+}
+.modulo input:focus {
+  border-color: var(--oro);
+  outline: none;
+}
+.modulo input[aria-invalid="true"] {
+  border-color: var(--oro);
+}
+.modulo__esito {
+  margin-top: 12px;
+  font-size: 15px;
+  color: var(--oro);
+}
+.modulo__nota {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(247, 243, 236, 0.7);
+}
+.modulo__nota a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Pagine legali: Spedizioni, Resi e garanzia, Privacy ---
+   Una colonna stretta, testo grande: sono pagine da leggere. */
+.legale {
+  padding: 40px 0 72px;
+}
+.legale__colonna {
+  max-width: 780px;
+}
+.legale .titolo--grande {
+  color: var(--vino);
+}
+.legale h2 {
+  margin: 44px 0 12px;
+  font-size: 26px;
+  line-height: 1.15;
+}
+.legale h3 {
+  margin: 28px 0 10px;
+  font-size: 19px;
+  line-height: 1.2;
+}
+.legale p,
+.legale li,
+.legale td,
+.legale th {
+  font-size: 16px;
+  line-height: 1.7;
+}
+.legale p + p,
+.legale ul + p,
+.legale ol + p,
+.legale table + p {
+  margin-top: 16px;
+}
+.legale p + ul,
+.legale p + ol {
+  margin-top: 10px;
+}
+.legale ul,
+.legale ol {
+  display: grid;
+  gap: 8px;
+  padding-left: 22px;
+}
+.legale ul {
+  list-style: disc;
+}
+.legale ol {
+  list-style: decimal;
+}
+.legale a {
+  color: var(--vino);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* il riassunto in cima: le tre cose da sapere */
+.legale__breve {
+  margin-top: 28px;
+  padding: 20px 20px 20px 40px !important;
+  border-left: 3px solid var(--vino);
+  background: var(--crema);
+}
+.legale__aggiornata {
+  margin-top: 12px;
+  font-size: 14px !important;
+  color: var(--terra-chiara);
+}
+.legale__tabella {
+  width: 100%;
+  margin: 8px 0 16px;
+  border-collapse: collapse;
+}
+.legale__tabella th,
+.legale__tabella td {
+  padding: 10px 12px 10px 0;
+  border-bottom: 1px solid var(--beige);
+  text-align: left;
+  vertical-align: top;
+}
+.legale__tabella th {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--terra-chiara);
+}
+.legale__modulo {
+  padding: 20px;
+  border: 1px dashed rgba(58, 42, 36, 0.35);
+  border-radius: 6px;
+  background: var(--avorio);
+}
+.legale__nota {
+  font-size: 14px !important;
+  color: var(--terra-chiara);
+}
+.legale__domande {
+  margin-top: 56px !important;
+  padding-top: 24px;
+  border-top: 1px solid var(--beige);
+}
+/* un dato che manca: giallo, impossibile da non vedere prima di pubblicare */
+.da-compilare {
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: #ffe066;
+  color: var(--terra);
+  font-weight: 500;
+}
+
+/* --- Piè di pagina --- */
+.piede {
+  padding: 64px 0;
+  background: var(--vino-scuro);
+  color: var(--avorio);
+}
+.piede__filo {
+  margin-bottom: 48px;
+  opacity: 0.7;
+}
+.piede__marchio {
+  font-family: var(--font-titoli);
+  font-size: clamp(38px, 12.5vw, 120px); /* sta dentro i margini anche a 375 px */
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+}
+.piede__marchio span {
+  color: var(--oro);
+}
+.piede__voci {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+  margin-top: 48px;
+}
+.piede__voci a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+  color: rgba(247, 243, 236, 0.75);
+}
+.piede__voci a:hover {
+  color: var(--oro);
+}
+.piede__fondo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(247, 243, 236, 0.15);
+  font-size: 12px;
+  color: rgba(247, 243, 236, 0.55);
+}
+
+/* in homepage si vede un'anteprima a righe piene: 6 pezzi su telefono e
+   tablet (2 o 3 per riga), 8 da computer (4 per riga). Gli altri sono nella
+   pagina della categoria, a cui porta il pulsante sotto. */
+@media (max-width: 1023px) {
+  .griglia-prodotti--anteprima > :nth-child(n + 7) {
+    display: none;
+  }
+}
+@media (min-width: 1024px) {
+  .griglia-prodotti--anteprima > :nth-child(n + 9) {
+    display: none;
+  }
+}
+.pannello__tutti {
+  margin-top: 36px;
+  padding: 0 28px;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+}
+.pannello__tutti:hover {
+  background: var(--vino);
+  color: var(--avorio);
+  text-decoration: none;
+}
+@media (max-width: 639px) {
+  .pannello__tutti {
+    width: 100%;
+    justify-content: center;
+  }
+}
+/* su tablet la foto verticale a tutta larghezza diventava altissima */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .storia__foto img,
+  .marica-testa__foto img,
+  .marica-blocco__foto img {
+    aspect-ratio: 3 / 2 !important;
+  }
+}
+
+/* --- Pagine Collane, Bracciali, Orecchini --- */
+.pagina-categoria {
+  padding: 24px 0 64px;
+}
+.indietro {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: var(--terra-chiara);
+}
+.indietro:hover {
+  color: var(--vino);
+}
+.pagina-categoria .titolo {
+  color: var(--vino);
+}
+.pagina-categoria__testo {
+  max-width: 44ch;
+  margin: 20px 0 10px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* --- Rimando finale: "non è quello che cercavi?" --- */
+.rimando {
+  padding: 56px 0;
+  background: var(--vino);
+  color: var(--avorio);
+}
+.rimando__riga {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+.rimando .titolo {
+  font-size: clamp(30px, 8vw, 48px);
+}
+.rimando__testo {
+  max-width: 40ch;
+  margin-top: 12px;
+  font-size: 17px;
+  color: rgba(247, 243, 236, 0.8);
+}
+
+/* --- Pagina Crea la tua --- */
+.crea-pagina {
+  padding: 16px 0 56px;
+  overflow: hidden;
+}
+.crea-pagina__griglia {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.crea-pagina__foto {
+  margin-right: calc(-1 * var(--margine));
+  overflow: hidden;
+  background: var(--crema);
+}
+.crea-pagina .titolo {
+  color: var(--vino);
+}
+.crea-pagina__testo {
+  max-width: 40ch;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--terra-chiara);
+}
+
+/* i sei passaggi: numerati perché sono davvero una sequenza */
+.come-funziona {
+  padding: 56px 0 64px;
+  background: var(--crema);
+}
+.come-funziona__passi {
+  display: flex;
+  flex-direction: column;
+  margin-top: 28px;
+  border-top: 1px solid var(--beige);
+}
+.come-funziona__passi li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 8px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--beige);
+}
+.come-funziona__numero {
+  font-family: var(--font-titoli);
+  font-size: 22px;
+  line-height: 1.1;
+  color: var(--terracotta);
+}
+.come-funziona__titolo {
+  font-size: 18px;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+.come-funziona__testo {
+  margin-top: 4px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--terra-chiara);
+}
+
+/* --- Pagina "in arrivo" --- */
+.in-arrivo {
+  padding: 72px 0 96px;
+}
+.in-arrivo__filo {
+  width: 170px;
+  margin-bottom: 32px;
+}
+.in-arrivo .titolo {
+  max-width: 14ch;
+  color: var(--vino);
+}
+.in-arrivo__testo {
+  max-width: 38ch;
+  margin: 20px 0 28px;
+  font-size: 17px;
+  color: var(--terra-chiara);
+}
+
+
+
+/* --- Pagina prodotto: Crea la tua ----------------------------------------
+   Sul telefono una colonna sola: galleria, poi la scheda con le scelte.
+   Da computer galleria a sinistra, scheda a destra. */
+.prodotto {
+  padding: 0 0 48px;
+}
+.prodotto__griglia {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* galleria: le foto scorrono col dito, una alla volta */
+.galleria {
+  margin-inline: calc(-1 * var(--margine));
+}
+.galleria__foto {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  background: var(--crema);
+}
+.galleria__foto::-webkit-scrollbar {
+  display: none;
+}
+.galleria__vista {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+.galleria__miniature {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 10px var(--margine) 0;
+  scrollbar-width: none;
+}
+.galleria__miniatura {
+  flex: 0 0 60px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  overflow: hidden;
+  opacity: 0.65;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.galleria__miniatura[aria-current="true"] {
+  border-color: var(--vino);
+  opacity: 1;
+}
+
+.scheda-prodotto__titolo {
+  font-size: clamp(34px, 9vw, 52px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: var(--vino);
+}
+.scheda-prodotto__prezzo {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin-top: 14px;
+  font-size: 26px;
+  font-variant-numeric: tabular-nums;
+}
+.scheda-prodotto__da {
+  font-size: 14px;
+  color: var(--terra-chiara);
+}
+
+/* i vantaggi, con una perlina al posto del punto elenco */
+.vantaggi {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 20px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+.vantaggi li {
+  position: relative;
+  padding-left: 20px;
+}
+.vantaggi li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.5em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--oro);
+}
+
+/* ogni gruppo di scelte */
+.scelta {
+  margin: 28px 0 0;
+  padding: 0;
+  border: 0;
+}
+.scelta__titolo {
+  margin-bottom: 12px;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terra-chiara);
+}
+.scelta__titolo span {
+  margin-left: 6px;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  color: var(--terra);
+}
+
+/* I pallini radio restano nel codice (servono alla tastiera e agli screen
+   reader) ma non si vedono: si vede il riquadro che li contiene. */
+.campione input,
+.opzione input,
+.set__voce input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* campioni di colore del filo */
+.campioni {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+}
+.campione {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.campione__colore {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+  transition: outline-color 0.2s;
+}
+.campione:has(input:checked) .campione__colore {
+  outline-color: var(--terra);
+}
+.campione:has(input:focus-visible) .campione__colore {
+  outline-color: var(--mare);
+}
+.campione__nome {
+  font-size: 11px;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--terra-chiara);
+}
+
+/* pietre e lunghezze: riquadri da toccare */
+.opzioni {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.opzioni--tre {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.opzione {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 52px;
+  padding: 8px 14px;
+  border: 1px solid rgba(58, 42, 36, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.opzione--colonna {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+}
+.opzione--colonna .opzione__prezzo {
+  white-space: normal;
+  line-height: 1.3;
+}
+.opzioni--tre .opzione {
+  padding: 8px 10px;
+}
+.opzione__nome {
+  font-size: 15px;
+}
+.opzione__prezzo {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-size: 12px;
+  color: var(--terra-chiara);
+}
+.opzione:has(input:checked) {
+  border-color: var(--vino);
+  background: rgba(91, 17, 26, 0.05);
+  box-shadow: inset 0 0 0 1px var(--vino);
+}
+.opzione:has(input:focus-visible) {
+  outline: 2px solid var(--mare);
+  outline-offset: 2px;
+}
+
+/* le tendine di filo e centro: chiuse mostrano solo la scelta fatta */
+.tendina {
+  border: 1px solid rgba(58, 42, 36, 0.2);
+  border-radius: 6px;
+  background: var(--avorio);
+}
+.tendina[open] {
+  border-color: var(--vino);
+}
+.tendina__scelta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 8px 14px;
+  list-style: none;
+  cursor: pointer;
+}
+.tendina__scelta::-webkit-details-marker {
+  display: none;
+}
+.tendina__pallino,
+.opzione__pallino {
+  flex: none;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+.tendina__pallino {
+  width: 32px;
+  height: 32px;
+}
+.tendina__nome {
+  font-size: 16px;
+}
+.tendina__dettaglio {
+  font-size: 13px;
+  color: var(--terra-chiara);
+}
+.tendina__cambia {
+  margin-left: auto;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vino);
+}
+.tendina__cambia::after {
+  content: " ▾";
+}
+.tendina[open] .tendina__cambia::after {
+  content: " ▴";
+}
+.tendina__se-aperta,
+.tendina[open] .tendina__se-chiusa {
+  display: none;
+}
+.tendina[open] .tendina__se-aperta {
+  display: inline;
+}
+/* "Fatto": chiude la tendina, largo per il pollice */
+.tendina__fatto {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 18px;
+  border: 1px solid var(--vino);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--vino);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.tendina__fatto:hover {
+  background: var(--vino);
+  color: var(--avorio);
+}
+.tendina__corpo {
+  padding: 4px 14px 16px;
+  border-top: 1px solid var(--beige);
+}
+.tendina__gruppo {
+  margin: 16px 0 8px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--terra-chiara);
+}
+.tendina__gruppo span {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+.campioni--tanti {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px 8px;
+  margin-top: 16px;
+}
+.opzione--pallino {
+  justify-content: flex-start;
+}
+.opzione--pallino .opzione__prezzo {
+  margin-left: auto;
+}
+.opzione__pallino {
+  width: 18px;
+  height: 18px;
+}
+/* il metallo compare solo se al centro c'è un ciondolo */
+.finiture {
+  display: none;
+}
+.scelta--centro:has(input[data-ciondolo]:checked) .finiture {
+  display: block;
+}
+
+/* le offerte */
+.set {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.set__voce {
+  position: relative;
+  display: block;
+  padding: 16px;
+  border: 1px solid rgba(58, 42, 36, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.set__voce:has(input:checked) {
+  border-color: var(--vino);
+  background: rgba(91, 17, 26, 0.05);
+  box-shadow: inset 0 0 0 1px var(--vino);
+}
+.set__voce:has(input:focus-visible) {
+  outline: 2px solid var(--mare);
+  outline-offset: 2px;
+}
+.set__corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.set__riga {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.set__nome {
+  font-family: var(--font-titoli);
+  font-size: 19px;
+}
+.set__prezzo {
+  flex-shrink: 0;
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+}
+.set__cosa {
+  font-size: 14px;
+  color: var(--terra-chiara);
+}
+.set__risparmio {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--mare);
+  color: var(--avorio);
+  font-size: 12px;
+  font-weight: 500;
+}
+/* l'etichetta sta sul bordo in alto a destra */
+.set__etichetta {
+  position: absolute;
+  top: -10px;
+  right: 14px;
+  padding: 2px 10px;
+  border-radius: 4px;
+  background: var(--oro);
+  color: var(--terra);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* bottone a tutta larghezza */
+.bottone--pieno {
+  width: 100%;
+  margin-top: 24px;
+}
+.garanzie {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 18px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--terra-chiara);
+}
+.garanzie li::before {
+  content: "✓ ";
+  color: var(--mare);
+}
+.scheda-prodotto__nota {
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--terra-chiara);
+}
+
+/* cosa ricevi e dettagli */
+.ricevi {
+  padding: 56px 0;
+}
+.ricevi__griglia {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.ricevi__foto {
+  overflow: hidden;
+  background: var(--crema);
+}
+.ricevi__elenco {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 20px;
+  font-size: 16px;
+}
+.ricevi__elenco li::before {
+  content: "✓ ";
+  color: var(--mare);
+}
+.dettagli {
+  margin: 28px 0 0;
+  border-top: 1px solid var(--beige);
+}
+.dettagli div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--beige);
+  font-size: 15px;
+}
+.dettagli dt {
+  color: var(--terra-chiara);
+}
+.dettagli dd {
+  margin: 0;
+  text-align: right;
+}
+
+/* domande: <details> si apre e chiude da solo */
+.domande {
+  padding: 56px 0 72px;
+  background: var(--crema);
+}
+.domande__elenco {
+  margin-top: 24px;
+  border-top: 1px solid var(--beige);
+}
+.domanda {
+  border-bottom: 1px solid var(--beige);
+}
+.domanda summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+}
+.domanda summary::-webkit-details-marker {
+  display: none;
+}
+.domanda summary::after {
+  content: "+";
+  flex-shrink: 0;
+  font-size: 22px;
+  color: var(--vino);
+  transition: transform 0.2s;
+}
+.domanda[open] summary::after {
+  transform: rotate(45deg);
+}
+.domanda p {
+  max-width: 60ch;
+  padding-bottom: 18px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--terra-chiara);
+}
+
+/* barra fissa in basso sul telefono: compare quando il bottone principale
+   esce dallo schermo, così si compra senza tornare su */
+.barra-acquisto {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 35;
+  padding: 10px 0 calc(10px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--beige);
+  background: var(--avorio);
+}
+.barra-acquisto__riga {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.barra-acquisto__totale {
+  flex-shrink: 0;
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+}
+.barra-acquisto .bottone--pieno {
+  margin-top: 0;
+}
+
+/* --- L'offerta: prezzo, scarsità, pila di valore -------------------------
+   Vedi dati/configuratore.py per i numeri e le regole di legge. */
+
+.scheda-prodotto__promessa {
+  max-width: 34ch;
+  margin-top: 12px;
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--terra-chiara);
+}
+
+/* il prezzo: grande quello di oggi, sotto quanto costerebbe pezzo per pezzo */
+.prezzo-offerta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin-top: 16px;
+  font-variant-numeric: tabular-nums;
+}
+.prezzo-offerta__oggi {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--vino);
+}
+/* il prezzo dei pezzi presi uno per uno, barrato accanto al prezzo */
+.prezzo-offerta__separati {
+  font-size: 18px;
+  color: var(--terra-chiara);
+  text-decoration-thickness: 1px;
+}
+.prezzo-offerta__risparmio {
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--mare);
+  color: var(--avorio);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* quante collane annoda Marica: un punto che pulsa piano, come "in diretta" */
+.scarsita {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--terra);
+}
+.scarsita__punto {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  box-shadow: 0 0 0 0 rgba(184, 90, 60, 0.5);
+}
+.js .scarsita__punto {
+  animation: pulsa 2s ease-out infinite;
+}
+@keyframes pulsa {
+  to {
+    box-shadow: 0 0 0 8px rgba(184, 90, 60, 0);
+  }
+}
+
+/* il numero del passaggio accanto al titolo di ogni scelta */
+.scelta__titolo .scelta__passo {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin: 0 6px 0 0;
+  border-radius: 50%;
+  background: var(--vino);
+  color: var(--avorio);
+  font-size: 11px;
+  letter-spacing: 0;
+}
+.scelta__nota {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--terra-chiara);
+}
+
+/* prezzi nei set: barrato quanto costerebbe separato, poi il prezzo del set */
+.set__prezzi {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.set__separati {
+  font-size: 13px;
+  color: var(--terra-chiara);
+  font-variant-numeric: tabular-nums;
+}
+/* cosa c'è nell'offerta: una riga per voce, con la spunta */
+.set__include {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.set__include span {
+  position: relative;
+  padding-left: 20px;
+}
+.set__include span::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--mare);
+  font-weight: 600;
+}
+
+/* guida alle lunghezze */
+.guida-misure {
+  margin-top: 12px;
+  font-size: 14px;
+}
+.guida-misure summary {
+  display: inline-block;
+  padding: 10px 0; /* più facile da toccare */
+  color: var(--vino);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  list-style: none;
+}
+.guida-misure summary::-webkit-details-marker {
+  display: none;
+}
+.guida-misure__corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 6px;
+  background: var(--crema);
+  line-height: 1.5;
+  color: var(--terra-chiara);
+}
+.guida-misure__disegno {
+  width: 100%;
+  max-width: 260px;
+  margin-inline: auto;
+}
+.guida-misure__corpo-linea {
+  fill: none;
+  stroke: var(--terra-chiara);
+  stroke-width: 1.5;
+}
+.guida-misure__collana {
+  fill: none;
+  stroke: var(--vino);
+  stroke-width: 2;
+}
+.guida-misure__disegno text {
+  font-size: 11px;
+  fill: var(--terra);
+}
+
+/* regalo: il messaggio compare solo spuntando la casella */
+.regalo {
+  margin-top: 24px;
+  padding: 14px 16px;
+  border: 1px dashed rgba(58, 42, 36, 0.35);
+  border-radius: 8px;
+}
+.regalo__scelta {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+}
+.regalo__scelta input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  accent-color: var(--vino);
+}
+.regalo__icona {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--vino);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+.regalo__testo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.regalo__titolo {
+  font-family: var(--font-titoli);
+  font-size: 18px;
+}
+.regalo__spiega {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--terra-chiara);
+}
+.regalo:has(input:checked) {
+  border-style: solid;
+  border-color: var(--vino);
+}
+.regalo__messaggio {
+  display: none;
+  margin-top: 12px;
+}
+.regalo:has(input:checked) .regalo__messaggio {
+  display: block;
+}
+.regalo__messaggio label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--terra-chiara);
+}
+.regalo__messaggio textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(58, 42, 36, 0.25);
+  border-radius: 4px;
+  background: var(--avorio);
+  color: var(--terra);
+  font: inherit;
+  font-size: 16px; /* 16 px: sotto questa misura l'iPhone ingrandisce la pagina */
+  resize: vertical;
+}
+
+/* la pila: cosa c'è nel set scelto, riga per riga */
+.pila {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--crema);
+}
+.pila__titolo {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terra-chiara);
+}
+.pila__elenco li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--beige);
+  font-size: 14px;
+}
+.pila__elenco li:last-child {
+  border-bottom: 0;
+}
+.pila__elenco li span:last-child {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.pila__regalo span:last-child {
+  color: var(--mare);
+  font-weight: 500;
+}
+
+/* quando arriva */
+.consegna {
+  margin-top: 12px;
+  font-size: 14px;
+  text-align: center;
+  color: var(--terra-chiara);
+}
+.consegna strong {
+  font-weight: 500;
+  color: var(--terra);
+}
+
+/* tre promesse con icona, in fila */
+.promesse {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--terra-chiara);
+}
+.promesse li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.promesse svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: var(--vino);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* descrizione, cura, spedizione: stesse righe apribili delle domande */
+.schede-info {
+  margin-top: 24px;
+  border-top: 1px solid var(--beige);
+}
+
+/* confronto con la bigiotteria di serie */
+.confronto {
+  padding: 56px 0;
+  background: var(--crema);
+}
+.confronto__tabella {
+  width: 100%;
+  margin-top: 24px;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.confronto__tabella th,
+.confronto__tabella td {
+  padding: 14px 8px;
+  border-bottom: 1px solid var(--beige);
+  text-align: center;
+}
+.confronto__tabella tbody th {
+  padding-left: 0;
+  font-weight: 400;
+  text-align: left;
+}
+.confronto__tabella thead th {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terra-chiara);
+}
+.confronto__tabella thead .confronto__noi {
+  color: var(--vino);
+}
+.confronto__noi {
+  width: 28%;
+  background: rgba(91, 17, 26, 0.05);
+}
+.confronto__si {
+  font-size: 18px;
+  color: var(--vino);
+}
+.confronto__no {
+  color: var(--terra-chiara);
+}
+
+/* le più amate: sul telefono una fila che scorre col dito */
+.amate {
+  padding: 56px 0;
+}
+.amate__testo {
+  max-width: 46ch;
+  margin-top: 16px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+.amate__nome {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--font-titoli);
+  font-size: 17px;
+}
+.amate__azione {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vino);
+}
+.amate a:hover .amate__azione {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.amate__fila {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 62%;
+  gap: 12px;
+  margin: 24px calc(-1 * var(--margine)) 20px;
+  padding: 0 var(--margine);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--margine);
+  scrollbar-width: none;
+}
+.amate__fila > * {
+  scroll-snap-align: start;
+}
+
+/* recensioni vere: compaiono solo quando ci sono */
+.recensioni {
+  padding: 56px 0;
+}
+.recensioni__fila {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+.recensione {
+  margin: 0;
+  padding: 20px;
+  border-radius: 8px;
+  background: var(--crema);
+}
+.recensione blockquote {
+  margin: 0;
+  font-family: var(--font-titoli);
+  font-size: 18px;
+  line-height: 1.4;
+}
+.recensione figcaption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--terra-chiara);
+}
+
+/* testo letto dagli screen reader ma invisibile */
+.solo-lettori {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* --- Pagina Contatti ------------------------------------------------------
+   Sul telefono tutto in colonna; da computer intestazione e canali affiancati,
+   modulo in una colonna stretta (i moduli larghi si compilano male). */
+.contatti-testa {
+  padding: 40px 0 48px;
+}
+.contatti-testa__griglia {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.contatti-testa .titolo--grande {
+  color: var(--vino);
+}
+.contatti-testa__testo {
+  max-width: 40ch;
+  margin-top: 16px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--terra-chiara);
+}
+
+/* --- Richiesta speciale (pagina Crea la tua) --- */
+.speciale {
+  padding: 56px 0 64px;
+  background: var(--crema);
+}
+.speciale__griglia {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.speciale__testo {
+  max-width: 44ch;
+  margin-top: 16px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+.modulo-speciale {
+  max-width: 600px;
+}
+.speciale__apri > summary {
+  width: 100%;
+  max-width: 600px;
+  list-style: none;
+}
+.speciale__apri > summary::-webkit-details-marker {
+  display: none;
+}
+.speciale__apri[open] > summary {
+  display: none;
+}
+.modulo-speciale .opzione {
+  background: var(--avorio);
+}
+.scelta__nota a {
+  color: var(--vino);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.scelta__nota--sopra {
+  margin: 0 0 12px;
+}
+.opzioni--quattro {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 16px;
+}
+.campo--senza-spazio {
+  margin-top: 0;
+}
+.campo__facoltativo {
+  margin-left: 4px;
+  font-weight: 400;
+  color: var(--terra-chiara);
+}
+.campo input[type="file"] {
+  min-height: 0;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.speciale__regola {
+  max-width: 44ch;
+  margin-top: 24px;
+  padding: 14px 16px;
+  border-left: 3px solid var(--vino);
+  background: var(--avorio);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* come si ordina: tre passi sotto il titolo */
+.ordine-passi {
+  display: grid;
+  gap: 12px;
+  max-width: 46ch;
+  margin-top: 28px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.ordine-passi li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.ordine-passi__numero {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--vino);
+  color: var(--avorio);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* i canali diretti: righe grandi da toccare col pollice */
+.canali {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.canale {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 72px;
+  padding: 14px 18px;
+  border: 1px solid rgba(58, 42, 36, 0.2);
+  border-radius: 8px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.canale:hover {
+  border-color: var(--vino);
+  background: rgba(91, 17, 26, 0.04);
+}
+.canale svg {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: var(--vino);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.canale__testo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.canale__nome {
+  font-family: var(--font-titoli);
+  font-size: 19px;
+}
+.canale__dettaglio {
+  font-size: 14px;
+  color: var(--terra-chiara);
+}
+
+/* il modulo */
+.scrivi {
+  padding: 56px 0 64px;
+  background: var(--crema);
+}
+.scrivi__foto {
+  display: none;
+}
+.modulo-contatti {
+  max-width: 560px;
+  margin-top: 8px;
+}
+.opzioni--motivi .opzione {
+  background: var(--avorio);
+}
+.campo {
+  margin-top: 20px;
+}
+.campo label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.campo input,
+.campo textarea {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 14px;
+  border: 1px solid rgba(58, 42, 36, 0.25);
+  border-radius: 4px;
+  background: var(--avorio);
+  color: var(--terra);
+  font: inherit;
+  font-size: 16px; /* sotto i 16 px l'iPhone ingrandisce la pagina */
+}
+.campo textarea {
+  resize: vertical;
+}
+.campo input:focus,
+.campo textarea:focus {
+  border-color: var(--vino);
+  outline: 2px solid var(--vino);
+  outline-offset: 0;
+}
+.campo__nota {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--terra-chiara);
+}
+.campo__nota--centro {
+  text-align: center;
+}
+
+/* il campo trappola per lo spam: fuori dallo schermo, non display:none
+   (alcuni programmi di spam saltano i campi nascosti in quel modo) */
+.trappola {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.consenso {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.45;
+  cursor: pointer;
+}
+.consenso input {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  accent-color: var(--vino);
+}
+.consenso a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* esito dell'invio */
+.esito {
+  max-width: 560px;
+  margin-top: 20px;
+  padding: 16px 18px;
+  border-left: 3px solid var(--mare);
+  background: var(--avorio);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.esito--errore {
+  border-left-color: var(--terracotta);
+}
+.esito__titolo {
+  font-family: var(--font-titoli);
+  font-size: 19px;
+}
+
+/* risposte rapide: righe con la freccia */
+.rapide {
+  padding: 56px 0;
+}
+.rapide__elenco {
+  margin-top: 24px;
+  border-top: 1px solid var(--beige);
+}
+.rapide__elenco a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 60px;
+  border-bottom: 1px solid var(--beige);
+  font-size: 16px;
+}
+.rapide__elenco a span:last-child {
+  color: var(--vino);
+  transition: transform 0.2s;
+}
+.rapide__elenco a:hover span:last-child {
+  transform: translateX(4px);
+}
+
+/* mercatini */
+.mercatini {
+  padding: 56px 0;
+  background: var(--crema);
+}
+.mercatini__griglia {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.mercatini__elenco li {
+  display: flex;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--beige);
+}
+.mercatini__data {
+  flex-shrink: 0;
+  min-width: 96px;
+  font-weight: 500;
+  color: var(--vino);
+}
+
+/* dati del venditore: piccoli, in fondo */
+.venditore {
+  padding: 8px 0 56px;
+}
+.venditore .dettagli {
+  max-width: 560px;
+  margin: 0;
+  font-size: 14px;
+}
+
+/* 6. ANIMAZIONI -------------------------------------------------------------
+   Valgono solo se il JavaScript funziona (classe .js su <html>, vedi base.html):
+   senza, la pagina si vede comunque tutta, subito. */
+
+/* il titolo dell'hero sale dal basso, riga per riga */
+.js .titolone .riga {
+  display: block;
+  overflow: hidden;
+}
+.js .titolone .riga > span {
+  display: block;
+  animation: sale 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--ritardo, 0s);
+}
+@keyframes sale {
+  from { transform: translateY(108%); }
+}
+
+/* la foto dell'hero si scopre dall'alto */
+.js .hero__foto {
+  animation: scopre 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+@keyframes scopre {
+  from { clip-path: inset(0 0 100% 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+/* il filo si disegna quando entra nello schermo (sito.js aggiunge .visto) */
+.js .filo path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.js .filo.visto path {
+  stroke-dashoffset: 0;
+}
+.js .filo .perlina {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.4);
+  transition: opacity 0.35s, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: var(--ritardo, 0.35s);
+}
+.js .filo.visto .perlina {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* cambiando scheda, la nuova griglia compare con una breve dissolvenza */
+.js .pannello:not([hidden]) {
+  animation: appare 0.25s ease-out;
+}
+@keyframes appare {
+  from { opacity: 0; transform: translateY(6px); }
+}
+
+/* le voci del menu entrano una dopo l'altra */
+.menu[open] .menu__voci a {
+  animation: entra 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(70ms + var(--ordine) * 42ms);
+}
+@keyframes entra {
+  from { opacity: 0; transform: translateX(-10px); }
+}
+
+/* Chi ha chiesto meno movimento al sistema operativo non vede animazioni */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .js .filo path {
+    stroke-dashoffset: 0;
+  }
+  .js .filo .perlina {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+/* 7. SCHERMI PIÙ GRANDI ---------------------------------------------------- */
+
+/* da 640 px: tablet piccoli e telefoni orizzontali */
+@media (min-width: 640px) {
+  .solo-grande {
+    display: inline;
+  }
+  .categorie {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .filtro {
+    padding: 0 20px;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+  }
+  .griglia-prodotti {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 48px 24px;
+  }
+  .parete {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px 12px;
+  }
+  .parete li {
+    overflow: visible;
+    background: none;
+  }
+  .parete__nome {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--terra-chiara);
+  }
+  .modulo__riga {
+    flex-direction: row;
+  }
+  .modulo input {
+    flex: 1;
+  }
+  .piede__voci {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .piede__fondo {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* da 1024 px: computer */
+@media (min-width: 1024px) {
+  .testata__riga {
+    height: 84px;
+  }
+  .testata__menu {
+    display: none;
+  }
+  .testata__voci {
+    display: flex;
+  }
+  .testata__logo {
+    font-size: 22px;
+  }
+  .testata__borsa {
+    display: none;
+  }
+  .testata__carrello-testo {
+    display: inline;
+  }
+  .testata__carrello-numero {
+    font-size: inherit;
+    letter-spacing: inherit;
+  }
+
+  /* hero: testo a sinistra, foto a destra */
+  .hero {
+    padding: 56px 0 96px;
+  }
+  .hero__griglia {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: center; /* così i pulsanti restano nella prima schermata */
+    gap: 32px;
+  }
+  .hero__testo {
+    grid-column: 1 / span 6;
+    grid-row: 1;
+  }
+  .hero__foto {
+    grid-column: 7 / span 6;
+    grid-row: 1;
+  }
+  .hero__foto img {
+    aspect-ratio: 4 / 5;
+    object-position: 50% 30%;
+  }
+  /* abbastanza grande da imporsi, abbastanza piccolo da tenere
+     "Mai senza" sulla stessa riga nella metà sinistra */
+  .titolone {
+    font-size: clamp(64px, 6.6vw, 100px);
+  }
+
+  .catalogo {
+    padding: 72px 0 96px;
+  }
+  .griglia-prodotti {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 56px 24px;
+  }
+  .scheda:hover .scheda__foto img {
+    transform: scale(1.03);
+  }
+  .scheda__nome {
+    font-size: 19px;
+  }
+  .categorie {
+    top: 84px; /* da computer la testata è più alta */
+  }
+  .pannello {
+    scroll-margin-top: 156px;
+  }
+
+  .titolo {
+    font-size: clamp(44px, 4.4vw, 76px);
+  }
+  .titolo--grande {
+    font-size: clamp(56px, 5.4vw, 104px);
+  }
+
+  .manifesto {
+    padding: 128px 0;
+  }
+  .manifesto__griglia {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .unici,
+  .passaggi,
+  .crea,
+  .storia,
+  .newsletter {
+    padding: 96px 0;
+  }
+  .parete {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 28px 16px;
+  }
+  .parete--quattro {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  /* come nasce: titolo fermo a sinistra, passaggi che scorrono a destra */
+  .passaggi__griglia {
+    display: grid;
+    grid-template-columns: 4fr 7fr;
+    gap: 64px;
+  }
+  .passaggi__testa {
+    position: sticky;
+    top: 120px;
+    align-self: start;
+  }
+  /* la colonna è stretta: a dimensione piena andava a capo a ogni parola */
+  .passaggi__testa .titolo {
+    font-size: clamp(40px, 3.4vw, 56px);
+  }
+  .passaggi__elenco {
+    margin-top: 0;
+    gap: 64px;
+  }
+  .passaggio {
+    grid-template-columns: 3fr 2fr;
+    gap: 24px;
+  }
+
+  .crea__griglia,
+  .storia__griglia,
+  .newsletter__griglia {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: center;
+    gap: 40px;
+  }
+  .crea__griglia > :first-child {
+    grid-column: 1 / span 5;
+  }
+  .crea__foto {
+    grid-column: 7 / span 6;
+  }
+  .storia__foto {
+    grid-column: 1 / span 7;
+  }
+
+  /* pagina Marica: foto e testo affiancati, a righe alterne */
+  .marica-testa {
+    padding: 56px 0 96px;
+  }
+  .marica-blocco,
+  .impegni {
+    padding: 96px 0;
+  }
+  .marica-testa__griglia,
+  .marica-blocco__griglia {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: center;
+    gap: 40px;
+  }
+  .marica-testa__foto,
+  .marica-blocco__foto {
+    grid-column: 1 / span 5;
+  }
+  .marica-testa__griglia > :last-child,
+  .marica-blocco__griglia > :last-child {
+    grid-column: 7 / span 6;
+  }
+  .marica-blocco__griglia--rovescia .marica-blocco__foto {
+    grid-column: 8 / span 5;
+    grid-row: 1;
+  }
+  .marica-blocco__griglia--rovescia > :last-child {
+    grid-column: 1 / span 6;
+    grid-row: 1;
+  }
+  .impegni__elenco {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 48px;
+    margin-top: 56px;
+  }
+  .storia__griglia > :last-child {
+    grid-column: 9 / span 4;
+  }
+  .newsletter__griglia {
+    align-items: end;
+  }
+  .newsletter__griglia > :first-child {
+    grid-column: 1 / span 6;
+  }
+  .modulo {
+    grid-column: 8 / span 5;
+  }
+
+  .piede {
+    padding: 96px 0;
+  }
+
+  .pagina-categoria {
+    padding: 40px 0 96px;
+  }
+  .rimando {
+    padding: 72px 0;
+  }
+  .rimando__riga {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .crea-pagina {
+    padding: 56px 0 96px;
+  }
+  .crea-pagina__griglia {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: center;
+    gap: 40px;
+  }
+  .crea-pagina__griglia > :last-child {
+    grid-column: 1 / span 6;
+    grid-row: 1;
+  }
+  .crea-pagina__foto {
+    grid-column: 7 / span 6;
+    grid-row: 1;
+  }
+  .come-funziona {
+    padding: 96px 0;
+  }
+  .prodotto {
+    padding: 40px 0 96px;
+  }
+  .prodotto__griglia {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    align-items: start;
+    gap: 56px;
+  }
+  .galleria {
+    position: sticky;
+    top: 108px;
+    margin-inline: 0;
+  }
+  .galleria__miniature {
+    padding-inline: 0;
+  }
+  .galleria__miniatura {
+    flex-basis: 72px;
+  }
+  .ricevi__griglia {
+    display: grid;
+    grid-template-columns: 5fr 6fr;
+    align-items: center;
+    gap: 56px;
+  }
+  .barra-acquisto {
+    display: none;
+  }
+  .come-funziona__passi {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 40px;
+  }
+  .piede__voci {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  /* le più amate: quattro in fila, niente scorrimento */
+  .amate__fila {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-inline: 0;
+    padding: 0;
+    overflow: visible;
+  }
+  .recensioni__fila {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .confronto__tabella {
+    max-width: 760px;
+  }
+  /* contatti: testo a sinistra, canali a destra */
+  .contatti-testa {
+    padding: 72px 0 80px;
+  }
+  .contatti-testa__griglia {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    align-items: end;
+    gap: 56px;
+  }
+  .scrivi,
+  .rapide,
+  .mercatini {
+    padding: 96px 0;
+  }
+  .speciale {
+    padding: 96px 0;
+  }
+  .speciale__griglia {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    align-items: start;
+    gap: 64px;
+  }
+  .speciale__testa {
+    position: sticky;
+    top: 120px;
+  }
+  .opzioni--quattro {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .campioni--tanti {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .scrivi__griglia {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    align-items: start;
+    gap: 56px;
+  }
+  .scrivi__foto {
+    display: block;
+    position: sticky;
+    top: 120px;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  .mercatini__griglia {
+    display: grid;
+    grid-template-columns: 5fr 6fr;
+    align-items: center;
+    gap: 56px;
+  }
+}
+
+
+/* 8. TELEFONO: ARMONIA ----------------------------------------------------- */
+/* Sul telefono i pulsanti hanno tutti la stessa forma: a tutta larghezza,
+   uno sotto l'altro. Quello "solo testo" diventa un pulsante con il bordo,
+   così accanto a quello pieno non sembra una scritta dimenticata. */
+@media (max-width: 639px) {
+  .bottoni {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .bottoni .bottone--testo {
+    min-height: 52px;
+    padding: 0 32px;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+  }
+  .crea .bottone,
+  .storia .bottone,
+  .rimando .bottone,
+  .in-arrivo .bottone {
+    width: 100%;
+  }
+  /* la foto dell'hero quadrata: meno schiacciata, il gioiello in primo piano */
+  .hero__foto img {
+    aspect-ratio: 1 / 1;
+  }
+  /* le tre schede del catalogo ci stanno anche sui telefoni stretti */
+  .filtro {
+    padding: 0 4px;
+    letter-spacing: 0.04em;
+  }
+}
+/* sotto i 360 px le opzioni della tendina vanno una per riga */
+@media (max-width: 359px) {
+  .tendina .opzioni {
+    grid-template-columns: 1fr;
+  }
+}
