@@ -119,9 +119,13 @@ WT = {
                           "note": "Anteprima navigabile del sito."},
     },
     "home_h": "Projects", "home_p": "Una selezione di progetti recenti, da esplorare dal vivo.", "home_a": "Tutti i progetti",
-    "partners_k": "Partner", "partners_h": "Le aziende con cui <em>lavoriamo</em>.",
-    "partners": [("Asia Baldoni Fitness", "Brand di fitness femminile online", "Ricerca e sviluppo di strumenti interni, automazioni e soluzioni di intelligenza artificiale."),
-                 ("Tartufoli Group", "La società a cui fa capo Asia Baldoni Fitness", "Infrastruttura digitale e intelligenza artificiale al servizio dei brand del gruppo.")],
+    "partners_k": "Partner", "partners_h": "Partner, <em>non semplici clienti</em>.",
+    "partners_p": "Lavoriamo al fianco di aziende che hanno scelto la tecnologia e l'intelligenza artificiale come leva di crescita. Con loro non ci limitiamo a consegnare un progetto: costruiamo insieme, giorno dopo giorno, i sistemi su cui si regge il loro business.",
+    "partners_cta": ("Vuoi crescere con noi?", "Diventa partner"),
+    "partners": [("Asia Baldoni Fitness", "Partner tecnologico", "Fitness femminile online",
+                  "Al fianco del team nello sviluppo di strumenti interni, automazioni e soluzioni di intelligenza artificiale che supportano vendite e operations."),
+                 ("Tartufoli Group", "Partner strategico", "Il gruppo di Asia Baldoni Fitness",
+                  "Una collaborazione di lungo periodo per l'infrastruttura digitale e l'adozione dell'intelligenza artificiale nei brand del gruppo.")],
 },
 "en": {
     "title": "Projects · Reef 7 Lab", "desc": "A selection of Reef 7 Lab projects: applications, websites and tools for businesses.",
@@ -154,9 +158,13 @@ WT = {
                           "note": "Browsable website preview."},
     },
     "home_h": "Projects", "home_p": "A selection of recent projects, ready to explore live.", "home_a": "All projects",
-    "partners_k": "Partners", "partners_h": "The companies we <em>work with</em>.",
-    "partners": [("Asia Baldoni Fitness", "Online women's fitness brand", "Research and development of internal tools, automations and AI solutions."),
-                 ("Tartufoli Group", "The company behind Asia Baldoni Fitness", "Digital infrastructure and artificial intelligence for the group's brands.")],
+    "partners_k": "Partners", "partners_h": "Partners, <em>not just clients</em>.",
+    "partners_p": "We work alongside companies that have chosen technology and artificial intelligence as a lever for growth. We don't deliver a project and disappear: together, day after day, we build the systems their business runs on.",
+    "partners_cta": ("Want to grow with us?", "Become a partner"),
+    "partners": [("Asia Baldoni Fitness", "Technology partner", "Online women's fitness",
+                  "Working alongside the team to develop internal tools, automations and AI solutions that support sales and operations."),
+                 ("Tartufoli Group", "Strategic partner", "The group behind Asia Baldoni Fitness",
+                  "A long-term collaboration on digital infrastructure and the adoption of artificial intelligence across the group's brands.")],
 },
 }
 
@@ -666,9 +674,11 @@ def build(lang, variant=""):
         return f'<a class="work-card2" href="{u("work")}#{w["key"]}"><div class="wc-img">{img}</div><div class="wc-meta"><h3>{p["name"]}</h3><p>{p["type"]}</p></div></a>'
 
     work_cards = "".join(work_card(w) for w in WORK)
-    partners = "".join(f'<div class="partner"><b class="partner-name">{n}</b><span class="partner-what">{w}</span><p>{d}</p></div>' for n, w, d in W["partners"])
+    partners = "".join(f'<div class="partner"><span class="partner-tag">{tag}</span><b class="partner-name">{n}</b><span class="partner-what">{w}</span><p>{d}</p></div>' for n, tag, w, d in W["partners"])
+    cq, ca = W["partners_cta"]
     partners_html = f"""<section class="block partners-block"><div class="wrap partners-in">
-  <div><p class="mono">{W['partners_k']}</p><h2>{W['partners_h']}</h2></div>
+  <div><p class="mono">{W['partners_k']}</p><h2>{W['partners_h']}</h2><p class="partners-p">{W['partners_p']}</p>
+    <p class="partners-cta">{cq} <a class="link" href="{u('contact')}">{ca} {arrow}</a></p></div>
   <div class="partners">{partners}</div>
 </div></section>"""
     out["work"] = page("work", W["title"], W["desc"], head_block(L["nav"]["work"], W["h1"], W["sub"]) + f"""
@@ -805,16 +815,18 @@ def build(lang, variant=""):
     out["studio"] = page("studio", St["title"], St["desc"], head_block(L["nav"]["studio"], St["h1"], St["sub"]) + f"""
 <section class="wrap principle-list">{pr}
 </section>
-<section class="block"><div class="wrap why">
-  <p class="mono">{St['seven_k']}</p>
-  <div><h2>{St['seven_h']}</h2><p>{St['seven_p']}</p>
+<section class="block"><div class="wrap seven">
+  <div><p class="mono">{St['seven_k']}</p><h2>{St['seven_h']}</h2><p>{St['seven_p']}</p>
     <a class="link" href="{u('mission')}">{St['seven_a']} {arrow}</a></div>
+  <div class="reef-map seven-map" id="reef-map" data-points="{map_data}" data-world="https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-110m.json">
+    <svg viewBox="0 0 1000 500" role="img" aria-label="{St['seven_h'].replace('<em>', '').replace('</em>', '')}"></svg>
+  </div>
 </div></section>
 <section class="block"><div class="wrap about">
   <div class="portrait"><img src="{pre}assets/alessandro.jpg" alt="{St['photo_alt']}" width="512" height="512"></div>
   <div><p class="big">{St['who_big']}</p>{who}
     <div class="sign"><b>{St['sign'][0]}</b><span>{St['sign'][1]}</span></div></div>
-</div></section>""")
+</div></section>""", extra=libs + f'\n<script src="{pre}mission.js?v={VERSION}"></script>')
 
     # contatti
     C = L["contact"]; F = C["f"]

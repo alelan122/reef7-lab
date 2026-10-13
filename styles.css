@@ -499,7 +499,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
 .case-out { color: var(--text); font-weight: 500; }
 
 /* partner */
-.partners-in { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
+.partners-in { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
 .partners-in h2 { font: 600 clamp(36px, 4.4vw, 64px)/.98 var(--sans); letter-spacing: -.045em; margin-top: 18px; }
 .partners-in h2 em { color: var(--aqua); letter-spacing: -.03em; }
 .partners { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; }
@@ -510,3 +510,17 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
 .partner p { color: var(--muted); font-size: 15px; margin-top: auto; }
 @media (max-width: 900px) { .partners-in { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .partners { grid-template-columns: 1fr; } .partner { min-height: 0; } }
+
+/* lab: perché 7 con la mappa dei reef */
+.seven { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
+.seven h2 { font: 600 clamp(36px, 4.4vw, 64px)/.98 var(--sans); letter-spacing: -.045em; margin: 18px 0 20px; }
+.seven h2 em { color: var(--aqua); letter-spacing: -.03em; }
+.seven p:not(.mono) { color: var(--muted); font-size: clamp(17px, 1.35vw, 19px); max-width: 560px; }
+.seven-map .pin .label { font-size: 15px; }
+@media (max-width: 900px) { .seven { grid-template-columns: 1fr; } }
+.partners-p { color: var(--muted); font-size: clamp(17px, 1.35vw, 19px); margin-top: 20px; max-width: 520px; }
+.partners-cta { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; color: var(--text); font-weight: 500; }
+.partners-cta .link { margin-top: 0; }
+.partner { min-height: 280px; }
+.partner-tag { align-self: flex-start; font: 500 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; background: rgba(95, 225, 242, .12); color: var(--aqua); margin-bottom: 14px; }
+.partner-what { color: var(--faint) !important; }
