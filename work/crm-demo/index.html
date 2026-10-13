@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CRM vendite su misura · Demo Reef 7 Lab</title>
-<meta name="description" content="Demo navigabile di un CRM vendite su misura progettato da Reef 7 Lab: pipeline, scheda lead con AI, traiettoria del cash, classifica e commissioni automatiche.">
+<title>CRM vendite fotovoltaico · Demo Reef 7 Lab</title>
+<meta name="description" content="Demo navigabile di un CRM su misura per un'azienda di fotovoltaico, progettato da Reef 7 Lab: pipeline dei sopralluoghi, scheda cliente con AI, traiettoria del fatturato, classifica e commissioni.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-  :root { --bg: #111417; --panel: #171b1f; --ink: #e8ebee; --muted: #9aa3ad; --faint: #6b7480; --line: #272c32; --soft: #1e2328; --col: #15191d; --em: #34c38f; --em-ink: #062b1d; --blue: #2f7bff; --aqua: #14b8c9; --green: #34c38f; --red: #f0627a; --amber: #f59e0b; --orange: #f08a5d; --violet: #a78bfa; --side: #111417; --sans: "Geist", "Segoe UI", system-ui, sans-serif; --mono: "Geist Mono", ui-monospace, monospace; color-scheme: dark; }
-  :root[data-theme="light"] { --bg: #f6f7f9; --panel: #fff; --ink: #0f172a; --muted: #64748b; --faint: #94a3b8; --line: #e6e9ef; --soft: #f1f4f8; --col: #edf0f4; --em: #16a36f; --em-ink: #fff; --green: #16a36f; --red: #e11d48; --side: #fff; color-scheme: light; }
+  :root { --bg: #0b1020; --panel: #11182b; --ink: #e9edf6; --muted: #98a2b8; --faint: #66708a; --line: #1f2940; --soft: #182238; --col: #0f1626; --em: #f5b740; --em-ink: #1c1405; --blue: #2f7bff; --aqua: #14b8c9; --green: #34d399; --red: #f0627a; --amber: #f59e0b; --orange: #f08a5d; --violet: #a78bfa; --side: #0b1020; --sans: "Geist", "Segoe UI", system-ui, sans-serif; --mono: "Geist Mono", ui-monospace, monospace; color-scheme: dark; }
+  :root[data-theme="light"] { --bg: #f6f7f9; --panel: #fff; --ink: #0f172a; --muted: #64748b; --faint: #94a3b8; --line: #e6e9ef; --soft: #f1f4f8; --col: #edf0f4; --em: #c98500; --em-ink: #fff; --green: #16a34a; --red: #e11d48; --side: #fff; color-scheme: light; }
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; }
   body { background: var(--bg); color: var(--ink); font: 14px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
@@ -19,8 +19,8 @@
   .app { display: grid; grid-template-columns: 228px minmax(0, 1fr); height: 100vh; }
   .side { background: var(--side); color: var(--muted); border-right: 1px solid var(--line); padding: 18px 12px; display: flex; flex-direction: column; gap: 3px; }
   .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 600; padding: 4px 10px 14px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
-  .brand .sales { margin-left: auto; font: 600 10px var(--mono); letter-spacing: .06em; color: var(--em); background: rgba(52, 195, 143, .14); padding: 3px 8px; border-radius: 999px; }
-  .brand i { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(135deg, #1f9d74, var(--em)); color: #fff; display: grid; place-items: center; font: 600 12px var(--mono); font-style: normal; }
+  .brand .sales { margin-left: auto; font: 600 10px var(--mono); letter-spacing: .06em; color: var(--em); background: rgba(245, 183, 64, .14); padding: 3px 8px; border-radius: 999px; }
+  .brand i { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(135deg, #f59e0b, #fb7185); color: #fff; display: grid; place-items: center; font: 600 12px var(--mono); font-style: normal; }
   .brand small { display: block; font-weight: 400; color: var(--faint); font-size: 11.5px; }
   .grp { height: 1px; background: var(--line); margin: 8px 10px; }
   .sec { font: 500 10.5px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: #475569; padding: 16px 10px 6px; }
@@ -74,7 +74,7 @@
   .legend { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--muted); }
   .light { display: inline-flex; align-items: center; gap: 7px; font-weight: 600; font-size: 13px; padding: 4px 10px; border-radius: 999px; }
   .light::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
-  .light.g { color: var(--em); box-shadow: inset 0 0 0 1px rgba(52, 195, 143, .5); } .light.a { color: var(--amber); box-shadow: inset 0 0 0 1px rgba(245, 158, 11, .5); } .light.r { color: var(--orange); box-shadow: inset 0 0 0 1px rgba(240, 138, 93, .55); }
+  .light.g { color: var(--green); box-shadow: inset 0 0 0 1px rgba(52, 211, 153, .5); } .light.a { color: var(--amber); box-shadow: inset 0 0 0 1px rgba(245, 158, 11, .5); } .light.r { color: var(--orange); box-shadow: inset 0 0 0 1px rgba(240, 138, 93, .55); }
   .light::before { display: none; }
   .diag { border-left: 3px solid var(--amber); background: #fffbeb; border-radius: 0 12px 12px 0; padding: 14px 16px; margin-top: 12px; }
   .diag b { display: block; margin-bottom: 6px; }
@@ -83,7 +83,7 @@
   /* pipeline */
   .board { display: grid; grid-auto-flow: column; grid-auto-columns: 232px; gap: 10px; align-items: start; padding-bottom: 6px; }
   .col { background: var(--col); border: 1px solid var(--line); border-radius: 12px; padding: 9px; min-height: 280px; transition: background .15s, box-shadow .15s; }
-  .col.won { background: rgba(52, 195, 143, .07); } .col.lost { background: rgba(240, 98, 122, .07); }
+  .col.won { background: rgba(245, 183, 64, .07); } .col.lost { background: rgba(240, 98, 122, .07); }
   .col.folded { grid-column: span 1; min-height: 0; width: 46px; padding: 9px 6px; cursor: pointer; }
   .col.folded h2 { writing-mode: vertical-rl; transform: rotate(180deg); margin: 0; }
   .col.folded .cards, .col.folded h2 em { display: none; }
@@ -128,7 +128,7 @@
   .db { padding: 14px 16px 24px; overflow: auto; flex: 1; display: grid; gap: 12px; align-content: start; }
   .box { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
   .box h4 { margin: 0 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; display: flex; align-items: center; gap: 8px; }
-  .box h4 .ai { font: 600 10px var(--mono); padding: 2px 6px; border-radius: 6px; background: rgba(52, 195, 143, .15); color: var(--em); letter-spacing: 0; }
+  .box h4 .ai { font: 600 10px var(--mono); padding: 2px 6px; border-radius: 6px; background: rgba(245, 183, 64, .15); color: var(--em); letter-spacing: 0; }
   .kv { display: grid; grid-template-columns: 120px 1fr; gap: 6px 10px; font-size: 13px; }
   .kv span { color: var(--muted); }
   .call { border-top: 1px solid var(--line); padding-top: 10px; margin-top: 10px; font-size: 13px; }
@@ -146,7 +146,7 @@
   .boards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .rank { display: grid; gap: 4px; }
   .rk { display: grid; grid-template-columns: 26px 1fr 100px; gap: 10px; align-items: center; padding: 9px 10px; border-radius: 10px; }
-  .rk.me { background: rgba(52, 195, 143, .08); box-shadow: inset 0 0 0 1px rgba(52, 195, 143, .3); }
+  .rk.me { background: rgba(245, 183, 64, .08); box-shadow: inset 0 0 0 1px rgba(245, 183, 64, .3); }
   .rk .pos { font: 600 13px var(--mono); color: var(--muted); text-align: center; }
   .rk .nm { display: flex; align-items: center; gap: 8px; font-weight: 500; min-width: 0; }
   .rk .bar { grid-column: 2 / 3; height: 6px; border-radius: 4px; background: var(--soft); overflow: hidden; margin-top: 4px; }
@@ -178,13 +178,13 @@
   .kpi3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 12px 0; }
   .kpi3 .card { display: flex; gap: 14px; align-items: flex-start; }
   .kpi3 span { color: var(--muted); } .kpi3 b { display: block; font-size: 24px; font-weight: 700; margin-top: 2px; font-variant-numeric: tabular-nums; } .kpi3 small { color: var(--muted); font-size: 12px; }
-  .today { background: #ecfdf5; color: #0f172a; border: 2px solid #34d399; border-radius: 14px; padding: 18px 20px; margin-bottom: 12px; }
+  .today { background: #eef5ff; color: #0f172a; border: 2px solid #7aa7ff; border-radius: 14px; padding: 18px 20px; margin-bottom: 12px; }
   .today .sub { color: #475569; font-size: 12.5px; margin: 2px 0 14px; }
   .today .two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .today .k { font: 600 11px var(--mono); letter-spacing: .06em; color: #475569; text-transform: uppercase; }
   .today .big { font-size: 34px; font-weight: 700; } .today .big small { font-size: 18px; color: #64748b; font-weight: 500; }
   .today .tb { height: 7px; border-radius: 5px; background: #fff; overflow: hidden; margin: 6px 0; } .today .tb i { display: block; height: 100%; background: #1e293b; border-radius: inherit; }
-  .today .plus { font-size: 34px; font-weight: 700; color: #047857; }
+  .today .plus { font-size: 34px; font-weight: 700; color: #1d4ed8; }
   .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 16px; align-items: end; height: 120px; position: relative; }
   .days div { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 4px; font-size: 11.5px; color: #475569; }
   .days div b { font-size: 12px; color: #0f172a; }
@@ -227,9 +227,9 @@
 <body>
 <div class="app">
   <aside class="side" id="side">
-    <div class="brand"><i>N</i><div>Nova Academy<small>Corsi online</small></div><span class="sales">SALES</span></div>
+    <div class="brand"><i>H</i><div>Helios Energia<small>Fotovoltaico</small></div><span class="sales">SALES</span></div>
     <button class="nav" data-view="dash" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>Dashboard</button>
-    <button class="nav" data-view="leads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="7" rx="1.5"/></svg>Lead<span class="count" id="c-leads"></span></button>
+    <button class="nav" data-view="leads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="7" rx="1.5"/></svg>Clienti<span class="count" id="c-leads"></span></button>
     <button class="nav" data-view="pay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Pagamenti</button>
     <div class="grp"></div>
     <button class="nav" data-view="rank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>Classifica</button>
@@ -243,8 +243,8 @@
       <button class="btn menu-btn" id="menu" aria-label="Menu">☰</button>
       <h1 id="title">Dashboard vendite</h1>
       <span class="sp"></span>
-      <input class="ctl search" id="q" type="search" placeholder="Cerca nome, telefono, fonte…" aria-label="Cerca">
-      <button class="btn primary" id="add">+ Nuovo lead</button>
+      <input class="ctl search" id="q" type="search" placeholder="Cerca cliente, telefono, fonte…" aria-label="Cerca">
+      <button class="btn primary" id="add">+ Nuovo cliente</button>
     </header>
 
     <section class="view" id="v-dash">
@@ -261,7 +261,7 @@
         <div class="seg" id="mode"><button aria-pressed="true" data-m="kanban">Kanban</button><button aria-pressed="false" data-m="list">Lista</button></div>
         <label class="tog"><input type="checkbox" id="mine"> Solo i miei <span style="color:var(--faint)">(Giulia)</span></label>
         <select class="ctl" id="f-src" aria-label="Fonte"><option value="">Tutte le fonti</option></select>
-        <span style="margin-left:auto;color:var(--muted);font-size:12.5px">Trascina i lead tra le fasi · le colonne Chiusa e Persa si aprono con un click</span>
+        <span style="margin-left:auto;color:var(--muted);font-size:12.5px">Trascina i clienti tra le fasi · le colonne Installato e Perso si aprono con un click</span>
       </div>
       <div class="board" id="board"></div>
       <div class="card" id="list" hidden></div>
@@ -269,11 +269,11 @@
 
     <section class="view" id="v-rank" hidden>
       <div class="boards"><div class="card pad"><p class="h">Questo mese</p><div class="rank" id="rank-m"></div></div><div class="card pad"><p class="h">Questa settimana</p><div class="rank" id="rank-w"></div></div></div>
-      <p class="note">Ordinata per cash incassato. Le linee tratteggiate sono le soglie bonus: chi le supera le vede scorrere sotto il proprio nome.</p>
+      <p class="note">Ordinata per incassato. Le linee tratteggiate sono le soglie bonus: chi le supera le vede scorrere sotto il proprio nome.</p>
     </section>
 
     <section class="view" id="v-comm" hidden>
-      <div class="bar2"><select class="ctl" id="c-rep" aria-label="Venditrice"></select></div>
+      <div class="bar2"><select class="ctl" id="c-rep" aria-label="Consulente"></select></div>
       <div class="hero"><div class="card pad" id="comm-me"></div><div class="card pad" id="bonus"></div></div>
       <div class="card"><table id="comm-all"></table></div>
       <p class="note">Si guadagna sull'incassato: la commissione matura quando entra il pagamento. Scaglioni non progressivi sul netto (lordo ÷ 1,10): si applica la percentuale dello scaglione più alto raggiunto.</p>
@@ -290,17 +290,17 @@
 <aside class="drawer" id="drawer" hidden aria-label="Scheda lead"></aside>
 <div class="modal" id="m-new" hidden>
   <form id="f-new">
-    <h3>Nuovo lead</h3>
+    <h3>Nuovo cliente</h3>
     <div class="row2"><label class="field">Nome<input name="name" required placeholder="Nome e cognome"></label><label class="field">Telefono<input name="phone" placeholder="+39 …"></label></div>
-    <div class="row2"><label class="field">Fonte<select name="source"><option>Funnel</option><option>Ads</option><option>Workshop</option><option>Instagram</option><option>Manuale</option></select></label><label class="field">Interesse<select name="interest"><option>Percorso Pro</option><option>Coaching</option></select></label></div>
+    <div class="row2"><label class="field">Fonte<select name="source"><option>Sito</option><option>Meta Ads</option><option>Porta a porta</option><option>Passaparola</option><option>Fiera</option></select></label><label class="field">Interesse<select name="interest"><option>FV + batteria</option><option>Solo FV</option></select></label></div>
     <label class="field">Assegnato a<select name="owner" id="new-owner"></select></label>
     <div class="mact"><button type="button" class="btn" data-close>Annulla</button><button class="btn primary">Crea lead</button></div>
   </form>
 </div>
 <div class="modal" id="m-lost" hidden>
   <form id="f-lost">
-    <h3>Perché è persa?</h3>
-    <label class="field">Motivo<select name="reason" required><option value="">Scegli un motivo</option><option>Prezzo</option><option>Non è il momento</option><option>Non risponde più</option><option>Ha scelto un'alternativa</option><option>Non in target</option></select></label>
+    <h3>Perché è perso?</h3>
+    <label class="field">Motivo<select name="reason" required><option value="">Scegli un motivo</option><option>Prezzo</option><option>Ha scelto un concorrente</option><option>Tetto non idoneo</option><option>Non risponde più</option><option>Finanziamento rifiutato</option></select></label>
     <label class="field">Nota (facoltativa)<textarea name="note" rows="2"></textarea></label>
     <div class="mact"><button type="button" class="btn" data-close>Annulla</button><button class="btn primary">Conferma</button></div>
   </form>
@@ -309,41 +309,41 @@
 <script>
 (() => {
   // ---- dati di esempio (azienda e persone inventate) ----
-  const REPS = { GB: ["Giulia Bianchi", "#2f7bff"], MR: ["Marta Russo", "#14b8c9"], SC: ["Sara Conti", "#7c3aed"], EL: ["Elisa Longo", "#f59e0b"], CF: ["Chiara Ferri", "#ec4899"] };
+  const REPS = { GB: ["Giulia Bianchi", "#3b82f6"], MR: ["Marco Russo", "#14b8c9"], SC: ["Sara Conti", "#8b5cf6"], EL: ["Enrico Longo", "#f59e0b"], CF: ["Carlo Ferri", "#ec4899"] };
   const ME = "GB";
-  const STAGES = [["call", "Da chiamare", "#94a3b8"], ["cold", "Chiamata a freddo", "#38bdf8"], ["app", "Candidatura inviata", "#22d3ee"], ["disco", "Discovery fissata", "#818cf8"], ["discodone", "Discovery fatta", "#a78bfa"], ["demo", "Demo fissata", "#c084fc"], ["nego", "In trattativa", "#f59e0b"], ["dep", "Acconto ricevuto", "#84cc16"], ["won", "Chiusa", "#16a34a"], ["lost", "Persa", "#e11d48"]];
-  const TARGET = 120000, BONUS_TEAM = 120000, BONUS_EACH = 250, WEEK_TARGET = 7000;
-  const TIERS = [[0, 6], [10000, 7], [20000, 8], [30000, 9], [40000, 10]];
+  const STAGES = [["call", "Da chiamare", "#94a3b8"], ["cold", "Primo contatto", "#38bdf8"], ["app", "Qualificato", "#22d3ee"], ["disco", "Sopralluogo fissato", "#818cf8"], ["discodone", "Sopralluogo fatto", "#a78bfa"], ["demo", "Preventivo inviato", "#c084fc"], ["nego", "In trattativa", "#f59e0b"], ["dep", "Contratto firmato", "#84cc16"], ["won", "Installato", "#22c55e"], ["lost", "Perso", "#f43f5e"]];
+  const TARGET = 750000, BONUS_TEAM = 750000, BONUS_EACH = 500, WEEK_TARGET = 35000;
+  const TIERS = [[0, 3], [40000, 3.5], [60000, 4], [80000, 4.5], [100000, 5]];
   const TODAY = 13, MONTH_DAYS = 31, WEEK_START = 13;
-  const AVATARS = [["Ripartenza", "Ha già provato da sola, vuole un metodo"], ["Tempo zero", "Lavora tanto, cerca qualcosa di sostenibile"], ["Scettica", "Ha speso in corsi senza risultati"]];
-  const AWARE = ["Consapevole del problema", "Consapevole della soluzione", "Pronta a scegliere"];
-  const OBJ = ["Prezzo", "Non ho tempo", "Ne parlo con il partner", "Ho già provato altro"];
-  const SUG = { "Prezzo": [["Caso studio · Laura, 3 mesi", "Mostra il ritorno concreto del percorso"], ["Video · Quanto costa non farlo", "Sposta il focus dal prezzo al valore"]],
-    "Non ho tempo": [["Video · Il metodo in 20 minuti al giorno", "Scioglie: non ho tempo"], ["Caso studio · Marta, mamma e manager", "Esempio simile al suo profilo"]],
-    "Ne parlo con il partner": [["Guida · Come presentarlo a casa", "Le dà le parole per la conversazione"], ["Caso studio · Elena e il marito", "Decisione presa in coppia"]],
-    "Ho già provato altro": [["Video · Perché questa volta è diverso", "Scioglie: ho già provato"], ["Caso studio · Sara, dopo 3 corsi", "Profilo scettico come il suo"]] };
-  const NAMES = ["Alessia Moretti", "Beatrice Galli", "Camilla Rossi", "Daniela Fontana", "Eleonora Greco", "Federica Marino", "Giada Costa", "Ilaria Bruno", "Jessica Rizzo", "Laura Ferrara", "Martina Esposito", "Noemi Romano", "Paola Gentile", "Roberta Caruso", "Serena Villa", "Valeria De Luca", "Arianna Leone", "Claudia Serra", "Francesca Pellegrini", "Giorgia Barbieri", "Irene Monti", "Lucia Fabbri"];
-  const SRC = ["Funnel", "Ads", "Workshop", "Instagram", "Manuale"];
-  const VAL = { "Percorso Pro": 2900, "Coaching": 1200 };
+  const AVATARS = [["Risparmio in bolletta", "Spende molto di luce e vuole tagliare il costo fisso"], ["Indipendenza energetica", "Vuole batteria e autonomia dalla rete"], ["Investitore", "Ragiona su rendimento e incentivi"]];
+  const AWARE = ["Consapevole del problema", "Sta confrontando preventivi", "Pronto a firmare"];
+  const OBJ = ["Prezzo", "Aspetto gli incentivi", "Non mi fido del rendimento", "Ne parlo in famiglia"];
+  const SUG = { "Prezzo": [["Simulazione · risparmio su 20 anni", "Sposta il focus dal prezzo al ritorno"], ["Opzioni di finanziamento a rata fissa", "La rata può stare sotto la bolletta attuale"]],
+    "Aspetto gli incentivi": [["Guida · incentivi e detrazioni in vigore", "Scioglie: aspetto gli incentivi"], ["Calcolo · quanto costa aspettare 6 mesi", "Mostra la bolletta persa nell'attesa"]],
+    "Non mi fido del rendimento": [["Caso · villetta a Treviso, 14 mesi di dati", "Produzione reale, non stimata"], ["Garanzie su pannelli e inverter", "Rendimento garantito per contratto"]],
+    "Ne parlo in famiglia": [["Riepilogo da girare in famiglia", "Le dà le parole per la conversazione"], ["Caso · coppia a Padova, batteria da 10 kWh", "Decisione presa insieme"]] };
+  const NAMES = ["Alessandro Moretti", "Beatrice Galli", "Paolo Rossi", "Daniela Fontana", "Agriturismo Greco", "Federico Marino", "Giada Costa", "Ivan Bruno", "Officina Rizzo", "Laura Ferrara", "Matteo Esposito", "Noemi Romano", "Pietro Gentile", "Roberta Caruso", "Capannone Villa Srl", "Valerio De Luca", "Arianna Leone", "Claudio Serra", "Francesca Pellegrini", "Hotel Barbieri", "Irene Monti", "Luca Fabbri"];
+  const SRC = ["Sito", "Meta Ads", "Porta a porta", "Passaparola", "Fiera"];
+  const VAL = { "FV + batteria": 18900, "Solo FV": 9800 };
   const pick = (a, i) => a[i % a.length];
   const ORDER = ["call", "cold", "app", "disco", "discodone", "demo", "nego", "dep", "won", "lost", "call", "app", "disco", "cold", "demo", "nego", "call", "app", "won", "disco", "lost", "nego"];
   const repKeys = Object.keys(REPS);
   function seed() {
     const leads = NAMES.map((name, i) => {
-      const stage = ORDER[i], interest = i % 3 === 2 ? "Coaching" : "Percorso Pro", owner = pick(repKeys, i);
+      const stage = ORDER[i], interest = i % 3 === 2 ? "Solo FV" : "FV + batteria", owner = pick(repKeys, i);
       const disco = ["disco", "discodone", "demo", "nego", "dep", "won"].includes(stage) ? pick(repKeys, i + 1) : "";
       const hadCall = ["discodone", "demo", "nego", "dep", "won", "lost"].includes(stage);
       return { id: i + 1, name, phone: `+39 3${(40 + i) % 90}${String(1000000 + i * 7919).slice(1)}`, source: pick(SRC, i), interest, stage, owner,
         cold: pick(repKeys, i + 2), disco, demo: ["demo", "nego", "dep", "won"].includes(stage) ? owner : "", days: (i * 3) % 9, prio: i % 5 === 0 && !["won", "lost"].includes(stage),
-        ai: i % 4 === 3 ? null : { avatar: pick(AVATARS, i), aware: pick(AWARE, i), pain: pick(["Non riesce a essere costante", "Ha poco tempo per sé", "Ha perso fiducia nei programmi"], i) },
-        calls: hadCall ? [{ day: Math.max(1, TODAY - (i % 6)), min: 32 + (i * 7) % 25, rep: disco || owner, esito: stage === "lost" ? "Non interessata" : stage === "won" ? "Chiusa" : "Interessata", show: true, obj: pick(OBJ, i), next: stage === "nego" ? "Richiamare dopo che ne parla a casa" : "Fissare la demo" }] : [],
-        reason: stage === "lost" ? pick(["Prezzo", "Non è il momento"], i) : "",
+        ai: i % 4 === 3 ? null : { avatar: pick(AVATARS, i), aware: pick(AWARE, i), pain: pick(["Bollette sopra i 300 € al mese", "Teme gli aumenti dell'energia", "Vuole sfruttare gli incentivi"], i) },
+        calls: hadCall ? [{ day: Math.max(1, TODAY - (i % 6)), min: 32 + (i * 7) % 25, rep: disco || owner, esito: stage === "lost" ? "Non interessata" : stage === "won" ? "Chiusa" : "Interessata", show: true, obj: pick(OBJ, i), next: stage === "nego" ? "Richiamare dopo che ne parla in famiglia" : "Inviare il preventivo" }] : [],
+        reason: stage === "lost" ? pick(["Prezzo", "Ha scelto un concorrente"], i) : "",
         log: [["↘", `Lead entrato da ${pick(SRC, i).toLowerCase()}`, `${TODAY - (i % 8) + 1} ottobre`]] };
     });
     // pagamenti del mese: storico dei giorni passati
     const pays = [];
     const add = (day, client, amount, owner, method) => pays.push({ id: pays.length + 1, day, client, amount, owner, method });
-    const base = [["Sofia Marchetti", 2900, "GB"], ["Anna Ricci", 1450, "MR"], ["Elena Sala", 2900, "SC"], ["Monica Riva", 1200, "EL"], ["Greta Fumagalli", 2900, "GB"], ["Silvia Neri", 2900, "CF"], ["Rita Colombo", 1450, "SC"], ["Carla Vitale", 2900, "MR"], ["Teresa Lodi", 1200, "GB"], ["Nadia Orsini", 2900, "EL"], ["Livia Bassi", 2900, "SC"], ["Vera Testa", 1450, "GB"], ["Olga Fiore", 2900, "MR"], ["Pia Sartori", 2900, "CF"], ["Ada Ferraro", 1200, "SC"], ["Bruna Conte", 2900, "GB"], ["Dora Mancini", 2900, "EL"], ["Emma Grasso", 1450, "MR"], ["Fiora Messina", 2900, "SC"], ["Gaia Bellini", 2900, "GB"]];
+    const base = [["Sofia Marchetti", 18900, "GB"], ["Andrea Ricci", 5670, "MR"], ["Elena Sala", 18900, "SC"], ["Mario Riva", 9800, "EL"], ["Caseificio Fumagalli", 34500, "GB"], ["Silvio Neri", 18900, "CF"], ["Rita Colombo", 5670, "SC"], ["Carlo Vitale", 18900, "MR"], ["Teresa Lodi", 9800, "GB"], ["Nadia Orsini", 18900, "EL"], ["B&B Bassi", 22400, "SC"], ["Vera Testa", 5670, "GB"], ["Olindo Fiore", 18900, "MR"], ["Pia Sartori", 18900, "CF"], ["Ada Ferraro", 9800, "SC"], ["Bruno Conte", 18900, "GB"], ["Dora Mancini", 18900, "EL"], ["Emilio Grasso", 5670, "MR"], ["Fiorella Messina", 18900, "SC"], ["Gaia Bellini", 18900, "GB"]];
     base.forEach(([c, a, o], i) => add(1 + Math.floor(i * 12 / base.length), c, a, o, i % 3 ? "Carta" : "Bonifico"));
     return { leads, pays };
   }
@@ -366,7 +366,7 @@
 
   // periodo della dashboard: mese, trimestre o anno (storico di esempio per i mesi passati)
   let period = "m";
-  const PER = { m: { label: "Ottobre 2026", target: TARGET, past: 0, day: TODAY, days: MONTH_DAYS }, q: { label: "Ottobre – dicembre 2026", target: TARGET * 3, past: 0, day: TODAY, days: 92 }, y: { label: "Anno 2026", target: TARGET * 12, past: 1004500, day: 286, days: 365 } };
+  const PER = { m: { label: "Ottobre 2026", target: TARGET, past: 0, day: TODAY, days: MONTH_DAYS }, q: { label: "Ottobre – dicembre 2026", target: TARGET * 3, past: 0, day: TODAY, days: 92 }, y: { label: "Anno 2026", target: TARGET * 12, past: 6550000, day: 286, days: 365 } };
   const I = { cash: '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/>', doc: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="m9 15 2 2 4-4"/>', rec: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M12 8v8M9.5 10.2c0-.9 1.1-1.6 2.5-1.6s2.5.7 2.5 1.6c0 2.2-5 1.2-5 3.4 0 .9 1.1 1.6 2.5 1.6s2.5-.7 2.5-1.6"/>', heart: '<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/>' };
   const ico = (k) => `<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">${I[k]}</svg></span>`;
   function renderDash() {
@@ -374,30 +374,30 @@
     const expected = P.target * P.day / P.days, ratio = cash / expected, perDay = cash / P.day;
     const lc = ratio >= 1 ? ["g", "In traiettoria"] : ratio >= .9 ? ["a", "Attenzione"] : ["r", "Sotto traiettoria"];
     $("#per-label").textContent = P.label;
-    $("#cash").innerHTML = `<div class="cashc">${ico("cash")}<div><div class="lbl">Cash incassato</div><div class="val">${eur(cash)}</div>
+    $("#cash").innerHTML = `<div class="cashc">${ico("cash")}<div><div class="lbl">Incassato</div><div class="val">${eur(cash)}</div>
         <div class="proj">Proiezione fine periodo: <b>${eur(perDay * P.days)}</b> con questo trend (${eur(perDay)}/giorno, giorno ${P.day} di ${P.days})</div></div>
         <span class="light ${lc[0]}">${lc[1]} · ${Math.round(ratio * 100)}%</span></div>
       <div class="pbar"><i style="width:${Math.min(100, cash / P.target * 100)}%;background:${ratio >= 1 ? "var(--em)" : ratio >= .9 ? "var(--amber)" : "var(--orange)"}"></i></div>
       <div class="pfoot">Incassato <b>${eur(cash)}</b> · atteso a oggi <b>${eur(expected)}</b> · ${Math.round(ratio * 100)}% · target periodo ${eur(P.target)}</div>`;
-    const contracts = new Set(db.pays.map((p) => p.client)).size + (period === "y" ? 341 : 0);
-    $("#kpi3").innerHTML = [["doc", "Contratti chiusi", contracts, ""], ["rec", "Scontrino medio", eur(cash / Math.max(1, contracts)), ""], ["heart", "LTV medio", eur(2140), "mediana 1.900 € · 362 clienti"]]
+    const contracts = new Set(db.pays.map((p) => p.client)).size + (period === "y" ? 352 : 0);
+    $("#kpi3").innerHTML = [["doc", "Contratti firmati", contracts, ""], ["rec", "Valore medio contratto", eur(cash / Math.max(1, contracts)), ""], ["heart", "Tempo medio di chiusura", "18 giorni", "dal primo contatto alla firma"]]
       .map(([i, k, v, sub]) => `<div class="card pad">${ico(i)}<div><span>${k}</span><b>${v}</b>${sub ? `<small>${sub}</small>` : ""}</div></div>`).join("");
     // call prenotate: oggi e ultimi 7 giorni rispetto al target giornaliero
-    const T = 30, booked = db.leads.filter((l) => ["disco", "demo"].includes(l.stage)).length + 22, days = [28, 33, 31, 36, 29, 27, 35], lbl = ["mar 6", "mer 7", "gio 8", "ven 9", "sab 10", "dom 11", "lun 12"], max = 40;
-    $("#today").innerHTML = `<div style="display:flex;justify-content:space-between"><b style="font-size:16px">Call prenotate oggi</b><span style="font-size:12.5px;color:#475569">Dettaglio</span></div>
-      <p class="sub">Target ${T} al giorno, weekend compreso: il 95% della capienza dei calendari dei prossimi 7 giorni.</p>
+    const T = 18, booked = db.leads.filter((l) => ["disco", "demo"].includes(l.stage)).length + 11, days = [17, 20, 19, 22, 18, 12, 21], lbl = ["mar 6", "mer 7", "gio 8", "ven 9", "sab 10", "dom 11", "lun 12"], max = 25;
+    $("#today").innerHTML = `<div style="display:flex;justify-content:space-between"><b style="font-size:16px">Sopralluoghi prenotati oggi</b><span style="font-size:12.5px;color:#475569">Dettaglio</span></div>
+      <p class="sub">Target ${T} al giorno: il 90% della capienza dei tecnici nei prossimi 7 giorni.</p>
       <div class="two"><div><div class="k">Oggi</div><div class="big">${booked} <small>/ ${T}</small></div><div class="tb"><i style="width:${Math.min(100, booked / T * 100)}%"></i></div>
-        <small style="color:#475569">${booked - 6} da candidatura · 6 da link personali</small></div>
-        <div><div class="k">Ultimi 7 giorni, sul target</div><div class="plus">${(() => { const d = days.reduce((a, v) => a + v - T, 0); return (d >= 0 ? "+" : "") + d; })()}</div><small style="color:#047857">In linea: l'attesa per una call resta tra 1 e 3 giorni.</small></div></div>
+        <small style="color:#475569">${booked - 5} da sito e ads · 5 da porta a porta</small></div>
+        <div><div class="k">Ultimi 7 giorni, sul target</div><div class="plus">${(() => { const d = days.reduce((a, v) => a + v - T, 0); return (d >= 0 ? "+" : "") + d; })()}</div><small style="color:#1d4ed8">In linea: l'attesa per un sopralluogo resta tra 2 e 4 giorni.</small></div></div>
       <div class="days"><span class="tline" style="bottom:${20 + T / max * .82 * 120}px"></span>${days.map((v, i) => `<div class="${v < T ? "low" : ""}"><b>${v}</b><i style="height:${v / max * 82}%"></i><span>${lbl[i]}</span></div>`).join("")}</div>`;
     renderRem();
   }
 
   // promemoria: rate scadute, trattative ferme, lead da richiamare
   function remList() {
-    const late = [["Rata scaduta da 7 giorni: Monica Riva", "600 € · Elisa Longo", null], ["Rata scaduta da 3 giorni: Teresa Lodi", "400 € · Giulia Bianchi", null]];
+    const late = [["Saldo scaduto da 7 giorni: Mario Riva", "2.940 € · Enrico Longo", null], ["Installazione da pianificare: Caseificio Fumagalli", "Contratto firmato da 9 giorni · Giulia Bianchi", null]];
     const stuck = db.leads.filter((l) => l.stage === "nego" && l.days >= 3).map((l) => [`Trattativa ferma da ${l.days} giorni: ${l.name}`, `In trattativa · ${REPS[l.owner][0]}`, l.id]);
-    const todo = db.leads.filter((l) => l.stage === "call" && l.prio).map((l) => [`Chiamare oggi: ${l.name}`, `Lead prioritario da ${l.source.toLowerCase()} · ${REPS[l.owner][0]}`, l.id]);
+    const todo = db.leads.filter((l) => l.stage === "call" && l.prio).map((l) => [`Chiamare oggi: ${l.name}`, `Cliente prioritario da ${l.source.toLowerCase()} · ${REPS[l.owner][0]}`, l.id]);
     return { late: [...late, ...stuck], today: todo };
   }
   function renderRem() {
@@ -413,7 +413,7 @@
   const ui = { q: "", mine: false, src: "", mode: "kanban", open: new Set() };
   const filtered = () => db.leads.filter((l) => (!ui.mine || [l.owner, l.disco, l.demo, l.cold].includes(ME)) && (!ui.src || l.source === ui.src) && (!ui.q || `${l.name} ${l.phone} ${l.source}`.toLowerCase().includes(ui.q)));
   const leadCard = (l) => `<div class="lead" data-id="${l.id}" tabindex="0"><div class="r1"><div><b>${esc(l.name)}</b><div class="src">${l.source}</div></div>${l.prio ? '<span class="pill p-prio">Priorità</span>' : ""}</div>
-    <div class="r2">${av(l.owner)}<span class="pill ${l.interest === "Coaching" ? "p-coach" : "p-pro"}">${l.interest}</span>${l.disco && l.demo && l.disco !== l.demo ? '<span class="pill p-dd">Disco / Demo</span>' : ""}<span class="age${l.days > 5 ? " stale" : ""}">${l.days ? `${l.days} gg in fase` : "oggi"}</span></div></div>`;
+    <div class="r2">${av(l.owner)}<span class="pill ${l.interest === "Solo FV" ? "p-coach" : "p-pro"}">${l.interest}</span>${l.disco && l.demo && l.disco !== l.demo ? '<span class="pill p-dd">Setter / Closer</span>' : ""}<span class="age${l.days > 5 ? " stale" : ""}">${l.days ? `${l.days} gg in fase` : "oggi"}</span></div></div>`;
   function renderLeads() {
     const v = filtered();
     $("#c-leads").textContent = db.leads.filter((l) => !["won", "lost"].includes(l.stage)).length;
@@ -425,7 +425,7 @@
         return `<div class="col${k === "won" ? " won" : k === "lost" ? " lost" : ""}${folded ? " folded" : ""}" data-stage="${k}"><h2><i style="background:${color}"></i>${label} <span>${list.length}</span><em>${list.length ? eur(list.reduce((a, l) => a + VAL[l.interest], 0)) : ""}</em></h2><div class="cards">${list.map(leadCard).join("")}</div></div>`;
       }).join("");
     } else {
-      $("#list").innerHTML = `<table><thead><tr><th>Nome</th><th>Telefono</th><th>Fase</th><th>Assegnato</th><th>Interesse</th><th>Fonte</th><th class="n">In fase da</th></tr></thead><tbody>${v.map((l) => `<tr data-id="${l.id}"><td><b>${esc(l.name)}</b>${l.prio ? ' <span class="pill p-prio">Priorità</span>' : ""}</td><td>${l.phone}</td><td>${stageOf(l.stage)[1]}</td><td><span class="who">${av(l.owner)}${REPS[l.owner][0]}</span></td><td><span class="pill ${l.interest === "Coaching" ? "p-coach" : "p-pro"}">${l.interest}</span></td><td>${l.source}</td><td class="n">${l.days} gg</td></tr>`).join("")}</tbody></table>`;
+      $("#list").innerHTML = `<table><thead><tr><th>Nome</th><th>Telefono</th><th>Fase</th><th>Assegnato</th><th>Interesse</th><th>Fonte</th><th class="n">In fase da</th></tr></thead><tbody>${v.map((l) => `<tr data-id="${l.id}"><td><b>${esc(l.name)}</b>${l.prio ? ' <span class="pill p-prio">Priorità</span>' : ""}</td><td>${l.phone}</td><td>${stageOf(l.stage)[1]}</td><td><span class="who">${av(l.owner)}${REPS[l.owner][0]}</span></td><td><span class="pill ${l.interest === "Solo FV" ? "p-coach" : "p-pro"}">${l.interest}</span></td><td>${l.source}</td><td class="n">${l.days} gg</td></tr>`).join("")}</tbody></table>`;
     }
   }
 
@@ -446,7 +446,7 @@
       db.pays.push({ id: db.pays.length + 1, day: TODAY, client: l.name, amount, owner: closer, method: "Carta" });
       const after = commOf(cashOf(db.pays, closer));
       l.log.unshift(["€", `Pagamento registrato: ${eur(amount)}`, "adesso"]);
-      msg = `${stage === "won" ? "🎉 Contratto chiuso" : "Acconto ricevuto"}: ${esc(l.name)} · ${eur(amount)} incassati · commissione di ${REPS[closer][0].split(" ")[0]} <b>+${eur(after - before)}</b>`;
+      msg = `${stage === "won" ? "⚡ Impianto installato" : "Contratto firmato"}: ${esc(l.name)} · ${eur(amount)} incassati · commissione di ${REPS[closer][0].split(" ")[0]} <b>+${eur(after - before)}</b>`;
     }
     save(); renderAll(); toast(msg);
     if (!$("#drawer").hidden) openLead(id);
@@ -489,15 +489,15 @@
     const repOpts = (sel) => `<option value="">—</option>` + Object.entries(REPS).map(([k, [n]]) => `<option value="${k}"${k === sel ? " selected" : ""}>${n}</option>`).join("");
     const last = l.calls[0], sug = last ? SUG[last.obj] : null;
     $("#drawer").innerHTML = `<div class="dh"><button class="x" data-close aria-label="Chiudi">×</button><h3>${esc(l.name)}</h3>
-      <div class="meta"><span class="pill ${l.interest === "Coaching" ? "p-coach" : "p-pro"}">${l.interest}</span><span>${l.source}</span><span>·</span><span>${l.days ? `ferma da ${l.days} giorni in fase` : "aggiornata oggi"}</span>${l.disco && l.demo && l.disco !== l.demo ? '<span class="pill p-dd">Disco / Demo</span>' : ""}</div>
+      <div class="meta"><span class="pill ${l.interest === "Solo FV" ? "p-coach" : "p-pro"}">${l.interest}</span><span>${l.source}</span><span>·</span><span>${l.days ? `ferma da ${l.days} giorni in fase` : "aggiornata oggi"}</span>${l.disco && l.demo && l.disco !== l.demo ? '<span class="pill p-dd">Setter / Closer</span>' : ""}</div>
       <div class="asg"><label>Fase<select id="d-stage">${STAGES.map(([k, n]) => `<option value="${k}"${k === l.stage ? " selected" : ""}>${n}</option>`).join("")}</select></label>
-        <label>Chiamata a freddo di<select data-a="cold">${repOpts(l.cold)}</select></label><label>Discovery assegnata a<select data-a="disco">${repOpts(l.disco)}</select></label><label>Demo assegnata a<select data-a="demo">${repOpts(l.demo)}</select></label></div></div>
+        <label>Primo contatto di<select data-a="cold">${repOpts(l.cold)}</select></label><label>Sopralluogo di<select data-a="disco">${repOpts(l.disco)}</select></label><label>Chiusura di<select data-a="demo">${repOpts(l.demo)}</select></label></div></div>
       <div class="db">
-        <div class="box"><h4>Classificazione <span class="ai">AI</span></h4>${l.ai ? `<div class="kv"><span>Avatar</span><b>${l.ai.avatar[0]}</b><span></span><span style="color:var(--ink)">${l.ai.avatar[1]}</span><span>Consapevolezza</span><b>${l.ai.aware}</b><span>Pain principale</span><b>${l.ai.pain}</b></div>` : `<p style="margin:0 0 10px;color:var(--muted)">Non ancora classificata.</p><button class="btn sm" id="d-ai">✦ Analizza profilo con AI</button>`}</div>
-        ${l.ai ? `<div class="box"><h4>Briefing pre-call <span class="ai">AI</span></h4><p style="margin:0;font-size:13px">${esc(l.name.split(" ")[0])} è nel profilo "${l.ai.avatar[0]}": ${l.ai.avatar[1].toLowerCase()}. Parti dal suo pain (${l.ai.pain.toLowerCase()}) e mostra un caso simile prima di parlare di prezzo.</p></div>` : ""}
-        <div class="box"><h4>Consulenze</h4>${l.calls.length ? l.calls.map((c) => `<div class="call"><div class="ch"><b>${c.day} ottobre</b><small>${c.min} min · ${REPS[c.rep][0]}</small><span class="pill" style="background:#dcfce7;color:#15803d">${c.show ? "Presente" : "No-show"}</span><span class="pill" style="background:var(--soft);color:var(--ink)">Esito AI: ${c.esito}</span></div>
+        <div class="box"><h4>Classificazione <span class="ai">AI</span></h4>${l.ai ? `<div class="kv"><span>Avatar</span><b>${l.ai.avatar[0]}</b><span></span><span style="color:var(--ink)">${l.ai.avatar[1]}</span><span>Consapevolezza</span><b>${l.ai.aware}</b><span>Problema principale</span><b>${l.ai.pain}</b></div>` : `<p style="margin:0 0 10px;color:var(--muted)">Non ancora classificato.</p><button class="btn sm" id="d-ai">✦ Analizza profilo con AI</button>`}</div>
+        ${l.ai ? `<div class="box"><h4>Briefing pre-call <span class="ai">AI</span></h4><p style="margin:0;font-size:13px">Profilo "${l.ai.avatar[0]}": ${l.ai.avatar[1].toLowerCase()}. Parti dal suo problema (${l.ai.pain.toLowerCase()}) e mostra la simulazione di risparmio prima di parlare di prezzo.</p></div>` : ""}
+        <div class="box"><h4>Chiamate e sopralluoghi</h4>${l.calls.length ? l.calls.map((c) => `<div class="call"><div class="ch"><b>${c.day} ottobre</b><small>${c.min} min · ${REPS[c.rep][0]}</small><span class="pill" style="background:#dcfce7;color:#15803d">${c.show ? "Presente" : "No-show"}</span><span class="pill" style="background:var(--soft);color:var(--ink)">Esito AI: ${c.esito}</span></div>
             <div class="kv"><span>Obiezione</span><b>${c.obj}</b><span>Prossimo passo</span><b>${c.next}</b></div></div>`).join("") : `<p style="margin:0;color:var(--muted)">Nessuna call registrata.</p>`}</div>
-        ${sug ? `<div class="box"><h4>Cosa mandarle adesso</h4>${sug.map(([t, why]) => `<div class="sug"><span class="t">${t}<small>${why}</small></span><button class="btn sm" data-copy="${esc(t)}">Copia messaggio</button></div>`).join("")}</div>` : ""}
+        ${sug ? `<div class="box"><h4>Cosa mandargli adesso</h4>${sug.map(([t, why]) => `<div class="sug"><span class="t">${t}<small>${why}</small></span><button class="btn sm" data-copy="${esc(t)}">Copia messaggio</button></div>`).join("")}</div>` : ""}
         ${l.stage === "lost" ? `<div class="box"><h4>Esito</h4><div class="kv"><span>Motivo</span><b>${esc(l.reason)}</b></div></div>` : ""}
         <div class="box"><h4>Diario</h4><ul class="tl">${l.log.map(([i, t, w]) => `<li><i>${i}</i><span>${esc(t)}<small>${w}</small></span></li>`).join("")}</ul></div>
       </div>`;
@@ -505,7 +505,7 @@
     $("#d-stage").onchange = (e) => moveLead(id, e.target.value);
     $("#drawer").querySelectorAll("[data-a]").forEach((s) => s.onchange = () => { l[s.dataset.a] = s.value; if (s.dataset.a === "demo" && s.value) l.owner = s.value; l.log.unshift(["👤", `${s.previousSibling.textContent.trim()}: ${s.value ? REPS[s.value][0] : "nessuno"}`, "adesso"]); save(); renderAll(); openLead(id); });
     $("#d-ai")?.addEventListener("click", (e) => { e.target.disabled = true; e.target.textContent = "Analisi in corso…"; setTimeout(() => { l.ai = { avatar: AVATARS[l.id % 3], aware: AWARE[l.id % 3], pain: "Non riesce a essere costante" }; l.log.unshift(["✦", "Profilo classificato con AI", "adesso"]); save(); openLead(id); toast("Profilo classificato"); }, 1400); });
-    $("#drawer").querySelectorAll("[data-copy]").forEach((b) => b.onclick = () => { const txt = `Ciao ${l.name.split(" ")[0]}! Come ti dicevo in call, ti lascio questo: ${b.dataset.copy}. Fammi sapere cosa ne pensi 🙂`; navigator.clipboard?.writeText(txt).catch(() => {}); toast("Messaggio WhatsApp copiato"); });
+    $("#drawer").querySelectorAll("[data-copy]").forEach((b) => b.onclick = () => { const txt = `Buongiorno ${l.name.split(" ")[0]}, come le dicevo durante il sopralluogo le giro questo: ${b.dataset.copy}. Resto a disposizione per qualsiasi dubbio.`; navigator.clipboard?.writeText(txt).catch(() => {}); toast("Messaggio WhatsApp copiato"); });
   }
   const closeAll = () => { $("#drawer").hidden = $("#scrim").hidden = true; };
 
@@ -536,9 +536,9 @@
     const team = cashOf(db.pays), pct = Math.min(100, team / BONUS_TEAM * 100);
     $("#bonus").innerHTML = `<p class="h">Bonus aziendale</p><b style="font-size:22px">${pct >= 100 ? "Obiettivo raggiunto 🎉" : `${Math.round(pct)}% dell'obiettivo`}</b>
       <div class="traj" style="margin:14px 0 8px"><i style="width:${pct}%"></i></div>
-      <p style="margin:0;color:var(--muted);font-size:13px">Sopra ${eur(BONUS_TEAM)} di cash del team, ogni venditrice con almeno 100 € di commissioni riceve <b style="color:var(--ink)">+${eur(BONUS_EACH)}</b>.</p>`;
+      <p style="margin:0;color:var(--muted);font-size:13px">Sopra ${eur(BONUS_TEAM)} incassati dal team, ogni consulente con almeno 100 € di commissioni riceve <b style="color:var(--ink)">+${eur(BONUS_EACH)}</b>.</p>`;
     const rows = repKeys.map((k) => { const g = cashOf(db.pays, k); return [k, g, tierOf(g)[1], commOf(g)]; }).sort((a, b) => b[1] - a[1]);
-    $("#comm-all").innerHTML = `<thead><tr><th>Venditrice</th><th class="n">Incassato lordo</th><th class="n">Netto</th><th class="n">Scaglione</th><th class="n">Commissione</th></tr></thead><tbody>${rows.map(([k, g, r, c]) => `<tr data-rep="${k}"><td><span class="who">${av(k)}${REPS[k][0]}</span></td><td class="n">${eur(g)}</td><td class="n">${eur(g / 1.1)}</td><td class="n">${r}%</td><td class="n"><b>${eur(c)}</b></td></tr>`).join("")}</tbody>`;
+    $("#comm-all").innerHTML = `<thead><tr><th>Consulente</th><th class="n">Incassato lordo</th><th class="n">Netto</th><th class="n">Scaglione</th><th class="n">Commissione</th></tr></thead><tbody>${rows.map(([k, g, r, c]) => `<tr data-rep="${k}"><td><span class="who">${av(k)}${REPS[k][0]}</span></td><td class="n">${eur(g)}</td><td class="n">${eur(g / 1.1)}</td><td class="n">${r}%</td><td class="n"><b>${eur(c)}</b></td></tr>`).join("")}</tbody>`;
   }
 
   // ---- pagamenti ----
@@ -548,13 +548,13 @@
     $("#pay-pills").innerHTML = `<b style="font-size:15px">Ottobre · ${eur(cashOf(db.pays))}</b><span style="color:var(--muted)">${db.pays.length} pagamenti</span><span style="flex:1"></span>` +
       per.map(([k, v]) => `<button class="btn sm" data-pr="${k}" style="${payRep === k ? "border-color:var(--blue);background:#eef4ff" : ""}">${av(k)} ${eur(v)}</button>`).join("");
     const list = db.pays.filter((p) => !payRep || p.owner === payRep).slice().sort((a, b) => b.day - a.day || b.id - a.id);
-    $("#pays").innerHTML = `<thead><tr><th>Data</th><th>Cliente</th><th>Venditrice</th><th>Metodo</th><th class="n">Importo</th></tr></thead><tbody>${list.map((p) => `<tr><td>${p.day} ottobre</td><td>${esc(p.client)}</td><td><span class="who">${av(p.owner)}${REPS[p.owner][0]}</span></td><td>${p.method}</td><td class="n"><b>${eur(p.amount)}</b></td></tr>`).join("")}</tbody>`;
+    $("#pays").innerHTML = `<thead><tr><th>Data</th><th>Cliente</th><th>Consulente</th><th>Metodo</th><th class="n">Importo</th></tr></thead><tbody>${list.map((p) => `<tr><td>${p.day} ottobre</td><td>${esc(p.client)}</td><td><span class="who">${av(p.owner)}${REPS[p.owner][0]}</span></td><td>${p.method}</td><td class="n"><b>${eur(p.amount)}</b></td></tr>`).join("")}</tbody>`;
   }
 
   const renderAll = () => { renderDash(); renderLeads(); renderRank(); renderComm(); renderPays(); };
 
   // ---- eventi ----
-  const TITLES = { dash: "Dashboard vendite", leads: "Lead", rank: "Classifica", comm: "Commissioni", pay: "Pagamenti" };
+  const TITLES = { dash: "Dashboard vendite", leads: "Pipeline clienti", rank: "Classifica", comm: "Commissioni", pay: "Pagamenti" };
   document.querySelectorAll(".nav[data-view]").forEach((b) => b.onclick = () => {
     document.querySelectorAll(".nav[data-view]").forEach((x) => x.removeAttribute("aria-current")); b.setAttribute("aria-current", "page");
     document.querySelectorAll(".view").forEach((v) => { v.hidden = v.id !== `v-${b.dataset.view}`; });
@@ -574,7 +574,7 @@
   $("#add").onclick = () => { $("#m-new").hidden = false; $("#f-new").name.focus(); };
   $("#f-new").addEventListener("submit", (e) => {
     e.preventDefault(); const f = new FormData(e.target);
-    const l = { id: Math.max(...db.leads.map((x) => x.id)) + 1, name: f.get("name").trim(), phone: f.get("phone").trim() || "—", source: f.get("source"), interest: f.get("interest"), stage: "call", owner: f.get("owner"), cold: "", disco: "", demo: "", days: 0, prio: true, ai: null, calls: [], reason: "", log: [["＋", "Lead creato a mano", "adesso"]] };
+    const l = { id: Math.max(...db.leads.map((x) => x.id)) + 1, name: f.get("name").trim(), phone: f.get("phone").trim() || "—", source: f.get("source"), interest: f.get("interest"), stage: "call", owner: f.get("owner"), cold: "", disco: "", demo: "", days: 0, prio: true, ai: null, calls: [], reason: "", log: [["＋", "Cliente inserito a mano", "adesso"]] };
     db.leads.push(l); save(); renderAll(); e.target.reset(); $("#m-new").hidden = true; toast(`Lead creato e assegnato a <b>${REPS[l.owner][0]}</b>`);
   });
   $("#f-lost").addEventListener("submit", (e) => {
