@@ -210,10 +210,10 @@ def goal_state():
     return out, active
 
 
-VERSION = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["styles.css", "alt-overrides.css", "site.js", "mission.js", "agent.js"])).hexdigest()[:8]
+VERSION = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["styles.css", "alt-overrides.css", "site.js", "mission.js", "agent.js", "audit.js"])).hexdigest()[:8]
 SLUG = {
-    "it": {"home": "index.html", "work": "lavori.html", "services": "servizi.html", "solutions": "soluzioni.html", "mission": "missione.html", "studio": "lab.html", "contact": "contatti.html"},
-    "en": {"home": "index.html", "work": "work.html", "services": "services.html", "solutions": "solutions.html", "mission": "mission.html", "studio": "lab.html", "contact": "contact.html"},
+    "it": {"home": "index.html", "work": "lavori.html", "services": "servizi.html", "solutions": "soluzioni.html", "mission": "missione.html", "studio": "lab.html", "contact": "contatti.html", "audit": "audit.html"},
+    "en": {"home": "index.html", "work": "work.html", "services": "services.html", "solutions": "solutions.html", "mission": "mission.html", "studio": "lab.html", "contact": "contact.html", "audit": "audit.html"},
 }
 NAV = ["work", "services", "solutions", "studio", "mission"]
 
@@ -363,6 +363,14 @@ T = {
         "sign": ("Alessandro", "Fondatore, Reef 7 Lab"),
         "photo_alt": "Alessandro, fondatore di Reef 7 Lab",
         "more": "Leggi tutta la storia",
+    },
+    "audit": {
+        "title": "Audit di automazione gratuito · Reef 7 Lab", "desc": "In due minuti scopri quante ore a settimana il tuo team potrebbe recuperare e cosa automatizzare per primo.",
+        "k": "Audit gratuito", "h1": "Quanto tempo può <em>recuperare</em> il tuo team?",
+        "sub": "Rispondi a poche domande sul lavoro che fate ancora a mano. Ricevi una stima delle ore recuperabili, le priorità e un piano in 3 passi, anche in PDF.",
+        "pts": ["2 minuti", "Report personalizzato", "Gratis, senza impegno"],
+        "home_k": "Audit gratuito", "home_h": "Quante ore perde ogni settimana <em>il tuo team</em>?", "home_p": "In due minuti scopri cosa conviene automatizzare per primo e quanto tempo potresti recuperare.", "home_a": "Fai l'audit",
+        "contact_p": "Non sai ancora da dove partire?", "contact_a": "Fai prima l'audit gratuito",
     },
     "contact": {
         "title": "Contact · Reef 7 Lab", "desc": "Raccontaci il tuo progetto: ti rispondiamo entro un giorno lavorativo con le prime idee.",
@@ -538,6 +546,14 @@ T = {
         "sign": ("Alessandro", "Founder, Reef 7 Lab"),
         "photo_alt": "Alessandro, founder of Reef 7 Lab",
         "more": "Read the full story",
+    },
+    "audit": {
+        "title": "Free automation audit · Reef 7 Lab", "desc": "In two minutes, find out how many hours a week your team could win back and what to automate first.",
+        "k": "Free audit", "h1": "How much time could your team <em>win back</em>?",
+        "sub": "Answer a few questions about the work you still do by hand. Get an estimate of the hours you could recover, your priorities and a 3-step plan, also as a PDF.",
+        "pts": ["2 minutes", "Personalised report", "Free, no commitment"],
+        "home_k": "Free audit", "home_h": "How many hours does <em>your team</em> lose every week?", "home_p": "In two minutes, find out what's worth automating first and how much time you could win back.", "home_a": "Take the audit",
+        "contact_p": "Not sure where to start yet?", "contact_a": "Take the free audit first",
     },
     "contact": {
         "title": "Contact · Reef 7 Lab", "desc": "Tell us about your project: we'll reply within one business day with first ideas.",
@@ -796,6 +812,10 @@ def build(lang, variant=""):
 <section class="block"><div class="wrap">
   {eco(H, pre)}
 </div></section>
+<section class="block au-promo-block"><div class="wrap"><a class="au-promo" href="{u('audit')}">
+  <div><p class="mono">{L['audit']['home_k']}</p><h2>{L['audit']['home_h']}</h2><p>{L['audit']['home_p']}</p></div>
+  <span class="btn">{L['audit']['home_a']} {arrow}</span>
+</a></div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{W['home_h']}</h2><p>{W['home_p']}</p></div>
   <div class="work-grid">{work_cards}</div>
@@ -962,6 +982,7 @@ def build(lang, variant=""):
   <aside class="contact-side">
     <p class="mono" style="margin-bottom:18px">{C['next_k']}</p>
     <ol class="next-steps">{steps_side}</ol>
+    <p class="au-side">{L['audit']['contact_p']} <a class="link" href="{u('audit')}">{L['audit']['contact_a']} {arrow}</a></p>
     <ul class="contact-info" style="margin-top:44px">{info}</ul>
   </aside>
   <div class="form-card">
@@ -970,6 +991,14 @@ def build(lang, variant=""):
     <div class="form-ok" hidden><span class="tick" aria-hidden="true">✓</span><h3>{F['ok_h']}</h3><p>{F['ok_p']}</p></div>
   </div>
 </div></section>""")
+
+    # audit di automazione: domande, stima e report generati da audit.js
+    A = L["audit"]
+    out["audit"] = page("audit", A["title"], A["desc"], head_block(A["k"], A["h1"], A["sub"]) + f"""
+<section class="block au-block"><div class="wrap">
+  <ul class="au-pts">{"".join(f"<li>{x}</li>" for x in A['pts'])}</ul>
+  <div id="audit"></div>
+</div></section>""", extra=f'\n<script src="{pre}audit.js?v={VERSION}"></script>')
 
     base = ROOT / variant if variant else ROOT
     folder = base if lang == "it" else base / "en"
