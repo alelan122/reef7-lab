@@ -86,6 +86,7 @@ WORK = [
     {"key": "fullpeak", "frame": "scroll", "url": "https://fullpeak.store/products/full-peak-magnesium-complex", "src": "assets/work/fullpeak-pdp.jpg", "thumb": "assets/work/thumb-fullpeak.jpg"},
     {"key": "dailypeak", "frame": "phone", "url": "work/my-daily-peak/index.html", "src": "work/my-daily-peak/index.html", "thumb": "assets/work/thumb-dailypeak.jpg"},
     {"key": "maisenzagioie", "frame": "browser", "url": "work/maisenzagioie/index.html", "src": "work/maisenzagioie/index.html", "thumb": "assets/work/thumb-maisenzagioie.jpg"},
+    {"key": "kasinolatino", "frame": "browser", "url": "https://alelan122.github.io/kasino-latino-anteprima/", "src": "https://alelan122.github.io/kasino-latino-anteprima/", "thumb": "assets/work/thumb-kasinolatino.jpg", "bar": "reef7lab · Kasino Latino"},
 ]
 WT = {
 "it": {
@@ -117,6 +118,11 @@ WT = {
                           "text": "Il sito racconta l'artigianalità di ogni pezzo e permette di creare la propria collana scegliendo fili e pietre. Dietro le quinte, un pannello semplice consente alla titolare di aggiornare prodotti e prezzi in autonomia, senza dipendere da nessuno.",
                           "points": ["Configuratore per creare la propria collana", "Catalogo organizzato per collezioni", "Pannello di gestione semplice e privato", "Design su misura e caricamento rapido"],
                           "note": "Anteprima navigabile del sito."},
+        "kasinolatino": {"name": "Kasino Latino", "client": "Kasino Latino A.S.D.", "type": "Sito per una scuola di ballo", "year": "2026",
+                         "lead": "Il nuovo sito di una scuola di salsa e bachata con tre sedi nelle Marche.",
+                         "text": "Orari, sedi e corsi sono il cuore del sito: si filtrano per giorno, mostrano sempre la prossima lezione disponibile e portano dritti alla prenotazione della prova gratuita, anche su WhatsApp. Per la scuola, aggiornare la stagione significa cambiare una sola lista: tabelle, filtri e messaggi si aggiornano da soli.",
+                         "points": ["Orari filtrabili per sede e per giorno", "Prenotazione della lezione di prova, anche via WhatsApp", "Istruttori, serate e gallery", "Veloce sul telefono, dove arrivano quasi tutte le visite"],
+                         "note": "Anteprima navigabile del sito."},
     },
     "home_h": "Projects", "home_p": "Una selezione di progetti recenti, da esplorare dal vivo.", "home_a": "Tutti i progetti",
     "partners_k": "Partner", "partners_h": "Partner, <em>non semplici clienti</em>.",
@@ -156,6 +162,11 @@ WT = {
                           "text": "The site tells the story of the craftsmanship behind every piece and lets visitors design their own necklace by choosing threads and stones. Behind the scenes, a simple panel lets the owner update products and prices on her own, without depending on anyone.",
                           "points": ["Configurator to design your own necklace", "Catalogue organised by collection", "Simple, private management panel", "Custom design and fast loading"],
                           "note": "Browsable website preview."},
+        "kasinolatino": {"name": "Kasino Latino", "client": "Kasino Latino A.S.D.", "type": "Website for a dance school", "year": "2026",
+                         "lead": "The new website for a salsa and bachata school with three locations in central Italy.",
+                         "text": "Schedules, locations and classes are the heart of the site: they filter by day, always show the next available class and lead straight to booking a free trial, WhatsApp included. For the school, updating the season means editing a single list: tables, filters and messages update themselves.",
+                         "points": ["Schedules filtered by location and day", "Free trial booking, WhatsApp included", "Instructors, events and gallery", "Fast on mobile, where almost every visit comes from"],
+                         "note": "Browsable website preview."},
     },
     "home_h": "Projects", "home_p": "A selection of recent projects, ready to explore live.", "home_a": "All projects",
     "partners_k": "Partners", "partners_h": "Partners, <em>not just clients</em>.",
@@ -320,6 +331,7 @@ T = {
                   ("5 lingue", "Laurea in Mediazione linguistica, 2025"), ("Partner", "Asia Baldoni Fitness e Tartufoli Group")],
         "sign": ("Alessandro", "Fondatore, Reef 7 Lab"),
         "photo_alt": "Alessandro, fondatore di Reef 7 Lab",
+        "more": "Leggi tutta la storia",
     },
     "contact": {
         "title": "Contact · Reef 7 Lab", "desc": "Raccontaci il tuo progetto: ti rispondiamo entro un giorno lavorativo con le prime idee.",
@@ -476,6 +488,7 @@ T = {
                   ("5 languages", "Degree in Language Mediation, 2025"), ("Partners", "Asia Baldoni Fitness and Tartufoli Group")],
         "sign": ("Alessandro", "Founder, Reef 7 Lab"),
         "photo_alt": "Alessandro, founder of Reef 7 Lab",
+        "more": "Read the full story",
     },
     "contact": {
         "title": "Contact · Reef 7 Lab", "desc": "Tell us about your project: we'll reply within one business day with first ideas.",
@@ -661,9 +674,9 @@ def build(lang, variant=""):
     def frame(w):
         p = W["projects"][w["key"]]
         kind = w["frame"]
-        bar = f'<div class="fr-bar"><i></i><i></i><i></i><span>{w["url"].replace("https://", "") if w["url"] and w["url"].startswith("http") else "reef7lab · " + p["name"]}</span></div>'
+        bar = f'<div class="fr-bar"><i></i><i></i><i></i><span>{w.get("bar") or w["url"].replace("https://", "") if w["url"] and w["url"].startswith("http") else "reef7lab · " + p["name"]}</span></div>'
         if kind == "browser":
-            return f'<div class="fr fr-browser">{bar}<iframe src="{pre}{w["src"]}" title="{p["name"]}" loading="lazy"></iframe></div>'
+            return f'<div class="fr fr-browser">{bar}<iframe src="{w["src"] if w["src"].startswith("http") else pre + w["src"]}" title="{p["name"]}" loading="lazy"></iframe></div>'
         if kind == "phone":
             return f'<div class="fr-phone-wrap"><div class="fr fr-phone"><span class="notch"></span><iframe src="{pre}{w["src"]}" title="{p["name"]}" loading="lazy"></iframe></div></div>'
         if kind == "scroll":
@@ -850,7 +863,7 @@ def build(lang, variant=""):
 </div></section>
 <section class="block"><div class="wrap about">
   <div class="portrait"><img src="{pre}assets/alessandro.jpg" alt="{St['photo_alt']}" width="512" height="512"></div>
-  <div><p class="big">{St['who_big']}</p>{who}
+  <div><p class="big">{St['who_big']}</p><div class="about-bio" data-more="{St['more']}">{who}</div>
     <ul class="creds">{"".join(f"<li><b>{k}</b><span>{v}</span></li>" for k, v in St['creds'])}</ul>
     <div class="sign"><b>{St['sign'][0]}</b><span>{St['sign'][1]}</span></div></div>
 </div></section>""", extra=libs + f'\n<script src="{pre}mission.js?v={VERSION}"></script>')

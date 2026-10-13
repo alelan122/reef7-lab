@@ -19,6 +19,17 @@
     }));
   });
 
+  // su telefono i blocchi lunghi si aprono a richiesta (su desktop il pulsante è nascosto)
+  const en = document.documentElement.lang === "en";
+  document.querySelectorAll(".svc, .case, .principle, .about-bio, .project-info").forEach((el) => {
+    const more = el.dataset.more || (en ? "Read more" : "Scopri di più"), less = en ? "Show less" : "Mostra meno";
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "fold-btn"; b.textContent = more; b.setAttribute("aria-expanded", "false");
+    b.addEventListener("click", () => { const o = el.classList.toggle("open"); b.textContent = o ? less : more; b.setAttribute("aria-expanded", o); });
+    el.classList.add("fold");
+    el.appendChild(b);
+  });
+
   // modulo contatti in tre passi: controlla ogni passo, poi invia tutte le risposte via FormSubmit (arrivano nella casella del Lab)
   const form = document.getElementById("contact-form");
   if (form) {
