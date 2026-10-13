@@ -34,9 +34,12 @@
     fail: "Sending didn't work. You can use the form instead:", declined: "No problem. You can always use the contact form:",
     restart: "Start over", huh: "I'm not sure I understood. Pick one of the options, or put it another way.",
     note: "Guided demo. The agents we build for you use real AI, connected to your CRM and calendar, on your website, WhatsApp and email.",
-    svc: { "11": "AI sales agents", "03": "Custom CRM", "13": "Sales call analysis", "06": "Automation, with and without AI", "12": "AI voice assistants", "08": "Dashboards", "09": "Company hub", "15": "Multilingual websites", "16": "Italy-China bridge", "07": "Company brain", "14": "3D configurators", "01": "Websites" },
+    svc: { "11": "AI sales agents", "03": "Custom CRM", "13": "Sales call analysis", "06": "Automation, with and without AI", "12": "AI voice assistants", "08": "Dashboards", "09": "Company hub", "15": "Multilingual websites", "16": "Italy-China bridge", "07": "Company brain", "14": "3D configurators", "01": "Websites", "02": "Custom applications", "04": "Bookings", "05": "Email marketing" },
     need: { sales: ["CRM and sales", "AI agents and voice assistants"], manual: ["Automation (with or without AI)"], data: ["Dashboards and financial control"], abroad: ["Multilingual or China projects"], unsure: ["Not sure yet"] },
     subject: "New lead from the AI agent", typing: "typing",
+    status_ai: "AI · replies in seconds", note_ai: "Reef 7 Lab's AI Agent, built with Claude. It may make mistakes: the call is where we go into detail.",
+    ai_err: "I'm having trouble replying right now. You can reach us through the form:",
+    formNeed: ["Website or landing page", "Custom app or management system", "CRM and sales", "Bookings and email marketing", "Automation (with or without AI)", "AI agents and voice assistants", "Company brain", "Dashboards and financial control", "Software integrations", "Multilingual or China projects", "Not sure yet"],
   } : {
     open: "Agent AI", title: "Agent AI", status: "Demo · risponde in pochi secondi", ph: "Scrivi un messaggio…", send: "Invia",
     teaser: "Vuoi scoprire in 30 secondi cosa potremmo automatizzare nella tua azienda?",
@@ -63,15 +66,23 @@
     fail: "L'invio non è riuscito. Puoi usare il modulo:", declined: "Nessun problema. Puoi sempre usare il modulo contatti:",
     restart: "Ricomincia", huh: "Non sono sicuro di aver capito. Scegli una delle opzioni, oppure dimmelo in un altro modo.",
     note: "Demo guidata. Gli agenti che costruiamo per te usano l'AI vera, collegata al tuo CRM e al tuo calendario, su sito, WhatsApp ed email.",
-    svc: { "11": "Agenti AI per le vendite", "03": "CRM su misura", "13": "Analisi delle call", "06": "Automazioni", "12": "Assistenti vocali AI", "08": "Dashboard", "09": "Hub aziendale", "15": "Siti multilingue", "16": "Ponte Italia-Cina", "07": "Company brain", "14": "Configuratori 3D", "01": "Siti web" },
+    svc: { "11": "Agenti AI per le vendite", "03": "CRM su misura", "13": "Analisi delle call", "06": "Automazioni", "12": "Assistenti vocali AI", "08": "Dashboard", "09": "Hub aziendale", "15": "Siti multilingue", "16": "Ponte Italia-Cina", "07": "Company brain", "14": "Configuratori 3D", "01": "Siti web", "02": "Applicazioni su misura", "04": "Prenotazioni", "05": "Email marketing" },
     need: { sales: ["CRM e vendite", "Agenti AI e assistenti vocali"], manual: ["Automazioni (con o senza AI)"], data: ["Dashboard e controllo di gestione"], abroad: ["Multilingue o progetti con la Cina"], unsure: ["Non lo so ancora"] },
     subject: "Nuovo contatto dall'agente AI", typing: "sta scrivendo",
+    status_ai: "AI · risponde in pochi secondi", note_ai: "Agent AI di Reef 7 Lab, costruito con Claude. Può sbagliare: i dettagli li vediamo insieme in call.",
+    ai_err: "In questo momento non riesco a rispondere. Puoi scriverci dal modulo:",
+    formNeed: ["Sito web o landing page", "App o gestionale su misura", "CRM e vendite", "Prenotazioni ed email marketing", "Automazioni (con o senza AI)", "Agenti AI e assistenti vocali", "Company brain", "Dashboard e controllo di gestione", "Integrazioni tra software", "Multilingue o progetti con la Cina", "Non lo so ancora"],
   };
 
   // servizi consigliati per obiettivo, ritoccati dal settore; progetto del portfolio più vicino al settore
   const REC = { sales: ["11", "03", "13"], manual: ["06", "12", "07"], data: ["08", "09"], abroad: ["15", "16"], unsure: ["07", "11"] };
   const SECTOR_SVC = { ecom: "14", local: "12", edu: "11", services: "07", b2b: "13", craft: "01" };
   const CASE = { ecom: ["Full Peak", "fullpeak"], services: ["Tenka OS", "tenka"], edu: ["My Daily Peak", "dailypeak"], b2b: ["Tenka OS", "tenka"], local: ["Kasino Latino", "kasinolatino"], craft: ["Maisenzagioie", "maisenzagioie"] };
+
+  // modalità AI: le chiavi "need" del Worker diventano servizi consigliati e opzioni del modulo contatti
+  const AI = window.REEF && window.REEF.agent;
+  const NEED = { site: ["01", 0], app: ["02", 1], "3d": ["14", 1], crm: ["03", 2], bookings: ["04", 3], email: ["05", 3], agents: ["11", 5], voice: ["12", 5], calls: ["13", 5], automation: ["06", 4], brain: ["07", 6], dashboard: ["08", 7], integrations: ["09", 8], multilingual: ["15", 9], china: ["16", 9] };
+  const TEAM = { "1-5": 0, "6-20": 1, "21-50": 2, "50+": 3 }, WHEN = { now: 0, "1-3m": 1, "6m": 2, exploring: 3 };
 
   // comprensione del testo libero: parole chiave per ogni risposta possibile
   const KW = {
@@ -103,6 +114,7 @@
   const log = panel.querySelector(".ag-log"), chips = panel.querySelector(".ag-chips");
   const input = panel.querySelector(".ag-input input"), sendBtn = panel.querySelector(".ag-input button");
   let started = false, pending = null, teaser = null;
+  const start = () => (AI ? runAI() : run());
 
   // invito discreto dopo qualche secondo, una sola volta per visita
   let seen = false;
@@ -121,7 +133,7 @@
     launcher.setAttribute("aria-expanded", open);
     launcher.classList.toggle("on", open);
     if (teaser) { teaser.remove(); teaser = null; }
-    if (open && !started) { started = true; run(); }
+    if (open && !started) { started = true; start(); }
     if (open && !input.disabled) input.focus();
   };
   launcher.addEventListener("click", () => toggle(panel.hidden));
@@ -162,77 +174,118 @@
     if (txt && pending) pending(txt);
   });
 
+  // demo guidata: domande fisse, testo libero capito con parole chiave
   async function run() {
     log.innerHTML = "";
-    const st = {};
     await say(T.hello);
-    st.goal = await ask(Object.entries(T.goals).map(([k, v]) => [k, v[0]]), (t) => match(KW.goal, t.toLowerCase()) || null);
-    await say(T.goals[st.goal][1]);
+    const goal = await ask(Object.entries(T.goals).map(([k, v]) => [k, v[0]]), (t) => match(KW.goal, t.toLowerCase()) || null);
+    await say(T.goals[goal][1]);
     await say(T.sector_q);
-    st.sector = await ask(Object.entries(T.sectors), (t) => match(KW.sector, t.toLowerCase()) || null);
-    await say(T.team_q(T.sectors[st.sector]));
+    const sector = await ask(Object.entries(T.sectors), (t) => match(KW.sector, t.toLowerCase()) || null);
+    await say(T.team_q(T.sectors[sector]));
     const ti = await ask(T.team.map((x, i) => [i, x]), (t) => { const i = teamFrom(t.toLowerCase()); return i < 0 ? null : i; });
-    st.team = T.team[ti];
     await say(T.when_q);
     const wi = await ask(T.when.map((x, i) => [i, x]), (t) => { const l = t.toLowerCase(); const i = [0, 3, 2, 1].find((k) => KW.when[k].test(l)); return i == null ? null : i; });
-    st.when = T.when[wi];
     await say(wi <= 1 ? T.hot : T.warm);
+    await closing({
+      goal: T.goals[goal][0], sector: T.sectors[sector], sectorKey: sector, team: T.team[ti], when: T.when[wi],
+      ids: [...new Set([...REC[goal], SECTOR_SVC[sector]])].slice(0, 3), need: T.need[goal],
+    });
+  }
 
-    const ids = [...new Set([...REC[st.goal], SECTOR_SVC[st.sector]])].slice(0, 3);
-    st.recs = ids.map((id) => T.svc[id]);
-    const recs = ids.map((id) => `<a href="${svcPage}#s${id}">${T.svc[id]}</a>`).join("");
-    const [caseName, caseId] = CASE[st.sector];
-    await say(`${T.sum}<dl class="ag-sum"><div><dt>${T.k_goal}</dt><dd>${T.goals[st.goal][0]}</dd></div><div><dt>${T.k_sector}</dt><dd>${T.sectors[st.sector]}</dd></div><div><dt>${T.k_team}</dt><dd>${st.team}</dd></div><div><dt>${T.k_when}</dt><dd>${st.when}</dd></div><div><dt>${T.k_svc}</dt><dd class="ag-recs">${recs}</dd></div></dl>`);
-    await say(T.case(caseName, `${workPage}#${caseId}`));
+  // modalità AI: conversazione libera con l'Agent AI tramite il Worker, fino alla proposta di call
+  async function runAI() {
+    log.innerHTML = "";
+    panel.querySelector(".ag-head small").textContent = T.status_ai;
+    const history = [];
+    await say(T.hello.replace(/^.*?\. /, en ? "Hi! I'm Reef 7 Lab's AI Agent. " : "Ciao! Sono l'Agent AI di Reef 7 Lab. "));
+    let chipsNow = Object.values(T.goals).map((g) => [g[0], g[0]]);
+    for (let turn = 0; turn < 10; turn++) {
+      const txt = await ask(chipsNow, (t) => t.slice(0, 1000));
+      history.push({ role: "user", content: txt });
+      const t = el("div", "ag-msg bot ag-typing", `<i></i><i></i><i></i><span class="sr">${T.typing}</span>`);
+      log.append(t); scroll();
+      let data = null;
+      try {
+        const res = await fetch(AI, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history }) });
+        data = await res.json();
+        if (!res.ok || !data.reply) data = null;
+      } catch { data = null; }
+      t.remove();
+      if (!data) { await say(`${T.ai_err}<div class="ag-actions"><a class="ag-book" href="${contactPage}#contact-form">${T.book_btn} →</a></div>`); return finish(); }
+      history.push({ role: "assistant", content: data.reply });
+      await say(esc(data.reply));
+      const L = data.lead || {};
+      if (data.action === "propose_call" || turn === 9) {
+        const keys = (L.need || []).filter((k) => NEED[k]);
+        const known = (v) => (v && v !== "unknown" ? v : "");
+        return closing({
+          goal: known(L.goal), sector: known(L.sector), sectorKey: match(KW.sector, (L.sector || "").toLowerCase()),
+          team: T.team[TEAM[L.team]] || "", when: T.when[WHEN[L.when]] || "",
+          ids: [...new Set(keys.map((k) => NEED[k][0]))].slice(0, 3), need: [...new Set(keys.map((k) => T.formNeed[NEED[k][1]]))],
+          transcript: history.map((m) => `${m.role === "user" ? "Visitatore" : "Agent AI"}: ${m.content}`).join("\n"),
+        }, true);
+      }
+      chipsNow = (data.suggestions || []).slice(0, 4).map((x) => [x, x]);
+    }
+  }
+
+  // riepilogo, progetto simile e raccolta del contatto: uguale per demo e AI
+  async function closing(st, ai = false) {
+    const row = (k, v) => (v ? `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>` : "");
+    const recs = st.ids.map((id) => `<a href="${svcPage}#s${id}">${T.svc[id]}</a>`).join("");
+    await say(`${T.sum}<dl class="ag-sum">${row(T.k_goal, st.goal)}${row(T.k_sector, st.sector)}${row(T.k_team, st.team)}${row(T.k_when, st.when)}${recs ? `<div><dt>${T.k_svc}</dt><dd class="ag-recs">${recs}</dd></div>` : ""}</dl>`);
+    if (CASE[st.sectorKey]) { const [caseName, caseId] = CASE[st.sectorKey]; await say(T.case(caseName, `${workPage}#${caseId}`)); }
 
     await say(T.next_q);
     const how = await ask([["book", T.c_book], ["here", T.c_here]]);
-    const q = new URLSearchParams({ need: T.need[st.goal].join("|"), team: st.team, when: st.when, goal: `${T.goals[st.goal][0]} · ${T.sectors[st.sector]}` });
+    const q = new URLSearchParams({ need: st.need.join("|"), team: st.team, when: st.when, goal: [st.goal, st.sector].filter(Boolean).join(" · ") });
     const formLink = `${contactPage}?${q}#contact-form`;
     if (how === "book") {
       await say(`${T.book}<div class="ag-actions"><a class="ag-book" href="${formLink}">${T.book_btn} →</a></div>`);
-      return finish();
+      return finish(ai);
     }
     await say(T.name_q);
-    st.name = await ask([], (t) => t.slice(0, 80));
-    await say(T.email_q(esc(st.name.split(" ")[0])));
+    const name = await ask([], (t) => t.slice(0, 80));
+    const first = esc(name.split(" ")[0]);
+    await say(T.email_q(first));
     let email = null;
     while (!email) {
       const v = await ask([], (t) => t);
       if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) email = v; else await say(T.email_bad);
     }
-    st.email = email;
     await say(T.consent_q);
     const ok = await ask([["yes", T.yes], ["no", T.no]]);
-    if (ok === "no") { await say(`${T.declined}<div class="ag-actions"><a class="ag-book" href="${formLink}">${T.book_btn} →</a></div>`); return finish(); }
+    if (ok === "no") { await say(`${T.declined}<div class="ag-actions"><a class="ag-book" href="${formLink}">${T.book_btn} →</a></div>`); return finish(ai); }
     const wait1 = el("div", "ag-msg bot", T.sending); log.append(wait1); scroll();
     try {
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          _subject: `${T.subject}: ${st.name} · ${T.goals[st.goal][0]}`, _replyto: st.email, _template: "table", _captcha: "false",
-          "Nome": st.name, "Email": st.email, "Obiettivo": T.goals[st.goal][0], "Settore": T.sectors[st.sector],
-          "Persone in azienda": st.team, "Quando partire": st.when, "Servizi consigliati": st.recs.join(", "), "Fonte": "Agente AI del sito",
+          _subject: `${T.subject}: ${name} · ${st.goal || st.sector || "—"}`, _replyto: email, _template: "table", _captcha: "false",
+          "Nome": name, "Email": email, "Obiettivo": st.goal || "—", "Settore": st.sector || "—",
+          "Persone in azienda": st.team || "—", "Quando partire": st.when || "—", "Servizi consigliati": st.ids.map((id) => T.svc[id]).join(", ") || "—",
+          "Fonte": ai ? "Agent AI del sito (AI)" : "Agent AI del sito (demo)", ...(st.transcript ? { "Conversazione": st.transcript } : {}),
         }),
       });
       const out = await res.json().catch(() => ({}));
       if (!res.ok || out.success === false || out.success === "false") throw new Error();
       wait1.remove();
-      await say(T.sent(esc(st.name.split(" ")[0])));
+      await say(T.sent(first));
     } catch {
       wait1.remove();
       await say(`${T.fail}<div class="ag-actions"><a class="ag-book" href="${formLink}">${T.book_btn} →</a></div>`);
     }
-    finish();
+    finish(ai);
   }
 
-  async function finish() {
-    log.append(el("p", "ag-note", T.note));
+  async function finish(ai = !!AI) {
+    log.append(el("p", "ag-note", ai ? T.note_ai : T.note));
     chips.innerHTML = "";
     pending = null; input.value = ""; input.disabled = sendBtn.disabled = true;
     const b = el("button", "ag-chip", T.restart); b.type = "button";
-    b.addEventListener("click", run);
+    b.addEventListener("click", start);
     chips.append(b);
     scroll();
   }

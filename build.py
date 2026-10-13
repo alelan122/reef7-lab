@@ -9,6 +9,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent
 EMAIL = "lancioni.ale@gmail.com"
+# indirizzo del Worker dell'Agent AI (projects/reef7-agent): vuoto = demo guidata
+AGENT_URL = ""
 # versione dei file di stile e script: cambia quando cambiano, così il browser non usa copie vecchie
 
 # ---------------- Missione: il 5% degli introiti al mare ----------------
@@ -664,7 +666,7 @@ def build(lang, variant=""):
   <nav aria-label="{L['pages']}">{foot_links}</nav>
   <a class="r" href="mailto:{EMAIL}">{EMAIL}</a>
 </div></footer>
-<script>window.REEF = {{ email: "{EMAIL}" }};</script>
+<script>window.REEF = {{ email: "{EMAIL}", agent: "{AGENT_URL}" }};</script>
 <script src="{pre}site.js?v={VERSION}"></script>
 <script src="{pre}agent.js?v={VERSION}"></script>{extra}
 </body>
