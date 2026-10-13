@@ -199,6 +199,49 @@
   .ritem:hover { border-color: var(--em); }
   .ritem .t { flex: 1; } .ritem .t b { display: block; font-size: 13.5px; } .ritem .t small { color: var(--muted); }
   @media (max-width: 1000px) { .kpi3, .today .two { grid-template-columns: 1fr; } .cashc { grid-template-columns: auto 1fr; } .cashc .light { grid-column: 1 / -1; justify-self: start; } }
+  /* rifinitura estetica */
+  body { background: radial-gradient(1200px 600px at 85% -10%, rgba(59, 130, 246, .10), transparent 60%), radial-gradient(900px 500px at 10% 110%, rgba(245, 183, 64, .06), transparent 60%), var(--bg); }
+  :root[data-theme="light"] body { background: var(--bg); }
+  .card, .box, .col { box-shadow: 0 1px 0 rgba(255, 255, 255, .03) inset, 0 10px 30px rgba(0, 0, 0, .18); }
+  :root[data-theme="light"] .card, :root[data-theme="light"] .box, :root[data-theme="light"] .col { box-shadow: 0 1px 2px rgba(15, 23, 42, .05); }
+  .card { border-radius: 16px; background: linear-gradient(180deg, rgba(255, 255, 255, .025), rgba(255, 255, 255, 0)), var(--panel); }
+  .top { background: rgba(11, 16, 32, .75); backdrop-filter: blur(10px); }
+  :root[data-theme="light"] .top { background: rgba(255, 255, 255, .85); }
+  .main { background: transparent; }
+  .side { background: rgba(11, 16, 32, .6); backdrop-filter: blur(8px); }
+  :root[data-theme="light"] .side { background: #fff; }
+  .nav { position: relative; }
+  .nav[aria-current="page"]::before { content: ""; position: absolute; left: -12px; top: 8px; bottom: 8px; width: 3px; border-radius: 0 3px 3px 0; background: var(--em); }
+  .ico { background: rgba(245, 183, 64, .12); color: var(--em); border: 1px solid rgba(245, 183, 64, .18); }
+  .cashc .val { font-size: 46px; background: linear-gradient(180deg, #fff, #c9d3e8); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  :root[data-theme="light"] .cashc .val { background: none; color: var(--ink); }
+  .spark { display: block; width: 100%; height: 110px; margin: 16px 0 4px; }
+  .sp-l { fill: none; stroke: var(--em); stroke-width: 2.5; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 6px rgba(245, 183, 64, .5)); }
+  .sp-t { fill: none; stroke: var(--faint); stroke-width: 1.2; stroke-dasharray: 5 6; vector-effect: non-scaling-stroke; }
+  .sp-d { fill: var(--em); stroke: var(--panel); stroke-width: 3; }
+  .pbar { height: 10px; margin-top: 8px; }
+  .pbar i { box-shadow: 0 0 14px rgba(245, 183, 64, .45); background-image: linear-gradient(90deg, rgba(255, 255, 255, .0), rgba(255, 255, 255, .25)) !important; }
+  .kpi3 .card { transition: transform .2s, border-color .2s; }
+  .kpi3 .card:hover { transform: translateY(-2px); border-color: rgba(245, 183, 64, .35); }
+  .today { background: linear-gradient(135deg, rgba(59, 130, 246, .14), rgba(59, 130, 246, .03) 60%), var(--panel); color: var(--ink); border: 1px solid rgba(96, 165, 250, .35); box-shadow: 0 10px 40px rgba(59, 130, 246, .12); }
+  .today .sub, .today .k, .today .mut, .today .det, .days div { color: var(--muted); }
+  .today .det { font-size: 12.5px; }
+  .today .big small { color: var(--faint); }
+  .today .tb { background: var(--soft); } .today .tb i { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+  .today .plus, .today .ok { color: #60a5fa; }
+  .days div b { color: var(--ink); }
+  .days div i { background: linear-gradient(180deg, #60a5fa, #2563eb); border-radius: 6px 6px 2px 2px; }
+  .days div.low i { background: linear-gradient(180deg, #334155, #1e293b); }
+  :root[data-theme="light"] .days div.low i { background: #cbd5e1; }
+  .days .tline { border-top-color: rgba(148, 163, 184, .6); }
+  .rem { padding: 20px 22px; }
+  .ritem { background: var(--col); transition: border-color .2s, transform .2s; }
+  .ritem:hover { transform: translateX(3px); }
+  .ritem > span:last-child { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--soft); color: var(--muted); }
+  .lead { transition: box-shadow .15s, opacity .15s, transform .15s, border-color .15s; }
+  .lead:hover { transform: translateY(-2px); border-color: rgba(245, 183, 64, .35); box-shadow: 0 10px 24px rgba(0, 0, 0, .25); }
+  .av { box-shadow: 0 0 0 2px var(--panel); }
+  .periods button { transition: background .2s, color .2s; }
   .note { color: var(--muted); font-size: 12.5px; margin: 12px 2px 0; }
   .modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: rgba(15, 23, 42, .35); padding: 16px; animation: fade .2s; }
   .modal form { width: min(440px, 100%); background: var(--panel); border-radius: 16px; padding: 22px; display: grid; gap: 14px; box-shadow: 0 30px 80px rgba(15, 23, 42, .3); }
@@ -369,6 +412,20 @@
   const PER = { m: { label: "Ottobre 2026", target: TARGET, past: 0, day: TODAY, days: MONTH_DAYS }, q: { label: "Ottobre – dicembre 2026", target: TARGET * 3, past: 0, day: TODAY, days: 92 }, y: { label: "Anno 2026", target: TARGET * 12, past: 6550000, day: 286, days: 365 } };
   const I = { cash: '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/>', doc: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="m9 15 2 2 4-4"/>', rec: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M12 8v8M9.5 10.2c0-.9 1.1-1.6 2.5-1.6s2.5.7 2.5 1.6c0 2.2-5 1.2-5 3.4 0 .9 1.1 1.6 2.5 1.6s2.5-.7 2.5-1.6"/>', heart: '<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/>' };
   const ico = (k) => `<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">${I[k]}</svg></span>`;
+  // andamento cumulato dell'incassato nei giorni trascorsi, con la linea dell'obiettivo
+  function spark(P) {
+    if (period !== "m") return "";
+    const W = 640, H = 120, byDay = Array.from({ length: TODAY }, (_, d) => db.pays.filter((p) => p.day === d + 1).reduce((a, p) => a + p.amount, 0));
+    let acc = 0; const cum = byDay.map((v) => (acc += v));
+    const max = Math.max(TARGET * TODAY / MONTH_DAYS * 1.15, acc * 1.1);
+    const x = (i) => (i / (MONTH_DAYS - 1)) * W, y = (v) => H - (v / max) * H;
+    const line = cum.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+    const area = `${line} L${x(cum.length - 1).toFixed(1)},${H} L0,${H} Z`;
+    return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">
+      <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5b740" stop-opacity=".35"/><stop offset="1" stop-color="#f5b740" stop-opacity="0"/></linearGradient></defs>
+      <path d="M0,${H} L${W},${y(TARGET)}" class="sp-t"/><path d="${area}" fill="url(#sg)"/><path d="${line}" class="sp-l"/>
+      <circle cx="${x(cum.length - 1)}" cy="${y(acc)}" r="4.5" class="sp-d"/></svg>`;
+  }
   function renderDash() {
     const P = PER[period], monthCash = cashOf(db.pays), cash = monthCash + P.past;
     const expected = P.target * P.day / P.days, ratio = cash / expected, perDay = cash / P.day;
@@ -377,6 +434,7 @@
     $("#cash").innerHTML = `<div class="cashc">${ico("cash")}<div><div class="lbl">Incassato</div><div class="val">${eur(cash)}</div>
         <div class="proj">Proiezione fine periodo: <b>${eur(perDay * P.days)}</b> con questo trend (${eur(perDay)}/giorno, giorno ${P.day} di ${P.days})</div></div>
         <span class="light ${lc[0]}">${lc[1]} · ${Math.round(ratio * 100)}%</span></div>
+      ${spark(P)}
       <div class="pbar"><i style="width:${Math.min(100, cash / P.target * 100)}%;background:${ratio >= 1 ? "var(--em)" : ratio >= .9 ? "var(--amber)" : "var(--orange)"}"></i></div>
       <div class="pfoot">Incassato <b>${eur(cash)}</b> · atteso a oggi <b>${eur(expected)}</b> · ${Math.round(ratio * 100)}% · target periodo ${eur(P.target)}</div>`;
     const contracts = new Set(db.pays.map((p) => p.client)).size + (period === "y" ? 352 : 0);
@@ -384,11 +442,11 @@
       .map(([i, k, v, sub]) => `<div class="card pad">${ico(i)}<div><span>${k}</span><b>${v}</b>${sub ? `<small>${sub}</small>` : ""}</div></div>`).join("");
     // call prenotate: oggi e ultimi 7 giorni rispetto al target giornaliero
     const T = 18, booked = db.leads.filter((l) => ["disco", "demo"].includes(l.stage)).length + 11, days = [17, 20, 19, 22, 18, 12, 21], lbl = ["mar 6", "mer 7", "gio 8", "ven 9", "sab 10", "dom 11", "lun 12"], max = 25;
-    $("#today").innerHTML = `<div style="display:flex;justify-content:space-between"><b style="font-size:16px">Sopralluoghi prenotati oggi</b><span style="font-size:12.5px;color:#475569">Dettaglio</span></div>
+    $("#today").innerHTML = `<div style="display:flex;justify-content:space-between"><b style="font-size:16px">Sopralluoghi prenotati oggi</b><span class="det">Dettaglio →</span></div>
       <p class="sub">Target ${T} al giorno: il 90% della capienza dei tecnici nei prossimi 7 giorni.</p>
       <div class="two"><div><div class="k">Oggi</div><div class="big">${booked} <small>/ ${T}</small></div><div class="tb"><i style="width:${Math.min(100, booked / T * 100)}%"></i></div>
-        <small style="color:#475569">${booked - 5} da sito e ads · 5 da porta a porta</small></div>
-        <div><div class="k">Ultimi 7 giorni, sul target</div><div class="plus">${(() => { const d = days.reduce((a, v) => a + v - T, 0); return (d >= 0 ? "+" : "") + d; })()}</div><small style="color:#1d4ed8">In linea: l'attesa per un sopralluogo resta tra 2 e 4 giorni.</small></div></div>
+        <small class="mut">${booked - 5} da sito e ads · 5 da porta a porta</small></div>
+        <div><div class="k">Ultimi 7 giorni, sul target</div><div class="plus">${(() => { const d = days.reduce((a, v) => a + v - T, 0); return (d >= 0 ? "+" : "") + d; })()}</div><small class="ok">In linea: l'attesa per un sopralluogo resta tra 2 e 4 giorni.</small></div></div>
       <div class="days"><span class="tline" style="bottom:${20 + T / max * .82 * 120}px"></span>${days.map((v, i) => `<div class="${v < T ? "low" : ""}"><b>${v}</b><i style="height:${v / max * 82}%"></i><span>${lbl[i]}</span></div>`).join("")}</div>`;
     renderRem();
   }
