@@ -9,6 +9,16 @@
     menu.textContent = open ? menu.dataset.close : label;
   });
 
+  // gallerie di schermate: le schede mostrano una schermata alla volta
+  document.querySelectorAll("[data-gallery]").forEach((g) => {
+    const imgs = g.querySelectorAll(".fr-shots img");
+    const tabs = g.nextElementSibling.querySelectorAll("button");
+    tabs.forEach((t, i) => t.addEventListener("click", () => {
+      imgs.forEach((im, j) => { im.hidden = j !== i; });
+      tabs.forEach((b, j) => b.setAttribute("aria-pressed", String(j === i)));
+    }));
+  });
+
   // modulo contatti: invia la richiesta via FormSubmit (arriva nella casella email del Lab) e mostra la conferma
   const form = document.getElementById("contact-form");
   if (form) form.addEventListener("submit", async (e) => {

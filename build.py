@@ -82,9 +82,9 @@ MT = {
 # ---------------- Lavori: progetti reali, senza dati privati ----------------
 # frame: "browser" (sito navigabile dentro il portfolio), "phone" (app navigabile), "scroll" (schermata da scorrere), "mock" (grafica senza dati)
 WORK = [
-    {"key": "tenka", "frame": "mock", "url": None, "src": None, "thumb": None},
+    {"key": "tenka", "frame": "gallery", "url": None, "src": ["assets/work/tenka-dashboard.jpg", "assets/work/tenka-tracker.jpg", "assets/work/tenka-login.jpg"], "thumb": "assets/work/thumb-tenka.jpg"},
     {"key": "dailypeak", "frame": "phone", "url": "work/my-daily-peak/index.html", "src": "work/my-daily-peak/index.html", "thumb": "assets/work/thumb-dailypeak.jpg"},
-    {"key": "fullpeak", "frame": "scroll", "url": "https://fullpeak.store", "src": "assets/work/fullpeak-full.jpg", "thumb": "assets/work/thumb-fullpeak.jpg"},
+    {"key": "fullpeak", "frame": "scroll", "url": "https://fullpeak.store/products/full-peak-magnesium-complex", "src": "assets/work/fullpeak-pdp.jpg", "thumb": "assets/work/thumb-fullpeak.jpg"},
     {"key": "maisenzagioie", "frame": "browser", "url": "work/maisenzagioie/index.html", "src": "work/maisenzagioie/index.html", "thumb": "assets/work/thumb-maisenzagioie.jpg"},
 ]
 WT = {
@@ -94,13 +94,14 @@ WT = {
     "sub": "Alcuni dei sistemi che abbiamo progettato e costruito. I siti qui sotto sono veri: puoi esplorarli e cliccarli direttamente in questa pagina.",
     "labels": {"client": "Cliente", "type": "Tipo", "year": "Anno"},
     "open": {"browser": "Apri il sito", "phone": "Apri la demo", "scroll": "Visita il sito"},
-    "hint": {"browser": "Sito navigabile: clicca e scorri", "phone": "Demo interattiva: prova l'app", "scroll": "Scorri per vedere la pagina", "mock": "Applicazione privata"},
+    "hint": {"browser": "Sito navigabile: clicca e scorri", "phone": "Demo interattiva: prova l'app", "scroll": "Scorri per vedere la pagina", "gallery": "Schermate dell'app", "mock": "Applicazione privata"},
+    "shots": ["Dashboard", "Tracker", "Accesso"],
     "projects": {
         "tenka": {"name": "Tenka OS", "client": "Tenka", "type": "Applicazione web su misura", "year": "2026",
                   "lead": "Il sistema operativo di un business e-commerce, in un'unica piattaforma.",
                   "text": "Vendite e spesa pubblicitaria si sincronizzano da sole, i margini di ogni offerta si calcolano in automatico e il team lavora su obiettivi condivisi, con tutte le procedure dell'azienda raccolte in una knowledge base interna.",
                   "points": ["Dati di vendita e advertising sincronizzati in automatico", "Margini e redditività di ogni offerta", "Knowledge base interna con procedure e documenti", "Accesso protetto con verifica in due passaggi"],
-                  "note": "Applicazione privata: i dati restano riservati. Demo disponibile su richiesta."},
+                  "note": "Schermate con dati dimostrativi: l'app è privata e i dati reali restano riservati. Demo dal vivo su richiesta."},
         "dailypeak": {"name": "My Daily Peak", "client": "Full Peak", "type": "Web app per i clienti, integrata in Shopify", "year": "2026",
                       "lead": "Un piano giornaliero personale che accompagna il cliente dopo l'acquisto.",
                       "text": "Chi acquista sceglie un obiettivo, fa un check-in di pochi secondi al giorno e vede i propri progressi settimana dopo settimana. L'app è riservata ai clienti, vive dentro il negozio e ricorda il riordino al momento giusto.",
@@ -125,13 +126,14 @@ WT = {
     "sub": "A few of the systems we've designed and built. The websites below are real: you can explore and click through them right on this page.",
     "labels": {"client": "Client", "type": "Type", "year": "Year"},
     "open": {"browser": "Open the website", "phone": "Open the demo", "scroll": "Visit the website"},
-    "hint": {"browser": "Live website: click and scroll", "phone": "Interactive demo: try the app", "scroll": "Scroll to see the page", "mock": "Private application"},
+    "hint": {"browser": "Live website: click and scroll", "phone": "Interactive demo: try the app", "scroll": "Scroll to see the page", "gallery": "App screenshots", "mock": "Private application"},
+    "shots": ["Dashboard", "Tracker", "Sign-in"],
     "projects": {
         "tenka": {"name": "Tenka OS", "client": "Tenka", "type": "Custom web application", "year": "2026",
                   "lead": "The operating system of an e-commerce business, in a single platform.",
                   "text": "Sales and ad spend sync automatically, the margins of every offer are calculated on their own, and the team works towards shared goals, with all company procedures gathered in an internal knowledge base.",
                   "points": ["Sales and advertising data synced automatically", "Margins and profitability for every offer", "Internal knowledge base with procedures and documents", "Secure access with two-step verification"],
-                  "note": "Private application: data stays confidential. Demo available on request."},
+                  "note": "Screenshots with sample data: the app is private and real data stays confidential. Live demo on request."},
         "dailypeak": {"name": "My Daily Peak", "client": "Full Peak", "type": "Customer web app, built into Shopify", "year": "2026",
                       "lead": "A personal daily plan that stays with customers after they buy.",
                       "text": "Customers pick a goal, check in for a few seconds a day and see their progress week after week. The app is reserved for customers, lives inside the store and reminds them to reorder at the right moment.",
@@ -573,6 +575,11 @@ def build(lang, variant=""):
             return f'<div class="fr-phone-wrap"><div class="fr fr-phone"><span class="notch"></span><iframe src="{pre}{w["src"]}" title="{p["name"]}" loading="lazy"></iframe></div></div>'
         if kind == "scroll":
             return f'<div class="fr fr-browser">{bar}<div class="fr-scroll" tabindex="0" aria-label="{p["name"]}"><img src="{pre}{w["src"]}" alt="{p["name"]}" loading="lazy" width="1200"></div></div>'
+        if kind == "gallery":
+            # schermate dell'app con schede per passare dall'una all'altra
+            imgs = "".join(f'<img src="{pre}{s}" alt="{p["name"]} · {W["shots"][j]}" loading="lazy" width="1424" height="835"{"" if j == 0 else " hidden"}>' for j, s in enumerate(w["src"]))
+            tabs = "".join(f'<button type="button" aria-pressed="{"true" if j == 0 else "false"}">{W["shots"][j]}</button>' for j in range(len(w["src"])))
+            return f'<div class="fr fr-browser fr-gallery" data-gallery>{bar}<div class="fr-shots">{imgs}</div></div><div class="shot-tabs">{tabs}</div>'
         return f'<div class="fr fr-browser fr-mock">{bar}{tenka_mock()}</div>'
 
     def project(i, w):
