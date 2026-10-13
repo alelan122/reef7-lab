@@ -255,17 +255,18 @@ T = {
         "eco_p": "Colleghiamo gli strumenti che usi già e automatizziamo i passaggi tra l'uno e l'altro. I dati entrano una volta sola e arrivano dove servono, già pronti per essere usati. Ecco tre esempi di ciò che costruiamo:",
         "values": ["Nessun dato inserito due volte", "Numeri affidabili, aggiornati da soli", "Il team libero dal lavoro ripetitivo"],
         "flows": [
-            {"tab": "Vendite e marketing", "in": ["Shopify", "Meta Ads"], "core": "Sincronizzazione automatica", "out": "Margine di oggi", "kind": "dash",
+            {"tab": "Vendite e marketing", "in": ["Shopify", "Meta Ads"], "core": "Sincronizzazione automatica", "out": "Margine di oggi", "kind": "dash", "manual": ["Esporti gli ordini da Shopify", "Copi la spesa da Meta Ads", "Incolli tutto in Excel", "Calcoli il margine a mano"], "manual_end": "Numeri pronti dopo giorni",
              "rows": ["Vendite", "Spesa pubblicitaria", "Margine reale"], "live": "Aggiornato in automatico",
              "value": "Sai ogni giorno quanto guadagni davvero, senza aprire un foglio di calcolo."},
-            {"tab": "Clienti", "in": ["WhatsApp", "Email"], "core": "Risposta e qualifica con l'AI", "out": "Nuovo contatto nel CRM", "kind": "crm",
+            {"tab": "Clienti", "in": ["WhatsApp", "Email"], "core": "Risposta e qualifica con l'AI", "out": "Nuovo contatto nel CRM", "kind": "crm", "manual": ["Leggi i messaggi su più canali", "Rispondi uno per uno", "Copi il contatto nel CRM", "Ti segni quando richiamare"], "manual_end": "Alcuni contatti si perdono",
              "rows": ["Richiesta ricevuta", "Risposta inviata in automatico", "Follow-up programmato"], "live": "Assegnato al commerciale",
              "value": "Ogni richiesta riceve una risposta immediata e nessun contatto si perde per strada."},
-            {"tab": "Amministrazione", "in": ["Ordini", "Pagamenti"], "core": "Documenti generati in automatico", "out": "Fattura e report pronti", "kind": "doc",
+            {"tab": "Amministrazione", "in": ["Ordini", "Pagamenti"], "core": "Documenti generati in automatico", "out": "Fattura e report pronti", "kind": "doc", "manual": ["Controlli ordini e pagamenti", "Compili la fattura", "La registri in contabilità", "Prepari il report del mese"], "manual_end": "Ore di lavoro ogni mese",
              "rows": ["Fattura", "Registrazione contabile", "Report mensile"], "live": "Pronto da inviare",
              "value": "Fatture e report si preparano da soli, senza errori di trascrizione."},
         ],
         "flow_lbl": ("Dati in entrata", "Il sistema", "Il risultato"),
+        "rows_lbl": ("Oggi, a mano", "Con il sistema, in automatico", "passaggi a mano"),
         "svc_h": "Services", "svc_p": "Dal sito al CRM, dall'intelligenza artificiale al controllo di gestione: competenze diverse che lavorano insieme.", "svc_all": "Tutti i servizi",
         "sol_h": "Solutions", "sol_p": "Per ogni settore combiniamo i servizi giusti in un unico sistema. Ecco alcuni esempi.", "sol_all": "Tutte le soluzioni",
         "reef_h": "Progettati come <em>un reef</em>", "reef_p": "Il reef è tra gli ecosistemi più efficienti della Terra. I suoi cinque principi guidano ogni progetto.",
@@ -397,17 +398,18 @@ T = {
         "eco_p": "We connect the tools you already use and automate the steps between them. Data is entered once and reaches wherever it's needed, ready to use. Here are three examples of what we build:",
         "values": ["No data entered twice", "Reliable numbers that update themselves", "A team freed from repetitive work"],
         "flows": [
-            {"tab": "Sales and marketing", "in": ["Shopify", "Meta Ads"], "core": "Automatic sync", "out": "Today's margin", "kind": "dash",
+            {"tab": "Sales and marketing", "in": ["Shopify", "Meta Ads"], "core": "Automatic sync", "out": "Today's margin", "kind": "dash", "manual": ["Export orders from Shopify", "Copy ad spend from Meta Ads", "Paste it all into a spreadsheet", "Work out the margin by hand"], "manual_end": "Numbers ready days later",
              "rows": ["Sales", "Ad spend", "Real margin"], "live": "Updated automatically",
              "value": "You know every day how much you're really making, without opening a spreadsheet."},
-            {"tab": "Customers", "in": ["WhatsApp", "Email"], "core": "AI replies and qualifies", "out": "New contact in the CRM", "kind": "crm",
+            {"tab": "Customers", "in": ["WhatsApp", "Email"], "core": "AI replies and qualifies", "out": "New contact in the CRM", "kind": "crm", "manual": ["Read messages across channels", "Reply to each one", "Copy the contact into the CRM", "Note when to call back"], "manual_end": "Some leads get lost",
              "rows": ["Request received", "Reply sent automatically", "Follow-up scheduled"], "live": "Assigned to sales",
              "value": "Every request gets an immediate reply and no lead slips through the cracks."},
-            {"tab": "Admin", "in": ["Orders", "Payments"], "core": "Documents generated automatically", "out": "Invoice and report ready", "kind": "doc",
+            {"tab": "Admin", "in": ["Orders", "Payments"], "core": "Documents generated automatically", "out": "Invoice and report ready", "kind": "doc", "manual": ["Check orders and payments", "Fill in the invoice", "Record it in the accounts", "Prepare the monthly report"], "manual_end": "Hours of work every month",
              "rows": ["Invoice", "Accounting entry", "Monthly report"], "live": "Ready to send",
              "value": "Invoices and reports prepare themselves, with no copy-and-paste errors."},
         ],
         "flow_lbl": ("Incoming data", "The system", "The result"),
+        "rows_lbl": ("Today, by hand", "With the system, automatically", "manual steps"),
         "svc_h": "Services", "svc_p": "From websites to CRM, from AI to financial control: different disciplines that work together.", "svc_all": "All services",
         "sol_h": "Solutions", "sol_p": "For each industry we combine the right services into a single system. Here are a few examples.", "sol_all": "All solutions",
         "reef_h": "Designed like <em>a reef</em>", "reef_p": "The reef is one of the most efficient ecosystems on Earth. Its five principles guide every project.",
@@ -485,13 +487,23 @@ def eco(H, pre):
         return f'<div class="mu mu-{f["kind"]}">{body}<p class="mu-live"><span class="dot"></span>{f["live"]}</p></div>'
 
     tabs = "".join(f'<button type="button" aria-pressed="{"true" if i == 0 else "false"}">{f["tab"]}</button>' for i, f in enumerate(H["flows"]))
+    rb, ra, rsteps = H["rows_lbl"]
     panels = "".join(f"""
       <div class="flow-panel"{"" if i == 0 else " hidden"}>
-        <div class="fl-col fl-in"><span class="mono">{li}</span>{"".join(f'<span class="chip-src">{x}</span>' for x in f["in"])}</div>
-        <div class="fl-link"><i></i></div>
-        <div class="fl-col fl-core"><span class="mono">{lc}</span><span class="core"><img src="{pre}assets/reef7-logo.png" alt="" width="40" height="40"><b>{f["core"]}</b></span></div>
-        <div class="fl-link"><i></i></div>
-        <div class="fl-col fl-out"><span class="mono">{lo}</span><div class="out-card"><b class="out-title">{f["out"]}</b>{mini(f)}</div></div>
+        <div class="fl-row fl-before">
+          <div class="fl-row-head"><span class="mono">{rb}</span><span class="count">{len(f["manual"])} {rsteps}</span></div>
+          <ol class="manual">{"".join(f'<li><span class="n">{j}</span>{m}</li>' for j, m in enumerate(f["manual"], 1))}<li class="end">{f["manual_end"]}</li></ol>
+        </div>
+        <div class="fl-row fl-after">
+          <div class="fl-row-head"><span class="mono">{ra}</span><span class="count on">0 {rsteps}</span></div>
+          <div class="fl-grid">
+            <div class="fl-col fl-in"><span class="mono">{li}</span>{"".join(f'<span class="chip-src">{x}</span>' for x in f["in"])}</div>
+            <div class="fl-link"><i></i></div>
+            <div class="fl-col fl-core"><span class="mono">{lc}</span><span class="core"><img src="{pre}assets/reef7-logo.png" alt="" width="40" height="40"><b>{f["core"]}</b></span></div>
+            <div class="fl-link"><i></i></div>
+            <div class="fl-col fl-out"><span class="mono">{lo}</span><div class="out-card"><b class="out-title">{f["out"]}</b>{mini(f)}</div></div>
+          </div>
+        </div>
         <p class="fl-value">{f["value"]}</p>
       </div>""" for i, f in enumerate(H["flows"]))
     values = "".join(f"<li>{v}</li>" for v in H["values"])
