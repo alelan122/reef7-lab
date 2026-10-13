@@ -3,237 +3,143 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Helios Hub · Demo Reef 7 Lab</title>
-<meta name="description" content="Demo dell'hub aziendale progettato da Reef 7 Lab: tutte le piattaforme dell'azienda, il loro stato e i numeri del giorno in un unico punto.">
+<title>Equilibra Hub · Demo Reef 7 Lab</title>
+<meta name="description" content="Demo dell'hub aziendale progettato da Reef 7 Lab: tutte le piattaforme interne, il loro stato e i link di direzione in un unico posto.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-  :root { --bg: #0b1020; --panel: #11182b; --ink: #e9edf6; --muted: #98a2b8; --faint: #66708a; --line: #1f2940; --soft: #182238; --amber: #f5b740; --blue: #60a5fa; --green: #34d399; --red: #f87171; --sans: "Geist", "Segoe UI", system-ui, sans-serif; --mono: "Geist Mono", ui-monospace, monospace; }
+  :root { --bg: #f7f8fb; --panel: #fff; --ink: #111827; --muted: #4b5563; --faint: #6b7280; --line: #e5e7eb; --acc: #4f5fe0; --acc-soft: #eef0ff; --ok: #16a34a; --sans: "Geist", "Segoe UI", system-ui, sans-serif; --mono: "Geist Mono", ui-monospace, monospace; }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
-  body { min-height: 100vh; color: var(--ink); font: 14px/1.5 var(--sans); -webkit-font-smoothing: antialiased; background: radial-gradient(1100px 600px at 90% -10%, rgba(96, 165, 250, .13), transparent 60%), radial-gradient(900px 600px at -10% 110%, rgba(245, 183, 64, .08), transparent 60%), var(--bg); }
-  a { color: inherit; text-decoration: none; }
+  body { background: var(--bg); color: var(--ink); font: 14px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
   button { font: inherit; color: inherit; }
-  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
-  /* testata */
-  .top { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(12px); background: rgba(11, 16, 32, .7); border-bottom: 1px solid var(--line); }
-  .top .wrap { display: flex; align-items: center; gap: 14px; height: 64px; }
-  .logo { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px; }
-  .logo i { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; font: 600 13px var(--mono); font-style: normal; background: linear-gradient(135deg, #f59e0b, #fb7185); }
-  .logo small { font: 600 10px var(--mono); letter-spacing: .08em; color: var(--blue); background: rgba(96, 165, 250, .14); padding: 3px 8px; border-radius: 999px; }
-  .kbtn { margin-left: auto; display: flex; align-items: center; gap: 10px; min-width: 300px; padding: 9px 12px; border-radius: 12px; border: 1px solid var(--line); background: rgba(24, 34, 56, .7); color: var(--muted); cursor: pointer; text-align: left; }
-  .kbtn:hover { border-color: #33415e; }
-  .kbtn kbd, .pal kbd { margin-left: auto; font: 500 11px var(--mono); padding: 2px 6px; border-radius: 6px; border: 1px solid var(--line); color: var(--faint); }
-  .me { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: #3b82f6; font-weight: 600; font-size: 12px; }
-  /* saluto e numeri */
-  .hello { padding: 40px 0 26px; display: flex; align-items: end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-  .hello p { margin: 0; color: var(--muted); }
-  .hello h1 { margin: 6px 0 0; font-size: clamp(30px, 3.4vw, 44px); letter-spacing: -.03em; font-weight: 600; }
-  .hello h1 em { font-style: normal; background: linear-gradient(90deg, var(--amber), #fb7185); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .sys { display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px; border-radius: 999px; border: 1px solid rgba(52, 211, 153, .35); background: rgba(52, 211, 153, .08); color: var(--green); font-weight: 500; }
-  .sys::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(52, 211, 153, .6); animation: pulse 2s infinite; }
-  @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(52, 211, 153, 0); } 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); } }
-  .bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-  .tile { position: relative; border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, 0)), var(--panel); box-shadow: 0 12px 30px rgba(0, 0, 0, .2); overflow: hidden; }
-  .tile .k { color: var(--muted); font-size: 13px; }
-  .tile .v { font-size: 30px; font-weight: 700; letter-spacing: -.02em; margin-top: 4px; font-variant-numeric: tabular-nums; }
-  .tile .d { font-size: 12.5px; color: var(--green); }
-  .tile .d.dn { color: var(--red); }
-  .tile svg.mini { position: absolute; right: 14px; bottom: 14px; width: 92px; height: 36px; opacity: .9; }
-  /* stato */
-  .status { margin-top: 14px; }
-  .status h2, .sec h2 { font: 600 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--faint); margin: 0 0 12px; display: flex; align-items: center; gap: 10px; }
-  .status h2 span { margin-left: auto; text-transform: none; letter-spacing: 0; font: 400 12px var(--sans); }
-  .svc { display: grid; grid-template-columns: 180px 1fr 70px 76px; gap: 14px; align-items: center; padding: 10px 4px; border-top: 1px solid var(--line); }
-  .svc:first-of-type { border-top: 0; }
-  .svc b { font-weight: 500; display: flex; align-items: center; gap: 9px; }
-  .svc b::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
-  .svc.warn b::before { background: var(--amber); }
-  .hist { display: flex; gap: 2px; height: 22px; align-items: stretch; }
-  .hist i { flex: 1; border-radius: 2px; background: rgba(52, 211, 153, .55); }
-  .hist i.w { background: rgba(245, 183, 64, .8); }
-  .svc .ms { font: 500 12px var(--mono); color: var(--muted); text-align: right; }
-  .svc .up { font: 500 12px var(--mono); color: var(--faint); text-align: right; }
-  /* piattaforme */
-  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 22px; margin: 34px 0 60px; align-items: start; }
-  .sec { margin-bottom: 30px; }
-  .apps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-  .app { display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 16px; border: 1px solid var(--line); background: rgba(17, 24, 43, .7); cursor: pointer; text-align: left; transition: transform .2s, border-color .2s, background .2s; }
-  .app:hover { transform: translateY(-3px); border-color: rgba(245, 183, 64, .45); background: rgba(24, 34, 56, .9); }
-  .app .row { display: flex; align-items: center; gap: 12px; }
-  .app .ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; flex: none; }
-  .app .ic svg { width: 20px; height: 20px; }
-  .app b { font-size: 15px; font-weight: 600; }
-  .app .live { margin-left: auto; font: 600 10px var(--mono); padding: 3px 7px; border-radius: 999px; background: rgba(52, 211, 153, .12); color: var(--green); }
-  .app .live.new { background: rgba(96, 165, 250, .14); color: var(--blue); }
-  .app p { margin: 0; color: var(--muted); font-size: 13px; }
-  .app .who { font: 500 11px var(--mono); color: var(--faint); }
-  /* colonna destra */
-  .side .tile { margin-bottom: 14px; }
-  .feed { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
-  .feed li { display: grid; grid-template-columns: 30px 1fr; gap: 10px; font-size: 13px; }
-  .feed i { width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; font-style: normal; background: var(--soft); }
-  .feed small { display: block; color: var(--faint); }
-  .news { border-color: rgba(245, 183, 64, .35); background: linear-gradient(135deg, rgba(245, 183, 64, .12), rgba(245, 183, 64, 0) 60%), var(--panel); }
-  .news b { display: block; font-size: 15px; margin: 6px 0 4px; }
-  .news p { margin: 0; color: var(--muted); font-size: 13px; }
-  .foot { color: var(--faint); font-size: 12px; padding: 0 0 30px; }
-  .foot a { color: var(--amber); }
-  /* ricerca rapida */
-  .scrim { position: fixed; inset: 0; z-index: 50; background: rgba(5, 8, 16, .6); backdrop-filter: blur(4px); display: grid; place-items: start center; padding: 12vh 16px 16px; }
-  .scrim[hidden] { display: none; }
-  .pal { width: min(600px, 100%); border-radius: 18px; border: 1px solid #2a3654; background: #0f1628; box-shadow: 0 40px 100px rgba(0, 0, 0, .6); overflow: hidden; animation: pop .18s ease; }
-  @keyframes pop { from { transform: translateY(-8px) scale(.98); opacity: 0; } }
-  .pal .in { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
-  .pal input { flex: 1; background: none; border: 0; outline: none; font: 16px var(--sans); color: var(--ink); }
-  .pal ul { list-style: none; margin: 0; padding: 8px; max-height: 360px; overflow: auto; }
-  .pal li { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 10px; cursor: pointer; }
-  .pal li small { color: var(--faint); margin-left: auto; font-size: 12px; }
-  .pal li.on { background: rgba(245, 183, 64, .12); }
-  .pal li .ic { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; }
-  .pal li .ic svg { width: 16px; height: 16px; }
-  .pal .grp { font: 600 10.5px var(--mono); letter-spacing: .08em; color: var(--faint); padding: 8px 12px 4px; cursor: default; }
-  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 60; background: #0b0e16; border: 1px solid var(--line); padding: 12px 16px; border-radius: 12px; box-shadow: 0 16px 40px rgba(0, 0, 0, .4); animation: up .3s ease; max-width: calc(100vw - 32px); }
+  .app { display: grid; grid-template-columns: 232px minmax(0, 1fr); min-height: 100vh; }
+  .side { background: var(--panel); border-right: 1px solid var(--line); padding: 0 14px; }
+  .brand { display: flex; align-items: center; gap: 10px; height: 64px; border-bottom: 1px solid var(--line); margin: 0 -14px 12px; padding: 0 22px; font-weight: 700; letter-spacing: .02em; }
+  .brand small { font: 600 10px var(--mono); color: var(--acc); background: var(--acc-soft); padding: 3px 8px; border-radius: 999px; letter-spacing: .06em; }
+  .nav { all: unset; display: flex; align-items: center; gap: 12px; width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 10px; cursor: pointer; color: var(--muted); font-weight: 500; margin-bottom: 4px; }
+  .nav svg { width: 18px; height: 18px; flex: none; }
+  .nav:hover { background: #f3f4f6; }
+  .nav[aria-current="page"] { background: var(--acc-soft); color: var(--ink); box-shadow: inset 0 0 0 1px #d9ddff; }
+  .side .foot { position: sticky; top: calc(100vh - 70px); font-size: 12px; color: var(--faint); padding: 14px 4px; }
+  .side .foot a { color: var(--acc); }
+  main { padding: 28px 32px 60px; min-width: 0; }
+  h1 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -.01em; }
+  .sub { margin: 4px 0 0; color: var(--muted); }
+  .sec-t { font: 600 12px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 34px 0 14px; }
+  .status { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); margin-bottom: 18px; }
+  .status b { font-weight: 600; margin-right: 8px; }
+  .sp { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; background: #f0fdf4; color: #166534; font-size: 13px; }
+  .sp::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+  .sp em { font-style: normal; color: #6b7280; font-size: 12px; }
+  .status .when { margin-left: auto; color: var(--faint); font-size: 12.5px; }
+  .grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+  .card { all: unset; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); cursor: pointer; transition: border-color .2s, box-shadow .2s; }
+  .card:hover { border-color: #c7cdfb; box-shadow: 0 6px 20px rgba(79, 95, 224, .08); }
+  .card .hd { display: flex; align-items: center; gap: 12px; }
+  .card .ic { width: 34px; height: 34px; border-radius: 9px; background: var(--acc-soft); color: var(--acc); display: grid; place-items: center; flex: none; }
+  .card .ic svg { width: 18px; height: 18px; }
+  .card b { font-weight: 600; font-size: 15px; line-height: 1.25; }
+  .tag { margin-left: auto; flex: none; font: 500 10px var(--sans); letter-spacing: .04em; text-transform: uppercase; color: #b42318; background: #fef3f2; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+  .card .hd { align-items: flex-start; } .card .hd b { flex: 1 1 0; min-width: 0; padding-top: 6px; }
+  .tag.open { color: #3730a3; background: var(--acc-soft); }
+  .dom { color: var(--acc); font-size: 13px; font-weight: 500; word-break: break-all; }
+  .card p { margin: 0; color: var(--muted); font-size: 13.5px; }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 60; background: var(--ink); color: #fff; padding: 12px 16px; border-radius: 12px; box-shadow: 0 16px 40px rgba(0, 0, 0, .2); animation: up .3s ease; max-width: calc(100vw - 32px); }
   @keyframes up { from { transform: translate(-50%, 12px); opacity: 0; } }
-  @media (max-width: 1080px) { .layout { grid-template-columns: 1fr; } .apps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 760px) {
-    .bento { grid-template-columns: 1fr 1fr; } .kbtn { min-width: 0; } .kbtn span { display: none; }
-    .svc { grid-template-columns: 1fr 60px; } .svc .hist, .svc .up { display: none; }
-    .apps { grid-template-columns: 1fr; } .wrap { padding: 0 16px; }
-  }
+  @media (max-width: 1560px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (max-width: 1200px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 860px) { .app { grid-template-columns: 1fr; } .side { display: none; } main { padding: 22px 16px 50px; } .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap">
-  <div class="logo"><i>H</i>Helios <small>HUB</small></div>
-  <button class="kbtn" id="open-pal"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Cerca piattaforme e azioni…</span><kbd>Ctrl K</kbd></button>
-  <span class="me" title="Giulia Bianchi">GB</span>
-</div></header>
+<div class="app">
+  <aside class="side">
+    <div class="brand">EQUILIBRA <small>HUB</small></div>
+    <button class="nav" data-go="int" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Piattaforme</button>
+    <button class="nav" data-go="dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 12 16 8"/><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>Direzione</button>
+    <button class="nav" data-go="pub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>Pubblico</button>
+    <div class="foot">Demo di <a href="../../lavori.html" target="_top">Reef 7 Lab</a>: azienda e dati di esempio.</div>
+  </aside>
+  <main>
+    <h1>Equilibra Hub</h1>
+    <p class="sub">Tutte le piattaforme in sviluppo e in produzione, in un posto solo.</p>
 
-<main class="wrap">
-  <section class="hello">
-    <div><p id="date"></p><h1>Buongiorno, <em>Giulia</em>.</h1></div>
-    <span class="sys" id="sys">Tutti i sistemi operativi</span>
-  </section>
+    <p class="sec-t" id="int">Piattaforme interne</p>
+    <div class="status" id="status"></div>
+    <div class="grid" id="g-int"></div>
 
-  <section class="bento" id="kpis"></section>
+    <p class="sec-t" id="dir">Direzione e controllo</p>
+    <div class="grid" id="g-dir"></div>
 
-  <section class="tile status"><h2>Stato delle piattaforme <span id="checked"></span></h2><div id="svcs"></div></section>
-
-  <div class="layout">
-    <div id="apps"></div>
-    <aside class="side">
-      <div class="tile news"><span style="font:600 10.5px var(--mono);letter-spacing:.08em;color:var(--amber)">NOVITÀ</span><b>Preventivo con firma digitale</b><p>Il cliente firma dal telefono subito dopo il sopralluogo: il contratto entra nel CRM e parte l'ordine dei pannelli.</p></div>
-      <div class="tile"><h2 style="font:600 11px var(--mono);letter-spacing:.1em;color:var(--faint);margin:0 0 14px">ATTIVITÀ RECENTI</h2><ul class="feed" id="feed"></ul></div>
-    </aside>
-  </div>
-  <p class="foot">Demo di <a href="../../lavori.html" target="_top">Reef 7 Lab</a>: azienda, piattaforme e numeri sono di esempio. Il CRM vendite si apre davvero.</p>
-</main>
-
-<div class="scrim" id="scrim" hidden><div class="pal" role="dialog" aria-label="Ricerca rapida">
-  <div class="in"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#98a2b8" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="pq" placeholder="Apri una piattaforma o cerca un'azione…" autocomplete="off"><kbd>Esc</kbd></div>
-  <ul id="pres"></ul>
-</div></div>
+    <p class="sec-t" id="pub">Pubblico e acquisizione</p>
+    <div class="grid" id="g-pub"></div>
+  </main>
+</div>
 
 <script>
 (() => {
-  const ICON = {
+  const I = {
     crm: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/>',
-    quote: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',
-    cal: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/>',
-    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
-    box: '<path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/>',
-    tool: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-2.4z"/>',
-    chart: '<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/>',
-    tv: '<rect x="2" y="7" width="20" height="13" rx="2"/><path d="m8 3 4 4 4-4"/>',
+    coach: '<path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/>',
+    phone: '<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/>',
     mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
-    team: '<circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v5M5 17v-2h14v2"/>',
+    play: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="m10 9 5 3-5 3z"/>',
+    chart: '<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/>',
+    bars: '<path d="M6 20V10M12 20V4M18 20v-7"/>',
+    doc: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+    tv: '<rect x="2" y="7" width="20" height="13" rx="2"/><path d="m8 3 4 4 4-4"/>',
+    cal: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18M9 15l2 2 4-4"/>',
+    org: '<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-2h12v2"/>',
     globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
-    bolt: '<path d="M13 2 3 14h9l-1 8 10-12h-9z"/>',
+    video: '<rect x="2" y="6" width="14" height="12" rx="2"/><path d="m22 8-6 4 6 4z"/>',
+    brief: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+    user: '<circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2M19 8l2 2 4-4"/>',
   };
-  const svg = (k) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON[k]}</svg>`;
-  const C = { amber: ["rgba(245,183,64,.14)", "#f5b740"], blue: ["rgba(96,165,250,.14)", "#60a5fa"], green: ["rgba(52,211,153,.13)", "#34d399"], violet: ["rgba(167,139,250,.15)", "#a78bfa"], pink: ["rgba(251,113,133,.14)", "#fb7185"] };
-  // piattaforme per reparto: [nome, descrizione, icona, colore, chi la usa, link, nuova?]
-  const SECTIONS = [
-    ["Vendite", [["CRM vendite", "Pipeline clienti, sopralluoghi, classifica e commissioni dei consulenti.", "crm", "amber", "Consulenti · direzione", "../crm-demo/index.html"],
-      ["Preventivatore", "Simulazione del risparmio e preventivo firmabile dal telefono.", "quote", "amber", "Consulenti", "", true],
-      ["Agenda sopralluoghi", "Prenotazioni assegnate al tecnico più vicino, con conferme automatiche.", "cal", "amber", "Tecnici · clienti", ""]]],
-    ["Operazioni", [["Monitoraggio impianti", "Produzione in tempo reale degli impianti installati e avvisi sui guasti.", "sun", "blue", "Assistenza · clienti", ""],
-      ["Magazzino", "Pannelli, inverter e batterie: giacenze, ordini ai fornitori, consegne.", "box", "blue", "Logistica", ""],
-      ["Assistenza", "Richieste dei clienti, interventi programmati e storico per impianto.", "tool", "blue", "Assistenza", ""]]],
-    ["Direzione", [["Controllo di gestione", "Fatturato, margini per impianto e cassa prevista, aggiornati ogni notte.", "chart", "green", "Direzione", ""],
-      ["Dashboard TV", "La classifica e i numeri del giorno sullo schermo dell'ufficio.", "tv", "green", "Tutto il team", ""],
-      ["Email e campagne", "Newsletter e sequenze automatiche su infrastruttura propria.", "mail", "green", "Marketing", ""]]],
-    ["Persone e pubblico", [["Organigramma", "Ruoli, responsabili e contatti di tutto il team.", "team", "violet", "Tutto il team", ""],
-      ["Sito Helios", "Sito pubblico con calcolo del risparmio e richiesta di sopralluogo.", "globe", "pink", "Pubblico", ""],
-      ["Incentivi e pratiche", "Pratiche GSE e detrazioni di ogni cliente, con scadenze e documenti.", "bolt", "violet", "Ufficio pratiche", "", true]]],
+  const svg = (k) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${I[k]}</svg>`;
+  // [nome, icona, dominio, accesso, descrizione, link]
+  const INT = [
+    ["CRM Vendite", "crm", "sales.equilibra.app", "", "CRM delle venditrici: lead, KPI, classifica, pagamenti, commissioni, insoluti.", "../crm-demo/index.html"],
+    ["App Coach", "coach", "coach.equilibra.app", "", "Piattaforma delle nutrizioniste: clienti, piani alimentari, check settimanali, chat.", ""],
+    ["App Clienti", "phone", "app.equilibra.app", "", "Lato cliente del Metodo Equilibra: percorso, piano alimentare, progressi, account.", ""],
+    ["Equilibra Email", "mail", "email.equilibra.app", "Login team", "Email marketing interno: sequenze, segmenti, warm-up, liste di esclusione.", ""],
+    ["Content Hub", "play", "content.equilibra.app", "Login team", "Pipeline dei contenuti: dalle riprese al montaggio, approvazione e pubblicazione.", ""],
+    ["Equilibra Hiring", "user", "hiring.equilibra.app", "Login team", "Selezione del personale: posizioni aperte, candidati, colloqui con scorecard.", ""],
+    ["Equilibra Social", "chart", "social.equilibra.app", "Login team", "Statistiche dei profili social e dei competitor, con i consigli della settimana.", ""],
   ];
-  const ALL = SECTIONS.flatMap(([sec, apps]) => apps.map((a) => [sec, ...a]));
+  const DIR = [
+    ["Controllo di Gestione", "bars", "cdg.equilibra.app", "Direzione", "KPI, cash e marginalità per prodotto, aggiornati ogni notte.", ""],
+    ["Bilancio", "doc", "bilancio.equilibra.app", "Direzione", "Bilancio gestionale mese per mese: stato patrimoniale, conto economico, rendiconto.", ""],
+    ["Dashboard TV", "tv", "sales.equilibra.app/tv", "Admin", "Tabellone per lo schermo in ufficio: cash, classifica, setter, marketing. Si aggiorna ogni 5 minuti.", ""],
+    ["Prenotazioni", "cal", "calendario.equilibra.app", "Pubblica", "Pagina di prenotazione della discovery con assegnazione automatica: il lead torna sempre alla sua venditrice.", ""],
+    ["Organigramma", "org", "team.equilibra.app", "Direzione", "Struttura del team: ruoli, responsabili, reparti.", ""],
+  ];
+  const PUB = [
+    ["Sito Equilibra", "globe", "equilibra.it", "", "Sito pubblico del Metodo Equilibra.", ""],
+    ["Webinar gratuito", "video", "webinar.equilibra.it", "", "Landing dei webinar di lancio e delle masterclass.", ""],
+    ["Lavora con noi", "brief", "equilibra.it/carriere", "", "Tutte le posizioni aperte, in un'unica pagina.", ""],
+    ["Candidature venditrici", "user", "equilibra.it/candidature-sales", "", "Pagina candidature per il team vendita.", ""],
+    ["Candidature nutrizioniste", "coach", "equilibra.it/candidature-coach", "", "Pagina candidature per il team coach.", ""],
+  ];
   const $ = (s) => document.querySelector(s);
-  const toast = (t) => { document.querySelector(".toast")?.remove(); const e = document.createElement("div"); e.className = "toast"; e.textContent = t; document.body.append(e); setTimeout(() => e.remove(), 3200); };
-  const openApp = (a) => { const link = a[6]; if (link) location.href = link; else toast(`${a[1]}: in questa demo è visibile solo il CRM vendite.`); };
-
-  $("#date").textContent = new Date().toLocaleDateString("it-IT", { weekday: "long", day: "numeric", month: "long" }).replace(/^./, (c) => c.toUpperCase());
-
-  // numeri del giorno
-  const spark = (pts, color) => { const max = Math.max(...pts), min = Math.min(...pts); const d = pts.map((v, i) => `${i ? "L" : "M"}${(i / (pts.length - 1)) * 92},${34 - ((v - min) / (max - min || 1)) * 30}`).join(" "); return `<svg class="mini" viewBox="0 0 92 36"><path d="${d}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round"/></svg>`; };
-  $("#kpis").innerHTML = [
-    ["Incassato oggi", "38.400 €", "+12% rispetto a lunedì scorso", "", [3, 5, 4, 6, 5, 8, 7, 9], "#f5b740"],
-    ["Installazioni questa settimana", "14", "3 in più della media", "", [8, 9, 11, 10, 12, 11, 14], "#60a5fa"],
-    ["Ticket di assistenza aperti", "6", "2 urgenti da assegnare", "dn", [9, 8, 9, 7, 8, 7, 6], "#f87171"],
-    ["Disponibilità ultimi 30 giorni", "99,98%", "nessun disservizio grave", "", [9.98, 9.99, 9.98, 9.99, 9.97, 9.99, 9.99, 9.98], "#34d399"],
-  ].map(([k, v, d, c, pts, col]) => `<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="d ${c}">${d}</div>${spark(pts, col)}</div>`).join("");
-
-  // stato delle piattaforme, con gli ultimi 40 controlli
-  const SVCS = [["CRM vendite", 92], ["Preventivatore", 118], ["Agenda sopralluoghi", 104], ["Monitoraggio impianti", 210], ["Email e campagne", 87], ["API pubbliche", 143]];
-  const hist = SVCS.map(() => Array.from({ length: 40 }, () => Math.random() < .015));
-  function renderSvcs() {
-    $("#svcs").innerHTML = SVCS.map(([n, base], i) => {
-      const ms = Math.round(base * (.8 + Math.random() * .5)), warn = ms > 260;
-      return `<div class="svc${warn ? " warn" : ""}"><b>${n}</b><div class="hist">${hist[i].map((w) => `<i class="${w ? "w" : ""}"></i>`).join("")}</div><span class="ms">${ms} ms</span><span class="up">${warn ? "lento" : "99,9%"}</span></div>`;
-    }).join("");
-    $("#checked").textContent = `controllato alle ${new Date().toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit", second: "2-digit" })} · ogni 30 secondi`;
-  }
-  renderSvcs();
-  setInterval(() => { hist.forEach((h) => { h.shift(); h.push(Math.random() < .02); }); renderSvcs(); }, 30000);
-
-  // piattaforme
-  $("#apps").innerHTML = SECTIONS.map(([sec, apps]) => `<section class="sec"><h2>${sec}</h2><div class="apps">${apps.map(([n, d, ic, col, who, link, isNew]) => `
-    <button class="app" data-app="${n}"><span class="row"><span class="ic" style="background:${C[col][0]};color:${C[col][1]}">${svg(ic)}</span><b>${n}</b><span class="live${isNew ? " new" : ""}">${isNew ? "NUOVA" : link ? "APRI" : "ONLINE"}</span></span><p>${d}</p><span class="who">${who}</span></button>`).join("")}</div></section>`).join("");
-  $("#apps").addEventListener("click", (e) => { const b = e.target.closest("[data-app]"); if (b) openApp(ALL.find((a) => a[1] === b.dataset.app)); });
-
-  // attività recenti
-  $("#feed").innerHTML = [["⚡", "Impianto installato: Caseificio Fumagalli", "34,5 kWp · 2 ore fa"], ["✍", "Contratto firmato da Sofia Marchetti", "Giulia Bianchi · 3 ore fa"], ["🛠", "Intervento chiuso: inverter sostituito", "Assistenza · ieri"], ["📦", "Arrivati 120 pannelli dal fornitore", "Magazzino · ieri"], ["✉", "Campagna \"Batterie d'autunno\" inviata", "4.200 contatti · 2 giorni fa"]]
-    .map(([i, t, s]) => `<li><i>${i}</i><span>${t}<small>${s}</small></span></li>`).join("");
-
-  // ricerca rapida (Ctrl K)
-  const ACTIONS = [["Azioni", "Nuovo cliente nel CRM", "crm", "amber", "", "../crm-demo/index.html#lead"], ["Azioni", "Prenota un sopralluogo", "cal", "amber", "", ""], ["Azioni", "Apri un ticket di assistenza", "tool", "blue", "", ""]];
-  const ITEMS = [...ALL.map(([sec, n, d, ic, col, who, link]) => ["Piattaforme", n, ic, col, sec, link]), ...ACTIONS.map(([g, n, ic, col, sub, link]) => [g, n, ic, col, sub, link])];
-  let sel = 0, shown = [];
-  const renderPal = () => {
-    const q = $("#pq").value.trim().toLowerCase();
-    shown = ITEMS.filter((it) => !q || it[1].toLowerCase().includes(q) || it[4].toLowerCase().includes(q));
-    sel = Math.min(sel, Math.max(0, shown.length - 1));
-    let last = "";
-    $("#pres").innerHTML = shown.map((it, i) => { const head = it[0] !== last ? `<li class="grp">${(last = it[0]).toUpperCase()}</li>` : ""; return `${head}<li data-i="${i}" class="${i === sel ? "on" : ""}"><span class="ic" style="background:${C[it[3]][0]};color:${C[it[3]][1]}">${svg(it[2])}</span>${it[1]}<small>${it[4] || "↵"}</small></li>`; }).join("") || `<li class="grp">NESSUN RISULTATO</li>`;
-  };
-  const go = (it) => { if (!it) return; closePal(); if (it[5]) location.href = it[5]; else toast(`${it[1]}: in questa demo è visibile solo il CRM vendite.`); };
-  const openPal = () => { $("#scrim").hidden = false; $("#pq").value = ""; sel = 0; renderPal(); $("#pq").focus(); };
-  const closePal = () => { $("#scrim").hidden = true; };
-  $("#open-pal").onclick = openPal;
-  $("#scrim").onclick = (e) => { if (e.target.id === "scrim") closePal(); };
-  $("#pq").oninput = () => { sel = 0; renderPal(); };
-  $("#pres").addEventListener("click", (e) => { const li = e.target.closest("li[data-i]"); if (li) go(shown[+li.dataset.i]); });
-  document.addEventListener("keydown", (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") { e.preventDefault(); $("#scrim").hidden ? openPal() : closePal(); return; }
-    if ($("#scrim").hidden) return;
-    if (e.key === "Escape") closePal();
-    if (e.key === "ArrowDown") { e.preventDefault(); sel = Math.min(shown.length - 1, sel + 1); renderPal(); }
-    if (e.key === "ArrowUp") { e.preventDefault(); sel = Math.max(0, sel - 1); renderPal(); }
-    if (e.key === "Enter") { e.preventDefault(); go(shown[sel]); }
+  const toast = (t) => { document.querySelector(".toast")?.remove(); const e = document.createElement("div"); e.className = "toast"; e.textContent = t; document.body.append(e); setTimeout(() => e.remove(), 3000); };
+  const card = ([n, ic, dom, acc, d, link]) => `<button class="card" data-n="${n}" data-link="${link}"><span class="hd"><span class="ic">${svg(ic)}</span><b>${n}</b>${acc ? `<span class="tag">${acc}</span>` : link ? `<span class="tag open">Demo</span>` : ""}</span><span class="dom">${dom}</span><p>${d}</p></button>`;
+  $("#g-int").innerHTML = INT.map(card).join("");
+  $("#g-dir").innerHTML = DIR.map(card).join("");
+  $("#g-pub").innerHTML = PUB.map(card).join("");
+  document.addEventListener("click", (e) => {
+    const c = e.target.closest(".card"); if (c) { if (c.dataset.link) location.href = c.dataset.link; else toast(`${c.dataset.n}: in questa demo si apre solo il CRM Vendite.`); }
+    const n = e.target.closest(".nav"); if (n) { document.querySelectorAll(".nav").forEach((x) => x.removeAttribute("aria-current")); n.setAttribute("aria-current", "page"); document.getElementById(n.dataset.go).scrollIntoView({ behavior: "smooth" }); }
   });
+  // stato delle piattaforme, ricontrollato ogni 2 minuti
+  const SVC = [["CRM vendite", 99], ["App coach", 137], ["App clienti", 121], ["Piattaforma email", 117], ["Content Hub", 98], ["API CRM", 190]];
+  const renderStatus = () => {
+    $("#status").innerHTML = `<b>Stato piattaforme</b>${SVC.map(([n, b]) => `<span class="sp">${n} <em>${Math.round(b * (.85 + Math.random() * .3))} ms</em></span>`).join("")}<span class="when">controllato alle ${new Date().toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" })} · ogni 2 minuti</span>`;
+  };
+  renderStatus(); setInterval(renderStatus, 120000);
 })();
 </script>
 </body>

@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CRM vendite fotovoltaico · Demo Reef 7 Lab</title>
-<meta name="description" content="Demo navigabile di un CRM su misura per un'azienda di fotovoltaico, progettato da Reef 7 Lab: pipeline dei sopralluoghi, scheda cliente con AI, traiettoria del fatturato, classifica e commissioni.">
+<title>CRM vendite · Demo Reef 7 Lab</title>
+<meta name="description" content="Demo navigabile di un CRM vendite su misura progettato da Reef 7 Lab: pipeline, scheda lead con AI, traiettoria del cash, classifica e commissioni automatiche.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-  :root { --bg: #0b1020; --panel: #11182b; --ink: #e9edf6; --muted: #98a2b8; --faint: #66708a; --line: #1f2940; --soft: #182238; --col: #0f1626; --em: #f5b740; --em-ink: #1c1405; --blue: #2f7bff; --aqua: #14b8c9; --green: #34d399; --red: #f0627a; --amber: #f59e0b; --orange: #f08a5d; --violet: #a78bfa; --side: #0b1020; --sans: "Geist", "Segoe UI", system-ui, sans-serif; --mono: "Geist Mono", ui-monospace, monospace; color-scheme: dark; }
-  :root[data-theme="light"] { --bg: #f6f7f9; --panel: #fff; --ink: #0f172a; --muted: #64748b; --faint: #94a3b8; --line: #e6e9ef; --soft: #f1f4f8; --col: #edf0f4; --em: #c98500; --em-ink: #fff; --green: #16a34a; --red: #e11d48; --side: #fff; color-scheme: light; }
+  :root { --bg: #111417; --panel: #171b1f; --ink: #e8ebee; --muted: #9aa3ad; --faint: #6b7480; --line: #272c32; --soft: #1e2328; --col: #15191d; --em: #8b9bff; --em-ink: #0c1033; --blue: #2f7bff; --aqua: #14b8c9; --green: #4ade80; --red: #f0627a; --amber: #f59e0b; --orange: #f08a5d; --violet: #a78bfa; --side: #111417; --sans: "Geist", "Segoe UI", system-ui, sans-serif; --mono: "Geist Mono", ui-monospace, monospace; color-scheme: dark; }
+  :root[data-theme="light"] { --bg: #f6f7f9; --panel: #fff; --ink: #0f172a; --muted: #64748b; --faint: #94a3b8; --line: #e6e9ef; --soft: #f1f4f8; --col: #edf0f4; --em: #4f5fe0; --em-ink: #fff; --green: #16a34a; --red: #e11d48; --side: #fff; color-scheme: light; }
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; }
   body { background: var(--bg); color: var(--ink); font: 14px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
@@ -19,8 +19,8 @@
   .app { display: grid; grid-template-columns: 228px minmax(0, 1fr); height: 100vh; }
   .side { background: var(--side); color: var(--muted); border-right: 1px solid var(--line); padding: 18px 12px; display: flex; flex-direction: column; gap: 3px; }
   .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 600; padding: 4px 10px 14px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
-  .brand .sales { margin-left: auto; font: 600 10px var(--mono); letter-spacing: .06em; color: var(--em); background: rgba(245, 183, 64, .14); padding: 3px 8px; border-radius: 999px; }
-  .brand i { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(135deg, #f59e0b, #fb7185); color: #fff; display: grid; place-items: center; font: 600 12px var(--mono); font-style: normal; }
+  .brand .sales { margin-left: auto; font: 600 10px var(--mono); letter-spacing: .06em; color: var(--em); background: rgba(139, 155, 255, .14); padding: 3px 8px; border-radius: 999px; }
+  .brand i { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(135deg, #6366f1, #a5b4fc); color: #fff; display: grid; place-items: center; font: 600 12px var(--mono); font-style: normal; }
   .brand small { display: block; font-weight: 400; color: var(--faint); font-size: 11.5px; }
   .grp { height: 1px; background: var(--line); margin: 8px 10px; }
   .sec { font: 500 10.5px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: #475569; padding: 16px 10px 6px; }
@@ -74,7 +74,7 @@
   .legend { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--muted); }
   .light { display: inline-flex; align-items: center; gap: 7px; font-weight: 600; font-size: 13px; padding: 4px 10px; border-radius: 999px; }
   .light::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
-  .light.g { color: var(--green); box-shadow: inset 0 0 0 1px rgba(52, 211, 153, .5); } .light.a { color: var(--amber); box-shadow: inset 0 0 0 1px rgba(245, 158, 11, .5); } .light.r { color: var(--orange); box-shadow: inset 0 0 0 1px rgba(240, 138, 93, .55); }
+  .light.g { color: var(--green); box-shadow: inset 0 0 0 1px rgba(139, 155, 255, .5); } .light.a { color: var(--amber); box-shadow: inset 0 0 0 1px rgba(245, 158, 11, .5); } .light.r { color: var(--orange); box-shadow: inset 0 0 0 1px rgba(240, 138, 93, .55); }
   .light::before { display: none; }
   .diag { border-left: 3px solid var(--amber); background: #fffbeb; border-radius: 0 12px 12px 0; padding: 14px 16px; margin-top: 12px; }
   .diag b { display: block; margin-bottom: 6px; }
@@ -83,7 +83,7 @@
   /* pipeline */
   .board { display: grid; grid-auto-flow: column; grid-auto-columns: 232px; gap: 10px; align-items: start; padding-bottom: 6px; }
   .col { background: var(--col); border: 1px solid var(--line); border-radius: 12px; padding: 9px; min-height: 280px; transition: background .15s, box-shadow .15s; }
-  .col.won { background: rgba(245, 183, 64, .07); } .col.lost { background: rgba(240, 98, 122, .07); }
+  .col.won { background: rgba(139, 155, 255, .07); } .col.lost { background: rgba(240, 98, 122, .07); }
   .col.folded { grid-column: span 1; min-height: 0; width: 46px; padding: 9px 6px; cursor: pointer; }
   .col.folded h2 { writing-mode: vertical-rl; transform: rotate(180deg); margin: 0; }
   .col.folded .cards, .col.folded h2 em { display: none; }
@@ -128,7 +128,7 @@
   .db { padding: 14px 16px 24px; overflow: auto; flex: 1; display: grid; gap: 12px; align-content: start; }
   .box { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
   .box h4 { margin: 0 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; display: flex; align-items: center; gap: 8px; }
-  .box h4 .ai { font: 600 10px var(--mono); padding: 2px 6px; border-radius: 6px; background: rgba(245, 183, 64, .15); color: var(--em); letter-spacing: 0; }
+  .box h4 .ai { font: 600 10px var(--mono); padding: 2px 6px; border-radius: 6px; background: rgba(139, 155, 255, .15); color: var(--em); letter-spacing: 0; }
   .kv { display: grid; grid-template-columns: 120px 1fr; gap: 6px 10px; font-size: 13px; }
   .kv span { color: var(--muted); }
   .call { border-top: 1px solid var(--line); padding-top: 10px; margin-top: 10px; font-size: 13px; }
@@ -146,7 +146,7 @@
   .boards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .rank { display: grid; gap: 4px; }
   .rk { display: grid; grid-template-columns: 26px 1fr 100px; gap: 10px; align-items: center; padding: 9px 10px; border-radius: 10px; }
-  .rk.me { background: rgba(245, 183, 64, .08); box-shadow: inset 0 0 0 1px rgba(245, 183, 64, .3); }
+  .rk.me { background: rgba(139, 155, 255, .08); box-shadow: inset 0 0 0 1px rgba(139, 155, 255, .3); }
   .rk .pos { font: 600 13px var(--mono); color: var(--muted); text-align: center; }
   .rk .nm { display: flex; align-items: center; gap: 8px; font-weight: 500; min-width: 0; }
   .rk .bar { grid-column: 2 / 3; height: 6px; border-radius: 4px; background: var(--soft); overflow: hidden; margin-top: 4px; }
@@ -178,13 +178,13 @@
   .kpi3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 12px 0; }
   .kpi3 .card { display: flex; gap: 14px; align-items: flex-start; }
   .kpi3 span { color: var(--muted); } .kpi3 b { display: block; font-size: 24px; font-weight: 700; margin-top: 2px; font-variant-numeric: tabular-nums; } .kpi3 small { color: var(--muted); font-size: 12px; }
-  .today { background: #eef5ff; color: #0f172a; border: 2px solid #7aa7ff; border-radius: 14px; padding: 18px 20px; margin-bottom: 12px; }
+  .today { background: #eef0ff; color: #0f172a; border: 2px solid #8b9bff; border-radius: 14px; padding: 18px 20px; margin-bottom: 12px; }
   .today .sub { color: #475569; font-size: 12.5px; margin: 2px 0 14px; }
   .today .two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .today .k { font: 600 11px var(--mono); letter-spacing: .06em; color: #475569; text-transform: uppercase; }
   .today .big { font-size: 34px; font-weight: 700; } .today .big small { font-size: 18px; color: #64748b; font-weight: 500; }
   .today .tb { height: 7px; border-radius: 5px; background: #fff; overflow: hidden; margin: 6px 0; } .today .tb i { display: block; height: 100%; background: #1e293b; border-radius: inherit; }
-  .today .plus { font-size: 34px; font-weight: 700; color: #1d4ed8; }
+  .today .plus { font-size: 34px; font-weight: 700; color: #3f4fd6; }
   .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 16px; align-items: end; height: 120px; position: relative; }
   .days div { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 4px; font-size: 11.5px; color: #475569; }
   .days div b { font-size: 12px; color: #0f172a; }
@@ -199,102 +199,14 @@
   .ritem:hover { border-color: var(--em); }
   .ritem .t { flex: 1; } .ritem .t b { display: block; font-size: 13.5px; } .ritem .t small { color: var(--muted); }
   @media (max-width: 1000px) { .kpi3, .today .two { grid-template-columns: 1fr; } .cashc { grid-template-columns: auto 1fr; } .cashc .light { grid-column: 1 / -1; justify-self: start; } }
-  /* rifinitura estetica */
-  body { background: radial-gradient(1200px 600px at 85% -10%, rgba(59, 130, 246, .10), transparent 60%), radial-gradient(900px 500px at 10% 110%, rgba(245, 183, 64, .06), transparent 60%), var(--bg); }
-  :root[data-theme="light"] body { background: var(--bg); }
-  .card, .box, .col { box-shadow: 0 1px 0 rgba(255, 255, 255, .03) inset, 0 10px 30px rgba(0, 0, 0, .18); }
-  :root[data-theme="light"] .card, :root[data-theme="light"] .box, :root[data-theme="light"] .col { box-shadow: 0 1px 2px rgba(15, 23, 42, .05); }
-  .card { border-radius: 16px; background: linear-gradient(180deg, rgba(255, 255, 255, .025), rgba(255, 255, 255, 0)), var(--panel); }
-  .top { background: rgba(11, 16, 32, .75); backdrop-filter: blur(10px); }
-  :root[data-theme="light"] .top { background: rgba(255, 255, 255, .85); }
-  .main { background: transparent; }
-  .side { background: rgba(11, 16, 32, .6); backdrop-filter: blur(8px); }
-  :root[data-theme="light"] .side { background: #fff; }
-  .nav { position: relative; }
-  .nav[aria-current="page"]::before { content: ""; position: absolute; left: -12px; top: 8px; bottom: 8px; width: 3px; border-radius: 0 3px 3px 0; background: var(--em); }
-  .ico { background: rgba(245, 183, 64, .12); color: var(--em); border: 1px solid rgba(245, 183, 64, .18); }
-  .cashc .val { font-size: 46px; background: linear-gradient(180deg, #fff, #c9d3e8); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  :root[data-theme="light"] .cashc .val { background: none; color: var(--ink); }
-  .spark { display: block; width: 100%; height: 110px; margin: 16px 0 4px; }
-  .sp-l { fill: none; stroke: var(--em); stroke-width: 2.5; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 6px rgba(245, 183, 64, .5)); }
-  .sp-t { fill: none; stroke: var(--faint); stroke-width: 1.2; stroke-dasharray: 5 6; vector-effect: non-scaling-stroke; }
-  .sp-d { fill: var(--em); stroke: var(--panel); stroke-width: 3; }
-  .pbar { height: 10px; margin-top: 8px; }
-  .pbar i { box-shadow: 0 0 14px rgba(245, 183, 64, .45); background-image: linear-gradient(90deg, rgba(255, 255, 255, .0), rgba(255, 255, 255, .25)) !important; }
-  .kpi3 .card { transition: transform .2s, border-color .2s; }
-  .kpi3 .card:hover { transform: translateY(-2px); border-color: rgba(245, 183, 64, .35); }
-  .today { background: linear-gradient(135deg, rgba(59, 130, 246, .14), rgba(59, 130, 246, .03) 60%), var(--panel); color: var(--ink); border: 1px solid rgba(96, 165, 250, .35); box-shadow: 0 10px 40px rgba(59, 130, 246, .12); }
-  .today .sub, .today .k, .today .mut, .today .det, .days div { color: var(--muted); }
-  .today .det { font-size: 12.5px; }
-  .today .big small { color: var(--faint); }
-  .today .tb { background: var(--soft); } .today .tb i { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
-  .today .plus, .today .ok { color: #60a5fa; }
-  .days div b { color: var(--ink); }
-  .days div i { background: linear-gradient(180deg, #60a5fa, #2563eb); border-radius: 6px 6px 2px 2px; }
-  .days div.low i { background: linear-gradient(180deg, #334155, #1e293b); }
-  :root[data-theme="light"] .days div.low i { background: #cbd5e1; }
-  .days .tline { border-top-color: rgba(148, 163, 184, .6); }
-  .rem { padding: 20px 22px; }
-  .ritem { background: var(--col); transition: border-color .2s, transform .2s; }
-  .ritem:hover { transform: translateX(3px); }
-  .ritem > span:last-child { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--soft); color: var(--muted); }
-  .lead { transition: box-shadow .15s, opacity .15s, transform .15s, border-color .15s; }
-  .lead:hover { transform: translateY(-2px); border-color: rgba(245, 183, 64, .35); box-shadow: 0 10px 24px rgba(0, 0, 0, .25); }
-  .av { box-shadow: 0 0 0 2px var(--panel); }
-  .periods button { transition: background .2s, color .2s; }
-  /* stile professionale: sobrio, poche luci, gerarchia chiara */
-  body { background: var(--bg) !important; }
-  .side, .top { backdrop-filter: none !important; }
-  .side { background: #0a0f1d !important; }
-  :root[data-theme="light"] .side { background: #fff !important; }
-  .top { background: var(--bg) !important; padding: 12px 24px; }
-  .crumb { display: flex; align-items: center; gap: 8px; color: var(--faint); font-size: 13px; }
-  .crumb h1 { font-size: 15px; font-weight: 600; color: var(--ink); }
-  .today-d { color: var(--faint); font-size: 12.5px; margin-right: 6px; }
-  .glabel { font: 600 10.5px var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--faint); margin: 14px 10px 6px; }
-  .grp { display: none; }
-  .nav { font-weight: 500; font-size: 13.5px; padding: 7px 10px; }
-  .nav[aria-current="page"] { background: var(--soft); box-shadow: none; }
-  .card, .box, .col { box-shadow: none !important; }
-  .card { background: var(--panel) !important; border-radius: 12px; }
-  .ico { width: 34px; height: 34px; border-radius: 9px; background: var(--soft); border: 1px solid var(--line); color: var(--muted); }
-  .ico svg { width: 17px; height: 17px; }
-  .res-head .ico { color: var(--em); }
-  .res-head b { font-size: 16px; }
-  .periods button { padding: 6px 12px; font-size: 13px; border-radius: 8px; }
-  .periods button[aria-pressed="true"] { background: var(--soft); border-color: #33405e; color: var(--ink); font-weight: 600; }
-  :root[data-theme="light"] .periods button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
-  .cashc .lbl { font-size: 12.5px; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; color: var(--faint); }
-  .cashc .val { font-size: 40px; font-weight: 600; background: none !important; color: var(--ink) !important; letter-spacing: -.025em; }
-  .cashc .proj { font-size: 13px; }
-  .light { font-size: 12px; padding: 4px 10px; border-radius: 6px; }
-  .sp-l { filter: none; stroke-width: 2; }
-  .spark { height: 96px; }
-  .pbar { height: 6px; }
-  .pbar i { box-shadow: none; background-image: none !important; }
-  .kpi3 .card:hover, .lead:hover, .ritem:hover { transform: none; }
-  .kpi3 span { font-size: 12.5px; text-transform: uppercase; letter-spacing: .05em; font-weight: 600; color: var(--faint); }
-  .kpi3 b { font-size: 22px; font-weight: 600; margin-top: 4px; }
-  .today { background: var(--panel) !important; border: 1px solid var(--line) !important; box-shadow: none !important; border-radius: 12px; }
-  .today .plus { font-size: 30px; font-weight: 600; color: var(--ink); }
-  .today .big { font-size: 30px; font-weight: 600; }
-  .today .ok { color: var(--green); }
-  .today .tb i { background: var(--blue); }
-  .days { height: 110px; }
-  .days div i { background: #3b6fd8; border-radius: 3px 3px 0 0; }
-  .days div.low i { background: #2a3550; }
-  .rem h3 { font-size: 15px; font-weight: 600; }
-  .rem h3 em { background: var(--soft); color: var(--muted); }
-  .ritem { background: transparent; border-radius: 8px; padding: 11px 12px; }
-  .ritem:hover { border-color: #33405e; background: var(--soft); }
-  .ritem > span:last-child { background: transparent; width: auto; height: auto; }
-  .lead { border-radius: 8px; }
-  .lead:hover { border-color: #33405e; box-shadow: none; }
-  .col { border-radius: 10px; }
-  .btn.primary { border-radius: 8px; }
-  .rk .pos { font-size: 12px; }
-  .rk:first-of-type .pos { color: var(--em); }
-  .toast { border-radius: 10px; font-size: 13.5px; }
+  .ph { margin: 4px 0 22px; } .ph h2 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -.02em; } .ph p { margin: 4px 0 0; color: var(--muted); }
+  .top[hidden] { display: none; }
+  .side { overflow-y: auto; }
+  .side .foot .nav { padding: 7px 4px; }
+  .theme { grid-template-columns: repeat(3, 1fr) !important; }
+  .demo-n { font-size: 11.5px; color: var(--faint); padding: 0 4px; }
+  .demo-n .reset { display: inline; color: var(--muted); text-decoration: underline; }
+  .cashc .val { font-size: 42px; }
   .note { color: var(--muted); font-size: 12.5px; margin: 12px 2px 0; }
   .modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: rgba(15, 23, 42, .35); padding: 16px; animation: fade .2s; }
   .modal form { width: min(440px, 100%); background: var(--panel); border-radius: 16px; padding: 22px; display: grid; gap: 14px; box-shadow: 0 30px 80px rgba(15, 23, 42, .3); }
@@ -318,101 +230,42 @@
     .view { padding: 14px; }
     .asg { grid-template-columns: 1fr; }
   }
-
-  /* ===== high end: nero, grigi, bianco come unico accento ===== */
-  :root:not([data-theme="light"]) { --bg: #09090b; --panel: #0e0e11; --ink: #fafafa; --muted: #a1a1aa; --faint: #71717a; --line: #1e1e22; --soft: #17171a; --col: #0b0b0e; --em: #fafafa; --em-ink: #09090b; --blue: #d4d4d8; --green: #4ade80; --red: #f87171; --amber: #fbbf24; --orange: #fbbf24; --violet: #d4d4d8; --side: #09090b; }
-  body { font-feature-settings: "ss01", "cv11"; letter-spacing: -.005em; }
-  .side { background: #09090b !important; border-right-color: var(--line); }
-  .brand { border-bottom-color: var(--line); }
-  .brand i { background: #fafafa !important; color: #09090b !important; border-radius: 8px; }
-  .brand .sales { background: transparent !important; color: var(--faint) !important; border: 1px solid var(--line); }
-  .nav { color: var(--muted); }
-  .nav[aria-current="page"] { background: #17171a; color: #fafafa; }
-  .nav[aria-current="page"]::before { background: #fafafa; }
-  .nav .count { background: #1f1f23 !important; color: #d4d4d8 !important; font-weight: 500; }
-  .btn { background: transparent; border-color: var(--line); }
-  .btn:hover { border-color: #3f3f46; }
-  .btn.primary { background: #fafafa !important; color: #09090b !important; border-color: #fafafa !important; }
-  .ctl { background: transparent; border-color: var(--line); }
-  .search { background: #0e0e11; }
-  .card, .box { border-color: var(--line) !important; background: #0e0e11 !important; }
-  .ico { background: transparent !important; border-color: var(--line) !important; color: var(--muted) !important; }
-  .res-head .ico { color: #fafafa !important; }
-  .cashc .val { font-weight: 500 !important; font-size: 44px !important; letter-spacing: -.035em !important; }
-  .kpi3 b, .today .big, .today .plus { font-weight: 500 !important; letter-spacing: -.025em; color: #fafafa !important; }
-  .light { box-shadow: none !important; border: 1px solid var(--line); background: transparent !important; }
-  .light.g { color: #86efac; } .light.a { color: #fcd34d; } .light.r { color: #fca5a5; }
-  .pbar { background: #17171a; height: 4px !important; }
-  .pbar i { background: #fafafa !important; }
-  .sp-l { stroke: #fafafa !important; stroke-width: 1.6 !important; }
-  .sp-d { fill: #fafafa !important; stroke: #0e0e11 !important; }
-  .sp-t { stroke: #3f3f46 !important; }
-  .today .tb { background: #17171a !important; } .today .tb i { background: #fafafa !important; }
-  .today .ok { color: var(--muted) !important; }
-  .days div i { background: #71717a !important; width: 30px !important; border-radius: 4px 4px 0 0 !important; }
-  .days div:last-child i { background: #fafafa !important; }
-  .days div.low i { background: #27272a !important; }
-  .days div b { font-weight: 500; }
-  .days .tline { border-top-color: #52525b !important; }
-  .periods button[aria-pressed="true"] { background: #fafafa !important; color: #09090b !important; border-color: #fafafa !important; }
-  .seg { background: #0e0e11; border: 1px solid var(--line); }
-  .seg button[aria-pressed="true"] { background: #1f1f23; box-shadow: none; }
-  .col { background: #0b0b0e !important; border-color: var(--line) !important; }
-  .col.won, .col.lost { background: #0b0b0e !important; }
-  .col h2 i { filter: grayscale(1) brightness(1.4); opacity: .7; }
-  .col.won h2 i { filter: none; background: #4ade80 !important; opacity: 1; }
-  .col.lost h2 i { filter: none; background: #f87171 !important; opacity: 1; }
-  .lead { background: #0e0e11 !important; border-color: var(--line) !important; }
-  .lead:hover { border-color: #3f3f46 !important; }
-  .pill { background: transparent !important; border: 1px solid var(--line); color: var(--muted) !important; font-weight: 500; }
-  .p-prio { color: #fca5a5 !important; border-color: rgba(248, 113, 113, .3); }
-  .av { background: #1f1f23 !important; color: #d4d4d8 !important; box-shadow: 0 0 0 1px #2a2a2f !important; font-weight: 500; }
-  .lead .age.stale { color: #fca5a5; font-weight: 500; }
-  .box h4 .ai { background: transparent !important; color: var(--muted) !important; border: 1px solid var(--line); }
-  .rk.me { background: #131316 !important; box-shadow: inset 0 0 0 1px var(--line) !important; }
-  .rk .bar i, .lb-row .bar i, .traj i { background: #fafafa !important; }
-  .rk:first-of-type .pos { color: #fafafa; }
-  .mark { color: var(--faint); } .mark::before, .mark::after { background: repeating-linear-gradient(90deg, #3f3f46 0 6px, transparent 6px 10px); }
-  .tiers div { background: #0b0b0e; border: 1px solid var(--line); }
-  .tiers div.on { background: #fafafa !important; color: #09090b !important; } .tiers div.on b { color: #09090b !important; }
-  .rem h3 em { background: #1f1f23 !important; color: #d4d4d8 !important; }
-  .ritem:hover { background: #121215 !important; border-color: #3f3f46 !important; }
-  th { background: #0b0b0e !important; }
-  tbody tr:hover { background: #121215 !important; }
-  .drawer { background: #09090b; } .dh { background: #0e0e11; }
-  .theme { border-color: var(--line); } .theme button[aria-pressed="true"] { background: #1f1f23; }
-  .side .foot a { color: #d4d4d8; text-decoration: underline; text-underline-offset: 3px; }
-  .toast { background: #fafafa !important; color: #09090b !important; border: 0 !important; }
-  .toast b { color: #09090b !important; }
-  :root[data-theme="light"] .brand i { background: #09090b !important; color: #fff !important; }
 </style>
 </head>
 <body>
 <div class="app">
   <aside class="side" id="side">
-    <div class="brand"><i>H</i><div>Helios Energia<small>Fotovoltaico</small></div><span class="sales">SALES</span></div>
-    <p class="glabel">Vendite</p>
-    <button class="nav" data-view="dash" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>Dashboard</button>
-    <button class="nav" data-view="leads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="11" rx="1.5"/><rect x="17" y="4" width="4" height="7" rx="1.5"/></svg>Clienti<span class="count" id="c-leads"></span></button>
-    <button class="nav" data-view="pay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Pagamenti</button>
-    <p class="glabel">Team</p>
-    <button class="nav" data-view="rank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>Classifica</button>
-    <button class="nav" data-view="comm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.6-1-1.7-1.5-3-1.5-1.7 0-3 .9-3 2.2 0 3 6 1.6 6 4.6 0 1.3-1.3 2.2-3 2.2-1.4 0-2.6-.6-3.2-1.6M12 6v2M12 16v2"/></svg>Commissioni</button>
-    <div class="foot"><span class="user">Giulia Bianchi</span><button class="nav" id="go-rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>Promemoria<span class="count" id="c-rem"></span></button>
-      <div class="theme" role="group" aria-label="Tema"><button data-t="light" aria-pressed="false" title="Chiaro">☀</button><button data-t="dark" aria-pressed="true" title="Scuro">☾</button></div>
-      <span>Demo di <a href="../../lavori.html" target="_top">Reef 7 Lab</a>: azienda, persone e numeri sono di esempio.</span><button class="reset" id="reset">↺ Ripristina la demo</button></div>
+    <div class="brand"><i>E</i><div>Equilibra<small>Nutrizione</small></div><span class="sales">SALES</span></div>
+    <button class="nav" data-view="dash" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Dashboard</button>
+    <button class="nav" data-view="leads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>Lead<span class="count" id="c-leads"></span></button>
+    <button class="nav" data-view="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h3M3 12h3M3 18h3M9 6h12M9 12h12M9 18h12"/></svg>Liste call a freddo</button>
+    <button class="nav" data-view="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>Calendario</button>
+    <button class="nav" data-view="pay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg>Pagamenti</button>
+    <button class="nav" data-view="ins"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>Insoluti</button>
+    <div class="grp"></div>
+    <button class="nav" data-view="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12 16 8"/><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>KPI</button>
+    <button class="nav" data-view="rank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>Classifica</button>
+    <button class="nav" data-view="comm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6.5A6 6 0 1 0 15 17.5M4 10h8M4 14h8"/></svg>Commissioni</button>
+    <button class="nav" data-view="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 9v6l-4 2v-8z"/></svg>Funnel</button>
+    <div class="foot">
+      <span class="user">Giulia Bianchi</span>
+      <button class="nav" id="go-rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>Promemoria<span class="count" id="c-rem"></span></button>
+      <button class="nav" data-view="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M12 8v4M10 10h4"/></svg>Segnala o proponi</button>
+      <div class="theme" role="group" aria-label="Tema"><button data-t="light" aria-pressed="false" title="Chiaro">☀</button><button data-t="dark" aria-pressed="true" title="Scuro">☾</button><button data-t="auto" aria-pressed="false" title="Sistema">▭</button></div>
+      <span class="demo-n">Demo di <a href="../../lavori.html" target="_top">Reef 7 Lab</a> · dati di esempio · <button class="reset" id="reset">ripristina</button></span>
+    </div>
   </aside>
   <div class="main">
     <header class="top">
       <button class="btn menu-btn" id="menu" aria-label="Menu">☰</button>
-      <div class="crumb"><span>Helios Energia</span><span>/</span><h1 id="title">Dashboard vendite</h1></div>
+      <h1 id="title">Dashboard vendite</h1>
       <span class="sp"></span>
-      <span class="today-d" id="tdate">Martedì 13 ottobre</span>
-      <input class="ctl search" id="q" type="search" placeholder="Cerca cliente, telefono, fonte…" aria-label="Cerca">
-      <button class="btn primary" id="add">+ Nuovo cliente</button>
+      <input class="ctl search" id="q" type="search" placeholder="Cerca nome, telefono, fonte…" aria-label="Cerca">
+      <button class="btn primary" id="add">+ Nuovo lead</button>
     </header>
 
     <section class="view" id="v-dash">
+      <div class="ph"><h2>Dashboard vendite</h2><p>Il quadro commerciale del Metodo Equilibra a colpo d'occhio</p></div>
       <div class="res-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span><div><b>Risultato</b><small id="per-label">Ottobre 2026</small></div>
         <div class="periods" id="periods"><button data-p="m" aria-pressed="true">Mese corrente</button><button data-p="q" aria-pressed="false">Trimestre</button><button data-p="y" aria-pressed="false">Anno 2026</button></div></div>
       <div class="card pad" id="cash"></div>
@@ -426,7 +279,7 @@
         <div class="seg" id="mode"><button aria-pressed="true" data-m="kanban">Kanban</button><button aria-pressed="false" data-m="list">Lista</button></div>
         <label class="tog"><input type="checkbox" id="mine"> Solo i miei <span style="color:var(--faint)">(Giulia)</span></label>
         <select class="ctl" id="f-src" aria-label="Fonte"><option value="">Tutte le fonti</option></select>
-        <span style="margin-left:auto;color:var(--muted);font-size:12.5px">Trascina i clienti tra le fasi · le colonne Installato e Perso si aprono con un click</span>
+        <span style="margin-left:auto;color:var(--muted);font-size:12.5px">Trascina i lead tra le fasi · le colonne Chiusa e Persa si aprono con un click</span>
       </div>
       <div class="board" id="board"></div>
       <div class="card" id="list" hidden></div>
@@ -434,16 +287,21 @@
 
     <section class="view" id="v-rank" hidden>
       <div class="boards"><div class="card pad"><p class="h">Questo mese</p><div class="rank" id="rank-m"></div></div><div class="card pad"><p class="h">Questa settimana</p><div class="rank" id="rank-w"></div></div></div>
-      <p class="note">Ordinata per incassato. Le linee tratteggiate sono le soglie bonus: chi le supera le vede scorrere sotto il proprio nome.</p>
+      <p class="note">Ordinata per cash incassato. Le linee tratteggiate sono le soglie bonus: chi le supera le vede scorrere sotto il proprio nome.</p>
     </section>
 
     <section class="view" id="v-comm" hidden>
-      <div class="bar2"><select class="ctl" id="c-rep" aria-label="Consulente"></select></div>
+      <div class="bar2"><select class="ctl" id="c-rep" aria-label="Venditrice"></select></div>
       <div class="hero"><div class="card pad" id="comm-me"></div><div class="card pad" id="bonus"></div></div>
       <div class="card"><table id="comm-all"></table></div>
       <p class="note">Si guadagna sull'incassato: la commissione matura quando entra il pagamento. Scaglioni non progressivi sul netto (lordo ÷ 1,10): si applica la percentuale dello scaglione più alto raggiunto.</p>
     </section>
 
+    <section class="view" id="v-ins" hidden>
+      <div class="ph"><h2>Insoluti</h2><p>Le rate dovute e non ancora arrivate, fotografate adesso.</p></div>
+      <div class="kpi3" id="ins-k"></div>
+      <div class="card"><table id="ins-t"></table></div>
+    </section>
     <section class="view" id="v-pay" hidden>
       <div class="bar2" id="pay-pills"></div>
       <div class="card"><table id="pays"></table></div>
@@ -455,17 +313,17 @@
 <aside class="drawer" id="drawer" hidden aria-label="Scheda lead"></aside>
 <div class="modal" id="m-new" hidden>
   <form id="f-new">
-    <h3>Nuovo cliente</h3>
+    <h3>Nuovo lead</h3>
     <div class="row2"><label class="field">Nome<input name="name" required placeholder="Nome e cognome"></label><label class="field">Telefono<input name="phone" placeholder="+39 …"></label></div>
-    <div class="row2"><label class="field">Fonte<select name="source"><option>Sito</option><option>Meta Ads</option><option>Porta a porta</option><option>Passaparola</option><option>Fiera</option></select></label><label class="field">Interesse<select name="interest"><option>FV + batteria</option><option>Solo FV</option></select></label></div>
+    <div class="row2"><label class="field">Fonte<select name="source"><option>Funnel</option><option>Ads</option><option>Workshop</option><option>Instagram</option><option>Manuale</option></select></label><label class="field">Interesse<select name="interest"><option>Percorso</option><option>Coaching</option></select></label></div>
     <label class="field">Assegnato a<select name="owner" id="new-owner"></select></label>
     <div class="mact"><button type="button" class="btn" data-close>Annulla</button><button class="btn primary">Crea lead</button></div>
   </form>
 </div>
 <div class="modal" id="m-lost" hidden>
   <form id="f-lost">
-    <h3>Perché è perso?</h3>
-    <label class="field">Motivo<select name="reason" required><option value="">Scegli un motivo</option><option>Prezzo</option><option>Ha scelto un concorrente</option><option>Tetto non idoneo</option><option>Non risponde più</option><option>Finanziamento rifiutato</option></select></label>
+    <h3>Perché è persa?</h3>
+    <label class="field">Motivo<select name="reason" required><option value="">Scegli un motivo</option><option>Prezzo</option><option>Non è il momento</option><option>Non risponde più</option><option>Ha scelto un'alternativa</option><option>Non in target</option></select></label>
     <label class="field">Nota (facoltativa)<textarea name="note" rows="2"></textarea></label>
     <div class="mact"><button type="button" class="btn" data-close>Annulla</button><button class="btn primary">Conferma</button></div>
   </form>
@@ -474,48 +332,48 @@
 <script>
 (() => {
   // ---- dati di esempio (azienda e persone inventate) ----
-  const REPS = { GB: ["Giulia Bianchi", "#3b82f6"], MR: ["Marco Russo", "#14b8c9"], SC: ["Sara Conti", "#8b5cf6"], EL: ["Enrico Longo", "#f59e0b"], CF: ["Carlo Ferri", "#ec4899"] };
+  const REPS = { GB: ["Giulia Bianchi", "#2f7bff"], MR: ["Marta Russo", "#14b8c9"], SC: ["Sara Conti", "#7c3aed"], EL: ["Elisa Longo", "#f59e0b"], CF: ["Chiara Ferri", "#ec4899"] };
   const ME = "GB";
-  const STAGES = [["call", "Da chiamare", "#94a3b8"], ["cold", "Primo contatto", "#38bdf8"], ["app", "Qualificato", "#22d3ee"], ["disco", "Sopralluogo fissato", "#818cf8"], ["discodone", "Sopralluogo fatto", "#a78bfa"], ["demo", "Preventivo inviato", "#c084fc"], ["nego", "In trattativa", "#f59e0b"], ["dep", "Contratto firmato", "#84cc16"], ["won", "Installato", "#22c55e"], ["lost", "Perso", "#f43f5e"]];
-  const TARGET = 750000, BONUS_TEAM = 750000, BONUS_EACH = 500, WEEK_TARGET = 35000;
-  const TIERS = [[0, 3], [40000, 3.5], [60000, 4], [80000, 4.5], [100000, 5]];
+  const STAGES = [["call", "Da chiamare", "#94a3b8"], ["cold", "Chiamata a freddo", "#38bdf8"], ["app", "Candidatura inviata", "#22d3ee"], ["disco", "Discovery fissata", "#818cf8"], ["discodone", "Discovery fatta", "#a78bfa"], ["demo", "Demo fissata", "#c084fc"], ["nego", "In trattativa", "#f59e0b"], ["dep", "Acconto ricevuto", "#84cc16"], ["won", "Chiusa", "#16a34a"], ["lost", "Persa", "#e11d48"]];
+  const TARGET = 120000, BONUS_TEAM = 120000, BONUS_EACH = 250, WEEK_TARGET = 7000;
+  const TIERS = [[0, 6], [10000, 7], [20000, 8], [30000, 9], [40000, 10]];
   const TODAY = 13, MONTH_DAYS = 31, WEEK_START = 13;
-  const AVATARS = [["Risparmio in bolletta", "Spende molto di luce e vuole tagliare il costo fisso"], ["Indipendenza energetica", "Vuole batteria e autonomia dalla rete"], ["Investitore", "Ragiona su rendimento e incentivi"]];
-  const AWARE = ["Consapevole del problema", "Sta confrontando preventivi", "Pronto a firmare"];
-  const OBJ = ["Prezzo", "Aspetto gli incentivi", "Non mi fido del rendimento", "Ne parlo in famiglia"];
-  const SUG = { "Prezzo": [["Simulazione · risparmio su 20 anni", "Sposta il focus dal prezzo al ritorno"], ["Opzioni di finanziamento a rata fissa", "La rata può stare sotto la bolletta attuale"]],
-    "Aspetto gli incentivi": [["Guida · incentivi e detrazioni in vigore", "Scioglie: aspetto gli incentivi"], ["Calcolo · quanto costa aspettare 6 mesi", "Mostra la bolletta persa nell'attesa"]],
-    "Non mi fido del rendimento": [["Caso · villetta a Treviso, 14 mesi di dati", "Produzione reale, non stimata"], ["Garanzie su pannelli e inverter", "Rendimento garantito per contratto"]],
-    "Ne parlo in famiglia": [["Riepilogo da girare in famiglia", "Le dà le parole per la conversazione"], ["Caso · coppia a Padova, batteria da 10 kWh", "Decisione presa insieme"]] };
-  const NAMES = ["Alessandro Moretti", "Beatrice Galli", "Paolo Rossi", "Daniela Fontana", "Agriturismo Greco", "Federico Marino", "Giada Costa", "Ivan Bruno", "Officina Rizzo", "Laura Ferrara", "Matteo Esposito", "Noemi Romano", "Pietro Gentile", "Roberta Caruso", "Capannone Villa Srl", "Valerio De Luca", "Arianna Leone", "Claudio Serra", "Francesca Pellegrini", "Hotel Barbieri", "Irene Monti", "Luca Fabbri"];
-  const SRC = ["Sito", "Meta Ads", "Porta a porta", "Passaparola", "Fiera"];
-  const VAL = { "FV + batteria": 18900, "Solo FV": 9800 };
+  const AVATARS = [["Ripartenza", "Ha già provato diete da sola, vuole un metodo che duri"], ["Tempo zero", "Lavora tanto, cerca un'alimentazione sostenibile"], ["Scettica", "Ha speso in programmi senza risultati"]];
+  const AWARE = ["Consapevole del problema", "Consapevole della soluzione", "Pronta a scegliere"];
+  const OBJ = ["Prezzo", "Non ho tempo", "Ne parlo con il partner", "Ho già provato diete"];
+  const SUG = { "Prezzo": [["Caso studio · Laura, 4 mesi di percorso", "Mostra il cambiamento concreto"], ["Video · Quanto costa non cambiare", "Sposta il focus dal prezzo al valore"]],
+    "Non ho tempo": [["Video · Il metodo in 15 minuti al giorno", "Scioglie: non ho tempo"], ["Caso studio · Marta, mamma e manager", "Profilo simile al suo"]],
+    "Ne parlo con il partner": [["Guida · Come presentarlo a casa", "Le dà le parole per la conversazione"], ["Caso studio · Elena e il marito", "Decisione presa in coppia"]],
+    "Ho già provato diete": [["Video · Perché questa volta è diverso", "Scioglie: ho già provato"], ["Caso studio · Sara, dopo tre diete", "Profilo scettico come il suo"]] };
+  const NAMES = ["Alessia Moretti", "Beatrice Galli", "Camilla Rossi", "Daniela Fontana", "Eleonora Greco", "Federica Marino", "Giada Costa", "Ilaria Bruno", "Jessica Rizzo", "Laura Ferrara", "Martina Esposito", "Noemi Romano", "Paola Gentile", "Roberta Caruso", "Serena Villa", "Valeria De Luca", "Arianna Leone", "Claudia Serra", "Francesca Pellegrini", "Giorgia Barbieri", "Irene Monti", "Lucia Fabbri"];
+  const SRC = ["Funnel", "Ads", "Workshop", "Instagram", "Manuale"];
+  const VAL = { "Percorso": 2900, "Coaching": 1200 };
   const pick = (a, i) => a[i % a.length];
   const ORDER = ["call", "cold", "app", "disco", "discodone", "demo", "nego", "dep", "won", "lost", "call", "app", "disco", "cold", "demo", "nego", "call", "app", "won", "disco", "lost", "nego"];
   const repKeys = Object.keys(REPS);
   function seed() {
     const leads = NAMES.map((name, i) => {
-      const stage = ORDER[i], interest = i % 3 === 2 ? "Solo FV" : "FV + batteria", owner = pick(repKeys, i);
+      const stage = ORDER[i], interest = i % 3 === 2 ? "Coaching" : "Percorso", owner = pick(repKeys, i);
       const disco = ["disco", "discodone", "demo", "nego", "dep", "won"].includes(stage) ? pick(repKeys, i + 1) : "";
       const hadCall = ["discodone", "demo", "nego", "dep", "won", "lost"].includes(stage);
       return { id: i + 1, name, phone: `+39 3${(40 + i) % 90}${String(1000000 + i * 7919).slice(1)}`, source: pick(SRC, i), interest, stage, owner,
         cold: pick(repKeys, i + 2), disco, demo: ["demo", "nego", "dep", "won"].includes(stage) ? owner : "", days: (i * 3) % 9, prio: i % 5 === 0 && !["won", "lost"].includes(stage),
-        ai: i % 4 === 3 ? null : { avatar: pick(AVATARS, i), aware: pick(AWARE, i), pain: pick(["Bollette sopra i 300 € al mese", "Teme gli aumenti dell'energia", "Vuole sfruttare gli incentivi"], i) },
-        calls: hadCall ? [{ day: Math.max(1, TODAY - (i % 6)), min: 32 + (i * 7) % 25, rep: disco || owner, esito: stage === "lost" ? "Non interessata" : stage === "won" ? "Chiusa" : "Interessata", show: true, obj: pick(OBJ, i), next: stage === "nego" ? "Richiamare dopo che ne parla in famiglia" : "Inviare il preventivo" }] : [],
-        reason: stage === "lost" ? pick(["Prezzo", "Ha scelto un concorrente"], i) : "",
+        ai: i % 4 === 3 ? null : { avatar: pick(AVATARS, i), aware: pick(AWARE, i), pain: pick(["Non riesce a essere costante", "Ha poco tempo per sé", "Ha perso fiducia nei programmi"], i) },
+        calls: hadCall ? [{ day: Math.max(1, TODAY - (i % 6)), min: 32 + (i * 7) % 25, rep: disco || owner, esito: stage === "lost" ? "Non interessata" : stage === "won" ? "Chiusa" : "Interessata", show: true, obj: pick(OBJ, i), next: stage === "nego" ? "Richiamare dopo che ne parla a casa" : "Fissare la demo" }] : [],
+        reason: stage === "lost" ? pick(["Prezzo", "Non è il momento"], i) : "",
         log: [["↘", `Lead entrato da ${pick(SRC, i).toLowerCase()}`, `${TODAY - (i % 8) + 1} ottobre`]] };
     });
     // pagamenti del mese: storico dei giorni passati
     const pays = [];
     const add = (day, client, amount, owner, method) => pays.push({ id: pays.length + 1, day, client, amount, owner, method });
-    const base = [["Sofia Marchetti", 18900, "GB"], ["Andrea Ricci", 5670, "MR"], ["Elena Sala", 18900, "SC"], ["Mario Riva", 9800, "EL"], ["Caseificio Fumagalli", 34500, "GB"], ["Silvio Neri", 18900, "CF"], ["Rita Colombo", 5670, "SC"], ["Carlo Vitale", 18900, "MR"], ["Teresa Lodi", 9800, "GB"], ["Nadia Orsini", 18900, "EL"], ["B&B Bassi", 22400, "SC"], ["Vera Testa", 5670, "GB"], ["Olindo Fiore", 18900, "MR"], ["Pia Sartori", 18900, "CF"], ["Ada Ferraro", 9800, "SC"], ["Bruno Conte", 18900, "GB"], ["Dora Mancini", 18900, "EL"], ["Emilio Grasso", 5670, "MR"], ["Fiorella Messina", 18900, "SC"], ["Gaia Bellini", 18900, "GB"]];
+    const base = [["Sofia Marchetti", 2900, "GB"], ["Anna Ricci", 1450, "MR"], ["Elena Sala", 2900, "SC"], ["Monica Riva", 1200, "EL"], ["Greta Fumagalli", 2900, "GB"], ["Silvia Neri", 2900, "CF"], ["Rita Colombo", 1450, "SC"], ["Carla Vitale", 2900, "MR"], ["Teresa Lodi", 1200, "GB"], ["Nadia Orsini", 2900, "EL"], ["Livia Bassi", 2900, "SC"], ["Vera Testa", 1450, "GB"], ["Olga Fiore", 2900, "MR"], ["Pia Sartori", 2900, "CF"], ["Ada Ferraro", 1200, "SC"], ["Bruna Conte", 2900, "GB"], ["Dora Mancini", 2900, "EL"], ["Emma Grasso", 1450, "MR"], ["Fiora Messina", 2900, "SC"], ["Gaia Bellini", 2900, "GB"]];
     base.forEach(([c, a, o], i) => add(1 + Math.floor(i * 12 / base.length), c, a, o, i % 3 ? "Carta" : "Bonifico"));
     return { leads, pays };
   }
   let db;
-  try { db = JSON.parse(localStorage.getItem("r7-crm2") || "null"); } catch {}
+  try { db = JSON.parse(localStorage.getItem("r7-crm3") || "null"); } catch {}
   if (!db || !db.leads) db = seed();
-  const save = () => { try { localStorage.setItem("r7-crm2", JSON.stringify(db)); } catch {} };
+  const save = () => { try { localStorage.setItem("r7-crm3", JSON.stringify(db)); } catch {} };
 
   const $ = (s) => document.querySelector(s);
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -531,60 +389,45 @@
 
   // periodo della dashboard: mese, trimestre o anno (storico di esempio per i mesi passati)
   let period = "m";
-  const PER = { m: { label: "Ottobre 2026", target: TARGET, past: 0, day: TODAY, days: MONTH_DAYS }, q: { label: "Ottobre – dicembre 2026", target: TARGET * 3, past: 0, day: TODAY, days: 92 }, y: { label: "Anno 2026", target: TARGET * 12, past: 6550000, day: 286, days: 365 } };
+  const PER = { m: { label: "Ottobre 2026", target: TARGET, past: 0, day: TODAY, days: MONTH_DAYS }, q: { label: "Ottobre – dicembre 2026", target: TARGET * 3, past: 0, day: TODAY, days: 92 }, y: { label: "Anno 2026", target: TARGET * 12, past: 1004500, day: 286, days: 365 } };
   const I = { cash: '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/>', doc: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="m9 15 2 2 4-4"/>', rec: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M12 8v8M9.5 10.2c0-.9 1.1-1.6 2.5-1.6s2.5.7 2.5 1.6c0 2.2-5 1.2-5 3.4 0 .9 1.1 1.6 2.5 1.6s2.5-.7 2.5-1.6"/>', heart: '<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/>' };
   const ico = (k) => `<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">${I[k]}</svg></span>`;
-  // andamento cumulato dell'incassato nei giorni trascorsi, con la linea dell'obiettivo
-  function spark(P) {
-    if (period !== "m") return "";
-    const W = 640, H = 120, byDay = Array.from({ length: TODAY }, (_, d) => db.pays.filter((p) => p.day === d + 1).reduce((a, p) => a + p.amount, 0));
-    let acc = 0; const cum = byDay.map((v) => (acc += v));
-    const max = Math.max(TARGET * TODAY / MONTH_DAYS * 1.15, acc * 1.1);
-    const x = (i) => (i / (MONTH_DAYS - 1)) * W, y = (v) => H - (v / max) * H;
-    const line = cum.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
-    const area = `${line} L${x(cum.length - 1).toFixed(1)},${H} L0,${H} Z`;
-    return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">
-      <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".14"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs>
-      <path d="M0,${H} L${W},${y(TARGET)}" class="sp-t"/><path d="${area}" fill="url(#sg)"/><path d="${line}" class="sp-l"/>
-      <circle cx="${x(cum.length - 1)}" cy="${y(acc)}" r="4.5" class="sp-d"/></svg>`;
-  }
   function renderDash() {
     const P = PER[period], monthCash = cashOf(db.pays), cash = monthCash + P.past;
     const expected = P.target * P.day / P.days, ratio = cash / expected, perDay = cash / P.day;
     const lc = ratio >= 1 ? ["g", "In traiettoria"] : ratio >= .9 ? ["a", "Attenzione"] : ["r", "Sotto traiettoria"];
     $("#per-label").textContent = P.label;
-    $("#cash").innerHTML = `<div class="cashc">${ico("cash")}<div><div class="lbl">Incassato</div><div class="val">${eur(cash)}</div>
+    $("#cash").innerHTML = `<div class="cashc">${ico("cash")}<div><div class="lbl">Cash incassato</div><div class="val">${eur(cash)}</div>
         <div class="proj">Proiezione fine periodo: <b>${eur(perDay * P.days)}</b> con questo trend (${eur(perDay)}/giorno, giorno ${P.day} di ${P.days})</div></div>
         <span class="light ${lc[0]}">${lc[1]} · ${Math.round(ratio * 100)}%</span></div>
-      ${spark(P)}
       <div class="pbar"><i style="width:${Math.min(100, cash / P.target * 100)}%;background:${ratio >= 1 ? "var(--em)" : ratio >= .9 ? "var(--amber)" : "var(--orange)"}"></i></div>
       <div class="pfoot">Incassato <b>${eur(cash)}</b> · atteso a oggi <b>${eur(expected)}</b> · ${Math.round(ratio * 100)}% · target periodo ${eur(P.target)}</div>`;
-    const contracts = new Set(db.pays.map((p) => p.client)).size + (period === "y" ? 352 : 0);
-    $("#kpi3").innerHTML = [["doc", "Contratti firmati", contracts, ""], ["rec", "Valore medio contratto", eur(cash / Math.max(1, contracts)), ""], ["heart", "Tempo medio di chiusura", "18 giorni", "dal primo contatto alla firma"]]
+    const contracts = new Set(db.pays.map((p) => p.client)).size + (period === "y" ? 341 : 0);
+    $("#kpi3").innerHTML = [["doc", "Contratti chiusi", contracts, ""], ["rec", "Scontrino medio", eur(cash / Math.max(1, contracts)), ""], ["heart", "LTV medio", eur(2140), "mediana 1.900 € · 362 clienti"]]
       .map(([i, k, v, sub]) => `<div class="card pad">${ico(i)}<div><span>${k}</span><b>${v}</b>${sub ? `<small>${sub}</small>` : ""}</div></div>`).join("");
     // call prenotate: oggi e ultimi 7 giorni rispetto al target giornaliero
-    const T = 18, booked = db.leads.filter((l) => ["disco", "demo"].includes(l.stage)).length + 11, days = [17, 20, 19, 22, 18, 12, 21], lbl = ["mar 6", "mer 7", "gio 8", "ven 9", "sab 10", "dom 11", "lun 12"], max = 25;
-    $("#today").innerHTML = `<div style="display:flex;justify-content:space-between"><b style="font-size:16px">Sopralluoghi prenotati oggi</b><span class="det">Dettaglio →</span></div>
-      <p class="sub">Target ${T} al giorno: il 90% della capienza dei tecnici nei prossimi 7 giorni.</p>
+    const T = 30, booked = db.leads.filter((l) => ["disco", "demo"].includes(l.stage)).length + 22, days = [28, 33, 31, 36, 29, 27, 35], lbl = ["mar 6", "mer 7", "gio 8", "ven 9", "sab 10", "dom 11", "lun 12"], max = 40;
+    $("#today").innerHTML = `<div style="display:flex;justify-content:space-between"><b style="font-size:16px">Discovery prenotate oggi</b><span style="font-size:12.5px;color:#475569">Dettaglio</span></div>
+      <p class="sub">Target ${T} al giorno, weekend compreso: il 95% della capienza dei calendari dei prossimi 7 giorni.</p>
       <div class="two"><div><div class="k">Oggi</div><div class="big">${booked} <small>/ ${T}</small></div><div class="tb"><i style="width:${Math.min(100, booked / T * 100)}%"></i></div>
-        <small class="mut">${booked - 5} da sito e ads · 5 da porta a porta</small></div>
-        <div><div class="k">Ultimi 7 giorni, sul target</div><div class="plus">${(() => { const d = days.reduce((a, v) => a + v - T, 0); return (d >= 0 ? "+" : "") + d; })()}</div><small class="ok">In linea: l'attesa per un sopralluogo resta tra 2 e 4 giorni.</small></div></div>
+        <small style="color:#475569">${booked - 6} da candidatura · 6 da link personali</small></div>
+        <div><div class="k">Ultimi 7 giorni, sul target</div><div class="plus">${(() => { const d = days.reduce((a, v) => a + v - T, 0); return (d >= 0 ? "+" : "") + d; })()}</div><small style="color:#3f4fd6">In linea: l'attesa per una call resta tra 1 e 3 giorni.</small></div></div>
       <div class="days"><span class="tline" style="bottom:${20 + T / max * .82 * 120}px"></span>${days.map((v, i) => `<div class="${v < T ? "low" : ""}"><b>${v}</b><i style="height:${v / max * 82}%"></i><span>${lbl[i]}</span></div>`).join("")}</div>`;
     renderRem();
   }
 
   // promemoria: rate scadute, trattative ferme, lead da richiamare
   function remList() {
-    const late = [["Saldo scaduto da 7 giorni: Mario Riva", "2.940 € · Enrico Longo", null], ["Installazione da pianificare: Caseificio Fumagalli", "Contratto firmato da 9 giorni · Giulia Bianchi", null]];
+    const late = [["ESCALATION: rata Alice Vagnini scaduta da 7gg — 1.000,00 €", "6 ott 2026 · Alice Vagnini · Elisa Longo", null], ["Rata Monica Riva scaduta da 3gg — 600,00 €", "10 ott 2026 · Monica Riva · Elisa Longo", null]];
     const stuck = db.leads.filter((l) => l.stage === "nego" && l.days >= 3).map((l) => [`Trattativa ferma da ${l.days} giorni: ${l.name}`, `In trattativa · ${REPS[l.owner][0]}`, l.id]);
-    const todo = db.leads.filter((l) => l.stage === "call" && l.prio).map((l) => [`Chiamare oggi: ${l.name}`, `Cliente prioritario da ${l.source.toLowerCase()} · ${REPS[l.owner][0]}`, l.id]);
+    const todo = db.leads.filter((l) => l.stage === "call" && l.prio).map((l) => [`Chiamare oggi: ${l.name}`, `Lead prioritario da ${l.source.toLowerCase()} · ${REPS[l.owner][0]}`, l.id]);
     return { late: [...late, ...stuck], today: todo };
   }
   function renderRem() {
     const r = remList(), n = r.late.length + r.today.length;
     $("#c-rem").textContent = n;
     const row = ([t, sub, id]) => `<div class="ritem"${id ? ` data-id="${id}"` : ""}><span class="t"><b>${esc(t)}</b><small>${esc(sub)}</small></span><span>→</span></div>`;
-    $("#rem").innerHTML = `<h3><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:var(--muted)"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>I tuoi promemoria <em>${n}</em></h3>
+    $("#rem").innerHTML = `<h3>🔔 I tuoi promemoria <em>${n}</em></h3>
       ${r.late.length ? `<div class="k">SCADUTI · ${r.late.length}</div>${r.late.map(row).join("")}` : ""}
       ${r.today.length ? `<div class="k" style="--dot:var(--amber)">OGGI · ${r.today.length}</div>${r.today.map(row).join("")}` : ""}`;
   }
@@ -593,7 +436,7 @@
   const ui = { q: "", mine: false, src: "", mode: "kanban", open: new Set() };
   const filtered = () => db.leads.filter((l) => (!ui.mine || [l.owner, l.disco, l.demo, l.cold].includes(ME)) && (!ui.src || l.source === ui.src) && (!ui.q || `${l.name} ${l.phone} ${l.source}`.toLowerCase().includes(ui.q)));
   const leadCard = (l) => `<div class="lead" data-id="${l.id}" tabindex="0"><div class="r1"><div><b>${esc(l.name)}</b><div class="src">${l.source}</div></div>${l.prio ? '<span class="pill p-prio">Priorità</span>' : ""}</div>
-    <div class="r2">${av(l.owner)}<span class="pill ${l.interest === "Solo FV" ? "p-coach" : "p-pro"}">${l.interest}</span>${l.disco && l.demo && l.disco !== l.demo ? '<span class="pill p-dd">Setter / Closer</span>' : ""}<span class="age${l.days > 5 ? " stale" : ""}">${l.days ? `${l.days} gg in fase` : "oggi"}</span></div></div>`;
+    <div class="r2">${av(l.owner)}<span class="pill ${l.interest === "Coaching" ? "p-coach" : "p-pro"}">${l.interest}</span>${l.disco && l.demo && l.disco !== l.demo ? '<span class="pill p-dd">Disco / Demo</span>' : ""}<span class="age${l.days > 5 ? " stale" : ""}">${l.days ? `${l.days} gg in fase` : "oggi"}</span></div></div>`;
   function renderLeads() {
     const v = filtered();
     $("#c-leads").textContent = db.leads.filter((l) => !["won", "lost"].includes(l.stage)).length;
@@ -605,7 +448,7 @@
         return `<div class="col${k === "won" ? " won" : k === "lost" ? " lost" : ""}${folded ? " folded" : ""}" data-stage="${k}"><h2><i style="background:${color}"></i>${label} <span>${list.length}</span><em>${list.length ? eur(list.reduce((a, l) => a + VAL[l.interest], 0)) : ""}</em></h2><div class="cards">${list.map(leadCard).join("")}</div></div>`;
       }).join("");
     } else {
-      $("#list").innerHTML = `<table><thead><tr><th>Nome</th><th>Telefono</th><th>Fase</th><th>Assegnato</th><th>Interesse</th><th>Fonte</th><th class="n">In fase da</th></tr></thead><tbody>${v.map((l) => `<tr data-id="${l.id}"><td><b>${esc(l.name)}</b>${l.prio ? ' <span class="pill p-prio">Priorità</span>' : ""}</td><td>${l.phone}</td><td>${stageOf(l.stage)[1]}</td><td><span class="who">${av(l.owner)}${REPS[l.owner][0]}</span></td><td><span class="pill ${l.interest === "Solo FV" ? "p-coach" : "p-pro"}">${l.interest}</span></td><td>${l.source}</td><td class="n">${l.days} gg</td></tr>`).join("")}</tbody></table>`;
+      $("#list").innerHTML = `<table><thead><tr><th>Nome</th><th>Telefono</th><th>Fase</th><th>Assegnato</th><th>Interesse</th><th>Fonte</th><th class="n">In fase da</th></tr></thead><tbody>${v.map((l) => `<tr data-id="${l.id}"><td><b>${esc(l.name)}</b>${l.prio ? ' <span class="pill p-prio">Priorità</span>' : ""}</td><td>${l.phone}</td><td>${stageOf(l.stage)[1]}</td><td><span class="who">${av(l.owner)}${REPS[l.owner][0]}</span></td><td><span class="pill ${l.interest === "Coaching" ? "p-coach" : "p-pro"}">${l.interest}</span></td><td>${l.source}</td><td class="n">${l.days} gg</td></tr>`).join("")}</tbody></table>`;
     }
   }
 
@@ -626,7 +469,7 @@
       db.pays.push({ id: db.pays.length + 1, day: TODAY, client: l.name, amount, owner: closer, method: "Carta" });
       const after = commOf(cashOf(db.pays, closer));
       l.log.unshift(["€", `Pagamento registrato: ${eur(amount)}`, "adesso"]);
-      msg = `${stage === "won" ? "Impianto installato" : "Contratto firmato"}: ${esc(l.name)} · ${eur(amount)} incassati · commissione di ${REPS[closer][0].split(" ")[0]} <b>+${eur(after - before)}</b>`;
+      msg = `${stage === "won" ? "🎉 Contratto chiuso" : "Acconto ricevuto"}: ${esc(l.name)} · ${eur(amount)} incassati · commissione di ${REPS[closer][0].split(" ")[0]} <b>+${eur(after - before)}</b>`;
     }
     save(); renderAll(); toast(msg);
     if (!$("#drawer").hidden) openLead(id);
@@ -669,23 +512,23 @@
     const repOpts = (sel) => `<option value="">—</option>` + Object.entries(REPS).map(([k, [n]]) => `<option value="${k}"${k === sel ? " selected" : ""}>${n}</option>`).join("");
     const last = l.calls[0], sug = last ? SUG[last.obj] : null;
     $("#drawer").innerHTML = `<div class="dh"><button class="x" data-close aria-label="Chiudi">×</button><h3>${esc(l.name)}</h3>
-      <div class="meta"><span class="pill ${l.interest === "Solo FV" ? "p-coach" : "p-pro"}">${l.interest}</span><span>${l.source}</span><span>·</span><span>${l.days ? `ferma da ${l.days} giorni in fase` : "aggiornata oggi"}</span>${l.disco && l.demo && l.disco !== l.demo ? '<span class="pill p-dd">Setter / Closer</span>' : ""}</div>
+      <div class="meta"><span class="pill ${l.interest === "Coaching" ? "p-coach" : "p-pro"}">${l.interest}</span><span>${l.source}</span><span>·</span><span>${l.days ? `ferma da ${l.days} giorni in fase` : "aggiornata oggi"}</span>${l.disco && l.demo && l.disco !== l.demo ? '<span class="pill p-dd">Disco / Demo</span>' : ""}</div>
       <div class="asg"><label>Fase<select id="d-stage">${STAGES.map(([k, n]) => `<option value="${k}"${k === l.stage ? " selected" : ""}>${n}</option>`).join("")}</select></label>
-        <label>Primo contatto di<select data-a="cold">${repOpts(l.cold)}</select></label><label>Sopralluogo di<select data-a="disco">${repOpts(l.disco)}</select></label><label>Chiusura di<select data-a="demo">${repOpts(l.demo)}</select></label></div></div>
+        <label>Chiamata a freddo di<select data-a="cold">${repOpts(l.cold)}</select></label><label>Discovery assegnata a<select data-a="disco">${repOpts(l.disco)}</select></label><label>Demo assegnata a<select data-a="demo">${repOpts(l.demo)}</select></label></div></div>
       <div class="db">
-        <div class="box"><h4>Classificazione <span class="ai">AI</span></h4>${l.ai ? `<div class="kv"><span>Avatar</span><b>${l.ai.avatar[0]}</b><span></span><span style="color:var(--ink)">${l.ai.avatar[1]}</span><span>Consapevolezza</span><b>${l.ai.aware}</b><span>Problema principale</span><b>${l.ai.pain}</b></div>` : `<p style="margin:0 0 10px;color:var(--muted)">Non ancora classificato.</p><button class="btn sm" id="d-ai">✦ Analizza profilo con AI</button>`}</div>
-        ${l.ai ? `<div class="box"><h4>Briefing pre-call <span class="ai">AI</span></h4><p style="margin:0;font-size:13px">Profilo "${l.ai.avatar[0]}": ${l.ai.avatar[1].toLowerCase()}. Parti dal suo problema (${l.ai.pain.toLowerCase()}) e mostra la simulazione di risparmio prima di parlare di prezzo.</p></div>` : ""}
-        <div class="box"><h4>Chiamate e sopralluoghi</h4>${l.calls.length ? l.calls.map((c) => `<div class="call"><div class="ch"><b>${c.day} ottobre</b><small>${c.min} min · ${REPS[c.rep][0]}</small><span class="pill" style="background:#dcfce7;color:#15803d">${c.show ? "Presente" : "No-show"}</span><span class="pill" style="background:var(--soft);color:var(--ink)">Esito AI: ${c.esito}</span></div>
+        <div class="box"><h4>Classificazione <span class="ai">AI</span></h4>${l.ai ? `<div class="kv"><span>Avatar</span><b>${l.ai.avatar[0]}</b><span></span><span style="color:var(--ink)">${l.ai.avatar[1]}</span><span>Consapevolezza</span><b>${l.ai.aware}</b><span>Pain principale</span><b>${l.ai.pain}</b></div>` : `<p style="margin:0 0 10px;color:var(--muted)">Non ancora classificata.</p><button class="btn sm" id="d-ai">✦ Analizza profilo con AI</button>`}</div>
+        ${l.ai ? `<div class="box"><h4>Briefing pre-call <span class="ai">AI</span></h4><p style="margin:0;font-size:13px">${esc(l.name.split(" ")[0])} è nel profilo "${l.ai.avatar[0]}": ${l.ai.avatar[1].toLowerCase()}. Parti dal suo pain (${l.ai.pain.toLowerCase()}) e mostra un caso simile prima di parlare di prezzo.</p></div>` : ""}
+        <div class="box"><h4>Consulenze</h4>${l.calls.length ? l.calls.map((c) => `<div class="call"><div class="ch"><b>${c.day} ottobre</b><small>${c.min} min · ${REPS[c.rep][0]}</small><span class="pill" style="background:#dcfce7;color:#15803d">${c.show ? "Presente" : "No-show"}</span><span class="pill" style="background:var(--soft);color:var(--ink)">Esito AI: ${c.esito}</span></div>
             <div class="kv"><span>Obiezione</span><b>${c.obj}</b><span>Prossimo passo</span><b>${c.next}</b></div></div>`).join("") : `<p style="margin:0;color:var(--muted)">Nessuna call registrata.</p>`}</div>
-        ${sug ? `<div class="box"><h4>Cosa mandargli adesso</h4>${sug.map(([t, why]) => `<div class="sug"><span class="t">${t}<small>${why}</small></span><button class="btn sm" data-copy="${esc(t)}">Copia messaggio</button></div>`).join("")}</div>` : ""}
+        ${sug ? `<div class="box"><h4>Cosa mandarle adesso</h4>${sug.map(([t, why]) => `<div class="sug"><span class="t">${t}<small>${why}</small></span><button class="btn sm" data-copy="${esc(t)}">Copia messaggio</button></div>`).join("")}</div>` : ""}
         ${l.stage === "lost" ? `<div class="box"><h4>Esito</h4><div class="kv"><span>Motivo</span><b>${esc(l.reason)}</b></div></div>` : ""}
         <div class="box"><h4>Diario</h4><ul class="tl">${l.log.map(([i, t, w]) => `<li><i>${i}</i><span>${esc(t)}<small>${w}</small></span></li>`).join("")}</ul></div>
       </div>`;
     $("#drawer").hidden = $("#scrim").hidden = false;
     $("#d-stage").onchange = (e) => moveLead(id, e.target.value);
-    $("#drawer").querySelectorAll("[data-a]").forEach((s) => s.onchange = () => { l[s.dataset.a] = s.value; if (s.dataset.a === "demo" && s.value) l.owner = s.value; l.log.unshift(["●", `${s.previousSibling.textContent.trim()}: ${s.value ? REPS[s.value][0] : "nessuno"}`, "adesso"]); save(); renderAll(); openLead(id); });
+    $("#drawer").querySelectorAll("[data-a]").forEach((s) => s.onchange = () => { l[s.dataset.a] = s.value; if (s.dataset.a === "demo" && s.value) l.owner = s.value; l.log.unshift(["👤", `${s.previousSibling.textContent.trim()}: ${s.value ? REPS[s.value][0] : "nessuno"}`, "adesso"]); save(); renderAll(); openLead(id); });
     $("#d-ai")?.addEventListener("click", (e) => { e.target.disabled = true; e.target.textContent = "Analisi in corso…"; setTimeout(() => { l.ai = { avatar: AVATARS[l.id % 3], aware: AWARE[l.id % 3], pain: "Non riesce a essere costante" }; l.log.unshift(["✦", "Profilo classificato con AI", "adesso"]); save(); openLead(id); toast("Profilo classificato"); }, 1400); });
-    $("#drawer").querySelectorAll("[data-copy]").forEach((b) => b.onclick = () => { const txt = `Buongiorno ${l.name.split(" ")[0]}, come le dicevo durante il sopralluogo le giro questo: ${b.dataset.copy}. Resto a disposizione per qualsiasi dubbio.`; navigator.clipboard?.writeText(txt).catch(() => {}); toast("Messaggio WhatsApp copiato"); });
+    $("#drawer").querySelectorAll("[data-copy]").forEach((b) => b.onclick = () => { const txt = `Ciao ${l.name.split(" ")[0]}! Come ti dicevo in call, ti lascio questo: ${b.dataset.copy}. Fammi sapere cosa ne pensi 🙂`; navigator.clipboard?.writeText(txt).catch(() => {}); toast("Messaggio WhatsApp copiato"); });
   }
   const closeAll = () => { $("#drawer").hidden = $("#scrim").hidden = true; };
 
@@ -696,7 +539,7 @@
       const total = rows.reduce((a, r) => a + r[1], 0);
       let html = `<div style="display:flex;justify-content:space-between;margin-bottom:10px;font-size:13px"><span style="color:var(--muted)">Team</span><b>${eur(total)} <span style="color:var(--muted);font-weight:400">/ ${eur(target)}</span></b></div>`;
       rows.forEach(([k, v], i) => {
-        html += `<div class="rk${k === ME ? " me" : ""}"><span class="pos">${i + 1}</span><span class="nm nmw">${av(k)}${REPS[k][0]}</span><b>${eur(v)}</b><span class="bar"><i style="width:${v / max * 100}%"></i></span></div>`;
+        html += `<div class="rk${k === ME ? " me" : ""}"><span class="pos">${i === 0 ? "👑" : i + 1}</span><span class="nm nmw">${av(k)}${REPS[k][0]}</span><b>${eur(v)}</b><span class="bar"><i style="width:${v / max * 100}%"></i></span></div>`;
         marks.filter((m) => v >= m && (rows[i + 1] ? rows[i + 1][1] < m : true)).forEach((m) => { html += `<div class="mark">soglia bonus ${eur(m)}</div>`; });
       });
       return html;
@@ -714,11 +557,11 @@
       <div class="tiers">${TIERS.map(([t, r]) => `<div class="${r === rate ? "on" : ""}"><b>${r}%</b>${t ? `da ${eur(t)}` : "base"}</div>`).join("")}</div>
       <p style="margin:6px 0 0;font-size:13px">${next ? `Ti mancano <b>${eur(next[0] - gross)}</b> per il ${next[1]}%` : "Hai raggiunto lo scaglione più alto"}</p>`;
     const team = cashOf(db.pays), pct = Math.min(100, team / BONUS_TEAM * 100);
-    $("#bonus").innerHTML = `<p class="h">Bonus aziendale</p><b style="font-size:22px">${pct >= 100 ? "Obiettivo raggiunto" : `${Math.round(pct)}% dell'obiettivo`}</b>
+    $("#bonus").innerHTML = `<p class="h">Bonus aziendale</p><b style="font-size:22px">${pct >= 100 ? "Obiettivo raggiunto 🎉" : `${Math.round(pct)}% dell'obiettivo`}</b>
       <div class="traj" style="margin:14px 0 8px"><i style="width:${pct}%"></i></div>
-      <p style="margin:0;color:var(--muted);font-size:13px">Sopra ${eur(BONUS_TEAM)} incassati dal team, ogni consulente con almeno 100 € di commissioni riceve <b style="color:var(--ink)">+${eur(BONUS_EACH)}</b>.</p>`;
+      <p style="margin:0;color:var(--muted);font-size:13px">Sopra ${eur(BONUS_TEAM)} di cash del team, ogni venditrice con almeno 100 € di commissioni riceve <b style="color:var(--ink)">+${eur(BONUS_EACH)}</b>.</p>`;
     const rows = repKeys.map((k) => { const g = cashOf(db.pays, k); return [k, g, tierOf(g)[1], commOf(g)]; }).sort((a, b) => b[1] - a[1]);
-    $("#comm-all").innerHTML = `<thead><tr><th>Consulente</th><th class="n">Incassato lordo</th><th class="n">Netto</th><th class="n">Scaglione</th><th class="n">Commissione</th></tr></thead><tbody>${rows.map(([k, g, r, c]) => `<tr data-rep="${k}"><td><span class="who">${av(k)}${REPS[k][0]}</span></td><td class="n">${eur(g)}</td><td class="n">${eur(g / 1.1)}</td><td class="n">${r}%</td><td class="n"><b>${eur(c)}</b></td></tr>`).join("")}</tbody>`;
+    $("#comm-all").innerHTML = `<thead><tr><th>Venditrice</th><th class="n">Incassato lordo</th><th class="n">Netto</th><th class="n">Scaglione</th><th class="n">Commissione</th></tr></thead><tbody>${rows.map(([k, g, r, c]) => `<tr data-rep="${k}"><td><span class="who">${av(k)}${REPS[k][0]}</span></td><td class="n">${eur(g)}</td><td class="n">${eur(g / 1.1)}</td><td class="n">${r}%</td><td class="n"><b>${eur(c)}</b></td></tr>`).join("")}</tbody>`;
   }
 
   // ---- pagamenti ----
@@ -728,16 +571,26 @@
     $("#pay-pills").innerHTML = `<b style="font-size:15px">Ottobre · ${eur(cashOf(db.pays))}</b><span style="color:var(--muted)">${db.pays.length} pagamenti</span><span style="flex:1"></span>` +
       per.map(([k, v]) => `<button class="btn sm" data-pr="${k}" style="${payRep === k ? "border-color:var(--blue);background:#eef4ff" : ""}">${av(k)} ${eur(v)}</button>`).join("");
     const list = db.pays.filter((p) => !payRep || p.owner === payRep).slice().sort((a, b) => b.day - a.day || b.id - a.id);
-    $("#pays").innerHTML = `<thead><tr><th>Data</th><th>Cliente</th><th>Consulente</th><th>Metodo</th><th class="n">Importo</th></tr></thead><tbody>${list.map((p) => `<tr><td>${p.day} ottobre</td><td>${esc(p.client)}</td><td><span class="who">${av(p.owner)}${REPS[p.owner][0]}</span></td><td>${p.method}</td><td class="n"><b>${eur(p.amount)}</b></td></tr>`).join("")}</tbody>`;
+    $("#pays").innerHTML = `<thead><tr><th>Data</th><th>Cliente</th><th>Venditrice</th><th>Metodo</th><th class="n">Importo</th></tr></thead><tbody>${list.map((p) => `<tr><td>${p.day} ottobre</td><td>${esc(p.client)}</td><td><span class="who">${av(p.owner)}${REPS[p.owner][0]}</span></td><td>${p.method}</td><td class="n"><b>${eur(p.amount)}</b></td></tr>`).join("")}</tbody>`;
   }
 
-  const renderAll = () => { renderDash(); renderLeads(); renderRank(); renderComm(); renderPays(); };
+  // insoluti: rate scadute o in scadenza (dati di esempio)
+  const INS = [["Alice Vagnini", 1000, 7, "EL"], ["Monica Riva", 600, 3, "EL"], ["Teresa Lodi", 400, 12, "GB"], ["Rita Colombo", 725, -4, "SC"], ["Carla Vitale", 1450, -6, "MR"], ["Ada Ferraro", 300, 21, "SC"]];
+  function renderIns() {
+    const late = INS.filter((x) => x[2] > 0), soon = INS.filter((x) => x[2] <= 0);
+    $("#ins-k").innerHTML = [["Residuo scaduto", eur(late.reduce((a, x) => a + x[1], 0)), `${late.length} rate`, "r"], ["In scadenza entro 7 giorni", eur(soon.reduce((a, x) => a + x[1], 0)), `${soon.length} rate`, "a"], ["Clienti con insoluto", INS.length, `${new Set(INS.map((x) => x[3])).size} venditrici coinvolte`, ""]]
+      .map(([k, v, sub, c]) => `<div class="card pad"><div><span>${k}</span><b style="${c === "r" ? "color:var(--red)" : c === "a" ? "color:var(--amber)" : ""}">${v}</b><small>${sub}</small></div></div>`).join("");
+    $("#ins-t").innerHTML = `<thead><tr><th>Cliente</th><th>Venditrice</th><th>Stato</th><th class="n">Importo</th></tr></thead><tbody>${INS.slice().sort((a, b) => b[2] - a[2]).map(([c, a, d, o]) => `<tr><td><b>${c}</b></td><td><span class="who">${av(o)}${REPS[o][0]}</span></td><td>${d > 0 ? `<span style="color:var(--red)">Scaduta da ${d} giorni</span>` : `<span style="color:var(--amber)">Scade tra ${-d} giorni</span>`}</td><td class="n"><b>${eur(a)}</b></td></tr>`).join("")}</tbody>`;
+  }
+  const renderAll = () => { renderDash(); renderLeads(); renderRank(); renderComm(); renderPays(); renderIns(); };
 
   // ---- eventi ----
-  const TITLES = { dash: "Dashboard vendite", leads: "Pipeline clienti", rank: "Classifica", comm: "Commissioni", pay: "Pagamenti" };
+  const TITLES = { dash: "Dashboard vendite", leads: "Lead", rank: "Classifica", comm: "Commissioni", pay: "Pagamenti", ins: "Insoluti" };
   document.querySelectorAll(".nav[data-view]").forEach((b) => b.onclick = () => {
+    if (b.dataset.view === "x") { toast(`${b.textContent.trim()}: sezione non inclusa in questa demo.`); return; }
     document.querySelectorAll(".nav[data-view]").forEach((x) => x.removeAttribute("aria-current")); b.setAttribute("aria-current", "page");
     document.querySelectorAll(".view").forEach((v) => { v.hidden = v.id !== `v-${b.dataset.view}`; });
+    document.querySelector(".top").hidden = b.dataset.view === "dash" || b.dataset.view === "ins";
     $("#title").textContent = TITLES[b.dataset.view]; $("#side").classList.remove("open");
   });
   $("#menu").onclick = () => $("#side").classList.toggle("open");
@@ -754,7 +607,7 @@
   $("#add").onclick = () => { $("#m-new").hidden = false; $("#f-new").name.focus(); };
   $("#f-new").addEventListener("submit", (e) => {
     e.preventDefault(); const f = new FormData(e.target);
-    const l = { id: Math.max(...db.leads.map((x) => x.id)) + 1, name: f.get("name").trim(), phone: f.get("phone").trim() || "—", source: f.get("source"), interest: f.get("interest"), stage: "call", owner: f.get("owner"), cold: "", disco: "", demo: "", days: 0, prio: true, ai: null, calls: [], reason: "", log: [["＋", "Cliente inserito a mano", "adesso"]] };
+    const l = { id: Math.max(...db.leads.map((x) => x.id)) + 1, name: f.get("name").trim(), phone: f.get("phone").trim() || "—", source: f.get("source"), interest: f.get("interest"), stage: "call", owner: f.get("owner"), cold: "", disco: "", demo: "", days: 0, prio: true, ai: null, calls: [], reason: "", log: [["＋", "Lead creato a mano", "adesso"]] };
     db.leads.push(l); save(); renderAll(); e.target.reset(); $("#m-new").hidden = true; toast(`Lead creato e assegnato a <b>${REPS[l.owner][0]}</b>`);
   });
   $("#f-lost").addEventListener("submit", (e) => {
@@ -770,12 +623,13 @@
   $("#periods").onclick = (e) => { const b = e.target.closest("button"); if (!b) return; period = b.dataset.p; $("#periods").querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b)); renderDash(); };
   $("#rem").addEventListener("click", (e) => { const r = e.target.closest(".ritem[data-id]"); if (r) openLead(+r.dataset.id); else if (e.target.closest(".ritem")) document.querySelector('[data-view="pay"]').click(); });
   $("#go-rem").onclick = () => { document.querySelector('[data-view="dash"]').click(); setTimeout(() => $("#rem").scrollIntoView({ behavior: "smooth" }), 50); };
-  const setTheme = (t) => { document.documentElement.dataset.theme = t; document.querySelectorAll(".theme button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.t === t)); try { localStorage.setItem("r7-crm-theme", t); } catch {} };
+  const setTheme = (t) => { document.documentElement.dataset.theme = t === "auto" ? (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark") : t; document.querySelectorAll(".theme button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.t === t)); try { localStorage.setItem("r7-crm-theme", t); } catch {} };
   document.querySelectorAll(".theme button").forEach((b) => b.onclick = () => setTheme(b.dataset.t));
   try { setTheme(localStorage.getItem("r7-crm-theme") || "dark"); } catch { setTheme("dark"); }
   $("#reset").onclick = () => { db = seed(); save(); closeAll(); renderAll(); toast("Demo ripristinata"); };
 
   renderAll();
+  document.querySelector(".top").hidden = true;
   // #lead apre direttamente la pipeline
   if (location.hash === "#lead") document.querySelector('[data-view="leads"]').click();
 })();
