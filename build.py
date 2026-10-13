@@ -197,7 +197,7 @@ def goal_state():
     return out, active
 
 
-VERSION = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["styles.css", "alt-overrides.css", "site.js", "mission.js"])).hexdigest()[:8]
+VERSION = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["styles.css", "alt-overrides.css", "site.js", "mission.js", "agent.js"])).hexdigest()[:8]
 SLUG = {
     "it": {"home": "index.html", "work": "lavori.html", "services": "servizi.html", "solutions": "soluzioni.html", "mission": "missione.html", "studio": "lab.html", "contact": "contatti.html"},
     "en": {"home": "index.html", "work": "work.html", "services": "services.html", "solutions": "solutions.html", "mission": "mission.html", "studio": "lab.html", "contact": "contact.html"},
@@ -217,6 +217,9 @@ T = {
         ("02", "Digitale", "Applicazioni su misura", "Il software si adatta a come lavori. Non il contrario.",
          "Se il tuo team passa più tempo ad aggirare un gestionale che a usarlo, il problema non è il team. Progettiamo gestionali, portali clienti e strumenti interni attorno ai processi reali della tua azienda.",
          ["Analisi dei processi e prototipo cliccabile", "Applicazioni web e desktop", "Accessi e permessi per ruolo", "Integrazione con gli strumenti che usi già", "Nuove funzioni man mano che cresci"]),
+        ("14", "Digitale", "Configuratori 3D e realtà aumentata", "Il cliente vede il prodotto prima di comprarlo, esattamente come lo vuole.",
+         "Un prodotto che si può ruotare, personalizzare e provare nel proprio spazio vende più di una foto. Costruiamo configuratori 3D e anteprime in realtà aumentata che funzionano direttamente dal browser, senza app da scaricare, collegati al tuo catalogo e ai tuoi prezzi.",
+         ["Modelli 3D da ruotare e personalizzare", "Prova in realtà aumentata dal telefono", "Prezzo aggiornato a ogni scelta", "Nessuna app da scaricare", "Collegati a catalogo e ordini"]),
         ("03", "Vendite", "CRM su misura", "Lead, trattative e provvigioni in un unico strumento, costruito sul tuo modo di vendere.",
          "Un CRM generico costringe il team commerciale ad adattarsi. Costruiamo CRM su misura: ogni lead arriva già assegnato, le trattative avanzano per fasi, pagamenti e provvigioni si calcolano da soli e la direzione vede risultati e classifica in tempo reale.",
          ["Pipeline e fasi definite sul tuo processo", "Assegnazione automatica dei lead", "Pagamenti e provvigioni calcolati in automatico", "Classifica e KPI del team, anche su uno schermo in ufficio", "Collegato a sito, prenotazioni ed email"]),
@@ -226,6 +229,15 @@ T = {
         ("05", "Vendite", "Email marketing e automazioni", "Sequenze email che lavorano per te, con la consegna sotto controllo.",
          "Dal benvenuto al follow-up dopo una call, le email partono al momento giusto in base a ciò che fa ogni contatto. Curiamo anche la parte tecnica che decide se un'email arriva in casella o finisce nello spam.",
          ["Sequenze automatiche per ogni fase del cliente", "Segmentazione in base al comportamento", "Riscaldamento dei domini e gestione delle liste", "Statistiche di apertura e risposta", "Un'alternativa alle piattaforme a canone"]),
+        ("11", "Intelligenza artificiale", "Agenti AI per le vendite", "Ogni contatto riceve una risposta in pochi secondi, a qualsiasi ora.",
+         "Un lead che aspetta un giorno è un lead che si raffredda. L'agente risponde su sito, WhatsApp ed email, fa le domande giuste per capire chi è pronto a comprare, fissa la call nell'agenda del commerciale e aggiorna il CRM. I casi delicati passano sempre a una persona.",
+         ["Risposta immediata su sito, WhatsApp ed email", "Lead qualificati con le tue domande", "Call fissate nell'agenda del commerciale giusto", "CRM aggiornato senza inserimenti a mano", "Passaggio a una persona quando serve"]),
+        ("12", "Intelligenza artificiale", "Assistenti vocali AI", "Un assistente al telefono che risponde, prenota e richiama.",
+         "Le chiamate perse sono clienti persi. L'assistente vocale risponde con una voce naturale, in più lingue, prende appuntamenti, conferma e ricorda le prenotazioni e richiama chi non ha risposto. Ogni conversazione arriva al team già trascritta e riassunta.",
+         ["Risposte al telefono a qualsiasi ora", "Prenotazioni, conferme e promemoria", "Richiami dei contatti persi", "Più lingue, voce naturale", "Trascrizione e riassunto di ogni chiamata"]),
+        ("13", "Intelligenza artificiale", "Analisi delle chiamate di vendita", "Ogni call diventa una lezione per tutto il team.",
+         "Le call dei commerciali vengono trascritte e analizzate: quanto si è seguito lo script, quali obiezioni sono emerse, dove si è persa la trattativa. Chi guida il team vede subito su cosa lavorare, e ogni commerciale riceve suggerimenti concreti dopo ogni chiamata.",
+         ["Trascrizione automatica delle call", "Punteggio rispetto al tuo script di vendita", "Obiezioni ricorrenti in evidenza", "Suggerimenti per ogni commerciale", "Report per chi guida il team"]),
         ("06", "Intelligenza artificiale", "Automazioni, con e senza AI", "Le ore spese in lavoro ripetitivo tornano al tuo team.",
          "Rispondere alle stesse email, copiare dati, compilare report: è lavoro che non fa crescere nessuno. Lo automatizziamo: con regole e integrazioni dove basta un flusso preciso, con l'intelligenza artificiale dove serve capire testi e decidere, sempre con un controllo umano nei passaggi delicati. E misuriamo quanto tempo ti restituisce.",
          ["Analisi delle attività che costano più tempo", "Flussi automatici tra i tuoi software, senza AI", "Agenti AI per email, documenti e richieste", "Contatti qualificati e smistati da soli", "Controllo umano nei passaggi delicati", "Tempo risparmiato misurato"]),
@@ -241,24 +253,30 @@ T = {
         ("10", "Gestione", "Dagli abbonamenti a strumenti tuoi", "Sostituiamo i software a canone con strumenti tuoi, integrati tra loro.",
          "CRM, email, prenotazioni, automazioni: molte aziende pagano ogni mese più abbonamenti che fanno cose simili e non si parlano. Analizziamo i costi e sostituiamo quelli che conviene con strumenti tuoi, più semplici e collegati.",
          ["Analisi dei software in uso e dei costi", "Piano di migrazione senza interruzioni", "Dati trasferiti e verificati", "Strumenti integrati tra loro", "Meno costi ricorrenti nel tempo"]),
+        ("15", "Mercati esteri", "Siti ed e-commerce multilingue", "Parla ai clienti di ogni paese nella loro lingua, davvero.",
+         "Tradurre un sito non basta: ogni mercato ha le sue parole, i suoi dubbi e le sue abitudini d'acquisto. Adattiamo testi, pagine e comunicazioni in italiano, inglese, spagnolo, tedesco e cinese, con un unico pannello per gestire tutte le versioni.",
+         ["Contenuti adattati a ogni mercato, non solo tradotti", "Italiano, inglese, spagnolo, tedesco e cinese", "Un unico pannello per tutte le lingue", "Email e assistenza nella lingua del cliente", "Visibilità sui motori di ricerca di ogni paese"]),
+        ("16", "Mercati esteri", "Ponte Italia-Cina", "Fornitori, ordini e clienti cinesi, gestiti come se fossero dietro l'angolo.",
+         "Lavorare con la Cina significa lingue, fusi orari e software diversi. Colleghiamo i sistemi dei fornitori cinesi ai tuoi, così ordini, spedizioni e controlli di qualità si seguono da un'unica vista, e curiamo la comunicazione in cinese con l'aiuto dell'intelligenza artificiale e una revisione umana.",
+         ["Integrazione tra software cinesi e italiani", "Ordini e spedizioni in un'unica vista", "Comunicazione in cinese con fornitori e clienti", "Assistenza clienti multilingue con l'AI", "Controllo umano nei passaggi importanti"]),
     ],
     "sectors": [
         {"t": "Team commerciali", "d": "Più tempo in chiamata, meno tempo su Excel.",
          "pain": "I commerciali aggiornano fogli di calcolo invece di vendere, i contatti si perdono tra un'agenda e l'altra e le provvigioni si calcolano a mano a fine mese.",
          "build": ["Un CRM costruito sul tuo processo di vendita", "Prenotazioni distribuite automaticamente tra i commerciali", "Sequenze email che seguono ogni contatto dopo la call", "Provvigioni e classifica calcolate in automatico"],
-         "out": "Un team che passa più tempo con i clienti e una direzione che vede i risultati in tempo reale.", "svc": ["03", "04", "05", "08"]},
+         "out": "Un team che passa più tempo con i clienti e una direzione che vede i risultati in tempo reale.", "svc": ["03", "11", "13", "08"]},
         {"t": "E-commerce", "d": "Più vendite, senza più lavoro manuale.",
          "pain": "Ordini, campagne e assistenza vivono in strumenti diversi. Scopri a fine mese cosa ha funzionato, quando è troppo tardi per correggere.",
          "build": ["Pagine prodotto pensate per convertire", "Dashboard con vendite, spesa pubblicitaria e margine reale", "Assistenza ai clienti gestita dall'intelligenza artificiale", "App per i clienti dopo l'acquisto, integrata nel negozio"],
-         "out": "Sai ogni giorno quanto guadagni davvero, e il team si concentra sulla crescita invece di rincorrere gli ordini.", "svc": ["01", "08", "06", "02"]},
+         "out": "Sai ogni giorno quanto guadagni davvero, e il team si concentra sulla crescita invece di rincorrere gli ordini.", "svc": ["01", "14", "15", "08"]},
         {"t": "Studi professionali", "d": "Meno burocrazia, più tempo per i clienti.",
          "pain": "Documenti da cercare, scadenze da ricordare e le stesse domande dei clienti ogni settimana: ore preziose che non puoi fatturare.",
          "build": ["Un portale riservato per i clienti", "Documenti archiviati e classificati in automatico", "Un assistente che conosce le procedure dello studio", "Promemoria automatici per scadenze e appuntamenti"],
-         "out": "Più ore dedicate alla consulenza, meno errori e clienti che si sentono davvero seguiti.", "svc": ["02", "07", "06", "04"]},
+         "out": "Più ore dedicate alla consulenza, meno errori e clienti che si sentono davvero seguiti.", "svc": ["02", "07", "12", "04"]},
         {"t": "Formazione e coaching", "d": "Un percorso digitale all'altezza di ciò che insegni.",
          "pain": "Corsi su una piattaforma, community su un'altra, vendite gestite a mano: gli studenti si perdono tra un passaggio e l'altro.",
          "build": ["Landing page e funnel per le iscrizioni", "Call di vendita prenotate e assegnate in automatico", "Email che accompagnano ogni studente dall'iscrizione al risultato", "Un assistente che risponde alle domande degli studenti"],
-         "out": "Più iscrizioni, studenti più coinvolti e un'attività che cresce senza moltiplicare il lavoro.", "svc": ["01", "04", "05", "07"]},
+         "out": "Più iscrizioni, studenti più coinvolti e un'attività che cresce senza moltiplicare il lavoro.", "svc": ["01", "11", "05", "07"]},
         {"t": "Agenzie e servizi B2B", "d": "Clienti seguiti meglio, con meno passaggi a mano.",
          "pain": "Richieste via email, stato dei lavori in un foglio condiviso, report preparati a mano ogni mese per ogni cliente.",
          "build": ["Un portale clienti con stato dei lavori e documenti", "Report per i clienti generati in automatico", "Richieste smistate al referente giusto", "Una knowledge base interna per il team"],
@@ -298,8 +316,8 @@ T = {
         "reef_words": ["Diversità", "Simbiosi", "Connessione", "Crescita stratificata", "Resilienza"], "reef_a": "La nostra filosofia",
     },
     "services_p": {
-        "title": "Services · Reef 7 Lab", "desc": "Siti web, applicazioni su misura, intelligenza artificiale, company brain e dashboard.",
-        "h1": "Dieci competenze, <em>un solo</em> sistema.",
+        "title": "Services · Reef 7 Lab", "desc": "Siti web, applicazioni su misura, agenti AI, assistenti vocali, company brain, dashboard e progetti con la Cina.",
+        "h1": "Tutte le competenze, <em>un solo</em> sistema.",
         "sub": "Dal sito che porta clienti al gestionale che fa girare l'azienda: le combiniamo in base ai tuoi obiettivi, mai partendo da un pacchetto preconfezionato.",
     },
     "solutions": {
@@ -345,7 +363,7 @@ T = {
         "form_h": "Iniziamo dal tuo progetto",
         "steps": ["Il progetto", "La tua azienda", "Tempi e contatti"],
         "f": {"need": "Di cosa hai bisogno?", "need_hint": "Puoi sceglierne più di uno",
-              "need_opts": ["Sito web o landing page", "App o gestionale su misura", "CRM e vendite", "Prenotazioni ed email marketing", "Automazioni (con o senza AI)", "Company brain", "Dashboard e controllo di gestione", "Integrazioni tra software", "Non lo so ancora"],
+              "need_opts": ["Sito web o landing page", "App o gestionale su misura", "CRM e vendite", "Prenotazioni ed email marketing", "Automazioni (con o senza AI)", "Agenti AI e assistenti vocali", "Company brain", "Dashboard e controllo di gestione", "Integrazioni tra software", "Multilingue o progetti con la Cina", "Non lo so ancora"],
               "goal": "Qual è l'obiettivo principale?", "goal_ph": "Es. vogliamo smettere di gestire i contatti su Excel e sapere ogni giorno quanto vende ogni commerciale",
               "company": "Nome dell'azienda", "site": "Sito web", "site_ph": "www.tuazienda.it",
               "sector": "Settore", "sector_ph": "Es. e-commerce, studio professionale, formazione",
@@ -374,6 +392,9 @@ T = {
         ("02", "Digital", "Custom applications", "Software that fits the way you work. Not the other way round.",
          "If your team spends more time working around a system than using it, the problem isn't the team. We design management tools, client portals and internal software around the way your company really works.",
          ["Process analysis and clickable prototype", "Web and desktop applications", "Role-based access and permissions", "Integration with the tools you already use", "New features as you grow"]),
+        ("14", "Digital", "3D configurators and augmented reality", "Customers see the product before they buy it, exactly the way they want it.",
+         "A product you can rotate, customise and place in your own space sells better than a photo. We build 3D configurators and augmented reality previews that run straight in the browser, with no app to download, connected to your catalogue and prices.",
+         ["3D models to rotate and customise", "Augmented reality try-on from the phone", "Price updated with every choice", "No app to download", "Connected to catalogue and orders"]),
         ("03", "Sales", "Custom CRM", "Leads, deals and commissions in one tool, built around the way you sell.",
          "A generic CRM forces your sales team to adapt. We build custom CRMs: every lead arrives already assigned, deals move through clear stages, payments and commissions calculate themselves, and leadership sees results and rankings in real time.",
          ["Pipeline and stages designed around your process", "Automatic lead assignment", "Payments and commissions calculated automatically", "Team leaderboard and KPIs, even on a screen in the office", "Connected to your website, bookings and email"]),
@@ -383,6 +404,15 @@ T = {
         ("05", "Sales", "Email marketing and automation", "Email sequences that work for you, with deliverability under control.",
          "From the welcome email to the follow-up after a call, emails go out at the right moment based on what each contact does. We also handle the technical side that decides whether an email lands in the inbox or in spam.",
          ["Automated sequences for every customer stage", "Segmentation based on behaviour", "Domain warm-up and list management", "Open and reply statistics", "An alternative to subscription platforms"]),
+        ("11", "AI", "AI sales agents", "Every lead gets an answer within seconds, at any hour.",
+         "A lead that waits a day is a lead that goes cold. The agent replies on your website, WhatsApp and email, asks the right questions to see who is ready to buy, books the call in the rep's calendar and updates the CRM. Sensitive cases always go to a person.",
+         ["Instant replies on website, WhatsApp and email", "Leads qualified with your questions", "Calls booked with the right rep", "CRM updated with no manual entry", "Hand-off to a person when needed"]),
+        ("12", "AI", "AI voice assistants", "A phone assistant that answers, books and calls back.",
+         "Missed calls are missed customers. The voice assistant answers with a natural voice, in several languages, books appointments, confirms and reminds bookings and calls back anyone who didn't pick up. Every conversation reaches the team already transcribed and summarised.",
+         ["Phone answered at any hour", "Bookings, confirmations and reminders", "Call-backs for missed contacts", "Multiple languages, natural voice", "Transcript and summary of every call"]),
+        ("13", "AI", "Sales call analysis", "Every call becomes a lesson for the whole team.",
+         "Sales calls are transcribed and analysed: how closely the script was followed, which objections came up, where the deal was lost. Team leads see right away what to work on, and every rep gets concrete suggestions after each call.",
+         ["Automatic call transcription", "Score against your sales script", "Recurring objections highlighted", "Suggestions for every rep", "Reports for team leads"]),
         ("06", "AI", "Automation, with and without AI", "The hours lost to repetitive work go back to your team.",
          "Answering the same emails, copying data, filling in reports: work that helps no one grow. We automate it: with rules and integrations where a precise workflow is enough, with AI where text needs to be understood and decisions made, always with human review at the critical steps. And we measure exactly how much time it gives back.",
          ["Finding the tasks that cost the most time", "Automated workflows between your tools, no AI needed", "AI agents for email, documents and requests", "Leads qualified and routed automatically", "Human review at the critical steps", "Time saved, measured"]),
@@ -398,24 +428,30 @@ T = {
         ("10", "Operations", "From subscriptions to your own tools", "We replace subscription software with tools you own, all connected.",
          "CRM, email, bookings, automation: many companies pay for several monthly subscriptions that do similar things and don't talk to each other. We analyse the costs and replace the ones worth replacing with your own tools, simpler and connected.",
          ["Review of the software you use and what it costs", "Migration plan with no downtime", "Data transferred and verified", "Tools that work together", "Lower recurring costs over time"]),
+        ("15", "International", "Multilingual websites and e-commerce", "Speak to customers in every country in their own language, for real.",
+         "Translating a website isn't enough: every market has its own words, doubts and buying habits. We adapt copy, pages and communication in Italian, English, Spanish, German and Chinese, with a single panel to manage every version.",
+         ["Content adapted to each market, not just translated", "Italian, English, Spanish, German and Chinese", "One panel for every language", "Email and support in the customer's language", "Search visibility in every country"]),
+        ("16", "International", "Italy-China bridge", "Chinese suppliers, orders and customers, handled as if they were around the corner.",
+         "Working with China means different languages, time zones and software. We connect your Chinese suppliers' systems to yours, so orders, shipments and quality checks are tracked in one view, and we handle communication in Chinese with the help of AI and human review.",
+         ["Integration between Chinese and Italian software", "Orders and shipments in one view", "Communication in Chinese with suppliers and customers", "Multilingual AI customer care", "Human review at the important steps"]),
     ],
     "sectors": [
         {"t": "Sales teams", "d": "More time on calls, less time in spreadsheets.",
          "pain": "Reps update spreadsheets instead of selling, contacts get lost between calendars and commissions are calculated by hand at the end of the month.",
          "build": ["A CRM built around your sales process", "Bookings distributed automatically across the team", "Email sequences that follow up every contact after the call", "Commissions and leaderboard calculated automatically"],
-         "out": "A team that spends more time with clients, and leadership that sees results in real time.", "svc": ["03", "04", "05", "08"]},
+         "out": "A team that spends more time with clients, and leadership that sees results in real time.", "svc": ["03", "11", "13", "08"]},
         {"t": "E-commerce", "d": "More sales, without more manual work.",
          "pain": "Orders, campaigns and support live in different tools. You find out what worked at the end of the month, when it's too late to fix.",
          "build": ["Product pages built to convert", "A dashboard with sales, ad spend and real margin", "Customer support handled by AI", "A post-purchase customer app built into the store"],
-         "out": "You know every day how much you're really making, and your team focuses on growth instead of chasing orders.", "svc": ["01", "08", "06", "02"]},
+         "out": "You know every day how much you're really making, and your team focuses on growth instead of chasing orders.", "svc": ["01", "14", "15", "08"]},
         {"t": "Professional firms", "d": "Less paperwork, more time for clients.",
          "pain": "Documents to find, deadlines to remember and the same client questions every week: valuable hours you can't bill.",
          "build": ["A private client portal", "Documents filed and classified automatically", "An assistant that knows the firm's procedures", "Automatic reminders for deadlines and appointments"],
-         "out": "More hours for advisory work, fewer mistakes and clients who feel genuinely looked after.", "svc": ["02", "07", "06", "04"]},
+         "out": "More hours for advisory work, fewer mistakes and clients who feel genuinely looked after.", "svc": ["02", "07", "12", "04"]},
         {"t": "Education and coaching", "d": "A digital journey as good as what you teach.",
          "pain": "Courses on one platform, community on another, sales handled by hand: students get lost between one step and the next.",
          "build": ["Landing pages and funnels for sign-ups", "Sales calls booked and assigned automatically", "Emails that guide every student from sign-up to results", "An assistant that answers students' questions"],
-         "out": "More sign-ups, more engaged students and a business that grows without multiplying the workload.", "svc": ["01", "04", "05", "07"]},
+         "out": "More sign-ups, more engaged students and a business that grows without multiplying the workload.", "svc": ["01", "11", "05", "07"]},
         {"t": "Agencies and B2B services", "d": "Clients looked after better, with fewer manual steps.",
          "pain": "Requests by email, project status in a shared spreadsheet, reports put together by hand every month for every client.",
          "build": ["A client portal with project status and documents", "Client reports generated automatically", "Requests routed to the right person", "An internal knowledge base for the team"],
@@ -455,8 +491,8 @@ T = {
         "reef_words": ["Diversity", "Symbiosis", "Connection", "Layered growth", "Resilience"], "reef_a": "Our philosophy",
     },
     "services_p": {
-        "title": "Services · Reef 7 Lab", "desc": "Websites, custom applications, artificial intelligence, company brain and dashboards.",
-        "h1": "Ten disciplines, <em>one</em> system.",
+        "title": "Services · Reef 7 Lab", "desc": "Websites, custom applications, AI agents, voice assistants, company brain, dashboards and Italy-China projects.",
+        "h1": "Every discipline, <em>one</em> system.",
         "sub": "From the website that brings in clients to the system that runs the company: we combine them around your goals, never starting from an off-the-shelf package.",
     },
     "solutions": {
@@ -502,7 +538,7 @@ T = {
         "form_h": "Let's start with your project",
         "steps": ["The project", "Your company", "Timeline and contact"],
         "f": {"need": "What do you need?", "need_hint": "You can pick more than one",
-              "need_opts": ["Website or landing page", "Custom app or management system", "CRM and sales", "Bookings and email marketing", "Automation (with or without AI)", "Company brain", "Dashboards and financial control", "Software integrations", "Not sure yet"],
+              "need_opts": ["Website or landing page", "Custom app or management system", "CRM and sales", "Bookings and email marketing", "Automation (with or without AI)", "AI agents and voice assistants", "Company brain", "Dashboards and financial control", "Software integrations", "Multilingual or China projects", "Not sure yet"],
               "goal": "What's your main goal?", "goal_ph": "E.g. we want to stop managing leads in spreadsheets and know every day how much each rep is selling",
               "company": "Company name", "site": "Website", "site_ph": "www.yourcompany.com",
               "sector": "Industry", "sector_ph": "E.g. e-commerce, professional services, education",
@@ -613,7 +649,7 @@ def build(lang, variant=""):
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{pre}{css}?v={VERSION}">
 </head>
-<body>
+<body data-page="{key}">
 <header class="top{'' if hero else ' solid'}"><div class="wrap top-in">
   <a class="logo" href="{u('home')}"><img src="{pre}assets/reef7-logo.png" alt="" width="34" height="34">Reef 7 Lab</a>
   <nav aria-label="{L['pages']}">{links}<a href="{u('contact')}" class="cta"{cur}>{L['nav']['contact']}</a></nav>
@@ -629,7 +665,8 @@ def build(lang, variant=""):
   <a class="r" href="mailto:{EMAIL}">{EMAIL}</a>
 </div></footer>
 <script>window.REEF = {{ email: "{EMAIL}" }};</script>
-<script src="{pre}site.js?v={VERSION}"></script>{extra}
+<script src="{pre}site.js?v={VERSION}"></script>
+<script src="{pre}agent.js?v={VERSION}"></script>{extra}
 </body>
 </html>
 """
@@ -728,7 +765,7 @@ def build(lang, variant=""):
     # home
     H = L["home"]
     rows = "".join(f"""
-    <a class="svc-row" href="{u('services')}#s{n}"><span class="mono">{g}</span><h3>{t}</h3><p>{d}</p><span class="go" aria-hidden="true">→</span></a>""" for n, g, t, d, *_ in L["services"] if n in ("01", "02", "03", "06", "07", "08"))
+    <a class="svc-row" href="{u('services')}#s{n}"><span class="mono">{g}</span><h3>{t}</h3><p>{d}</p><span class="go" aria-hidden="true">→</span></a>""" for n, g, t, d, *_ in L["services"] if n in ("01", "03", "11", "12", "07", "16"))
     sectors = "".join(f"""
     <a class="sector" href="{u('solutions')}#k{i}"><span class="mono">0{i}</span><h3>{x['t']}</h3><p>{x['d']}</p><ul>{"".join(f"<li>{b}</li>" for b in x['build'][:3])}</ul></a>""" for i, x in enumerate(L["sectors"][:3], 1))
     reef_words = "".join(f'<div><span class="mono">0{i}</span><b>{w}</b></div>' for i, w in enumerate(H["reef_words"], 1))
@@ -779,13 +816,13 @@ def build(lang, variant=""):
     SP = L["services_p"]
     # servizi divisi per gruppo: un'etichetta all'inizio di ogni gruppo
     svc, last = "", None
-    for n, g, t, short, long, li in L["services"]:
+    for i, (n, g, t, short, long, li) in enumerate(L["services"], 1):
         if g != last:
             svc += f'\n  <p class="svc-group mono">{g}</p>'
             last = g
         svc += f"""
   <article class="svc" id="s{n}">
-    <span class="mono">{n}</span>
+    <span class="mono">{i:02d}</span>
     <div><h2>{t}</h2><p class="tag">{short}</p><p class="lead">{long}</p></div>
     <div><ul>{"".join(f"<li>{x}</li>" for x in li)}</ul></div>
   </article>"""

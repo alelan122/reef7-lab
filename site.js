@@ -39,6 +39,15 @@
     const msg = form.querySelector(".form-msg");
     let cur = 0;
 
+    // arrivo dalla demo dell'agente: le risposte date in chat precompilano il modulo
+    const qs = new URLSearchParams(location.search);
+    if (qs.has("need")) {
+      const vals = qs.get("need").split("|");
+      form.querySelectorAll('input[name="need"]').forEach((x) => { x.checked = vals.includes(x.value); });
+      ["team", "when"].forEach((k) => form.querySelectorAll(`input[name="${k}"]`).forEach((x) => { x.checked = x.value === qs.get(k); }));
+      if (qs.get("goal") && !form.goal.value) form.goal.value = `${qs.get("goal")}: `;
+    }
+
     const show = (i) => {
       cur = i;
       steps.forEach((s, j) => { s.hidden = j !== i; });
