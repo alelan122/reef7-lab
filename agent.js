@@ -267,6 +267,7 @@
           "Nome": name, "Email": email, "Obiettivo": st.goal || "—", "Settore": st.sector || "—",
           "Persone in azienda": st.team || "—", "Quando partire": st.when || "—", "Servizi consigliati": st.ids.map((id) => T.svc[id]).join(", ") || "—",
           "Fonte": ai ? "Agent AI del sito (AI)" : "Agent AI del sito (demo)", ...(st.transcript ? { "Conversazione": st.transcript } : {}),
+          "Codice Reef 7": r7code({ ch: "agent", ai: !!ai, name, email, goal: st.goal || "", sector: st.sector || "", team: st.team || "", when: st.when || "", svc: st.ids, chat: (st.transcript || "").slice(0, 2500) }),
         }),
       });
       const out = await res.json().catch(() => ({}));
@@ -280,6 +281,7 @@
     finish(ai);
   }
 
+  const r7code = (o) => "R7L1." + btoa(unescape(encodeURIComponent(JSON.stringify({ v: 1, lang: document.documentElement.lang || "it", at: new Date().toISOString(), ...o })))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
   async function finish(ai = !!AI) {
     log.append(el("p", "ag-note", ai ? T.note_ai : T.note));
     chips.innerHTML = "";

@@ -95,6 +95,7 @@
     form.addEventListener("change", (e) => e.target.closest(".q-field")?.classList.remove("invalid"));
     form.addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.tagName === "INPUT" && cur < steps.length - 1) { e.preventDefault(); next.click(); } });
 
+    const r7code = (o) => "R7L1." + btoa(unescape(encodeURIComponent(JSON.stringify({ v: 1, lang: document.documentElement.lang || "it", at: new Date().toISOString(), ...o })))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (!valid(steps[cur])) return;
@@ -116,6 +117,8 @@
             "Azienda": one("company"), "Sito": one("site"), "Settore": one("sector"), "Persone in azienda": one("team"), "Strumenti usati": one("tools"),
             "Quando partire": one("when"), "Budget indicativo": one("budget"),
             "Nome": one("nome"), "Ruolo": one("role"), "Email": one("email"), "Telefono": one("phone"), "Come ci ha conosciuto": one("source"),
+            // codice per importare il contatto nell'app Reef 7 con un copia e incolla
+            "Codice Reef 7": r7code({ ch: "form", need: f.getAll("need"), goal: one("goal"), company: one("company"), site: one("site"), sector: one("sector"), team: one("team"), tools: one("tools"), when: one("when"), budget: one("budget"), name: one("nome"), role: one("role"), email: one("email"), phone: one("phone"), src: one("source") }),
           }),
         });
         const out = await res.json().catch(() => ({}));

@@ -11,6 +11,23 @@ ROOT = Path(__file__).parent
 EMAIL = "lancioni.ale@gmail.com"
 # indirizzo del Worker dell'Agent AI (projects/reef7-agent): vuoto = demo guidata
 AGENT_URL = ""
+
+# Regole di sicurezza delle pagine: script solo dal sito (più lo script in pagina, riconosciuto dalla sua impronta),
+# niente plugin, invii dei moduli solo verso il sito o FormSubmit, connessioni solo verso i servizi usati.
+import base64 as _b64, hashlib as _hl
+INLINE_JS = 'window.REEF = { email: "%s", agent: "%s" };'
+def csp_meta(inline_js):
+    h = _b64.b64encode(_hl.sha256(inline_js.encode("utf-8")).digest()).decode()
+    agent = " " + AGENT_URL.split("/", 3)[0] + "//" + AGENT_URL.split("/", 3)[2] if AGENT_URL.startswith("https://") else ""
+    pol = ("default-src 'self'; "
+           f"script-src 'self' https://cdn.jsdelivr.net 'sha256-{h}'; "
+           "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+           "font-src 'self' https://fonts.gstatic.com; "
+           "img-src 'self' data: https:; "
+           f"connect-src 'self' https://formsubmit.co https://cdn.jsdelivr.net https://*.workers.dev{agent}; "
+           "frame-src 'self' https://alelan122.github.io; "
+           "object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests")
+    return f'<meta http-equiv="Content-Security-Policy" content="{pol}">\n  <meta name="referrer" content="strict-origin-when-cross-origin">'
 # versione dei file di stile e script: cambia quando cambiano, così il browser non usa copie vecchie
 
 # ---------------- Missione: il 5% degli introiti al mare ----------------
@@ -719,10 +736,12 @@ def build(lang, variant=""):
 <section class="cta-band"><div class="wrap"><a href="{u('contact')}">
   <div><p class="mono">{L['cta_k']}</p><h2>{L['cta_h']}</h2></div><span class="circle" aria-hidden="true">→</span>
 </a></div></section>"""
+        inline_js = INLINE_JS % (EMAIL, AGENT_URL)
         return f"""<!doctype html>
 <html lang="{lang}">
 <head>
   <meta charset="utf-8">
+  {csp_meta(inline_js)}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{title}</title>
   <meta name="description" content="{desc}">
@@ -753,7 +772,7 @@ def build(lang, variant=""):
   <nav aria-label="{L['pages']}">{foot_links}</nav>
   <a class="r" href="mailto:{EMAIL}">{EMAIL}</a>
 </div></footer>
-<script>window.REEF = {{ email: "{EMAIL}", agent: "{AGENT_URL}" }};</script>
+<script>{inline_js}</script>
 <script src="{pre}site.js?v={VERSION}"></script>
 <script src="{pre}agent.js?v={VERSION}"></script>{extra}
 </body>

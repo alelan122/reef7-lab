@@ -257,6 +257,7 @@
   });
   back.addEventListener("click", () => show(cur - 1));
 
+  const r7code = (o) => "R7L1." + btoa(unescape(encodeURIComponent(JSON.stringify({ v: 1, lang: document.documentElement.lang || "it", at: new Date().toISOString(), ...o })))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
   lead.addEventListener("submit", async (e) => {
     e.preventDefault();
     const m2 = lead.querySelector(".au-msg2");
@@ -281,6 +282,7 @@
           "Attività manuali (ore/sett.)": a.tasks.map((t) => `${t.label}: ${t.hours}`).join("; "),
           "Ore recuperabili stimate a settimana": fmt(a.saved), "Priorità": a.tasks.slice(0, 3).map((t) => t.label).join("; "),
           "Strumenti": a.tools.map((t) => t[1]).join(", ") || "—", "Problema principale": a.pain || "—", "Costo orario": a.cost || "—",
+          "Codice Reef 7": r7code({ ch: "audit", name, email, company, sector: a.sector, team: a.team, saved: a.saved, tasks: a.tasks.map((t) => [t.label, t.hours]), tools: a.tools.map((t) => t[1]), pain: a.pain || "", cost: a.cost || "" }),
         }),
       });
       const out = await res.json().catch(() => ({}));
