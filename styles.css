@@ -575,7 +575,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
   .sectors .sector ul { display: none; }
   .svc-row p, .partner p { display: none; }
   .partner { min-height: 0; }
-  .block:has(> .wrap > .principles) { display: none; }
+  .principles { gap: 8px !important; } .principles div { padding: 14px 16px !important; }
 }
 .project > * { min-width: 0; }
 @media (max-width: 760px) {
