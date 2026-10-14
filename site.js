@@ -205,9 +205,11 @@ void main(){
 })();
 
 
-// Lab: due pareti di reef ai lati, con coralli pieni e colorati che compaiono dall'alto verso il basso mentre si scorre
+// Mission: due pareti di reef ai lati dell'intestazione, con coralli pieni e colorati che compaiono uno dopo l'altro
 (() => {
-  if (document.body.dataset.page !== "studio") return;
+  const head = document.body.dataset.page === "mission" && document.querySelector(".page-head");
+  if (!head) return;
+  head.classList.add("has-coral");
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const NS = "http://www.w3.org/2000/svg";
   let seed = 7;
@@ -273,41 +275,34 @@ void main(){
   const ORDER = ["stag", "fan", "brain", "anemone", "stag", "tube", "fan", "anemone", "brain", "stag"];
 
   function wall(side) {
-    const svg = el("svg", { viewBox: "0 0 160 1000", preserveAspectRatio: side === "l" ? "xMinYMin slice" : "xMaxYMin slice", class: `coral coral-${side}`, "aria-hidden": "true" });
+    const svg = el("svg", { viewBox: "0 0 160 640", preserveAspectRatio: side === "l" ? "xMinYMin slice" : "xMaxYMin slice", class: `coral coral-${side}`, "aria-hidden": "true" });
     const root = el("g", side === "l" ? {} : { transform: "translate(160,0) scale(-1,1)" }, svg);
     // roccia della parete
     let d = "M0,-10 L18,-10";
-    for (let y = 0; y <= 1010; y += 40) d += ` Q${26 + rnd() * 14},${y + 20} ${14 + rnd() * 14},${y + 40}`;
-    d += " L0,1050 Z";
+    for (let y = 0; y <= 650; y += 40) d += ` Q${26 + rnd() * 14},${y + 20} ${14 + rnd() * 14},${y + 40}`;
+    d += " L0,690 Z";
     const rg = el("linearGradient", { id: `rock${side}`, x1: "0", x2: "1" }, root);
     el("stop", { offset: "0", "stop-color": "#0b1a2c" }, rg);
     el("stop", { offset: "1", "stop-color": "#10263c" }, rg);
     el("path", { d, fill: `url(#rock${side})` }, root);
     // coralli lungo la parete
     let y = 40, i = side === "l" ? 0 : 3;
-    while (y < 990) {
+    while (y < 620) {
       const cl = el("g", { class: "cl" }, root), inner = el("g", {}, cl);
       TYPES[ORDER[i % ORDER.length]](inner, y);
       sway(inner, 0, y, 1.5 + rnd(), 6 + rnd() * 3);
       cl.style.transformOrigin = `0px ${y}px`;
       clusters.push({ el: cl, t: y / 1000 });
-      y += 85 + rnd() * 45; i++;
+      y += 78 + rnd() * 34; i++;
     }
     // bollicine che salgono
     if (!still) for (let b = 0; b < 7; b++) {
       const c = el("circle", { cx: 20 + rnd() * 60, cy: 1000, r: 1 + rnd() * 2.2, fill: "none", stroke: "rgba(160,230,255,.6)", "stroke-width": .8 }, root);
-      el("animate", { attributeName: "cy", from: 1020, to: -20, dur: `${9 + rnd() * 8}s`, begin: `${-rnd() * 12}s`, repeatCount: "indefinite" }, c);
+      el("animate", { attributeName: "cy", from: 660, to: -20, dur: `${9 + rnd() * 8}s`, begin: `${-rnd() * 12}s`, repeatCount: "indefinite" }, c);
     }
-    document.body.append(svg);
+    head.append(svg);
   }
   wall("l"); seed = 23; wall("r");
 
-  const update = () => {
-    const max = document.documentElement.scrollHeight - innerHeight;
-    const front = still ? 2 : .15 + (max > 0 ? scrollY / max : 1);
-    for (const c of clusters) c.el.classList.toggle("on", front > c.t);
-  };
-  addEventListener("scroll", update, { passive: true });
-  addEventListener("resize", update);
-  update();
+  clusters.sort((p, q) => p.t - q.t).forEach((c, k) => setTimeout(() => c.el.classList.add("on"), still ? 0 : 150 + k * 90));
 })();

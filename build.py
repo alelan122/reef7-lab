@@ -1027,19 +1027,12 @@ def build(lang, variant=""):
     out["studio"] = page("studio", St["title"], St["desc"], head_block(L["nav"]["studio"], St["h1"], St["sub"]) + f"""
 <section class="wrap principle-list">{pr}
 </section>
-<section class="block"><div class="wrap seven">
-  <div><p class="mono">{St['seven_k']}</p><h2>{St['seven_h']}</h2><p>{St['seven_p']}</p>
-    <a class="link" href="{u('mission')}">{St['seven_a']} {arrow}</a></div>
-  <div class="reef-map seven-map" id="reef-map" data-points="{map_data}" data-world="https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-110m.json">
-    <svg viewBox="0 0 1000 500" role="img" aria-label="{St['seven_h'].replace('<em>', '').replace('</em>', '')}"></svg>
-  </div>
-</div></section>
 <section class="block"><div class="wrap about">
   <div class="portrait"><img src="{pre}assets/alessandro.jpg" alt="{St['photo_alt']}" width="1024" height="1024"></div>
   <div><p class="big">{St['who_big']}</p><div class="about-bio" data-more="{St['more']}">{who}</div>
     <ul class="creds">{"".join(f"<li><b>{k}</b><span>{v}</span></li>" for k, v in St['creds'])}</ul>
     <div class="sign"><b>{St['sign'][0]}</b><span>{St['sign'][1]}</span></div></div>
-</div></section>""", extra=libs + f'\n<script src="{pre}mission.js?v={VERSION}"></script>')
+</div></section>""")
 
     # contatti: modulo in tre passi
     C = L["contact"]; F = C["f"]
