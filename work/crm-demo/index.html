@@ -230,6 +230,19 @@
     .view { padding: 14px; }
     .asg { grid-template-columns: 1fr; }
   }
+
+  /* telefono: la barra con menu resta sempre visibile */
+  @media (max-width: 860px) {
+    .top[hidden] { display: flex !important; }
+    .top h1 { font-size: 16px; }
+    .search { display: none; }
+    .kpi3 { grid-template-columns: 1fr 1fr !important; }
+    .kpi3 .card { flex-direction: column; gap: 8px; padding: 14px; }
+    .kpi3 .card:last-child { grid-column: 1 / -1; }
+    .cashc .val { font-size: 34px !important; }
+    .periods { margin-left: 0; width: 100%; } .periods button { padding: 6px 10px; font-size: 12.5px; }
+    .ph h2 { display: none; }
+  }
 </style>
 </head>
 <body>

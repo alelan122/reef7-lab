@@ -908,3 +908,53 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
 .cs-quote blockquote { margin: 0; font-family: var(--serif); font-style: italic; font-size: clamp(24px, 2.8vw, 38px); line-height: 1.25; letter-spacing: -.01em; }
 .cs-quote figcaption { margin-top: 16px; color: var(--muted); font-size: 15px; }
 .cs-quote figcaption b { color: var(--text); font-weight: 600; }
+
+/* ===== telefono: ritmo più compatto e pagine più corte ===== */
+.pf-thumb { display: none; }
+@media (max-width: 760px) {
+  .block { padding: 56px 0; }
+  .page-head { padding-top: 112px !important; padding-bottom: 28px !important; }
+  .page-head h1 { font-size: clamp(36px, 10vw, 46px); }
+  .head { margin-bottom: 22px !important; }
+  .head h2, .block h2 { font-size: clamp(30px, 8.6vw, 40px); }
+  /* home */
+  .hero-in { padding-bottom: 40px; }
+  .hero-foot .actions { gap: 10px; }
+  .au-promo-vis { display: none; }
+  .au-promo { padding: 26px 22px; }
+  .au-promo-block, .case-block { padding: 8px 0 48px; }
+  .case-block .case-ba { display: none; }
+  .pcase { padding: 24px 20px; border-radius: 20px; }
+  .case-head h2 { font-size: 30px; }
+  .case-kpis div { padding: 16px 14px; }
+  .case-kpis b { font-size: 34px; }
+  .case-kpis small { font-size: 12px; }
+  /* elenchi compatti: servizi, principi, progetti */
+  .svc, .case, .principle { padding-block: 20px !important; }
+  .svc h2, .principle h2 { font-size: 26px !important; margin-top: 4px; }
+  .svc .tag { margin-top: 6px; }
+  .fold-btn { margin-top: 8px; }
+  .svc-group { margin-top: 26px; }
+  /* progetti: anteprima al posto del sito incorporato */
+  .project { padding: 34px 0 !important; gap: 18px !important; }
+  .project-frame .fr, .project-frame .fr-phone-wrap { display: none !important; }
+  .pf-thumb { display: block; position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--rule); }
+  .pf-thumb img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; display: block; }
+  .pf-thumb span { position: absolute; left: 12px; bottom: 12px; padding: 8px 14px; border-radius: 999px; background: rgba(4, 8, 15, .85); color: var(--text); font-size: 13.5px; font-weight: 500; backdrop-filter: blur(6px); }
+  .project-info h2 { font-size: 32px; }
+  .project-info .project-lead { font-size: 17px; }
+  /* caso studio completo */
+  .cs-head h2 { font-size: 32px; }
+  .cs-res .case-hero b { font-size: 76px; }
+  .cs-text section.fold:not(.open) p:nth-of-type(n+2) { display: none; }
+  .cs-text h3 { font-size: 22px; }
+  .cs-text p { font-size: 16px; }
+  /* contatti: prima il modulo */
+  .contact-grid { display: flex !important; flex-direction: column; gap: 36px; }
+  .contact-grid .form-card { order: -1; }
+  .picks { gap: 6px; }
+  .pick span { padding: 8px 12px; font-size: 13.5px; }
+  /* missione e lab */
+  .seven-map, .reef-map { margin-top: 10px; }
+  .about .creds li { padding: 12px 14px; }
+}

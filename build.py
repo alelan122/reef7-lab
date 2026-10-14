@@ -100,6 +100,7 @@ WT = {
     "sub": "Una selezione di sistemi che abbiamo progettato e sviluppato, dall'idea alla messa online. Dove possibile, puoi navigarli direttamente da questa pagina.",
     "labels": {"client": "Cliente", "type": "Tipo", "year": "Anno"},
     "open": {"browser": "Apri il sito", "phone": "Apri la demo", "scroll": "Visita il negozio"},
+    "hint_demo": "Demo navigabile",
     "hint": {"browser": "Sito navigabile", "phone": "Demo interattiva", "scroll": "Anteprima della pagina", "gallery": "Schermate dell'app", "mock": "Applicazione privata"},
     "shots": ["Dashboard", "Tracker", "Accesso"],
     "projects": {
@@ -186,6 +187,7 @@ WT = {
     "sub": "A selection of systems we've designed and built, from first idea to launch. Where possible, you can browse them right from this page.",
     "labels": {"client": "Client", "type": "Type", "year": "Year"},
     "open": {"browser": "Open the website", "phone": "Open the demo", "scroll": "Visit the store"},
+    "hint_demo": "Interactive demo",
     "hint": {"browser": "Live website", "phone": "Interactive demo", "scroll": "Page preview", "gallery": "App screenshots", "mock": "Private application"},
     "shots": ["Dashboard", "Tracker", "Sign-in"],
     "projects": {
@@ -836,10 +838,12 @@ def build(lang, variant=""):
         p = W["projects"][w["key"]]
         lb = W["labels"]
         href = w["url"] if (w["url"] or "").startswith("http") else (pre + w["url"] if w["url"] else None)
-        link = f'<a class="link" href="{href}" target="_blank" rel="noopener">{W["open"][w["frame"]]} ↗</a>' if href else ""
+        is_demo = w["key"] in ("crmdemo", "hubdemo", "maisenzagioie3d")
+        open_t = W["open"]["phone"] if is_demo else W["open"].get(w["frame"], "")
+        link = f'<a class="link" href="{href}" target="_blank" rel="noopener">{open_t} ↗</a>' if href else ""
         return f"""<article class="project" id="{w['key']}">
   <div class="project-info">
-    <span class="mono">{i:02d} · {W['hint'][w['frame']]}</span>
+    <span class="mono">{i:02d} · {W['hint_demo'] if w['key'] in ("crmdemo", "hubdemo", "maisenzagioie3d") else W['hint'][w['frame']]}</span>
     <h2>{p['name']}</h2>
     <p class="project-lead">{p['lead']}</p>
     <p>{p['text']}</p>
@@ -848,7 +852,7 @@ def build(lang, variant=""):
     {link}
     <p class="project-note">{p['note']}</p>
   </div>
-  <div class="project-frame">{frame(w)}</div>
+  <div class="project-frame">{frame(w)}{f'<a class="pf-thumb" href="{href}" target="_blank" rel="noopener"><img src="{pre}{w["thumb"]}" alt="{p["name"]}" loading="lazy"><span>{open_t} ↗</span></a>' if href and w.get("thumb") else (f'<span class="pf-thumb"><img src="{pre}{w["thumb"]}" alt="{p["name"]}" loading="lazy"></span>' if w.get("thumb") else "")}</div>
 </article>"""
 
     def work_card(w):

@@ -21,7 +21,7 @@
 
   // su telefono i blocchi lunghi si aprono a richiesta (su desktop il pulsante è nascosto)
   const en = document.documentElement.lang === "en";
-  document.querySelectorAll(".svc, .case, .principle, .about-bio, .project-info").forEach((el) => {
+  document.querySelectorAll(".svc, .case, .principle, .about-bio, .project-info, .cs-text section").forEach((el) => {
     const more = el.dataset.more || (en ? "Read more" : "Scopri di più"), less = en ? "Show less" : "Mostra meno";
     const b = document.createElement("button");
     b.type = "button"; b.className = "fold-btn"; b.textContent = more; b.setAttribute("aria-expanded", "false");
