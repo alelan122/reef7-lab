@@ -937,15 +937,15 @@ def build(lang, variant=""):
   </div>
   <a class="link" href="{u('solutions')}">{H['sol_all']} {arrow}</a>
 </div></section>
-<section class="block ocean"><div class="wrap ocean-in">
-  <div><p class="mono">{M['home_k']}</p><h2>{M['home_h']}</h2><p class="ocean-p">{M['home_p']}</p>
-    <a class="link" href="{u('mission')}">{M['home_a']} {arrow}</a></div>
-  <div class="goals">{goal_card(active)}</div>
-</div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{H['reef_h']}</h2><p>{H['reef_p']}</p></div>
   <div class="principles">{reef_words}</div>
   <a class="link" href="{u('studio')}">{H['reef_a']} {arrow}</a>
+</div></section>
+<section class="block ocean"><div class="wrap ocean-in">
+  <div><p class="mono">{M['home_k']}</p><h2>{M['home_h']}</h2><p class="ocean-p">{M['home_p']}</p>
+    <a class="link" href="{u('mission')}">{M['home_a']} {arrow}</a></div>
+  <div class="goals">{goal_card(active)}</div>
 </div></section>""", hero=True)
 
     # servizi
