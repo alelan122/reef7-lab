@@ -384,9 +384,10 @@ T = {
         "h1": "Il tuo business, <em>connesso</em>.",
         "sub": "Siti, applicazioni e intelligenza artificiale progettati per lavorare insieme. Meno lavoro manuale, decisioni più rapide, una crescita che si accumula nel tempo.",
         "b1": "Parliamo del tuo progetto", "b2": "Scopri i servizi",
+        "eco_core": "Il tuo sistema", "eco_nodes": [("Sito", "◎"), ("CRM", "◇"), ("Email", "✉"), ("Pagamenti", "€"), ("Agenda", "◷"), ("Dashboard", "▤")],
         "eco_k": "Integrazione dei sistemi",
         "eco_h": "Un unico sistema per <em>tutta l'azienda</em>.",
-        "eco_p": "Colleghiamo gli strumenti che usi già e automatizziamo i passaggi tra l'uno e l'altro. I dati entrano una volta sola e arrivano dove servono, già pronti per essere usati. Ecco tre esempi di ciò che costruiamo:",
+        "eco_p": "Colleghiamo gli strumenti che usi già e automatizziamo i passaggi tra l'uno e l'altro. I dati entrano una volta sola e arrivano dove servono, già pronti per essere usati.",
         "values": ["Nessun dato inserito due volte", "Numeri affidabili, aggiornati da soli", "Il team libero dal lavoro ripetitivo"],
         "flows": [
             {"tab": "Vendite e marketing", "in": ["Shopify", "Meta Ads"], "core": "Sincronizzazione automatica", "out": "Margine di oggi", "kind": "dash", "manual": ["Esporti gli ordini da Shopify", "Copi la spesa da Meta Ads", "Incolli tutto in Excel", "Calcoli il margine a mano"], "manual_end": "Numeri pronti dopo giorni",
@@ -568,9 +569,10 @@ T = {
         "h1": "Your business, <em>connected</em>.",
         "sub": "Websites, applications and AI designed to work together. Less manual work, faster decisions and growth that compounds over time.",
         "b1": "Let's talk about your project", "b2": "Explore services",
+        "eco_core": "Your system", "eco_nodes": [("Website", "◎"), ("CRM", "◇"), ("Email", "✉"), ("Payments", "€"), ("Calendar", "◷"), ("Dashboard", "▤")],
         "eco_k": "Systems integration",
         "eco_h": "One system for <em>the whole company</em>.",
-        "eco_p": "We connect the tools you already use and automate the steps between them. Data is entered once and reaches wherever it's needed, ready to use. Here are three examples of what we build:",
+        "eco_p": "We connect the tools you already use and automate the steps between them. Data is entered once and reaches wherever it's needed, ready to use.",
         "values": ["No data entered twice", "Reliable numbers that update themselves", "A team freed from repetitive work"],
         "flows": [
             {"tab": "Sales and marketing", "in": ["Shopify", "Meta Ads"], "core": "Automatic sync", "out": "Today's margin", "kind": "dash", "manual": ["Export orders from Shopify", "Copy ad spend from Meta Ads", "Paste it all into a spreadsheet", "Work out the margin by hand"], "manual_end": "Numbers ready days later",
@@ -669,53 +671,27 @@ T = {
 
 
 def eco(H, pre):
-    """Sezione 'Un unico sistema': tre flussi concreti, ognuno da dati in entrata a sistema a risultato, con schede."""
-    li, lc, lo = H["flow_lbl"]
-
-    def mini(f):
-        rows = f["rows"]
-        if f["kind"] == "dash":
-            bars = (30, 44, 38, 56, 52, 70, 86)
-            spark = "".join(f'<b style="height:{h}%"></b>' for h in bars)
-            body = f'<div class="mu-spark">{spark}</div>' + "".join(f'<div class="mu-row"><span>{r}</span><i style="--w:{w}%"></i></div>' for r, w in zip(rows, (78, 46, 64)))
-        elif f["kind"] == "crm":
-            body = '<div class="mu-contact"><span class="mu-avatar"></span><div><b></b><i></i></div></div>' + "".join(f'<div class="mu-step"><span class="tick">✓</span>{r}</div>' for r in rows)
-        else:
-            body = '<div class="mu-doc"><div class="mu-doc-head"><b></b><i></i></div><i></i><i></i><i class="short"></i></div>' + "".join(f'<div class="mu-step"><span class="tick">✓</span>{r}</div>' for r in rows)
-        return f'<div class="mu mu-{f["kind"]}">{body}<p class="mu-live"><span class="dot"></span>{f["live"]}</p></div>'
-
-    tabs = "".join(f'<button type="button" aria-pressed="{"true" if i == 0 else "false"}">{f["tab"]}</button>' for i, f in enumerate(H["flows"]))
-    rb, ra, rsteps = H["rows_lbl"]
-    panels = "".join(f"""
-      <div class="flow-panel"{"" if i == 0 else " hidden"}>
-        <div class="fl-row fl-before">
-          <div class="fl-row-head"><span class="mono">{rb}</span><span class="count">{len(f["manual"])} {rsteps}</span></div>
-          <ol class="manual">{"".join(f'<li><span class="n">{j}</span>{m}</li>' for j, m in enumerate(f["manual"], 1))}<li class="end">{f["manual_end"]}</li></ol>
-        </div>
-        <div class="fl-row fl-after">
-          <div class="fl-row-head"><span class="mono">{ra}</span><span class="count on">0 {rsteps}</span></div>
-          <div class="fl-grid">
-            <div class="fl-col fl-in"><span class="mono">{li}</span>{"".join(f'<span class="chip-src">{x}</span>' for x in f["in"])}</div>
-            <div class="fl-link"><i></i></div>
-            <div class="fl-col fl-core"><span class="mono">{lc}</span><span class="core"><img src="{pre}assets/reef7-logo.png" alt="" width="40" height="40"><b>{f["core"]}</b></span></div>
-            <div class="fl-link"><i></i></div>
-            <div class="fl-col fl-out"><span class="mono">{lo}</span><div class="out-card"><b class="out-title">{f["out"]}</b>{mini(f)}</div></div>
-          </div>
-        </div>
-        <p class="fl-value">{f["value"]}</p>
-      </div>""" for i, f in enumerate(H["flows"]))
+    """Sezione 'Un unico sistema': gli strumenti dell'azienda attorno a un unico centro, con i dati che scorrono."""
     values = "".join(f"<li>{v}</li>" for v in H["values"])
-    return f"""<div class="eco2">
+    # sei strumenti disposti in cerchio attorno al centro
+    import math
+    nodes, lines = "", ""
+    for i, (label, ico) in enumerate(H["eco_nodes"]):
+        ang = -math.pi / 2 + i * 2 * math.pi / len(H["eco_nodes"])
+        x, y = 50 + 38 * math.cos(ang), 50 + 38 * math.sin(ang)
+        nodes += f'<span class="hub-node" style="left:{x:.1f}%;top:{y:.1f}%"><i aria-hidden="true">{ico}</i>{label}</span>'
+        lines += f'<line x1="50" y1="50" x2="{x:.1f}" y2="{y:.1f}"/><circle class="pulse" r=".9" style="--x:{x - 50:.1f}px;--y:{y - 50:.1f}px;animation-delay:{i * .45:.2f}s" cx="50" cy="50"/>'
+    return f"""<div class="eco3">
     <div class="eco-copy">
       <p class="mono">{H['eco_k']}</p>
       <h2>{H['eco_h']}</h2>
       <p class="eco-lead">{H['eco_p']}</p>
       <ul class="eco-values">{values}</ul>
     </div>
-    <div class="flow" data-flow>
-      <div class="flow-tabs" role="group">{tabs}</div>
-      <div class="flow-stage">{panels}
-      </div>
+    <div class="hubviz" aria-hidden="true">
+      <svg viewBox="0 0 100 100" class="hub-lines"><circle cx="50" cy="50" r="38" class="ring"/>{lines}</svg>
+      {nodes}
+      <span class="hub-core"><img src="{pre}assets/reef7-logo.png" alt="" width="44" height="44"><b>{H['eco_core']}</b></span>
     </div>
   </div>"""
 

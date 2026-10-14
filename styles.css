@@ -958,3 +958,19 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
   .seven-map, .reef-map { margin-top: 10px; }
   .about .creds li { padding: 12px 14px; }
 }
+
+/* un unico sistema: disegno semplice */
+.eco3 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+.hubviz { position: relative; width: min(100%, 520px); aspect-ratio: 1; justify-self: center; }
+.hub-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.hub-lines .ring { fill: none; stroke: rgba(95, 225, 242, .12); stroke-width: .3; stroke-dasharray: 1 1.6; }
+.hub-lines line { stroke: rgba(95, 225, 242, .28); stroke-width: .35; }
+.hub-lines .pulse { fill: var(--aqua); filter: drop-shadow(0 0 1.5px var(--aqua)); animation: hubpulse 2.7s ease-in-out infinite; }
+@keyframes hubpulse { 0% { transform: translate(var(--x), var(--y)); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translate(0, 0); opacity: 0; } }
+.hub-node { position: absolute; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--rule-2); background: rgba(10, 19, 32, .92); font-size: 15px; font-weight: 500; white-space: nowrap; box-shadow: 0 10px 30px rgba(0, 0, 0, .35); }
+.hub-node i { font-style: normal; color: var(--aqua); font-size: 14px; }
+.hub-core { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 34%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; align-content: center; gap: 8px; text-align: center; background: radial-gradient(circle at 50% 35%, rgba(95, 225, 242, .22), rgba(10, 19, 32, .95) 70%); border: 1px solid rgba(95, 225, 242, .45); box-shadow: 0 0 60px rgba(95, 225, 242, .18); }
+.hub-core b { font-size: clamp(13px, 1.3vw, 16px); font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { .hub-lines .pulse { animation: none; opacity: 0; } }
+@media (max-width: 900px) { .eco3 { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .hubviz { width: 100%; } .hub-node { font-size: 12.5px; padding: 7px 11px; gap: 6px; } .hub-core img { width: 32px; height: 32px; } .hub-core b { font-size: 12px; } }
