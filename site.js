@@ -203,3 +203,111 @@ void main(){
   };
   requestAnimationFrame(frame);
 })();
+
+
+// Lab: due pareti di reef ai lati, con coralli pieni e colorati che compaiono dall'alto verso il basso mentre si scorre
+(() => {
+  if (document.body.dataset.page !== "studio") return;
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const NS = "http://www.w3.org/2000/svg";
+  let seed = 7;
+  const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
+  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.append(e); return e; };
+  const sway = (g, bx, by, deg, dur) => { if (!still) el("animateTransform", { attributeName: "transform", type: "rotate", values: `${-deg} ${bx} ${by};${deg} ${bx} ${by};${-deg} ${bx} ${by}`, dur: `${dur}s`, repeatCount: "indefinite" }, g); };
+  const clusters = [];
+
+  // ramo di corallo: segmenti sempre più sottili, colore che schiarisce verso le punte
+  function branch(g, x, y, ang, len, w, depth, hue) {
+    const steps = 3;
+    for (let i = 0; i < steps; i++) {
+      ang += (rnd() - .5) * .45;
+      const nx = x + Math.cos(ang) * len / steps, ny = y + Math.sin(ang) * len / steps;
+      el("line", { x1: x, y1: y, x2: nx, y2: ny, stroke: `hsl(${hue} 82% ${46 + (3 - depth) * 8 + i * 2}%)`, "stroke-width": Math.max(1.4, w * (1 - i / 5)), "stroke-linecap": "round" }, g);
+      x = nx; y = ny;
+    }
+    if (depth > 0) {
+      branch(g, x, y, ang - .45 - rnd() * .3, len * .72, w * .7, depth - 1, hue);
+      branch(g, x, y, ang + .45 + rnd() * .3, len * .72, w * .7, depth - 1, hue);
+    } else el("circle", { cx: x, cy: y, r: w * .75 + .8, fill: `hsl(${hue} 95% 82%)` }, g);
+  }
+  const TYPES = {
+    stag(g, y) { const hue = [330, 345, 12][Math.floor(rnd() * 3)]; for (let k = 0; k < 3; k++) branch(g, 4, y + (k - 1) * 10, -.35 + k * .35, 46 + rnd() * 16, 7, 2, hue + k * 6); },
+    fan(g, y) {
+      const hue = rnd() < .5 ? 275 : 22, n = 24;
+      el("path", { d: `M2,${y} L70,${y - 62} A80,80 0 0 1 78,${y + 52} Z`, fill: `hsl(${hue} 80% 55%)`, opacity: ".18" }, g);
+      for (let i = 0; i < n; i++) {
+        const a = -.95 + (i / (n - 1)) * 1.75, L = 62 + rnd() * 20;
+        const ex = 2 + Math.cos(a) * L, ey = y + Math.sin(a) * L;
+        el("path", { d: `M2,${y} Q${2 + Math.cos(a + .15) * L * .55},${y + Math.sin(a + .15) * L * .55} ${ex},${ey}`, stroke: `hsl(${hue} 85% ${55 + rnd() * 15}%)`, "stroke-width": 1.4, fill: "none", "stroke-linecap": "round" }, g);
+        if (i % 3 === 0) el("circle", { cx: ex, cy: ey, r: 1.6, fill: `hsl(${hue} 95% 80%)` }, g);
+      }
+    },
+    brain(g, y) {
+      const id = `bg${Math.floor(y)}${Math.floor(rnd() * 1e4)}`, hue = [40, 160, 300][Math.floor(rnd() * 3)];
+      const gr = el("radialGradient", { id, cx: "40%", cy: "35%", r: "70%" }, g);
+      el("stop", { offset: "0", "stop-color": `hsl(${hue} 85% 70%)` }, gr);
+      el("stop", { offset: "1", "stop-color": `hsl(${hue} 70% 32%)` }, gr);
+      el("ellipse", { cx: 22, cy: y, rx: 30, ry: 24, fill: `url(#${id})` }, g);
+      for (let k = -2; k <= 2; k++) el("path", { d: `M-4,${y + k * 8} q8,-5 14,0 t14,0 t14,0 t14,0`, stroke: `hsl(${hue} 60% 25%)`, "stroke-width": 1.6, fill: "none", opacity: ".55" }, g);
+    },
+    anemone(g, y) {
+      const hue = rnd() < .5 ? 175 : 50;
+      el("ellipse", { cx: 8, cy: y, rx: 12, ry: 9, fill: `hsl(${hue} 60% 30%)` }, g);
+      for (let i = 0; i < 13; i++) {
+        const a = -1.2 + i * .2, L = 30 + rnd() * 16, t = el("g", {}, g);
+        const ex = 10 + Math.cos(a) * L, ey = y + Math.sin(a) * L;
+        el("path", { d: `M10,${y} Q${10 + Math.cos(a - .3) * L * .6},${y + Math.sin(a - .3) * L * .6} ${ex},${ey}`, stroke: `hsl(${hue} 85% ${50 + (i % 3) * 8}%)`, "stroke-width": 4, fill: "none", "stroke-linecap": "round" }, t);
+        el("circle", { cx: ex, cy: ey, r: 2.8, fill: `hsl(${hue} 100% 80%)` }, t);
+        sway(t, 10, y, 6 + rnd() * 5, 3 + rnd() * 2);
+      }
+    },
+    tube(g, y) {
+      for (let i = 0; i < 6; i++) {
+        const a = -.7 + i * .28, L = 22 + rnd() * 20, x0 = 4, y0 = y + (i - 2.5) * 4;
+        const ex = x0 + Math.cos(a) * L, ey = y0 + Math.sin(a) * L;
+        el("line", { x1: x0, y1: y0, x2: ex, y2: ey, stroke: `hsl(${30 + i * 6} 95% 58%)`, "stroke-width": 9, "stroke-linecap": "round" }, g);
+        el("circle", { cx: ex, cy: ey, r: 3, fill: "hsl(20 60% 22%)" }, g);
+      }
+    },
+  };
+  const ORDER = ["stag", "fan", "brain", "anemone", "stag", "tube", "fan", "anemone", "brain", "stag"];
+
+  function wall(side) {
+    const svg = el("svg", { viewBox: "0 0 160 1000", preserveAspectRatio: side === "l" ? "xMinYMin slice" : "xMaxYMin slice", class: `coral coral-${side}`, "aria-hidden": "true" });
+    const root = el("g", side === "l" ? {} : { transform: "translate(160,0) scale(-1,1)" }, svg);
+    // roccia della parete
+    let d = "M0,-10 L18,-10";
+    for (let y = 0; y <= 1010; y += 40) d += ` Q${26 + rnd() * 14},${y + 20} ${14 + rnd() * 14},${y + 40}`;
+    d += " L0,1050 Z";
+    const rg = el("linearGradient", { id: `rock${side}`, x1: "0", x2: "1" }, root);
+    el("stop", { offset: "0", "stop-color": "#0b1a2c" }, rg);
+    el("stop", { offset: "1", "stop-color": "#10263c" }, rg);
+    el("path", { d, fill: `url(#rock${side})` }, root);
+    // coralli lungo la parete
+    let y = 40, i = side === "l" ? 0 : 3;
+    while (y < 990) {
+      const cl = el("g", { class: "cl" }, root), inner = el("g", {}, cl);
+      TYPES[ORDER[i % ORDER.length]](inner, y);
+      sway(inner, 0, y, 1.5 + rnd(), 6 + rnd() * 3);
+      cl.style.transformOrigin = `0px ${y}px`;
+      clusters.push({ el: cl, t: y / 1000 });
+      y += 85 + rnd() * 45; i++;
+    }
+    // bollicine che salgono
+    if (!still) for (let b = 0; b < 7; b++) {
+      const c = el("circle", { cx: 20 + rnd() * 60, cy: 1000, r: 1 + rnd() * 2.2, fill: "none", stroke: "rgba(160,230,255,.6)", "stroke-width": .8 }, root);
+      el("animate", { attributeName: "cy", from: 1020, to: -20, dur: `${9 + rnd() * 8}s`, begin: `${-rnd() * 12}s`, repeatCount: "indefinite" }, c);
+    }
+    document.body.append(svg);
+  }
+  wall("l"); seed = 23; wall("r");
+
+  const update = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const front = still ? 2 : .15 + (max > 0 ? scrollY / max : 1);
+    for (const c of clusters) c.el.classList.toggle("on", front > c.t);
+  };
+  addEventListener("scroll", update, { passive: true });
+  addEventListener("resize", update);
+  update();
+})();
