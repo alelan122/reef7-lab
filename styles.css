@@ -987,3 +987,24 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
 @media (max-width: 760px) { .coral { width: 54px; opacity: .8; } .page-head.has-coral .wrap { padding-inline: 62px 20px; } .coral-r { display: none; } }
 @media (prefers-reduced-motion: reduce) { .coral .cl { transition: none; } }
 .page-head.has-coral::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(transparent, var(--ink)); pointer-events: none; z-index: 0; }
+
+/* telefono: rifiniture dopo la revisione */
+@media (max-width: 760px) {
+  .page-head { padding-top: 92px !important; }
+  .ocean .goals > * { flex: 0 0 100%; }
+  .case-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; gap: 10px; }
+  .case-hero div { min-width: 0; }
+  .case-hero div { padding: 18px 16px; border-radius: 16px; }
+  .cs-res .case-hero b, .case-hero b { font-size: 50px; }
+  .case-hero span { font-size: 16px; margin-top: 8px; }
+  .case-hero p { font-size: 13.5px; line-height: 1.45; }
+  .case-hero + .case-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .case-hero + .case-kpis div { padding: 16px 12px; }
+  .case-hero + .case-kpis b { font-size: 28px; }
+  .case-hero + .case-kpis span { font-size: 13.5px; }
+  .case-hero + .case-kpis small { font-size: 12px; }
+  /* aree di tocco più comode */
+  .fold-btn, .more-btn { padding-block: 12px; margin-block: -12px; display: inline-flex; }
+  .foot a { display: inline-block; padding-block: 8px; }
+  .goal-org a { display: inline-block; padding-block: 8px; margin-block: -8px; }
+}
