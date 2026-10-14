@@ -289,6 +289,8 @@ def goal_state():
 
 
 VERSION = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["styles.css", "alt-overrides.css", "site.js", "mission.js", "agent.js", "audit.js"])).hexdigest()[:8]
+# impronta di tutto il sito (contenuti compresi): se online è diversa, la pagina in cache si ricarica da sola
+BUILD = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["build.py", "styles.css", "site.js", "mission.js", "agent.js", "audit.js"])).hexdigest()[:10]
 SLUG = {
     "it": {"home": "index.html", "work": "lavori.html", "services": "servizi.html", "solutions": "soluzioni.html", "mission": "missione.html", "studio": "lab.html", "contact": "contatti.html", "audit": "audit.html"},
     "en": {"home": "index.html", "work": "work.html", "services": "services.html", "solutions": "solutions.html", "mission": "mission.html", "studio": "lab.html", "contact": "contact.html", "audit": "audit.html"},
@@ -736,7 +738,7 @@ def build(lang, variant=""):
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{pre}{css}?v={VERSION}">
 </head>
-<body data-page="{key}">
+<body data-page="{key}" data-build="{BUILD}">
 <header class="top{'' if hero else ' solid'}"><div class="wrap top-in">
   <a class="logo" href="{u('home')}"><img src="{pre}assets/reef7-logo.png" alt="" width="34" height="34">Reef 7 Lab</a>
   <nav aria-label="{L['pages']}">{links}<a href="{u('contact')}" class="cta"{cur}>{L['nav']['contact']}</a></nav>
@@ -1111,6 +1113,7 @@ if __name__ == "__main__":
         (ROOT / "alt" / old).unlink(missing_ok=True)
     for lang in T:
         build(lang)
+    (ROOT / "version.txt").write_text(BUILD, encoding="utf-8")
     # versione B: stesso contenuto, stile editoriale (styles.css + alt-overrides.css)
     alt_css = (ROOT / "styles.css").read_text(encoding="utf-8") + "\n" + (ROOT / "alt-overrides.css").read_text(encoding="utf-8")
     (ROOT / "alt.css").write_text(alt_css, encoding="utf-8")

@@ -1,3 +1,15 @@
+// se il browser mostra una versione vecchia della pagina, la ricarica con quella appena pubblicata
+(() => {
+  const mine = document.body.dataset.build, me = document.currentScript && document.currentScript.src;
+  if (!mine || !me || location.protocol === "file:") return;
+  fetch(new URL("version.txt", me), { cache: "no-store" }).then((r) => (r.ok ? r.text() : "")).then((live) => {
+    live = live.trim();
+    if (!live || live === mine) return;
+    try { if (sessionStorage.getItem("r7-reloaded") === live) return; sessionStorage.setItem("r7-reloaded", live); } catch {}
+    const u = new URL(location.href); u.searchParams.set("v", live); location.replace(u.toString());
+  }).catch(() => {});
+})();
+
 // Reef 7 Lab: luce dell'acqua nell'hero, menu su telefono, modulo contatti.
 (() => {
   const top = document.querySelector(".top");
