@@ -37,7 +37,7 @@
     const t = el("text", { y: 4, class: "num" }, g);
     t.textContent = p.n;
     // posizione dell'etichetta scelta per non sovrapporsi ai reef vicini
-    const pos = { 4: [-16, 26, "end"], 5: [-16, -10, "end"], 7: [-16, 28, "end"], 6: [0, -20, "middle"] }[p.n] || [16, -12, "start"];
+    const pos = [[/^Bali/, [-16, 26, "end"]], [/^Maldiv/, [-16, -10, "end"]], [/Barrier/, [-16, 28, "end"]], [/^Moorea/, [0, -20, "middle"]]].find(([r]) => r.test(p.name))?.[1] || [16, -12, "start"];
     const label = el("text", { x: pos[0], y: pos[1], "text-anchor": pos[2], class: "label" }, g);
     label.textContent = p.name;
   }
