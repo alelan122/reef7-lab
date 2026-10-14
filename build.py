@@ -1033,7 +1033,7 @@ def build(lang, variant=""):
   </div>
 </div></section>
 <section class="block"><div class="wrap about">
-  <div class="portrait"><img src="{pre}assets/alessandro.jpg" alt="{St['photo_alt']}" width="512" height="512"></div>
+  <div class="portrait"><img src="{pre}assets/alessandro.jpg" alt="{St['photo_alt']}" width="1024" height="1024"></div>
   <div><p class="big">{St['who_big']}</p><div class="about-bio" data-more="{St['more']}">{who}</div>
     <ul class="creds">{"".join(f"<li><b>{k}</b><span>{v}</span></li>" for k, v in St['creds'])}</ul>
     <div class="sign"><b>{St['sign'][0]}</b><span>{St['sign'][1]}</span></div></div>
