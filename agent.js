@@ -1,32 +1,35 @@
 // Demo dell'agente vendite: qualifica il visitatore, consiglia servizi e un progetto simile, e raccoglie il contatto.
 // Il sito è statico, quindi capisce il testo libero con regole semplici: gli agenti che costruiamo per i clienti usano l'AI vera.
 (() => {
-  if (document.body.dataset.page === "contact") return;
+  if (["contact", "audit"].includes(document.body.dataset.page)) return;
   const en = document.documentElement.lang === "en";
   const svcPage = en ? "services.html" : "servizi.html";
   const workPage = en ? "work.html" : "lavori.html";
   const contactPage = en ? "contact.html" : "contatti.html";
+  const auditPage = "audit.html";
   const endpoint = `https://formsubmit.co/ajax/${(window.REEF && window.REEF.email) || "lancioni.ale@gmail.com"}`;
 
   const T = en ? {
     open: "AI Agent", title: "AI Agent", status: "Demo · replies in seconds", ph: "Type a message…", send: "Send",
-    teaser: "Want to find out in 30 seconds what we could automate in your business?",
-    hello: "Hi! I'm a demo of the sales agents we build. I'll ask you a few quick questions and tell you how we can help. What does your business need most?",
+    teaser: "Want to find out in 2 minutes how much time and revenue your business could win back?",
+    hello: "Hi! I'm a demo of the sales agents we build. Three quick questions and I'll take you to your company's free growth plan. What's your main goal?",
     goals: {
-      sales: ["More leads and sales", "Got it. The bottleneck is often speed: leads that wait a day go cold, and follow-ups get forgotten."],
-      manual: ["Less manual work", "Makes sense. Copying data, answering the same emails, building reports by hand: that's the first work to hand over to automation."],
-      data: ["Numbers under control", "Clear. The goal is one view where sales, cash and margins are always up to date, without chasing spreadsheets."],
-      abroad: ["Selling abroad", "Great. Languages, local markets and foreign suppliers are where we can make a real difference: we work in five languages, Chinese included."],
-      unsure: ["Not sure yet", "No problem, that's exactly what the first call is for. Let's start with the basics."],
+      earn: ["Earn more", "Got it. Money usually leaks in two places: leads answered too late, and customers never offered the next step."],
+      cost: ["Cut costs", "Makes sense. Companies often pay for several tools that do the same thing, and pay twice for the work of whoever copies data between them."],
+      time: ["Free up the team's time", "Clear. Data copied by hand, repeated emails, reports rebuilt every week: that's the first work to take off your team."],
+      service: ["Serve customers better", "Good. Faster replies and better-supported customers are also the simplest way to sell more."],
+      unsure: ["Not sure yet", "No problem: that's exactly what the audit helps you work out. Let's start with the basics."],
     },
     sector_q: "What industry are you in?",
-    sectors: { ecom: "E-commerce", services: "Professional services", edu: "Education and coaching", b2b: "B2B sales", local: "Local business", craft: "Brand or craft" },
+    sectors: { ecom: "E-commerce", services: "Professional services", edu: "Education and coaching", b2b: "B2B sales", local: "Local business", other: "Other" },
     team_q: (s) => `${s}, good. How many people work at the company?`, team: ["1-5", "6-20", "21-50", "50+"],
     when_q: "And when would you like to start?", when: ["Right away", "Within 1-3 months", "Within 6 months", "Just exploring"],
     hot: "Perfect, let's move fast then.", warm: "Good, there's time to design it properly.",
     sum: "Here's what I understood:", k_goal: "Goal", k_sector: "Industry", k_team: "Team", k_when: "Start", k_svc: "We'd suggest",
     case: (name, url) => `A project close to yours: <a href="${url}">${name} →</a>`,
-    next_q: "How would you like to continue?", c_book: "Book a free call", c_here: "Leave my details here",
+    audit_pitch: "With these answers, half of your free audit is already done. What's left is the work your team still does by hand and a few numbers: 2 minutes, and you get your plan with the hours you could win back, how much more you could earn and the first 3 moves.",
+    next_q: "How would you like to continue?", c_audit: "Take the free audit (2 min)", c_book: "Book a free call", c_here: "Leave my details here",
+    audit_go: "Great: I'll take you to the audit with your answers already filled in.", audit_btn: "Start the audit",
     book: "Perfect: the form is already filled in with your answers.", book_btn: "Go to the form",
     name_q: "Great. What's your name?", email_q: (n) => `Nice to meet you, ${n}. What's the best email to reach you?`, email_bad: "That email doesn't look right, can you check it?",
     consent_q: "Last thing: may we use these details to get back to you about this request?", yes: "Yes, I agree", no: "No thanks",
@@ -34,31 +37,33 @@
     fail: "Sending didn't work. You can use the form instead:", declined: "No problem. You can always use the contact form:",
     restart: "Start over", huh: "I'm not sure I understood. Pick one of the options, or put it another way.",
     note: "Guided demo. The agents we build for you use real AI, connected to your CRM and calendar, on your website, WhatsApp and email.",
-    svc: { "11": "AI sales agents", "03": "Custom CRM", "13": "Sales call analysis", "06": "Automation, with and without AI", "12": "AI voice assistants", "08": "Dashboards", "09": "Company hub", "15": "Multilingual websites", "16": "Bridge to China", "07": "Company brain", "14": "3D configurators", "01": "Websites", "02": "Custom applications", "04": "Bookings", "05": "Email marketing" },
-    need: { sales: ["CRM and sales", "AI agents and voice assistants"], manual: ["Automation (with or without AI)"], data: ["Dashboards and financial control"], abroad: ["Multilingual or China projects"], unsure: ["Not sure yet"] },
+    svc: { "31": "Sales system, lead to cash", "28": "Lead and lost-deal recovery", "29": "Upsells and renewals", "20": "Systems X-ray", "10": "Tools you own", "21": "Owned email marketing", "17": "Client portals", "11": "AI sales agents", "03": "Custom CRM", "13": "Sales call analysis", "06": "Automation, with and without AI", "12": "AI voice assistants", "08": "Dashboards", "09": "Company hub", "15": "Multilingual websites", "16": "Bridge to China", "07": "Company brain", "14": "3D configurators", "01": "Websites", "02": "Custom applications", "04": "Bookings", "05": "Email marketing" },
+    need: { earn: ["CRM and sales", "AI agents and voice assistants"], cost: ["Software integrations"], time: ["Automation (with or without AI)"], service: ["AI agents and voice assistants"], unsure: ["Not sure yet"] },
     subject: "New lead from the AI agent", typing: "typing",
     status_ai: "AI · replies in seconds", note_ai: "Reef 7 Lab's AI Agent, built with Claude. It may make mistakes: the call is where we go into detail.",
     ai_err: "I'm having trouble replying right now. You can reach us through the form:",
     formNeed: ["Website or landing page", "Custom app or management system", "CRM and sales", "Bookings and email marketing", "Automation (with or without AI)", "AI agents and voice assistants", "Company brain", "Dashboards and financial control", "Software integrations", "Multilingual or China projects", "Not sure yet"],
   } : {
     open: "Agent AI", title: "Agent AI", status: "Demo · risponde in pochi secondi", ph: "Scrivi un messaggio…", send: "Invia",
-    teaser: "Vuoi scoprire in 30 secondi cosa potremmo automatizzare nella tua azienda?",
-    hello: "Ciao! Sono una demo degli agenti di vendita che costruiamo. Ti faccio qualche domanda veloce e ti dico come possiamo aiutarti. Di cosa ha più bisogno la tua azienda?",
+    teaser: "Vuoi sapere in 2 minuti quanto tempo e quanto fatturato può recuperare la tua azienda?",
+    hello: "Ciao! Sono una demo degli agenti di vendita che costruiamo. Tre domande veloci e ti porto al piano di crescita gratuito della tua azienda. Qual è il tuo obiettivo principale?",
     goals: {
-      sales: ["Più contatti e vendite", "Chiaro. Spesso il collo di bottiglia è la velocità: un contatto che aspetta un giorno si raffredda, e i follow-up si dimenticano."],
-      manual: ["Meno lavoro manuale", "Ha senso. Copiare dati, rispondere alle stesse email, fare report a mano: è il primo lavoro da affidare all'automazione."],
-      data: ["Numeri sotto controllo", "Capito. L'obiettivo è un'unica vista con vendite, cassa e margini sempre aggiornati, senza rincorrere fogli Excel."],
-      abroad: ["Vendere all'estero", "Ottimo. Lingue, mercati locali e fornitori esteri sono il terreno dove possiamo fare davvero la differenza: lavoriamo in cinque lingue, cinese compreso."],
-      unsure: ["Non lo so ancora", "Nessun problema, la prima call serve proprio a questo. Partiamo dalle basi."],
+      earn: ["Guadagnare di più", "Chiaro. Di solito i soldi si perdono in due punti: contatti a cui si risponde tardi e clienti a cui non si propone il passo successivo."],
+      cost: ["Tagliare i costi", "Ha senso. Spesso si pagano più software che fanno la stessa cosa, e si paga due volte il lavoro di chi ricopia i dati da uno all'altro."],
+      time: ["Liberare tempo al team", "Capito. Dati copiati a mano, email ripetute, report rifatti ogni settimana: è il primo lavoro da togliere al team."],
+      service: ["Servire meglio i clienti", "Bene. Risposte più rapide e clienti seguiti meglio sono anche il modo più semplice per vendere di più."],
+      unsure: ["Non lo so ancora", "Nessun problema: è proprio quello che l'audit ti aiuta a capire. Partiamo dalle basi."],
     },
     sector_q: "In che settore lavori?",
-    sectors: { ecom: "E-commerce", services: "Studio o consulenza", edu: "Formazione e coaching", b2b: "Vendita B2B", local: "Attività locale", craft: "Brand o artigianato" },
+    sectors: { ecom: "E-commerce", services: "Studio o consulenza", edu: "Formazione e coaching", b2b: "Vendita B2B", local: "Attività locale", other: "Altro" },
     team_q: (s) => `${s}, bene. Quante persone lavorano in azienda?`, team: ["1-5", "6-20", "21-50", "Oltre 50"],
     when_q: "E quando vorresti partire?", when: ["Subito", "Entro 1-3 mesi", "Entro 6 mesi", "Sto valutando"],
     hot: "Perfetto, allora andiamo veloci.", warm: "Bene, c'è il tempo per progettarlo come si deve.",
     sum: "Ecco cosa ho capito:", k_goal: "Obiettivo", k_sector: "Settore", k_team: "Team", k_when: "Partenza", k_svc: "Ti consigliamo",
     case: (name, url) => `Un progetto vicino al tuo: <a href="${url}">${name} →</a>`,
-    next_q: "Come preferisci proseguire?", c_book: "Prenota una call gratuita", c_here: "Lascio i miei contatti qui",
+    audit_pitch: "Con queste risposte metà dell'audit gratuito è già fatta. Mancano le attività che il team fa ancora a mano e qualche numero: 2 minuti, e ricevi il tuo piano con le ore recuperabili, quanto puoi guadagnare in più e le prime 3 mosse.",
+    next_q: "Come preferisci proseguire?", c_audit: "Fai l'audit gratuito (2 min)", c_book: "Prenota una call gratuita", c_here: "Lascio i miei contatti qui",
+    audit_go: "Perfetto: ti porto all'audit con le tue risposte già inserite.", audit_btn: "Inizia l'audit",
     book: "Perfetto: il modulo è già compilato con le tue risposte.", book_btn: "Vai al modulo",
     name_q: "Ottimo. Come ti chiami?", email_q: (n) => `Piacere, ${n}. A quale email ti possiamo scrivere?`, email_bad: "Questa email non sembra corretta, puoi controllarla?",
     consent_q: "Ultima cosa: possiamo usare questi dati per ricontattarti in merito alla richiesta?", yes: "Sì, acconsento", no: "No, grazie",
@@ -66,8 +71,8 @@
     fail: "L'invio non è riuscito. Puoi usare il modulo:", declined: "Nessun problema. Puoi sempre usare il modulo contatti:",
     restart: "Ricomincia", huh: "Non sono sicuro di aver capito. Scegli una delle opzioni, oppure dimmelo in un altro modo.",
     note: "Demo guidata. Gli agenti che costruiamo per te usano l'AI vera, collegata al tuo CRM e al tuo calendario, su sito, WhatsApp ed email.",
-    svc: { "11": "Agenti AI per le vendite", "03": "CRM su misura", "13": "Analisi delle call", "06": "Automazioni", "12": "Assistenti vocali AI", "08": "Dashboard", "09": "Hub aziendale", "15": "Siti multilingue", "16": "Ponte con la Cina", "07": "Company brain", "14": "Configuratori 3D", "01": "Siti web", "02": "Applicazioni su misura", "04": "Prenotazioni", "05": "Email marketing" },
-    need: { sales: ["CRM e vendite", "Agenti AI e assistenti vocali"], manual: ["Automazioni (con o senza AI)"], data: ["Dashboard e controllo di gestione"], abroad: ["Multilingue o progetti con la Cina"], unsure: ["Non lo so ancora"] },
+    svc: { "31": "Sistema di vendita", "28": "Recupero trattative perse", "29": "Upsell e rinnovi", "20": "Radiografia dei sistemi", "10": "Strumenti tuoi", "21": "Email marketing di proprietà", "17": "Area clienti", "11": "Agenti AI per le vendite", "03": "CRM su misura", "13": "Analisi delle call", "06": "Automazioni", "12": "Assistenti vocali AI", "08": "Dashboard", "09": "Hub aziendale", "15": "Siti multilingue", "16": "Ponte con la Cina", "07": "Company brain", "14": "Configuratori 3D", "01": "Siti web", "02": "Applicazioni su misura", "04": "Prenotazioni", "05": "Email marketing" },
+    need: { earn: ["CRM e vendite", "Agenti AI e assistenti vocali"], cost: ["Integrazioni tra software"], time: ["Automazioni (con o senza AI)"], service: ["Agenti AI e assistenti vocali"], unsure: ["Non lo so ancora"] },
     subject: "Nuovo contatto dall'agente AI", typing: "sta scrivendo",
     status_ai: "AI · risponde in pochi secondi", note_ai: "Agent AI di Reef 7 Lab, costruito con Claude. Può sbagliare: i dettagli li vediamo insieme in call.",
     ai_err: "In questo momento non riesco a rispondere. Puoi scriverci dal modulo:",
@@ -75,9 +80,11 @@
   };
 
   // servizi consigliati per obiettivo, ritoccati dal settore; progetto del portfolio più vicino al settore
-  const REC = { sales: ["11", "03", "13"], manual: ["06", "12", "07"], data: ["08", "09"], abroad: ["15", "16"], unsure: ["07", "11"] };
-  const SECTOR_SVC = { ecom: "14", local: "12", edu: "11", services: "07", b2b: "13", craft: "01" };
-  const CASE = { ecom: ["Full Peak", "fullpeak"], services: ["Tenka OS", "tenka"], edu: ["My Daily Peak", "dailypeak"], b2b: ["Tenka OS", "tenka"], local: ["Kasino Latino", "kasinolatino"], craft: ["Maisenzagioie", "maisenzagioie"] };
+  const REC = { earn: ["31", "28", "11"], cost: ["20", "10", "21"], time: ["06", "08", "07"], service: ["11", "17", "12"], unsure: ["31", "06"] };
+  const SECTOR_SVC = { ecom: "19", local: "12", edu: "27", services: "17", b2b: "03", other: "08" };
+  const CASE = { ecom: ["Full Peak", "fullpeak"], services: ["Tenka OS", "tenka"], edu: ["My Daily Peak", "dailypeak"], b2b: ["Tenka OS", "tenka"], local: ["Kasino Latino", "kasinolatino"], other: ["Maisenzagioie", "maisenzagioie"] };
+  // stessa numerazione dell'audit, per inserire già le risposte
+  const A_SECTOR = { ecom: 0, services: 1, edu: 2, b2b: 3, local: 4, other: 5 }, A_GOAL = { earn: 0, cost: 1, time: 2, service: 3 };
 
   // modalità AI: le chiavi "need" del Worker diventano servizi consigliati e opzioni del modulo contatti
   const AI = window.REEF && window.REEF.agent;
@@ -86,8 +93,8 @@
 
   // comprensione del testo libero: parole chiave per ogni risposta possibile
   const KW = {
-    goal: { sales: /vend|client|lead|contatt|fattur|sales|sell|customer|revenue/, manual: /manual|automa|tempo|ripetit|excel|time|repetit|copia|copy/, data: /dati|numer|dashboard|margin|report|cassa|data|number|cash|kpi/, abroad: /ester|cina|chin|lingu|internaz|abroad|export|languag|foreign|mercat/, unsure: /non so|boh|not sure|don.?t know|vediamo|dunno/ },
-    sector: { ecom: /e-?comm|shop|negozio online|store|amazon|online/, services: /studio|consul|profession|avvocat|commercialist|agenz|agency|servizi|services|law|account/, edu: /formaz|corso|corsi|coach|course|training|educa|accadem|scuola online/, b2b: /b2b|commercial|rete vendita|industr|azienda|manufactur|wholesale/, local: /palestr|gym|ristor|restaurant|bar|negozio|locale|local|scuola|school|salon|hotel|clinic|studio medico/, craft: /artigian|handmade|gioiel|craft|brand|moda|fashion|design/ },
+    goal: { earn: /guadagn|vend|lead|contatt|fattur|earn|sales|sell|revenue|crescer|grow/, cost: /cost|spes|risparm|abbonam|software|cut|sav|subscri/, time: /tempo|manual|automa|ripetit|excel|time|repetit|copia|copy/, service: /client|assisten|serviz|support|customer|servire|serve/, unsure: /non so|boh|not sure|don.?t know|vediamo|dunno/ },
+    sector: { ecom: /e-?comm|shop|negozio online|store|amazon|online/, services: /studio|consul|profession|avvocat|commercialist|agenz|agency|servizi|services|law|account/, edu: /formaz|corso|corsi|coach|course|training|educa|accadem|scuola online/, b2b: /b2b|commercial|rete vendita|industr|azienda|manufactur|wholesale/, local: /palestr|gym|ristor|restaurant|bar|negozio|locale|local|scuola|school|salon|hotel|clinic|studio medico/, other: /altro|other|artigian|handmade|gioiel|craft|brand|design/ },
     when: [/subito|\bora\b|adesso|asap|right away|\bnow\b|immediat|urgent/, /mes[ei]|month|presto|soon|1-3|\btre\b|three/, /\b6\b|\bsei\b|\bsix\b|anno|year/, /valut|explor|not sure|vedr|pensando|thinking/],
   };
   const teamFrom = (txt) => {
@@ -184,11 +191,8 @@
     const sector = await ask(Object.entries(T.sectors), (t) => match(KW.sector, t.toLowerCase()) || null);
     await say(T.team_q(T.sectors[sector]));
     const ti = await ask(T.team.map((x, i) => [i, x]), (t) => { const i = teamFrom(t.toLowerCase()); return i < 0 ? null : i; });
-    await say(T.when_q);
-    const wi = await ask(T.when.map((x, i) => [i, x]), (t) => { const l = t.toLowerCase(); const i = [0, 3, 2, 1].find((k) => KW.when[k].test(l)); return i == null ? null : i; });
-    await say(wi <= 1 ? T.hot : T.warm);
     await closing({
-      goal: T.goals[goal][0], sector: T.sectors[sector], sectorKey: sector, team: T.team[ti], when: T.when[wi],
+      goal: T.goals[goal][0], goalKey: goal, sector: T.sectors[sector], sectorKey: sector, team: T.team[ti], ti, when: "",
       ids: [...new Set([...REC[goal], SECTOR_SVC[sector]])].slice(0, 3), need: T.need[goal],
     });
   }
@@ -216,12 +220,12 @@
       history.push({ role: "assistant", content: data.reply });
       await say(esc(data.reply));
       const L = data.lead || {};
-      if (data.action === "propose_call" || turn === 9) {
+      if (data.action === "propose_audit" || data.action === "propose_call" || turn === 9) {
         const keys = (L.need || []).filter((k) => NEED[k]);
         const known = (v) => (v && v !== "unknown" ? v : "");
         return closing({
-          goal: known(L.goal), sector: known(L.sector), sectorKey: match(KW.sector, (L.sector || "").toLowerCase()),
-          team: T.team[TEAM[L.team]] || "", when: T.when[WHEN[L.when]] || "",
+          goal: known(L.goal), goalKey: known(L.goal_key), sector: known(L.sector), sectorKey: known(L.sector_key) || match(KW.sector, (L.sector || "").toLowerCase()),
+          team: T.team[TEAM[L.team]] || "", ti: TEAM[L.team], when: T.when[WHEN[L.when]] || "",
           ids: [...new Set(keys.map((k) => NEED[k][0]))].slice(0, 3), need: [...new Set(keys.map((k) => T.formNeed[NEED[k][1]]))],
           transcript: history.map((m) => `${m.role === "user" ? "Visitatore" : "Agent AI"}: ${m.content}`).join("\n"),
         }, true);
@@ -237,10 +241,19 @@
     await say(`${T.sum}<dl class="ag-sum">${row(T.k_goal, st.goal)}${row(T.k_sector, st.sector)}${row(T.k_team, st.team)}${row(T.k_when, st.when)}${recs ? `<div><dt>${T.k_svc}</dt><dd class="ag-recs">${recs}</dd></div>` : ""}</dl>`);
     if (CASE[st.sectorKey]) { const [caseName, caseId] = CASE[st.sectorKey]; await say(T.case(caseName, `${workPage}#${caseId}`)); }
 
+    await say(T.audit_pitch);
     await say(T.next_q);
-    const how = await ask([["book", T.c_book], ["here", T.c_here]]);
+    const how = await ask([["audit", T.c_audit], ["book", T.c_book], ["here", T.c_here]]);
     const q = new URLSearchParams({ need: st.need.join("|"), team: st.team, when: st.when, goal: [st.goal, st.sector].filter(Boolean).join(" · ") });
     const formLink = `${contactPage}?${q}#contact-form`;
+    if (how === "audit") {
+      const aq = new URLSearchParams({ src: "agent" });
+      if (A_SECTOR[st.sectorKey] != null) aq.set("s", A_SECTOR[st.sectorKey]);
+      if (st.ti != null && st.ti >= 0) aq.set("t", st.ti);
+      if (A_GOAL[st.goalKey] != null) aq.set("g", A_GOAL[st.goalKey]);
+      await say(`${T.audit_go}<div class="ag-actions"><a class="ag-book" href="${auditPage}?${aq}#audit">${T.audit_btn} →</a></div>`);
+      return finish(ai);
+    }
     if (how === "book") {
       await say(`${T.book}<div class="ag-actions"><a class="ag-book" href="${formLink}">${T.book_btn} →</a></div>`);
       return finish(ai);

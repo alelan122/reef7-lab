@@ -43,10 +43,10 @@
     cost: "Average hourly cost of a team member (optional)", cost_ph: "E.g. 25", cost_hint: "Used only to estimate the value of the time saved.",
     next: "Next", back: "Back", calc: "Calculate", need_task: "Select at least one activity.", need_pick: "Choose an option.",
     teaser_k: "Your estimate", teaser: (h) => `Your team could win back about <b>${h} hours a week</b>.`,
-    teaser_p: "Get the full report: priorities, what to automate first and a 3-step plan. You'll see it right away, as a PDF too, and I'll send you a copy by email.",
+    teaser_p: "Get the full plan: priorities, two solutions for each, how much more you could earn and the first 3 steps. You'll see it right away, as a PDF too, and I'll send you a copy by email.",
     name: "Name", email: "Work email", company: "Company", consent: "I agree to Reef 7 Lab using these details to send me a copy of the report and get back to me.",
     unlock: "See the full report", sending: "Preparing…", bad_email: "Check the email address.", need_consent: "Consent is needed to send the report.",
-    r_title: "Automation report", r_for: "for", k_week: "hours a week", k_year: "working days a year", k_value: "a year in time value",
+    r_title: "Automation report", r_for: "for", k_week: "hours a week", k_year: "working days a year", k_value: "value of time won back in a year",
     r_tasks: "Where the time goes", r_now: "h today", r_saved: "recoverable", r_prio: "What to automate first", r_build: "What I would build",
     r_plan: "A plan in 3 steps", plan: ["First step", "Second step", "Third step"],
     plan_measure: "Measure the results with a dashboard: hours saved, response times and sales, always up to date.",
@@ -56,7 +56,7 @@
     pdf: "Download PDF", call: "Book a free call", restart: "Start over", sent_fail: "Your details didn't reach me, so no copy was sent by email. Download the PDF or write to me at {email} and I'll get back to you.",
     sent_ok: (e) => `A copy is on its way to <b>${e}</b>.`,
     sign_h: "I'll write to you myself", sign_p: "I read every report personally. Within one business day you'll get an email from me with first ideas on where to start.", sign_n: "Alessandro Lancioni · Founder, Reef 7 Lab",
-    mail_intro: (n) => `Hi ${n},\n\nhere is a copy of your automation report from Reef 7 Lab.`, mail_end: "I read every report personally: within one business day I'll write to you with first ideas on where to start.\n\nAlessandro Lancioni\nReef 7 Lab", mail_link: "Redo the audit or book a call:",
+    mail_intro: (n) => `Hi ${n},\n\nhere is a copy of your Reef 7 Lab growth plan: where to win back time and, if you shared your numbers, how much more you could earn.`, mail_end: "I read every report personally: within one business day I'll write to you with first ideas on where to start.\n\nAlessandro Lancioni\nReef 7 Lab", mail_link: "Redo the audit or book a call:",
     auto: (p) => `automatable: about ${p}%`, subject: "New automation audit",
     live_k: "Live estimate", live_empty: "Select the activities your team does by hand: the estimate updates as you go.",
     sum_k: "In short", sum_first: "First move", fte: (x) => `about ${x} full-time ${x === "1" ? "person" : "people"}`, month: (h, v) => `Every month as things are: about ${h} hours of manual work${v ? `, worth ${v}` : ""}.`,
@@ -64,7 +64,7 @@
     pot: "Automation potential", effort: ["Quick win", "Medium project", "Structured project"],
     ctx_h: "The context", src: "Sources",
     stats: {
-      speed: ["~7×", "Companies that follow up on a lead within an hour are nearly 7 times more likely to reach a decision maker than those that wait one more hour.", "Harvard Business Review, “The Short Life of Online Sales Leads”, 2011"],
+      speed: ["~7×", "Firms that call a new lead back within an hour are nearly 7 times more likely to reach a decision maker than those that wait one more hour.", "Harvard Business Review, “The Short Life of Online Sales Leads”, 2011"],
       data: ["9+ h", "In a survey of 500 professionals, manually moving data from emails, PDFs and spreadsheets takes over 9 hours a week per person.", "Parseur / QuestionPro survey, 2025 (vendor study)"],
       rep: ["40%+", "Over 40% of workers spend at least a quarter of their week on manual, repetitive tasks.", "Smartsheet, automation in the workplace survey"],
       it: ["15.7%", "In Italy only 15.7% of SMEs use at least one AI technology (in Germany, 26% of companies): starting now is still an advantage.", "Istat, Imprese e ICT, 2025"],
@@ -82,20 +82,20 @@
     cost: "Costo orario medio di una persona del team (facoltativo)", cost_ph: "Es. 25", cost_hint: "Serve solo a stimare il valore del tempo recuperato.",
     next: "Avanti", back: "Indietro", calc: "Calcola", need_task: "Seleziona almeno un'attività.", need_pick: "Scegli un'opzione.",
     teaser_k: "La tua stima", teaser: (h) => `Il tuo team potrebbe recuperare circa <b>${h} ore a settimana</b>.`,
-    teaser_p: "Ricevi il report completo: priorità, cosa automatizzare per primo e un piano in 3 passi. Lo vedi subito, anche in PDF, e te ne mando una copia per email.",
+    teaser_p: "Ricevi il piano completo: priorità, due soluzioni per ognuna, quanto puoi guadagnare in più e i primi 3 passi. Lo vedi subito, anche in PDF, e te ne mando una copia per email.",
     name: "Nome", email: "Email di lavoro", company: "Azienda", consent: "Acconsento a che Reef 7 Lab usi questi dati per inviarmi una copia del report e ricontattarmi.",
     unlock: "Vedi il report completo", sending: "Preparo il report…", bad_email: "Controlla l'indirizzo email.", need_consent: "Serve il consenso per inviarti il report.",
-    r_title: "Report di automazione", r_for: "per", k_week: "ore a settimana", k_year: "giornate lavorative l'anno", k_value: "l'anno di valore del tempo",
+    r_title: "Report di automazione", r_for: "per", k_week: "ore a settimana", k_year: "giornate lavorative l'anno", k_value: "valore del tempo recuperato in un anno",
     r_tasks: "Dove va il tempo", r_now: "ore oggi", r_saved: "recuperabili", r_prio: "Cosa automatizzare per primo", r_build: "Cosa costruirei",
     r_plan: "Un piano in 3 passi", plan: ["Primo passo", "Secondo passo", "Terzo passo"],
     plan_measure: "Misuriamo i risultati con una dashboard: ore risparmiate, tempi di risposta e vendite, sempre aggiornati.",
     plan_call: "Una call gratuita di 30 minuti: guardiamo questo report sui tuoi numeri reali e scegliamo da dove partire.",
     plan_build: (x, sol) => `Costruisco la prima soluzione, partendo da “${x}”, collegata agli strumenti che usate già: ${sol.charAt(0).toLowerCase() + sol.slice(1)}`,
-    r_tools: "Note sui vostri strumenti", r_pain: "Mi hai detto", r_note: "Stima indicativa basata sulle tue risposte e su ipotesi prudenti su quanto di ogni attività si può automatizzare (indicato accanto a ciascuna). I numeri reali li verifichiamo insieme, sui tuoi dati.",
+    r_tools: "Note sui tuoi strumenti", r_pain: "Mi hai detto", r_note: "Stima indicativa basata sulle tue risposte e su ipotesi prudenti su quanto di ogni attività si può automatizzare (indicato accanto a ciascuna). I numeri reali li verifichiamo insieme, sui tuoi dati.",
     pdf: "Scarica il PDF", call: "Prenota una call gratuita", restart: "Ricomincia", sent_fail: "I tuoi dati non mi sono arrivati, quindi la copia per email non è partita. Scarica il PDF oppure scrivimi a {email} e ti rispondo io.",
     sent_ok: (e) => `Una copia sta arrivando a <b>${e}</b>.`,
     sign_h: "Ti scrivo io", sign_p: "Leggo ogni report personalmente. Entro un giorno lavorativo ricevi una mia email con le prime idee su da dove partire.", sign_n: "Alessandro Lancioni · Fondatore di Reef 7 Lab",
-    mail_intro: (n) => `Ciao ${n},\n\necco la copia del tuo report di automazione di Reef 7 Lab.`, mail_end: "Leggo ogni report personalmente: entro un giorno lavorativo ti scrivo con le prime idee su da dove partire.\n\nAlessandro Lancioni\nReef 7 Lab", mail_link: "Rifai l'audit o prenota una call:",
+    mail_intro: (n) => `Ciao ${n},\n\necco la copia del tuo piano di crescita di Reef 7 Lab: dove recuperare tempo e, se mi hai dato i numeri, quanto puoi guadagnare in più.`, mail_end: "Leggo ogni report personalmente: entro un giorno lavorativo ti scrivo con le prime idee su da dove partire.\n\nAlessandro Lancioni\nReef 7 Lab", mail_link: "Rifai l'audit o prenota una call:",
     auto: (p) => `automatizzabile: circa il ${p}%`, subject: "Nuovo audit di automazione",
     live_k: "Stima in diretta", live_empty: "Seleziona le attività che il tuo team fa a mano: la stima si aggiorna mentre scegli.",
     sum_k: "In sintesi", sum_first: "La prima mossa", fte: (x) => `circa ${x} ${x === "1" ? "persona" : "persone"} a tempo pieno`, month: (h, v) => `Ogni mese, restando così: circa ${h} ore di lavoro manuale${v ? `, per un valore di ${v}` : ""}.`,
@@ -103,8 +103,8 @@
     pot: "Potenziale di automazione", effort: ["Vittoria rapida", "Progetto medio", "Progetto strutturato"],
     ctx_h: "Il contesto", src: "Fonti",
     stats: {
-      speed: ["~7×", "Le aziende che ricontattano un contatto entro un'ora hanno quasi 7 volte più probabilità di parlare con chi decide rispetto a chi aspetta un'ora in più.", "Harvard Business Review, “The Short Life of Online Sales Leads”, 2011"],
-      data: ["9+ ore", "In un sondaggio su 500 professionisti, spostare a mano dati da email, PDF e fogli di calcolo occupa più di 9 ore a settimana a persona.", "Sondaggio Parseur / QuestionPro, 2025 (studio di un fornitore)"],
+      speed: ["~7×", "Chi richiama un nuovo contatto entro un'ora ha quasi 7 volte più probabilità di parlare con chi decide, rispetto a chi aspetta un'ora in più.", "Harvard Business Review, “The Short Life of Online Sales Leads”, 2011"],
+      data: ["9+ ore", "In un sondaggio su 500 professionisti, ricopiare a mano dati da email, PDF e fogli di calcolo porta via più di 9 ore a settimana a persona.", "Sondaggio Parseur / QuestionPro, 2025 (studio di un fornitore)"],
       rep: ["40%+", "Oltre il 40% dei lavoratori passa almeno un quarto della settimana in attività manuali e ripetitive.", "Smartsheet, sondaggio sull'automazione nel lavoro"],
       it: ["15,7%", "In Italia solo il 15,7% delle PMI usa almeno una tecnologia di intelligenza artificiale (in Germania il 26% delle imprese): chi parte ora parte ancora in vantaggio.", "Istat, Imprese e ICT, 2025"],
       mck: ["~30%", "Entro il 2030 l'automazione potrebbe coprire circa il 30% delle ore lavorate.", "McKinsey Global Institute, Generative AI and the future of work in America, 2023"],
@@ -193,6 +193,7 @@
   <div class="au-layout">
   <div class="form-card au-card">
     <div class="au-prog"><div class="au-prog-bar"><i></i></div><p><span class="mono au-prog-n"></span><b class="au-prog-t"></b></p></div>
+    <p class="au-from-agent" hidden>${D.from_agent}</p>
     <form class="au-form" novalidate>
       <fieldset class="au-step" data-i="0" data-auto="1">
         <div class="q-field" data-req="sector"><p class="q-label">${T.sector}</p>${pills("sector", T.sectors)}</div>
@@ -387,6 +388,7 @@
     if (!valid()) return;
     if (cur === 0) { const ns = +new FormData(form).get("sector"); if (ns !== si) { renderTasks(ns); updateLive(); } }
     clearTimeout(autoT);
+    if (cur === 0 && skipGoal) { skipGoal = false; show(2); toCard(); return; }
     if (cur < steps.length - 1) { show(cur + 1); toCard(); return; }
     const a = answers();
     form.hidden = true;
@@ -401,7 +403,7 @@
   // piano in 3 passi: usato nel report a schermo e nella copia per email
   const planOf = (a) => {
     const first = a.tasks[0].label, kpis = a.tasks.slice(0, 2).map((t) => t.kpi).join(en ? " and " : " e ");
-    return [T.plan_call, T.plan_build(first.charAt(0).toLowerCase() + first.slice(1), a.tasks[0].build), D.measure(kpis)];
+    return [D.plan_call2, D.plan_build2(first.charAt(0).toLowerCase() + first.slice(1), a.tasks[0].build), D.measure(kpis)];
   };
   const mailText = (a, name) => {
     const plan = planOf(a), L = [];
@@ -447,7 +449,7 @@
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           _subject: `${T.subject}: ${company || name} · ${fmt(a.saved)} h/sett.`, _replyto: email, _template: "table", _captcha: "false",
-          _autoresponse: mailText(a, name), "Fonte": "Audit di automazione", "Nome": name, email, "Azienda": company || "—", "Settore": a.sector, "Dettaglio settore": a.sub ? a.sub[0] : "—", "Persone in azienda": a.team, "Obiettivo": a.gi >= 0 ? D.goals[a.gi] : "—",
+          _autoresponse: mailText(a, name), "Fonte": fromAgent ? "Audit di automazione (dall'Agent AI)" : "Audit di automazione", "Nome": name, email, "Azienda": company || "—", "Settore": a.sector, "Dettaglio settore": a.sub ? a.sub[0] : "—", "Persone in azienda": a.team, "Obiettivo": a.gi >= 0 ? D.goals[a.gi] : "—",
           "Contatti al mese": a.li >= 0 ? D.leads[a.li] : "—", "Su 10 diventano clienti": a.ci >= 0 ? D.close[a.ci] : "—", "Valore medio cliente": a.value || "—",
           "Fatturato in più stimato (anno)": (() => { const r = revOf(a); return r && r.eur ? money(r.eur * 12) : "—"; })(),
           "Software usati": a.sw >= 0 ? D.sw[a.sw] : "—", "Spesa software al mese": a.spend >= 0 ? D.spend[a.spend] : "—", "Sito": a.site || "—",
@@ -477,20 +479,21 @@
     const perMonth = a.saved * 4.33, stats = statsFor(a), rev = revOf(a);
     const revHtml = rev ? `<section class="au-rev"><h3>${D.rev_h}</h3>
         <p class="au-rev-now">${D.rev_now(num1(rev.clients), rev.now ? money(rev.now) : "")} ${rev.eur ? D.rev_total(money(rev.eur), money(rev.eur * 12)) : D.rev_total_c(num1(rev.extra))}</p>
-        <div class="au-levers">${rev.rows.map((r) => `<div class="au-lever"><b>${r.title}</b><p>${r.how}</p><span class="au-lever-n">${D.rev_each(num1(r.extra), r.eur ? money(r.eur) : "")}</span><small>${r.type === "lost" ? D.rev_assume_lost(Math.round(r.rate * 100)) : D.rev_assume(Math.round(r.rate * 100))}${r.src ? ` · ${r.src}` : ""}</small></div>`).join("")}</div>
+        <div class="au-levers">${rev.rows.map((r) => `<div class="au-lever"><b>${r.title}</b><p>${r.how}</p><span class="au-lever-n">${D.rev_each(num1(r.extra), r.eur ? money(r.eur) : "")}</span><small>${r.type === "lost" ? D.rev_assume_lost(Math.round(r.rate * 100)) : r.type === "repeat" ? D.rev_assume_rep(Math.round(r.rate * 100)) : D.rev_assume(Math.round(r.rate * 100))}${r.src ? ` · ${r.src}` : ""}</small></div>`).join("")}</div>
         <p class="au-note">${D.rev_note}</p></section>` : "";
     const contact = new URL(contactPage, location.href).href.split("?")[0];
     const q = new URLSearchParams({ need: "", team: a.team, goal: `${T.r_title}: ${fmt(a.saved)} ${T.k_week}` });
     report.innerHTML = `
       <header class="au-r-head">
         <p class="au-r-brand"><img src="${base}assets/logo-68.png" alt="" width="28" height="28"><b>Reef 7 Lab</b><span class="mono">${date}</span></p>
-        <h2>${T.r_title}${who.company ? ` <em>${T.r_for} ${esc(who.company)}</em>` : ""}</h2>
+        <h2>${D.r_title2}${who.company ? ` <em>${T.r_for} ${esc(who.company)}</em>` : ""}</h2>
         <p class="au-r-meta">${esc(a.sector)}${a.sub && a.sub[1] !== undefined && a.sub[0] !== (en ? "Other" : "Altro") ? ` · ${esc(a.sub[0])}` : ""} · ${esc(a.team)} ${en ? "people" : "persone"}${a.site ? ` · ${esc(a.site)}` : ""}</p>
       </header>
       ${sentOk ? `<p class="au-ok">${T.sent_ok(esc(who.email))}</p>` : `<p class="au-warn">${T.sent_fail.replace("{email}", `<a href="mailto:${MAIL}">${MAIL}</a>`)}</p>`}
       <div class="au-sum">
         <div class="au-sum-txt"><p class="mono">${T.sum_k}</p>
-          <p class="au-sum-v"><b>${T.tier[tier][0]}</b> · ${T.tier[tier][1]}</p>
+          <p class="au-sum-h">${D.headline(esc(who.company), fmt(a.saved), rev && rev.eur ? money(rev.eur) : "")}</p>
+          <p class="au-sum-v"><b>${D.tier2[tier][0]}</b>: ${D.tier2[tier][1]}</p>
           <p class="au-sum-first"><span class="mono">${T.sum_first}</span>${esc(top[0].label)}: ${esc(top[0].build.charAt(0).toLowerCase() + top[0].build.slice(1))}</p>
           <a class="btn au-sum-cta" href="${contactPage}?${q}#contact-form">${D.cta_top} →</a></div>
         <div class="au-gauge" style="--p:${pct}"><b>${pct}%</b><span>${T.pot}</span></div>
@@ -503,7 +506,7 @@
         ${a.cost || (rev && rev.eur) ? "" : `<div><b>${fte}</b><span>${T.fte(fte).replace(fte + " ", "")}</span></div>`}
         ${a.cost ? `<div><b>${money(a.saved * WEEKS * a.cost)}</b><span>${T.k_value}</span></div>` : ""}
       </div>
-      <p class="au-month">${T.month(fmt(perMonth), a.cost ? money(perMonth * a.cost) : "")} ${en ? "That's" : "Equivale a"} ${T.fte(fte)}.</p>
+      <p class="au-month">${D.month2(fmt(perMonth), a.cost ? money(perMonth * a.cost) : "", T.fte(fte))}</p>
       ${rev && a.gi === 0 ? revHtml : ""}
       <section><h3>${T.r_tasks}</h3>
         <div class="au-bars">${a.tasks.map((t) => `
@@ -512,9 +515,10 @@
             <span>${fmt(t.hours)} ${T.r_now} · <strong>${fmt(t.saved)} ${T.r_saved}</strong></span></div>`).join("")}</div>
       </section>
       <section><h3>${T.r_prio}</h3>
+        <p class="au-prio-intro">${D.prio_intro(esc(a.team), top.every((t) => !t.custom) ? 0 : top.every((t) => t.custom) ? 1 : 2)}</p>
         <ol class="au-prio">${top.map((t) => `<li><b>${esc(t.label)}</b><em class="au-eff e${t.custom ? t.eff : Math.max(0, t.eff - 1)}">${T.effort[t.custom ? t.eff : Math.max(0, t.eff - 1)]}</em>
           <div class="au-opts">${[t.light, t.full].map((x, j) => `<div class="au-opt${t.custom === !!j ? " rec" : ""}"><span class="mono">${D.opt[j]}${t.custom === !!j ? ` · ${D.rec}` : ""}</span><p>${esc(x)}</p></div>`).join("")}</div>
-          <p class="au-why">${D.why[t.custom ? 1 : 0]} <span>${D.kpi}: ${esc(t.kpi)}.</span> <a href="${svcPage}#s${t.svc}">${en ? "See the service" : "Vedi il servizio"} →</a></p></li>`).join("")}</ol>
+          <p class="au-why"><span>${D.kpi}: ${esc(t.kpi)}.</span> <a href="${svcPage}#s${t.svc}">${D.see_svc} →</a></p></li>`).join("")}</ol>
       </section>
       <section><h3>${T.r_plan}</h3>
         <ol class="au-plan">${plan.map((p, i) => `<li><span class="mono">${T.plan[i]}</span><p>${esc(p)}</p></li>`).join("")}</ol>
@@ -525,11 +529,11 @@
       <section><h3>${T.ctx_h}</h3>
         <div class="au-ctx">${stats.map((x, i) => `<div><b>${x[0]}</b><p>${x[1]}<sup>${i + 1}</sup></p></div>`).join("")}</div>
       </section>
-      ${a.tools.length ? `<section><h3>${T.r_tools}</h3><ul class="au-tools">${a.tools.map((t) => `<li><b>${esc(t[1])}</b> ${esc(t[2])}</li>`).join("")}</ul></section>` : ""}
+      ${a.tools.length ? `<section><h3>${D.tools_h}</h3><ul class="au-tools">${a.tools.map((t) => `<li><b>${esc(t[1])}</b> ${esc(t[2])}</li>`).join("")}</ul></section>` : ""}
       ${a.pain ? `<section><h3>${T.r_pain}</h3><blockquote>“${esc(a.pain)}”</blockquote></section>` : ""}
-      <div class="au-sign"><img src="${base}assets/alessandro.jpg" alt="" width="72" height="72"><div><b>${T.sign_h}</b><p>${T.sign_p}</p><span>${T.sign_n} · ${MAIL}</span></div></div>
-      <div class="au-nextstep"><div><p class="mono">${T.next_h}</p><p>${T.next_p}</p></div><a class="btn" href="${contactPage}?${q}#contact-form">${T.call} →</a><span class="au-next-url">${contact}</span></div>
-      <p class="au-note">${T.r_note}</p>
+      <div class="au-sign"><img src="${base}assets/alessandro.jpg" alt="" width="72" height="72"><div><b>${T.sign_h}</b><p>${D.sign_p2}</p><span>${T.sign_n} · ${MAIL}</span></div></div>
+      <div class="au-nextstep"><div><p class="mono">${T.next_h}</p><p>${D.next_p2}</p></div><a class="btn" href="${contactPage}?${q}#contact-form">${T.call} →</a><span class="au-next-url">${contact}</span></div>
+      <p class="au-note">${D.note2}</p>
       <p class="au-src"><b>${T.src}</b> ${stats.map((x, i) => `${i + 1}. ${x[2]}`).join(" · ")}</p>
       <div class="au-actions"><a class="btn" href="${contactPage}?${q}#contact-form">${T.call} →</a><button type="button" class="btn ghost au-pdf">${T.pdf}</button><button type="button" class="btn ghost au-restart">${T.restart}</button></div>`;
     report.hidden = false;
@@ -538,5 +542,25 @@
     report.scrollIntoView({ block: "start", behavior: "smooth" });
   }
 
+  // arrivo dall'Agent AI: settore, team e obiettivo già scelti
+  let skipGoal = false;
+  const P = new URLSearchParams(location.search);
+  const fromAgent = P.get("src") === "agent";
+  const preset = (name, v) => {
+    const i = v == null ? null : form.querySelector(`input[name="${name}"][value="${v}"]`);
+    if (!i) return false;
+    i.checked = true; i.dispatchEvent(new Event("change", { bubbles: true }));
+    return true;
+  };
   show(0);
+  if (fromAgent) {
+    clearTimeout(autoT);
+    const s = preset("sector", P.get("s")), t = preset("team", P.get("t")), g = preset("goal", P.get("g"));
+    clearTimeout(autoT);
+    if (s || t || g) root.querySelector(".au-from-agent").hidden = false;
+    if (s && !D.subs[+P.get("s")].length) renderTasks(+P.get("s"));
+    const step0done = [...steps[0].querySelectorAll("[data-req]")].every((x) => x.hidden || x.querySelector("input:checked"));
+    if (step0done) { if (s) renderTasks(+P.get("s")); show(g ? 2 : 1); updateLive(); }
+    else skipGoal = g;
+  }
 })();
