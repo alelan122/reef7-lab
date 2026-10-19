@@ -7,6 +7,8 @@
   const svcPage = en ? "services.html" : "servizi.html";
   const contactPage = en ? "contact.html" : "contatti.html";
   const endpoint = `https://formsubmit.co/ajax/${(window.REEF && window.REEF.email) || "lancioni.ale@gmail.com"}`;
+  const MAIL = (window.REEF && window.REEF.email) || "lancioni.ale@gmail.com";
+  const base = en ? "../" : "";
   const WEEKS = 46; // settimane lavorative in un anno
 
   // [chiave, attività, quota automatizzabile (ipotesi prudente), servizio, cosa costruiremmo]
@@ -62,16 +64,20 @@
     cost: "Average hourly cost of a team member (optional)", cost_ph: "E.g. 25", cost_hint: "Used only to estimate the value of the time saved.",
     next: "Next", back: "Back", calc: "Calculate", need_task: "Select at least one activity.", need_pick: "Choose an option.",
     teaser_k: "Your estimate", teaser: (h) => `Your team could win back about <b>${h} hours a week</b>.`,
-    teaser_p: "Get the full report: priorities, what to automate first and a 3-step plan, also as a PDF.",
-    name: "Name", email: "Work email", company: "Company", consent: "I agree to Reef 7 Lab using these details to send me the report and get back to me.",
+    teaser_p: "Get the full report: priorities, what to automate first and a 3-step plan. You'll see it right away, as a PDF too, and I'll send you a copy by email.",
+    name: "Name", email: "Work email", company: "Company", consent: "I agree to Reef 7 Lab using these details to send me a copy of the report and get back to me.",
     unlock: "See the full report", sending: "Preparing…", bad_email: "Check the email address.", need_consent: "Consent is needed to send the report.",
     r_title: "Automation report", r_for: "for", k_week: "hours a week", k_year: "working days a year", k_value: "a year in time value",
-    r_tasks: "Where the time goes", r_now: "h today", r_saved: "recoverable", r_prio: "What to automate first", r_build: "What we would build",
+    r_tasks: "Where the time goes", r_now: "h today", r_saved: "recoverable", r_prio: "What to automate first", r_build: "What I would build",
     r_plan: "A plan in 3 steps", plan: ["First step", "Second step", "Third step"],
-    plan_connect: "Connect the tools you already use, so data flows on its own and nobody copies it by hand.",
     plan_measure: "Measure the results with a dashboard: hours saved, response times and sales, always up to date.",
-    r_tools: "Notes on your tools", r_pain: "You told us", r_note: "Indicative estimate based on your answers and on conservative assumptions about how much of each activity can be automated (shown next to each one). We check the real numbers together, with your data.",
-    pdf: "Download PDF", call: "Book a free call", restart: "Start over", sent_fail: "We couldn't send your details, but here's your report anyway.",
+    plan_call: "A free 30-minute call: we go through this report on your real numbers and choose where to start.",
+    plan_build: (x) => `I build the first solution, starting from “${x}”, connected to the tools you already use. Then we add the rest one piece at a time.`,
+    r_tools: "Notes on your tools", r_pain: "You told me", r_note: "Indicative estimate based on your answers and on conservative assumptions about how much of each activity can be automated (shown next to each one). We'll check the real numbers together, on your data.",
+    pdf: "Download PDF", call: "Book a free call", restart: "Start over", sent_fail: "Your details didn't reach me, so no copy was sent by email. Download the PDF or write to me at {email} and I'll get back to you.",
+    sent_ok: (e) => `A copy is on its way to <b>${e}</b>.`,
+    sign_h: "I'll write to you myself", sign_p: "I read every report personally. Within one business day you'll get an email from me with first ideas on where to start.", sign_n: "Alessandro Lancioni · Founder, Reef 7 Lab",
+    mail_intro: (n) => `Hi ${n},\n\nhere is a copy of your automation report from Reef 7 Lab.`, mail_end: "I read every report personally: within one business day I'll write to you with first ideas on where to start.\n\nAlessandro Lancioni\nReef 7 Lab", mail_link: "Redo the audit or book a call:",
     auto: (p) => `automatable: about ${p}%`, subject: "New automation audit",
     live_k: "Live estimate", live_empty: "Select the activities your team does by hand: the estimate updates as you go.",
     live_get: "What you'll get", get: ["Hours and value you could win back", "What to automate first", "A 3-step plan, also as a PDF"],
@@ -85,16 +91,20 @@
     cost: "Costo orario medio di una persona del team (facoltativo)", cost_ph: "Es. 25", cost_hint: "Serve solo a stimare il valore del tempo recuperato.",
     next: "Avanti", back: "Indietro", calc: "Calcola", need_task: "Seleziona almeno un'attività.", need_pick: "Scegli un'opzione.",
     teaser_k: "La tua stima", teaser: (h) => `Il tuo team potrebbe recuperare circa <b>${h} ore a settimana</b>.`,
-    teaser_p: "Ricevi il report completo: priorità, cosa automatizzare per primo e un piano in 3 passi, anche in PDF.",
-    name: "Nome", email: "Email di lavoro", company: "Azienda", consent: "Acconsento a che Reef 7 Lab usi questi dati per inviarmi il report e ricontattarmi.",
+    teaser_p: "Ricevi il report completo: priorità, cosa automatizzare per primo e un piano in 3 passi. Lo vedi subito, anche in PDF, e te ne mando una copia per email.",
+    name: "Nome", email: "Email di lavoro", company: "Azienda", consent: "Acconsento a che Reef 7 Lab usi questi dati per inviarmi una copia del report e ricontattarmi.",
     unlock: "Vedi il report completo", sending: "Preparo il report…", bad_email: "Controlla l'indirizzo email.", need_consent: "Serve il consenso per inviarti il report.",
     r_title: "Report di automazione", r_for: "per", k_week: "ore a settimana", k_year: "giornate lavorative l'anno", k_value: "l'anno di valore del tempo",
-    r_tasks: "Dove va il tempo", r_now: "ore oggi", r_saved: "recuperabili", r_prio: "Cosa automatizzare per primo", r_build: "Cosa costruiremmo",
+    r_tasks: "Dove va il tempo", r_now: "ore oggi", r_saved: "recuperabili", r_prio: "Cosa automatizzare per primo", r_build: "Cosa costruirei",
     r_plan: "Un piano in 3 passi", plan: ["Primo passo", "Secondo passo", "Terzo passo"],
-    plan_connect: "Collegare gli strumenti che usate già, così i dati scorrono da soli e nessuno li copia più a mano.",
-    plan_measure: "Misurare i risultati con una dashboard: ore risparmiate, tempi di risposta e vendite, sempre aggiornati.",
-    r_tools: "Note sui vostri strumenti", r_pain: "Ci hai detto", r_note: "Stima indicativa basata sulle tue risposte e su ipotesi prudenti su quanto di ogni attività si può automatizzare (indicato accanto a ciascuna). I numeri reali li verifichiamo insieme, sui tuoi dati.",
-    pdf: "Scarica il PDF", call: "Prenota una call gratuita", restart: "Ricomincia", sent_fail: "Non siamo riusciti a inviare i tuoi dati, ma ecco comunque il tuo report.",
+    plan_measure: "Misuriamo i risultati con una dashboard: ore risparmiate, tempi di risposta e vendite, sempre aggiornati.",
+    plan_call: "Una call gratuita di 30 minuti: guardiamo questo report sui tuoi numeri reali e scegliamo da dove partire.",
+    plan_build: (x) => `Costruisco la prima soluzione, partendo da “${x}”, collegata agli strumenti che usate già. Poi aggiungiamo il resto un pezzo alla volta.`,
+    r_tools: "Note sui vostri strumenti", r_pain: "Mi hai detto", r_note: "Stima indicativa basata sulle tue risposte e su ipotesi prudenti su quanto di ogni attività si può automatizzare (indicato accanto a ciascuna). I numeri reali li verifichiamo insieme, sui tuoi dati.",
+    pdf: "Scarica il PDF", call: "Prenota una call gratuita", restart: "Ricomincia", sent_fail: "I tuoi dati non mi sono arrivati, quindi la copia per email non è partita. Scarica il PDF oppure scrivimi a {email} e ti rispondo io.",
+    sent_ok: (e) => `Una copia sta arrivando a <b>${e}</b>.`,
+    sign_h: "Ti scrivo io", sign_p: "Leggo ogni report personalmente. Entro un giorno lavorativo ricevi una mia email con le prime idee su da dove partire.", sign_n: "Alessandro Lancioni · Fondatore di Reef 7 Lab",
+    mail_intro: (n) => `Ciao ${n},\n\necco la copia del tuo report di automazione di Reef 7 Lab.`, mail_end: "Leggo ogni report personalmente: entro un giorno lavorativo ti scrivo con le prime idee su da dove partire.\n\nAlessandro Lancioni\nReef 7 Lab", mail_link: "Rifai l'audit o prenota una call:",
     auto: (p) => `automatizzabile: circa il ${p}%`, subject: "Nuovo audit di automazione",
     live_k: "Stima in diretta", live_empty: "Seleziona le attività che il tuo team fa a mano: la stima si aggiorna mentre scegli.",
     live_get: "Cosa ricevi", get: ["Ore e valore che puoi recuperare", "Cosa automatizzare per primo", "Un piano in 3 passi, anche in PDF"],
@@ -257,6 +267,24 @@
   });
   back.addEventListener("click", () => show(cur - 1));
 
+  // piano in 3 passi: usato nel report a schermo e nella copia per email
+  const planOf = (a) => {
+    const first = a.tasks[0].label;
+    return [T.plan_call, T.plan_build(first.charAt(0).toLowerCase() + first.slice(1)), T.plan_measure];
+  };
+  const mailText = (a, name) => {
+    const plan = planOf(a), L = [];
+    L.push(T.mail_intro(name), "");
+    L.push(`${fmt(a.saved)} ${T.k_week} · ${Math.round((a.saved * WEEKS) / 8)} ${T.k_year}` + (a.cost ? ` · ${money(a.saved * WEEKS * a.cost)} ${T.k_value}` : ""), "");
+    L.push(T.r_tasks.toUpperCase());
+    a.tasks.forEach((t) => L.push(`- ${t.label}: ${fmt(t.hours)} ${T.r_now}, ${fmt(t.saved)} ${T.r_saved}`));
+    L.push("", T.r_prio.toUpperCase());
+    a.tasks.slice(0, 3).forEach((t, i) => L.push(`${i + 1}. ${t.label}: ${t.build}`));
+    L.push("", T.r_plan.toUpperCase());
+    plan.forEach((x, i) => L.push(`${i + 1}. ${x}`));
+    L.push("", T.r_note, "", T.mail_end, "", `${T.mail_link} ${location.href.split("#")[0]}`);
+    return L.join("\n");
+  };
   const r7code = (o) => "R7L1." + btoa(unescape(encodeURIComponent(JSON.stringify({ v: 1, lang: document.documentElement.lang || "it", at: new Date().toISOString(), ...o })))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
   lead.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -278,7 +306,7 @@
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           _subject: `${T.subject}: ${company || name} · ${fmt(a.saved)} h/sett.`, _replyto: email, _template: "table", _captcha: "false",
-          "Fonte": "Audit di automazione", "Nome": name, "Email": email, "Azienda": company || "—", "Settore": a.sector, "Persone in azienda": a.team,
+          _autoresponse: mailText(a, name), "Fonte": "Audit di automazione", "Nome": name, email, "Azienda": company || "—", "Settore": a.sector, "Persone in azienda": a.team,
           "Attività manuali (ore/sett.)": a.tasks.map((t) => `${t.label}: ${t.hours}`).join("; "),
           "Ore recuperabili stimate a settimana": fmt(a.saved), "Priorità": a.tasks.slice(0, 3).map((t) => t.label).join("; "),
           "Strumenti": a.tools.map((t) => t[1]).join(", ") || "—", "Problema principale": a.pain || "—", "Costo orario": a.cost || "—",
@@ -288,7 +316,7 @@
       const out = await res.json().catch(() => ({}));
       if (!res.ok || out.success === false || out.success === "false") throw new Error();
     } catch { ok = false; }
-    renderReport(a, { name, company }, ok);
+    renderReport(a, { name, company, email }, ok);
   });
 
   function renderReport(a, who, sentOk) {
@@ -299,16 +327,15 @@
     const max = Math.max(...a.tasks.map((t) => t.hours));
     const date = new Date().toLocaleDateString(en ? "en-GB" : "it-IT", { day: "numeric", month: "long", year: "numeric" });
     const days = (a.saved * WEEKS) / 8;
-    const many = a.tools.length >= 3 || a.tasks.some((t) => t.key === "data" || t.key === "orders");
-    const plan = [top[0].build, many && top[0].svc !== "09" ? T.plan_connect : (top[1] ? top[1].build : T.plan_connect), top[2] && !many ? top[2].build : T.plan_measure];
+    const plan = planOf(a);
     const q = new URLSearchParams({ need: "", team: a.team, goal: `${T.r_title}: ${fmt(a.saved)} ${T.k_week}` });
     report.innerHTML = `
       <header class="au-r-head">
-        <p class="mono">Reef 7 Lab · ${date}</p>
+        <p class="au-r-brand"><img src="${base}assets/logo-68.png" alt="" width="28" height="28"><b>Reef 7 Lab</b><span class="mono">${date}</span></p>
         <h2>${T.r_title}${who.company ? ` <em>${T.r_for} ${esc(who.company)}</em>` : ""}</h2>
         <p class="au-r-meta">${esc(a.sector)} · ${esc(a.team)} ${en ? "people" : "persone"}</p>
       </header>
-      ${sentOk ? "" : `<p class="au-warn">${T.sent_fail}</p>`}
+      ${sentOk ? `<p class="au-ok">${T.sent_ok(esc(who.email))}</p>` : `<p class="au-warn">${T.sent_fail.replace("{email}", `<a href="mailto:${MAIL}">${MAIL}</a>`)}</p>`}
       <div class="au-kpis">
         <div><b>${fmt(a.saved)}</b><span>${T.k_week}</span></div>
         <div><b>${Math.round(days).toLocaleString(en ? "en-GB" : "it-IT")}</b><span>${T.k_year}</span></div>
@@ -328,6 +355,7 @@
       </section>
       ${a.tools.length ? `<section><h3>${T.r_tools}</h3><ul class="au-tools">${a.tools.map((t) => `<li><b>${esc(t[1])}</b> ${esc(t[2])}</li>`).join("")}</ul></section>` : ""}
       ${a.pain ? `<section><h3>${T.r_pain}</h3><blockquote>“${esc(a.pain)}”</blockquote></section>` : ""}
+      <div class="au-sign"><img src="${base}assets/alessandro.jpg" alt="" width="72" height="72"><div><b>${T.sign_h}</b><p>${T.sign_p}</p><span>${T.sign_n} · ${MAIL}</span></div></div>
       <p class="au-note">${T.r_note}</p>
       <div class="au-actions"><a class="btn" href="${contactPage}?${q}#contact-form">${T.call} →</a><button type="button" class="btn ghost au-pdf">${T.pdf}</button><button type="button" class="btn ghost au-restart">${T.restart}</button></div>`;
     report.hidden = false;

@@ -1080,3 +1080,27 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
 }
 /* Missione: respiro tra l'introduzione e "Come funzionerà" */
 body[data-page="mission"] .page-head + .block { padding-top: clamp(36px, 5vw, 56px) !important; }
+
+/* report audit: marchio, esito invio, firma di Alessandro */
+.au-r-brand { display: flex; align-items: center; gap: 10px; margin: 0; }
+.au-r-brand img { width: 28px; height: 28px; }
+.au-r-brand b { font-size: 15px; font-weight: 600; }
+.au-r-brand .mono { margin-left: auto; }
+.au-ok { padding: 10px 14px; border-radius: 12px; background: rgba(95, 225, 242, .08); color: var(--text); font-size: 14px; }
+.au-ok b { color: var(--aqua); font-weight: 600; }
+.au-warn a { color: inherit; text-decoration: underline; }
+.au-sign { display: flex; gap: 18px; align-items: center; padding: 20px; border-radius: 18px; border: 1px solid var(--rule); background: rgba(238, 243, 248, .03); }
+.au-sign img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; object-position: 50% 15%; flex: none; }
+.au-sign b { display: block; font-size: 18px; margin-bottom: 4px; }
+.au-sign p { color: var(--muted); font-size: 15px; line-height: 1.5; margin: 0 0 6px; }
+.au-sign span { font-size: 13px; color: var(--muted); }
+@media print {
+  @page { margin: 14mm 14mm 16mm; }
+  .au-ok, .au-warn { display: none !important; }
+  .au-r-brand { padding-bottom: 12px; border-bottom: 1px solid #ddd; margin-bottom: 18px; }
+  .au-sign { border-color: #ddd; background: #f4f7f9; break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .au-note { color: #555 !important; }
+  .au-prio a { display: none; }
+}
+@media (max-width: 560px) { .au-sign { flex-direction: column; align-items: flex-start; } }
+.au-sign { margin-top: 32px; }
