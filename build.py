@@ -993,7 +993,7 @@ def build(lang, variant=""):
 {partners_html}
 {case_home}
 <section class="block founder-block"><div class="wrap founder">
-  <img class="founder-img" src="{pre}assets/alessandro.jpg" alt="{L['studio']['photo_alt']}" width="1024" height="1024" loading="lazy">
+  <img class="founder-img" src="{pre}assets/alessandro.jpg" alt="{L['studio']['photo_alt']}" width="1024" height="1024" decoding="async">
   <div class="founder-txt"><p class="mono">{L['founder']['k']}</p><h2>{L['founder']['h']}</h2><p class="founder-p">{L['founder']['p']}</p>
     <ul class="founder-pts">{"".join(f"<li><b>{k}</b><span>{v}</span></li>" for k, v in L['founder']['points'])}</ul>
     <div class="founder-act"><a class="btn" href="{u('contact')}">{L['founder']['cta']} <span class="arr">→</span></a><a class="link" href="{u('studio')}">{L['founder']['a']} {arrow}</a></div>
@@ -1157,6 +1157,7 @@ def build(lang, variant=""):
     <ul class="contact-info" style="margin-top:44px">{info}</ul>
   </aside>
   <div class="form-card">
+    <div class="contact-me cm-mobile"><img src="{pre}assets/alessandro.jpg" alt="{L['studio']['photo_alt']}" width="1024" height="1024"><div><b>{L['founder']['contact_h']}</b><p>{L['founder']['contact_p']}</p></div></div>
     <h2>{C['form_h']}</h2>
     {form}
     <div class="form-ok" hidden><span class="tick" aria-hidden="true">✓</span><h3>{F['ok_h']}</h3><p>{F['ok_p']}</p></div>

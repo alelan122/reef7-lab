@@ -1063,3 +1063,10 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
 /* accessibilità: link per saltare al contenuto, visibile solo con la tastiera */
 .skip { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 10px 16px; border-radius: 999px; background: var(--text); color: var(--ink); font-weight: 600; transition: top .15s; }
 .skip:focus { top: 12px; }
+
+/* "Ti rispondo io": accanto al modulo sul PC, sopra il modulo sul telefono */
+.contact-me.cm-mobile { display: none; }
+@media (max-width: 760px) {
+  .contact-me.cm-mobile { display: flex; margin: 0 0 22px; }
+  .contact-side .contact-me { display: none; }
+}
