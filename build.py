@@ -79,7 +79,7 @@ MT = {
     "why_k": "La nostra storia", "why_h": "Per noi il mare <em>non è uno slogan</em>.",
     "why_p": ["Prima di fondare Reef 7 Lab, Alessandro è stato per diversi anni membro attivo di 2hands Ancona, il gruppo di volontari che ripulisce spiagge e coste dai rifiuti.",
               "Oggi vuole portare lo stesso impegno nel lavoro di Reef 7 Lab: fare in modo che i progetti che realizziamo aiutino a proteggere il mare da cui prendiamo il nome."],
-    "home_k": "Mission", "home_h": "Un progetto alla volta, <em>per il mare</em>.", "home_p": "Il 7 nel nostro nome sono sette barriere coralline che vogliamo aiutare a proteggere, una alla volta, con il nostro lavoro. Si comincia da qui:",
+    "home_k": "Missione", "home_h": "Un progetto alla volta, <em>per il mare</em>.", "home_p": "Il 7 nel nostro nome sono sette barriere coralline che vogliamo aiutare a proteggere, una alla volta, con il nostro lavoro. Si comincia da qui:",
     "home_a": "Scopri la missione",
 },
 "en": {
