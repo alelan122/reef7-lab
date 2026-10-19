@@ -176,6 +176,13 @@
     orders: '<path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/>',
     phone: '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',
   };
+  const GICON = [
+    '<path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/>',
+    '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"/>',
+    '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/>',
+  ];
+  const gicon = (i) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${GICON[i]}</svg>`;
   const icon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICON[k]}</svg>`;
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const fmt = (n) => (Math.round(n * 2) / 2).toLocaleString(en ? "en-GB" : "it-IT");
@@ -185,30 +192,41 @@
   root.innerHTML = `
   <div class="au-layout">
   <div class="form-card au-card">
-    <ol class="au-stepper">${T.steps.map((x, i) => `<li><span>${i + 1}</span><b>${x}</b></li>`).join("")}</ol>
+    <div class="au-prog"><div class="au-prog-bar"><i></i></div><p><span class="mono au-prog-n"></span><b class="au-prog-t"></b></p></div>
     <form class="au-form" novalidate>
-      <fieldset class="au-step" data-i="0">
+      <fieldset class="au-step" data-i="0" data-auto="1">
         <div class="q-field" data-req="sector"><p class="q-label">${T.sector}</p>${pills("sector", T.sectors)}</div>
         <div class="q-field au-sub" data-req="sub" hidden><p class="q-label">${D.sub_q}</p><div class="au-sub-picks"></div></div>
         <div class="q-field" data-req="team"><p class="q-label">${T.team}</p>${pills("team", T.teams)}</div>
-        <div class="q-field" data-req="goal"><p class="q-label">${D.goal_q}</p>${pills("goal", D.goals)}</div>
       </fieldset>
-      <fieldset class="au-step" data-i="1" hidden>
+      <fieldset class="au-step" data-i="1" data-auto="1" hidden>
+        <div class="q-field" data-req="goal"><p class="q-label">${D.goal_q}</p>
+          <div class="au-goals">${D.goals.map((g, i) => `<label class="au-goal-c"><input type="radio" name="goal" value="${i}"><i>${gicon(i)}</i><b>${esc(g)}</b><span>${esc(D.goal_d[i])}</span></label>`).join("")}</div></div>
+      </fieldset>
+      <fieldset class="au-step" data-i="2" hidden>
         <p class="q-label">${T.tasks_q}<small>${T.tasks_hint}</small></p>
         <div class="au-tasks"></div>
       </fieldset>
-      <fieldset class="au-step" data-i="2" hidden>
-        <div class="q-field"><p class="q-label">${T.tools_q}<small>${T.tools_hint}</small></p>${pills("tool", TOOLS.map((t) => t[1]), "checkbox")}</div>
+      <fieldset class="au-step" data-i="3" hidden>
+        <p class="q-label au-hint">${D.sales_hint}</p>
         <div class="q-field"><p class="q-label">${D.leads_q}</p>${pills("leads", D.leads)}</div>
         <div class="q-field"><p class="q-label">${D.close_q}</p>${pills("close", D.close)}</div>
-        <label class="field au-cost"><span>${D.value_q}</span><input name="value" type="number" min="0" max="1000000" inputmode="decimal" placeholder="${D.value_ph}"><small>${D.value_hint}</small></label>
+        <label class="field au-cost au-euro"><span>${D.value_q}</span><input name="value" type="number" min="0" max="1000000" inputmode="decimal" placeholder="${D.value_ph}"><small>${D.value_hint}</small></label>
+      </fieldset>
+      <fieldset class="au-step" data-i="4" hidden>
+        <div class="q-field"><p class="q-label">${T.tools_q}<small>${T.tools_hint}</small></p>${pills("tool", TOOLS.map((t) => t[1]), "checkbox")}</div>
         <div class="q-field"><p class="q-label">${D.sw_q}</p>${pills("sw", D.sw)}</div>
         <div class="q-field"><p class="q-label">${D.spend_q}</p>${pills("spend", D.spend)}</div>
-        <label class="field"><span>${T.pain}</span><textarea name="pain" rows="3" maxlength="500" placeholder="${T.pain_ph}"></textarea></label>
-        <label class="field au-cost"><span>${T.cost}</span><input name="cost" type="number" min="0" max="500" inputmode="decimal" placeholder="${T.cost_ph}"><small>${T.cost_hint}</small></label>
-        <label class="field"><span>${D.site_q}</span><input name="site" type="text" maxlength="200" autocomplete="url" placeholder="${D.site_ph}"><small>${D.site_hint}</small></label>
       </fieldset>
-      <div class="q-nav"><button type="button" class="btn ghost au-back" hidden>${T.back}</button><button type="button" class="btn au-next">${T.next} →</button></div>
+      <fieldset class="au-step" data-i="5" hidden>
+        <p class="q-label au-hint">${D.opt_hint}</p>
+        <label class="field"><span>${T.pain}</span><textarea name="pain" rows="3" maxlength="500" placeholder="${T.pain_ph}"></textarea></label>
+        <div class="au-two">
+          <label class="field au-cost au-euro"><span>${T.cost}</span><input name="cost" type="number" min="0" max="500" inputmode="decimal" placeholder="${T.cost_ph}"><small>${T.cost_hint}</small></label>
+          <label class="field"><span>${D.site_q}</span><input name="site" type="text" maxlength="200" autocomplete="url" placeholder="${D.site_ph}"><small>${D.site_hint}</small></label>
+        </div>
+      </fieldset>
+      <div class="q-nav"><button type="button" class="btn ghost au-back" hidden>← ${T.back}</button><span class="au-enter">${D.enter}</span><button type="button" class="btn au-go">${T.next} →</button></div>
       <p class="form-msg au-msg" role="status" aria-live="polite"></p>
     </form>
     <div class="au-gate" hidden>
@@ -228,6 +246,7 @@
     <p class="mono">${T.live_k}</p>
     <div class="au-live-num"><b>0</b><span>${T.k_week}</span></div>
     <p class="au-live-days"><b>0</b> ${T.k_year}</p>
+    <p class="au-live-rev" hidden></p>
     <div class="au-live-bars"></div>
     <p class="au-live-empty">${T.live_empty}</p>
     <div class="au-live-get"><p class="mono">${T.live_get}</p><ul>${T.get.map((x) => `<li>${x}</li>`).join("")}</ul></div>
@@ -237,21 +256,30 @@
 
   const card = root.querySelector(".au-card"), form = root.querySelector(".au-form");
   const steps = [...form.querySelectorAll(".au-step")];
-  const back = form.querySelector(".au-back"), next = form.querySelector(".au-next"), msg = form.querySelector(".au-msg");
+  const back = form.querySelector(".au-back"), next = form.querySelector(".au-go"), msg = form.querySelector(".au-msg");
   const gate = root.querySelector(".au-gate"), lead = root.querySelector(".au-lead"), report = root.querySelector(".au-report");
   let cur = 0;
 
   const progress = (i) => {
-    card.querySelectorAll(".au-stepper li").forEach((li, j) => { li.classList.toggle("done", j < i); li.classList.toggle("now", j === i); });
-    root.classList.toggle("live-on", i >= 1);
+    const n = steps.length;
+    card.querySelector(".au-prog-bar i").style.width = `${Math.min(100, ((i + 1) / (n + 1)) * 100)}%`;
+    card.querySelector(".au-prog-n").textContent = i < n ? D.step_of(i + 1, n) : "";
+    card.querySelector(".au-prog-t").textContent = D.steps[Math.min(i, D.steps.length - 1)];
+    root.classList.toggle("live-on", i >= 2 && i < n);
   };
-  const show = (i) => {
+  const toCard = () => {
+    const top = card.getBoundingClientRect().top;
+    if (top < 70 || top > window.innerHeight * 0.4) window.scrollTo({ top: window.scrollY + top - 90, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  };
+  const show = (i, dir = 1) => {
     cur = i;
-    steps.forEach((s, j) => { s.hidden = j !== i; });
+    steps.forEach((s, j) => { s.hidden = j !== i; s.classList.toggle("bwd", j === i && dir < 0); });
     back.hidden = i === 0;
     next.textContent = (i === steps.length - 1 ? T.calc : T.next) + " →";
     msg.textContent = "";
     progress(i);
+    const first = steps[i].querySelector("textarea, input[type=number], input[type=text]");
+    if (first && i === steps.length - 1 && matchMedia("(min-width: 980px)").matches) first.focus({ preventScroll: true });
   };
 
   // ore per attività: il cursore si attiva quando l'attività è selezionata
@@ -280,15 +308,26 @@
     subBox.querySelector(".au-sub-picks").innerHTML = list.length ? pills("sub", list.map((x) => x[0])) : "";
   }));
   form.addEventListener("change", (e) => e.target.closest(".q-field")?.classList.remove("invalid"));
+  let autoT = null;
+  form.addEventListener("change", (e) => {
+    const st = steps[cur];
+    if (e.target.type !== "radio" || st.dataset.auto !== "1" || e.target.name === "sector") return;
+    const done = [...st.querySelectorAll("[data-req]")].every((g) => g.hidden || g.querySelector("input:checked"));
+    clearTimeout(autoT);
+    if (done) autoT = setTimeout(() => next.click(), 420);
+  });
+  form.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && e.target.tagName !== "TEXTAREA") { e.preventDefault(); next.click(); }
+  });
 
   const valid = () => {
-    if (cur === 0) {
+    if (steps[cur].querySelector("[data-req]")) {
       let ok = true;
-      steps[0].querySelectorAll("[data-req]").forEach((g) => { if (g.hidden) return; const bad = !g.querySelector("input:checked"); g.classList.toggle("invalid", bad); if (bad) ok = false; });
+      steps[cur].querySelectorAll("[data-req]").forEach((g) => { if (g.hidden) return; const bad = !g.querySelector("input:checked"); g.classList.toggle("invalid", bad); if (bad) ok = false; });
       if (!ok) msg.textContent = T.need_pick;
       return ok;
     }
-    if (cur === 1 && !form.querySelector('input[name="task"]:checked')) { msg.textContent = T.need_task; return false; }
+    if (cur === 2 && !form.querySelector('input[name="task"]:checked')) { msg.textContent = T.need_task; return false; }
     return true;
   };
 
@@ -325,6 +364,9 @@
     const target = a.saved;
     live.classList.toggle("has", a.tasks.length > 0);
     live.querySelector(".au-live-days b").textContent = Math.round((target * WEEKS) / 8).toLocaleString(en ? "en-GB" : "it-IT");
+    const rv = revOf(a), lr = live.querySelector(".au-live-rev");
+    lr.hidden = !rv;
+    if (rv) lr.innerHTML = rv.eur ? `<b>+${money(rv.eur)}</b> ${D.live_rev}` : `<b>+${num1(rv.extra)}</b> ${D.live_rev_c}`;
     const max = Math.max(1, ...a.tasks.map((t) => t.hours));
     live.querySelector(".au-live-bars").innerHTML = a.tasks.slice(0, 4).map((t) =>
       `<div><span>${icon(t.icon)}${esc(t.label)}</span><i><b style="width:${(t.saved / max) * 100}%"></b></i><em>${fmt(t.saved)}</em></div>`).join("");
@@ -344,15 +386,17 @@
   next.addEventListener("click", () => {
     if (!valid()) return;
     if (cur === 0) { const ns = +new FormData(form).get("sector"); if (ns !== si) { renderTasks(ns); updateLive(); } }
-    if (cur < steps.length - 1) { show(cur + 1); card.scrollIntoView({ block: "nearest", behavior: "smooth" }); return; }
+    clearTimeout(autoT);
+    if (cur < steps.length - 1) { show(cur + 1); toCard(); return; }
     const a = answers();
     form.hidden = true;
     gate.hidden = false;
-    progress(3);
+    progress(steps.length);
+    toCard();
     gate.querySelector(".au-teaser").innerHTML = T.teaser(fmt(a.saved));
     lead.querySelector("input").focus();
   });
-  back.addEventListener("click", () => show(cur - 1));
+  back.addEventListener("click", () => { clearTimeout(autoT); show(cur - 1, -1); toCard(); });
 
   // piano in 3 passi: usato nel report a schermo e nella copia per email
   const planOf = (a) => {
@@ -484,7 +528,7 @@
       ${a.tools.length ? `<section><h3>${T.r_tools}</h3><ul class="au-tools">${a.tools.map((t) => `<li><b>${esc(t[1])}</b> ${esc(t[2])}</li>`).join("")}</ul></section>` : ""}
       ${a.pain ? `<section><h3>${T.r_pain}</h3><blockquote>“${esc(a.pain)}”</blockquote></section>` : ""}
       <div class="au-sign"><img src="${base}assets/alessandro.jpg" alt="" width="72" height="72"><div><b>${T.sign_h}</b><p>${T.sign_p}</p><span>${T.sign_n} · ${MAIL}</span></div></div>
-      <div class="au-next"><div><p class="mono">${T.next_h}</p><p>${T.next_p}</p></div><a class="btn" href="${contactPage}?${q}#contact-form">${T.call} →</a><span class="au-next-url">${contact}</span></div>
+      <div class="au-nextstep"><div><p class="mono">${T.next_h}</p><p>${T.next_p}</p></div><a class="btn" href="${contactPage}?${q}#contact-form">${T.call} →</a><span class="au-next-url">${contact}</span></div>
       <p class="au-note">${T.r_note}</p>
       <p class="au-src"><b>${T.src}</b> ${stats.map((x, i) => `${i + 1}. ${x[2]}`).join(" · ")}</p>
       <div class="au-actions"><a class="btn" href="${contactPage}?${q}#contact-form">${T.call} →</a><button type="button" class="btn ghost au-pdf">${T.pdf}</button><button type="button" class="btn ghost au-restart">${T.restart}</button></div>`;
