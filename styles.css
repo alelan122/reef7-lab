@@ -1070,3 +1070,5 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
   .contact-me.cm-mobile { display: flex; margin: 0 0 22px; }
   .contact-side .contact-me { display: none; }
 }
+/* immagini dei progetti: le dimensioni nel tag servono solo a riservare lo spazio, l'altezza segue le proporzioni */
+.pf-thumb img, .work-grid img, .feat-card img, .work-card img, .wc-img img { height: auto; }
