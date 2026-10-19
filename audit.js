@@ -80,6 +80,18 @@
     mail_intro: (n) => `Hi ${n},\n\nhere is a copy of your automation report from Reef 7 Lab.`, mail_end: "I read every report personally: within one business day I'll write to you with first ideas on where to start.\n\nAlessandro Lancioni\nReef 7 Lab", mail_link: "Redo the audit or book a call:",
     auto: (p) => `automatable: about ${p}%`, subject: "New automation audit",
     live_k: "Live estimate", live_empty: "Select the activities your team does by hand: the estimate updates as you go.",
+    sum_k: "In short", sum_first: "First move", fte: (x) => `about ${x} full-time ${x === "1" ? "person" : "people"}`, month: (h, v) => `Every month as things are: about ${h} hours of manual work${v ? `, worth ${v}` : ""}.`,
+    tier: [["Contained", "The margin is contained: it's worth starting from one simple automation and measuring it."], ["Concrete", "The margin is concrete: one or two targeted changes are enough to feel the difference."], ["High", "The margin is wide: it's worth starting soon from the first priority."]],
+    pot: "Automation potential", effort: ["Quick win", "Medium project", "Structured project"],
+    ctx_h: "The context", src: "Sources",
+    stats: {
+      speed: ["~7×", "Companies that follow up on a lead within an hour are nearly 7 times more likely to reach a decision maker than those that wait one more hour.", "Harvard Business Review, “The Short Life of Online Sales Leads”, 2011"],
+      data: ["9+ h", "In a survey of 500 professionals, manually moving data from emails, PDFs and spreadsheets takes over 9 hours a week per person.", "Parseur / QuestionPro survey, 2025 (vendor study)"],
+      rep: ["40%+", "Over 40% of workers spend at least a quarter of their week on manual, repetitive tasks.", "Smartsheet, automation in the workplace survey"],
+      it: ["15.7%", "In Italy only 15.7% of SMEs use at least one AI technology (in Germany, 26% of companies): starting now is still an advantage.", "Istat, Imprese e ICT, 2025"],
+      mck: ["~30%", "By 2030, automation could cover about 30% of hours worked.", "McKinsey Global Institute, Generative AI and the future of work in America, 2023"],
+    },
+    next_h: "The next step", next_p: "Book a free 30-minute call: we go through this report together, on your real numbers.",
     live_get: "What you'll get", get: ["Hours and value you could win back", "What to automate first", "A 3-step plan, also as a PDF"],
   } : {
     steps: ["La tua azienda", "Lavoro manuale", "Strumenti", "Il tuo report"], step_of: "Passo {a} di {b}",
@@ -107,9 +119,32 @@
     mail_intro: (n) => `Ciao ${n},\n\necco la copia del tuo report di automazione di Reef 7 Lab.`, mail_end: "Leggo ogni report personalmente: entro un giorno lavorativo ti scrivo con le prime idee su da dove partire.\n\nAlessandro Lancioni\nReef 7 Lab", mail_link: "Rifai l'audit o prenota una call:",
     auto: (p) => `automatizzabile: circa il ${p}%`, subject: "Nuovo audit di automazione",
     live_k: "Stima in diretta", live_empty: "Seleziona le attività che il tuo team fa a mano: la stima si aggiorna mentre scegli.",
+    sum_k: "In sintesi", sum_first: "La prima mossa", fte: (x) => `circa ${x} ${x === "1" ? "persona" : "persone"} a tempo pieno`, month: (h, v) => `Ogni mese, restando così: circa ${h} ore di lavoro manuale${v ? `, per un valore di ${v}` : ""}.`,
+    tier: [["Contenuto", "Il margine è contenuto: conviene partire da una sola automazione semplice e misurarla."], ["Concreto", "Il margine è concreto: uno o due interventi mirati bastano per vedere la differenza."], ["Alto", "Il margine è ampio: conviene partire presto dalla prima priorità."]],
+    pot: "Potenziale di automazione", effort: ["Vittoria rapida", "Progetto medio", "Progetto strutturato"],
+    ctx_h: "Il contesto", src: "Fonti",
+    stats: {
+      speed: ["~7×", "Le aziende che ricontattano un contatto entro un'ora hanno quasi 7 volte più probabilità di parlare con chi decide rispetto a chi aspetta un'ora in più.", "Harvard Business Review, “The Short Life of Online Sales Leads”, 2011"],
+      data: ["9+ ore", "In un sondaggio su 500 professionisti, spostare a mano dati da email, PDF e fogli di calcolo occupa più di 9 ore a settimana a persona.", "Sondaggio Parseur / QuestionPro, 2025 (studio di un fornitore)"],
+      rep: ["40%+", "Oltre il 40% dei lavoratori passa almeno un quarto della settimana in attività manuali e ripetitive.", "Smartsheet, sondaggio sull'automazione nel lavoro"],
+      it: ["15,7%", "In Italia solo il 15,7% delle PMI usa almeno una tecnologia di intelligenza artificiale (in Germania il 26% delle imprese): chi parte ora parte ancora in vantaggio.", "Istat, Imprese e ICT, 2025"],
+      mck: ["~30%", "Entro il 2030 l'automazione potrebbe coprire circa il 30% delle ore lavorate.", "McKinsey Global Institute, Generative AI and the future of work in America, 2023"],
+    },
+    next_h: "Il prossimo passo", next_p: "Prenota una call gratuita di 30 minuti: guardiamo insieme questo report, sui tuoi numeri reali.",
     live_get: "Cosa ricevi", get: ["Ore e valore che puoi recuperare", "Cosa automatizzare per primo", "Un piano in 3 passi, anche in PDF"],
   };
 
+  const EFFORT = { leads: 1, data: 1, reports: 0, booking: 0, followup: 0, docs: 1, questions: 2, support: 1, orders: 1, phone: 2 };
+  // dati di contesto mostrati in base alle attività scelte
+  const statsFor = (a) => {
+    const k = new Set(a.tasks.map((t) => t.key)), out = [];
+    if (k.has("leads") || k.has("support") || k.has("phone")) out.push("speed");
+    if (k.has("data") || k.has("orders") || k.has("docs")) out.push("data");
+    if (out.length < 2) out.push("rep");
+    out.push(a.team === T.teams[3] ? "mck" : "it");
+    return out.map((x) => T.stats[x]);
+  };
+  const tierOf = (h) => (h >= 15 ? 2 : h >= 6 ? 1 : 0);
   const ICON = {
     leads: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
     data: '<rect x="8" y="8" width="13" height="13" rx="2"/><path d="M4 16V5a1 1 0 0 1 1-1h11"/>',
@@ -276,6 +311,7 @@
     const plan = planOf(a), L = [];
     L.push(T.mail_intro(name), "");
     L.push(`${fmt(a.saved)} ${T.k_week} · ${Math.round((a.saved * WEEKS) / 8)} ${T.k_year}` + (a.cost ? ` · ${money(a.saved * WEEKS * a.cost)} ${T.k_value}` : ""), "");
+    L.push(`${T.pot}: ${Math.round((a.saved / a.tasks.reduce((x, t) => x + t.hours, 0)) * 100)}% · ${T.tier[tierOf(a.saved)][0]}. ${T.tier[tierOf(a.saved)][1]}`, "");
     L.push(T.r_tasks.toUpperCase());
     a.tasks.forEach((t) => L.push(`- ${t.label}: ${fmt(t.hours)} ${T.r_now}, ${fmt(t.saved)} ${T.r_saved}`));
     L.push("", T.r_prio.toUpperCase());
@@ -328,6 +364,10 @@
     const date = new Date().toLocaleDateString(en ? "en-GB" : "it-IT", { day: "numeric", month: "long", year: "numeric" });
     const days = (a.saved * WEEKS) / 8;
     const plan = planOf(a);
+    const total = a.tasks.reduce((x, t) => x + t.hours, 0), pct = Math.round((a.saved / total) * 100);
+    const tier = tierOf(a.saved), fte = (Math.round((a.saved / 40) * 10) / 10).toLocaleString(en ? "en-GB" : "it-IT");
+    const perMonth = a.saved * 4.33, stats = statsFor(a);
+    const contact = new URL(contactPage, location.href).href.split("?")[0];
     const q = new URLSearchParams({ need: "", team: a.team, goal: `${T.r_title}: ${fmt(a.saved)} ${T.k_week}` });
     report.innerHTML = `
       <header class="au-r-head">
@@ -336,11 +376,19 @@
         <p class="au-r-meta">${esc(a.sector)} · ${esc(a.team)} ${en ? "people" : "persone"}</p>
       </header>
       ${sentOk ? `<p class="au-ok">${T.sent_ok(esc(who.email))}</p>` : `<p class="au-warn">${T.sent_fail.replace("{email}", `<a href="mailto:${MAIL}">${MAIL}</a>`)}</p>`}
+      <div class="au-sum">
+        <div class="au-sum-txt"><p class="mono">${T.sum_k}</p>
+          <p class="au-sum-v"><b>${T.tier[tier][0]}</b> · ${T.tier[tier][1]}</p>
+          <p class="au-sum-first"><span class="mono">${T.sum_first}</span>${esc(top[0].label)}: ${esc(top[0].build)}</p></div>
+        <div class="au-gauge" style="--p:${pct}"><b>${pct}%</b><span>${T.pot}</span></div>
+      </div>
       <div class="au-kpis">
         <div><b>${fmt(a.saved)}</b><span>${T.k_week}</span></div>
         <div><b>${Math.round(days).toLocaleString(en ? "en-GB" : "it-IT")}</b><span>${T.k_year}</span></div>
+        ${a.cost ? "" : `<div><b>${fte}</b><span>${T.fte(fte).replace(fte + " ", "")}</span></div>`}
         ${a.cost ? `<div><b>${money(a.saved * WEEKS * a.cost)}</b><span>${T.k_value}</span></div>` : ""}
       </div>
+      <p class="au-month">${T.month(fmt(perMonth), a.cost ? money(perMonth * a.cost) : "")} ${en ? "That's" : "Equivale a"} ${T.fte(fte)}.</p>
       <section><h3>${T.r_tasks}</h3>
         <div class="au-bars">${a.tasks.map((t) => `
           <div class="au-bar"><p>${esc(t.label)}<small>${T.auto(Math.round(t.f * 100))}</small></p>
@@ -348,15 +396,20 @@
             <span>${fmt(t.hours)} ${T.r_now} · <strong>${fmt(t.saved)} ${T.r_saved}</strong></span></div>`).join("")}</div>
       </section>
       <section><h3>${T.r_prio}</h3>
-        <ol class="au-prio">${top.map((t) => `<li><b>${esc(t.label)}</b><p><span class="mono">${T.r_build}</span>${esc(t.build)} <a href="${svcPage}#s${t.svc}">→</a></p></li>`).join("")}</ol>
+        <ol class="au-prio">${top.map((t) => `<li><b>${esc(t.label)}</b><em class="au-eff e${EFFORT[t.key]}">${T.effort[EFFORT[t.key]]}</em><p><span class="mono">${T.r_build}</span>${esc(t.build)} <a href="${svcPage}#s${t.svc}">→</a></p></li>`).join("")}</ol>
       </section>
       <section><h3>${T.r_plan}</h3>
         <ol class="au-plan">${plan.map((p, i) => `<li><span class="mono">${T.plan[i]}</span><p>${esc(p)}</p></li>`).join("")}</ol>
       </section>
+      <section><h3>${T.ctx_h}</h3>
+        <div class="au-ctx">${stats.map((x, i) => `<div><b>${x[0]}</b><p>${x[1]}<sup>${i + 1}</sup></p></div>`).join("")}</div>
+      </section>
       ${a.tools.length ? `<section><h3>${T.r_tools}</h3><ul class="au-tools">${a.tools.map((t) => `<li><b>${esc(t[1])}</b> ${esc(t[2])}</li>`).join("")}</ul></section>` : ""}
       ${a.pain ? `<section><h3>${T.r_pain}</h3><blockquote>“${esc(a.pain)}”</blockquote></section>` : ""}
       <div class="au-sign"><img src="${base}assets/alessandro.jpg" alt="" width="72" height="72"><div><b>${T.sign_h}</b><p>${T.sign_p}</p><span>${T.sign_n} · ${MAIL}</span></div></div>
+      <div class="au-next"><div><p class="mono">${T.next_h}</p><p>${T.next_p}</p></div><a class="btn" href="${contactPage}?${q}#contact-form">${T.call} →</a><span class="au-next-url">${contact}</span></div>
       <p class="au-note">${T.r_note}</p>
+      <p class="au-src"><b>${T.src}</b> ${stats.map((x, i) => `${i + 1}. ${x[2]}`).join(" · ")}</p>
       <div class="au-actions"><a class="btn" href="${contactPage}?${q}#contact-form">${T.call} →</a><button type="button" class="btn ghost au-pdf">${T.pdf}</button><button type="button" class="btn ghost au-restart">${T.restart}</button></div>`;
     report.hidden = false;
     report.querySelector(".au-pdf").addEventListener("click", () => window.print());
