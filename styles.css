@@ -1164,3 +1164,17 @@ body[data-page="mission"] .page-head + .block { padding-top: clamp(36px, 5vw, 56
   .au-prio li { break-inside: avoid; }
 }
 @media print { .au-report { zoom: .86; } }
+
+/* audit personalizzato: obiettivo, software, servizi consigliati */
+.au-goal { color: var(--aqua) !important; font-size: 14.5px !important; }
+.au-swp { font-size: 15px; line-height: 1.6; color: var(--muted); margin: 0; }
+.au-recs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.au-rec { display: block; padding: 16px 18px; border-radius: 14px; border: 1px solid var(--rule); color: inherit; text-decoration: none; transition: border-color .2s; }
+.au-rec:hover { border-color: rgba(95, 225, 242, .5); }
+.au-rec b { display: block; font-size: 15.5px; font-weight: 600; margin-bottom: 4px; }
+.au-rec p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--muted); }
+@media print {
+  .au-goal { color: #0b6c80 !important; }
+  .au-rec { border-color: #ddd !important; break-inside: avoid; }
+  .au-swp { color: #333 !important; }
+}

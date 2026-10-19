@@ -124,6 +124,17 @@
     const list = out.map((x) => T.stats[x]);
     return (own ? [own, ...list] : list).slice(0, 3);
   };
+  const recsOf = (a) => {
+    const have = new Set(a.tasks.slice(0, 3).map((t) => t.svc)), out = [];
+    const add = (x) => { if (!have.has(x) && !out.includes(x) && D.svc[x]) out.push(x); };
+    if (a.gi === 1 || a.sw >= 1 || a.spend >= 2) { add("20"); add("10"); }
+    if (a.tools.some((t) => t[0] === "email") || a.tasks.some((t) => t.icon === "followup")) add("22");
+    if (a.spend >= 1 && a.tasks.some((t) => t.icon === "followup")) add("21");
+    ({ 0: ["23", "19", "14"], 1: ["17", "24"], 2: ["27", "24"], 3: ["03", "23"], 4: ["18", "11"], 5: ["08", "20"] }[a.si] || []).forEach(add);
+    if (a.ti >= 2) add("26");
+    add("08");
+    return out.slice(0, 3);
+  };
   const tierOf = (h) => (h >= 15 ? 2 : h >= 6 ? 1 : 0);
   // soluzione su misura o rapida, in base a dimensione del team e ore in gioco
   const custom = (ti, h) => ti >= 2 || (ti === 1 && h >= 10) || h >= 15;
@@ -153,7 +164,9 @@
     <form class="au-form" novalidate>
       <fieldset class="au-step" data-i="0">
         <div class="q-field" data-req="sector"><p class="q-label">${T.sector}</p>${pills("sector", T.sectors)}</div>
+        <div class="q-field au-sub" data-req="sub" hidden><p class="q-label">${D.sub_q}</p><div class="au-sub-picks"></div></div>
         <div class="q-field" data-req="team"><p class="q-label">${T.team}</p>${pills("team", T.teams)}</div>
+        <div class="q-field" data-req="goal"><p class="q-label">${D.goal_q}</p>${pills("goal", D.goals)}</div>
       </fieldset>
       <fieldset class="au-step" data-i="1" hidden>
         <p class="q-label">${T.tasks_q}<small>${T.tasks_hint}</small></p>
@@ -161,8 +174,11 @@
       </fieldset>
       <fieldset class="au-step" data-i="2" hidden>
         <div class="q-field"><p class="q-label">${T.tools_q}<small>${T.tools_hint}</small></p>${pills("tool", TOOLS.map((t) => t[1]), "checkbox")}</div>
+        <div class="q-field"><p class="q-label">${D.sw_q}</p>${pills("sw", D.sw)}</div>
+        <div class="q-field"><p class="q-label">${D.spend_q}</p>${pills("spend", D.spend)}</div>
         <label class="field"><span>${T.pain}</span><textarea name="pain" rows="3" maxlength="500" placeholder="${T.pain_ph}"></textarea></label>
         <label class="field au-cost"><span>${T.cost}</span><input name="cost" type="number" min="0" max="500" inputmode="decimal" placeholder="${T.cost_ph}"><small>${T.cost_hint}</small></label>
+        <label class="field"><span>${D.site_q}</span><input name="site" type="text" maxlength="200" autocomplete="url" placeholder="${D.site_ph}"><small>${D.site_hint}</small></label>
       </fieldset>
       <div class="q-nav"><button type="button" class="btn ghost au-back" hidden>${T.back}</button><button type="button" class="btn au-next">${T.next} →</button></div>
       <p class="form-msg au-msg" role="status" aria-live="polite"></p>
@@ -228,12 +244,19 @@
     });
   };
   renderTasks(si);
+  const subBox = form.querySelector(".au-sub");
+  form.querySelectorAll('input[name="sector"]').forEach((r) => r.addEventListener("change", () => {
+    const list = D.subs[+r.value] || [];
+    subBox.hidden = !list.length;
+    subBox.classList.remove("invalid");
+    subBox.querySelector(".au-sub-picks").innerHTML = list.length ? pills("sub", list.map((x) => x[0])) : "";
+  }));
   form.addEventListener("change", (e) => e.target.closest(".q-field")?.classList.remove("invalid"));
 
   const valid = () => {
     if (cur === 0) {
       let ok = true;
-      steps[0].querySelectorAll("[data-req]").forEach((g) => { const bad = !g.querySelector("input:checked"); g.classList.toggle("invalid", bad); if (bad) ok = false; });
+      steps[0].querySelectorAll("[data-req]").forEach((g) => { if (g.hidden) return; const bad = !g.querySelector("input:checked"); g.classList.toggle("invalid", bad); if (bad) ok = false; });
       if (!ok) msg.textContent = T.need_pick;
       return ok;
     }
@@ -248,12 +271,20 @@
       const t = TASKS[+row.dataset.i], h = +row.querySelector("input[type=range]").value, ti = +new FormData(form).get("team");
       const c = custom(ti, h);
       return { key: t[0], icon: t[1], label: t[2], f: t[3], svc: t[4], eff: t[5], light: t[6], full: t[7], kpi: t[8], custom: c, build: c ? t[7] : t[6], hours: h, saved: h * t[3] };
-    }).sort((a, b) => b.saved - a.saved);
+    });
+    // l'obiettivo pesa sull'ordine: le attività che lo servono salgono
+    const gi = f.get("goal") === null ? -1 : +f.get("goal");
+    const GOAL_OF = { leads: [0, 3], followup: [0], star: [0], booking: [0, 3], data: [1, 2], reports: [1, 2], docs: [1, 2], orders: [1, 2], support: [3, 2], questions: [2, 3], phone: [3, 0] };
+    const w = (t) => t.saved * ((GOAL_OF[t.icon] || []).includes(gi) ? 1.6 : 1);
+    tasks.sort((a, b) => w(b) - w(a));
     const saved = tasks.reduce((s, t) => s + t.saved, 0);
     const cost = Math.max(0, parseFloat(f.get("cost")) || 0);
     return {
       si: +f.get("sector"), ti: +f.get("team"), sector: T.sectors[+f.get("sector")], team: T.teams[+f.get("team")], tasks, saved,
       tools: f.getAll("tool").map((i) => TOOLS[+i]), pain: (f.get("pain") || "").toString().trim(), cost,
+      sub: f.get("sub") === null ? null : (D.subs[+f.get("sector")] || [])[+f.get("sub")] || null, gi,
+      sw: f.get("sw") === null ? -1 : +f.get("sw"), spend: f.get("spend") === null ? -1 : +f.get("spend"),
+      site: (f.get("site") || "").toString().trim().slice(0, 200),
     };
   };
 
@@ -303,12 +334,15 @@
     L.push(T.mail_intro(name), "", `${D.sector_k} (${a.sector}, ${a.team}): ${D.sectors[a.si].intro}`, "");
     L.push(`${fmt(a.saved)} ${T.k_week} · ${Math.round((a.saved * WEEKS) / 8)} ${T.k_year}` + (a.cost ? ` · ${money(a.saved * WEEKS * a.cost)} ${T.k_value}` : ""), "");
     L.push(`${T.pot}: ${Math.round((a.saved / a.tasks.reduce((x, t) => x + t.hours, 0)) * 100)}% · ${T.tier[tierOf(a.saved)][0]}. ${T.tier[tierOf(a.saved)][1]}`, "");
+    if (a.gi >= 0) L.push(D.goal_line[a.gi], "");
     L.push(T.r_tasks.toUpperCase());
     a.tasks.forEach((t) => L.push(`- ${t.label}: ${fmt(t.hours)} ${T.r_now}, ${fmt(t.saved)} ${T.r_saved}`));
     L.push("", T.r_prio.toUpperCase());
     a.tasks.slice(0, 3).forEach((t, i) => L.push(`${i + 1}. ${t.label}`, `   ${D.opt[0]}: ${t.light}`, `   ${D.opt[1]}: ${t.full}`, `   ${D.rec}: ${D.opt[t.custom ? 1 : 0].toLowerCase()} · ${D.kpi}: ${t.kpi}`));
     L.push("", T.r_plan.toUpperCase());
     plan.forEach((x, i) => L.push(`${i + 1}. ${x}`));
+    const rc = recsOf(a);
+    if (rc.length) { L.push("", D.rec_h.toUpperCase()); rc.forEach((x) => L.push(`- ${D.svc[x][0]}: ${D.svc[x][1]}`)); }
     L.push("", T.r_note, "", T.mail_end, "", `${T.mail_link} ${location.href.split("#")[0]}`);
     return L.join("\n");
   };
@@ -333,11 +367,12 @@
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           _subject: `${T.subject}: ${company || name} · ${fmt(a.saved)} h/sett.`, _replyto: email, _template: "table", _captcha: "false",
-          _autoresponse: mailText(a, name), "Fonte": "Audit di automazione", "Nome": name, email, "Azienda": company || "—", "Settore": a.sector, "Persone in azienda": a.team,
+          _autoresponse: mailText(a, name), "Fonte": "Audit di automazione", "Nome": name, email, "Azienda": company || "—", "Settore": a.sector, "Dettaglio settore": a.sub ? a.sub[0] : "—", "Persone in azienda": a.team, "Obiettivo": a.gi >= 0 ? D.goals[a.gi] : "—",
+          "Software usati": a.sw >= 0 ? D.sw[a.sw] : "—", "Spesa software al mese": a.spend >= 0 ? D.spend[a.spend] : "—", "Sito": a.site || "—",
           "Attività manuali (ore/sett.)": a.tasks.map((t) => `${t.label}: ${t.hours}`).join("; "),
           "Ore recuperabili stimate a settimana": fmt(a.saved), "Priorità": a.tasks.slice(0, 3).map((t) => t.label).join("; "),
           "Strumenti": a.tools.map((t) => t[1]).join(", ") || "—", "Problema principale": a.pain || "—", "Costo orario": a.cost || "—",
-          "Codice Reef 7": r7code({ ch: "audit", name, email, company, sector: a.sector, team: a.team, saved: a.saved, tasks: a.tasks.map((t) => [t.label, t.hours]), tools: a.tools.map((t) => t[1]), pain: a.pain || "", cost: a.cost || "" }),
+          "Codice Reef 7": r7code({ ch: "audit", name, email, company, sector: a.sector + (a.sub ? ` · ${a.sub[0]}` : ""), team: a.team, site: a.site, goal: a.gi >= 0 ? D.goals[a.gi] : "", saved: a.saved, tasks: a.tasks.map((t) => [t.label, t.hours]), tools: a.tools.map((t) => t[1]), pain: a.pain || "", cost: a.cost || "" }),
         }),
       });
       const out = await res.json().catch(() => ({}));
@@ -364,7 +399,7 @@
       <header class="au-r-head">
         <p class="au-r-brand"><img src="${base}assets/logo-68.png" alt="" width="28" height="28"><b>Reef 7 Lab</b><span class="mono">${date}</span></p>
         <h2>${T.r_title}${who.company ? ` <em>${T.r_for} ${esc(who.company)}</em>` : ""}</h2>
-        <p class="au-r-meta">${esc(a.sector)} · ${esc(a.team)} ${en ? "people" : "persone"}</p>
+        <p class="au-r-meta">${esc(a.sector)}${a.sub && a.sub[1] !== undefined && a.sub[0] !== (en ? "Other" : "Altro") ? ` · ${esc(a.sub[0])}` : ""} · ${esc(a.team)} ${en ? "people" : "persone"}${a.site ? ` · ${esc(a.site)}` : ""}</p>
       </header>
       ${sentOk ? `<p class="au-ok">${T.sent_ok(esc(who.email))}</p>` : `<p class="au-warn">${T.sent_fail.replace("{email}", `<a href="mailto:${MAIL}">${MAIL}</a>`)}</p>`}
       <div class="au-sum">
@@ -373,7 +408,7 @@
           <p class="au-sum-first"><span class="mono">${T.sum_first}</span>${esc(top[0].label)}: ${esc(top[0].build)}</p></div>
         <div class="au-gauge" style="--p:${pct}"><b>${pct}%</b><span>${T.pot}</span></div>
       </div>
-      <div class="au-sector"><p class="mono">${D.sector_k} · ${esc(a.sector)} · ${esc(a.team)} ${en ? "people" : "persone"}</p><p>${D.sectors[a.si].intro}</p><p class="au-scope">${D.scope[a.ti]}</p></div>
+      <div class="au-sector"><p class="mono">${D.sector_k} · ${esc(a.sector)} · ${esc(a.team)} ${en ? "people" : "persone"}</p><p>${D.sectors[a.si].intro}${a.sub && a.sub[1] ? " " + a.sub[1] : ""}</p><p class="au-scope">${D.scope[a.ti]}</p>${a.gi >= 0 ? `<p class="au-goal">${D.goal_line[a.gi]}</p>` : ""}</div>
       <div class="au-kpis">
         <div><b>${fmt(a.saved)}</b><span>${T.k_week}</span></div>
         <div><b>${Math.round(days).toLocaleString(en ? "en-GB" : "it-IT")}</b><span>${T.k_year}</span></div>
@@ -395,6 +430,8 @@
       <section><h3>${T.r_plan}</h3>
         <ol class="au-plan">${plan.map((p, i) => `<li><span class="mono">${T.plan[i]}</span><p>${esc(p)}</p></li>`).join("")}</ol>
       </section>
+      ${a.sw >= 0 || a.spend >= 0 ? `<section><h3>${D.sw_h}</h3><p class="au-swp">${D.sw_line(a.sw >= 0 ? D.sw[a.sw] : "", a.spend >= 0 ? D.spend[a.spend] : "")} ${a.sw >= 1 || a.spend >= 2 ? D.sw_many : D.sw_few}</p></section>` : ""}
+      ${(() => { const r = recsOf(a); return r.length ? `<section><h3>${D.rec_h}</h3><div class="au-recs">${r.map((x) => `<a class="au-rec" href="${svcPage}#s${x}"><b>${D.svc[x][0]}</b><p>${D.svc[x][1]}</p></a>`).join("")}</div></section>` : ""; })()}
       <section><h3>${T.ctx_h}</h3>
         <div class="au-ctx">${stats.map((x, i) => `<div><b>${x[0]}</b><p>${x[1]}<sup>${i + 1}</sup></p></div>`).join("")}</div>
       </section>
