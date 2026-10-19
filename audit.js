@@ -116,7 +116,9 @@
   // dati di contesto mostrati in base alle attività scelte
   const statsFor = (a) => {
     const k = new Set(a.tasks.map((t) => t.icon)), out = [];
-    const own = D.sectors[a.si].stat;
+    const subI = a.sub ? (D.subs[a.si] || []).indexOf(a.sub) : -1;
+    const ONLY = { 1: [0], 2: [1] }; // dato legale solo per gli studi legali, dato corsi solo per i corsi online
+    const own = ONLY[a.si] && subI >= 0 && !ONLY[a.si].includes(subI) ? null : D.sectors[a.si].stat;
     if (k.has("leads") || k.has("support") || k.has("phone")) out.push("speed");
     if (k.has("data") || k.has("orders") || k.has("docs")) out.push("data");
     if (out.length < 2) out.push("rep");
@@ -126,13 +128,23 @@
   };
   const recsOf = (a) => {
     const have = new Set(a.tasks.slice(0, 3).map((t) => t.svc)), out = [];
-    const add = (x) => { if (!have.has(x) && !out.includes(x) && D.svc[x]) out.push(x); };
-    if (a.gi === 1 || a.sw >= 1 || a.spend >= 2) { add("20"); add("10"); }
-    if (a.tools.some((t) => t[0] === "email") || a.tasks.some((t) => t.icon === "followup")) add("22");
-    if (a.spend >= 1 && a.tasks.some((t) => t.icon === "followup")) add("21");
-    ({ 0: ["23", "19", "14"], 1: ["17", "24"], 2: ["27", "24"], 3: ["03", "23"], 4: ["18", "11"], 5: ["08", "20"] }[a.si] || []).forEach(add);
+    const add = (x) => { if (!have.has(x) && !out.includes(x) && D.svc[x] && !(x === "25" && a.ti === 0)) out.push(x); };
+    const BY_SUB = {
+      0: [["19", "23", "18"], ["21", "23", "18"], ["14", "23", "19"], ["23", "19", "18"]],
+      1: [["07", "17", "12"], ["17", "24", "06"], ["17", "08", "06"], ["12", "04", "18"]],
+      2: [["11", "23", "24"], ["27", "24", "05"], ["27", "24", "04"]],
+      3: [["19", "03", "17"], ["17", "19", "03"], ["03", "23", "11"]],
+      4: [["12", "18", "04"], ["18", "04", "05"], ["18", "01", "05"], ["12", "04", "18"]],
+    };
+    const GOAL = [["23", "11", "18"], ["20", "10", "21"], ["06", "08", "07", "25"], ["17", "07", "11"]];
+    const subI = a.sub ? (D.subs[a.si] || []).indexOf(a.sub) : -1;
+    const heavy = a.sw >= 2 || a.spend >= 2;
+    if (a.gi === 1) add("20");
+    (BY_SUB[a.si] ? BY_SUB[a.si][subI >= 0 ? subI : 0] : ["08", "06"]).forEach(add);
+    if (heavy) add("20");
+    if (a.gi >= 0) GOAL[a.gi].forEach(add);
+    if (heavy) add("10");
     if (a.ti >= 2) add("26");
-    add("08");
     return out.slice(0, 3);
   };
   const tierOf = (h) => (h >= 15 ? 2 : h >= 6 ? 1 : 0);
@@ -154,7 +166,7 @@
   const icon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICON[k]}</svg>`;
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const fmt = (n) => (Math.round(n * 2) / 2).toLocaleString(en ? "en-GB" : "it-IT");
-  const money = (n) => (en ? "€" : "") + (Math.round(n / 100) * 100).toLocaleString(en ? "en-GB" : "it-IT") + (en ? "" : " €");
+  const money = (n) => (en ? "€" : "") + String(Math.round(n / 100) * 100).replace(/\B(?=(\d{3})+(?!\d))/g, en ? "," : ".") + (en ? "" : " €");
   const pills = (name, opts, type = "radio") => `<div class="picks">${opts.map((o, i) => `<label class="pick"><input type="${type}" name="${name}" value="${i}"><span>${esc(o)}</span></label>`).join("")}</div>`;
 
   root.innerHTML = `
@@ -405,7 +417,8 @@
       <div class="au-sum">
         <div class="au-sum-txt"><p class="mono">${T.sum_k}</p>
           <p class="au-sum-v"><b>${T.tier[tier][0]}</b> · ${T.tier[tier][1]}</p>
-          <p class="au-sum-first"><span class="mono">${T.sum_first}</span>${esc(top[0].label)}: ${esc(top[0].build)}</p></div>
+          <p class="au-sum-first"><span class="mono">${T.sum_first}</span>${esc(top[0].label)}: ${esc(top[0].build.charAt(0).toLowerCase() + top[0].build.slice(1))}</p>
+          <a class="btn au-sum-cta" href="${contactPage}?${q}#contact-form">${D.cta_top} →</a></div>
         <div class="au-gauge" style="--p:${pct}"><b>${pct}%</b><span>${T.pot}</span></div>
       </div>
       <div class="au-sector"><p class="mono">${D.sector_k} · ${esc(a.sector)} · ${esc(a.team)} ${en ? "people" : "persone"}</p><p>${D.sectors[a.si].intro}${a.sub && a.sub[1] ? " " + a.sub[1] : ""}</p><p class="au-scope">${D.scope[a.ti]}</p>${a.gi >= 0 ? `<p class="au-goal">${D.goal_line[a.gi]}</p>` : ""}</div>
@@ -423,14 +436,14 @@
             <span>${fmt(t.hours)} ${T.r_now} · <strong>${fmt(t.saved)} ${T.r_saved}</strong></span></div>`).join("")}</div>
       </section>
       <section><h3>${T.r_prio}</h3>
-        <ol class="au-prio">${top.map((t) => `<li><b>${esc(t.label)}</b><em class="au-eff e${t.eff}">${T.effort[t.eff]}</em>
+        <ol class="au-prio">${top.map((t) => `<li><b>${esc(t.label)}</b><em class="au-eff e${t.custom ? t.eff : Math.max(0, t.eff - 1)}">${T.effort[t.custom ? t.eff : Math.max(0, t.eff - 1)]}</em>
           <div class="au-opts">${[t.light, t.full].map((x, j) => `<div class="au-opt${t.custom === !!j ? " rec" : ""}"><span class="mono">${D.opt[j]}${t.custom === !!j ? ` · ${D.rec}` : ""}</span><p>${esc(x)}</p></div>`).join("")}</div>
           <p class="au-why">${D.why[t.custom ? 1 : 0]} <span>${D.kpi}: ${esc(t.kpi)}.</span> <a href="${svcPage}#s${t.svc}">${en ? "See the service" : "Vedi il servizio"} →</a></p></li>`).join("")}</ol>
       </section>
       <section><h3>${T.r_plan}</h3>
         <ol class="au-plan">${plan.map((p, i) => `<li><span class="mono">${T.plan[i]}</span><p>${esc(p)}</p></li>`).join("")}</ol>
       </section>
-      ${a.sw >= 0 || a.spend >= 0 ? `<section><h3>${D.sw_h}</h3><p class="au-swp">${D.sw_line(a.sw >= 0 ? D.sw[a.sw] : "", a.spend >= 0 ? D.spend[a.spend] : "")} ${a.sw >= 1 || a.spend >= 2 ? D.sw_many : D.sw_few}</p></section>` : ""}
+      ${a.sw >= 0 || a.spend >= 0 ? `<section><h3>${D.sw_h}</h3><p class="au-swp">${D.sw_line(a.sw >= 0 ? D.sw[a.sw] : "", a.spend >= 0 ? D.spend[a.spend] : "")} ${a.sw >= 2 || a.spend >= 2 ? D.sw_many : a.sw === 1 || a.spend === 1 ? D.sw_mid : D.sw_few}</p></section>` : ""}
       ${(() => { const r = recsOf(a); return r.length ? `<section><h3>${D.rec_h}</h3><div class="au-recs">${r.map((x) => `<a class="au-rec" href="${svcPage}#s${x}"><b>${D.svc[x][0]}</b><p>${D.svc[x][1]}</p></a>`).join("")}</div></section>` : ""; })()}
       <section><h3>${T.ctx_h}</h3>
         <div class="au-ctx">${stats.map((x, i) => `<div><b>${x[0]}</b><p>${x[1]}<sup>${i + 1}</sup></p></div>`).join("")}</div>

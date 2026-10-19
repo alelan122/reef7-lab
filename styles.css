@@ -1178,3 +1178,6 @@ body[data-page="mission"] .page-head + .block { padding-top: clamp(36px, 5vw, 56
   .au-rec { border-color: #ddd !important; break-inside: avoid; }
   .au-swp { color: #333 !important; }
 }
+
+.au-sum-cta { margin-top: 16px; }
+@media print { .au-sum-cta { display: none !important; } }
