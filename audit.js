@@ -11,30 +11,9 @@
   const base = en ? "../" : "";
   const WEEKS = 46; // settimane lavorative in un anno
 
-  // [chiave, attività, quota automatizzabile (ipotesi prudente), servizio, cosa costruiremmo]
-  const TASKS = en ? [
-    ["leads", "Replying to enquiries and new leads", 0.6, "11", "An AI agent that replies instantly on your website, WhatsApp and email, qualifies the lead and books the call."],
-    ["data", "Copying data between tools and spreadsheets", 0.8, "09", "Connecting your tools so data is entered once and reaches everywhere it's needed."],
-    ["reports", "Putting together reports and numbers", 0.75, "08", "A dashboard that updates itself with sales, cash and margins."],
-    ["booking", "Booking appointments and sending reminders", 0.7, "04", "Online bookings assigned to the right person, with automatic confirmations and reminders."],
-    ["followup", "Follow-ups and emails to customers", 0.65, "05", "Email sequences that go out at the right moment based on what each contact does."],
-    ["docs", "Quotes, invoices and documents", 0.5, "06", "Documents generated automatically from the data you already have, ready to check and send."],
-    ["questions", "Looking up information and answering internal questions", 0.5, "07", "A company brain: everything your company knows, one question away."],
-    ["support", "Repetitive customer support", 0.5, "11", "An AI assistant that answers frequent questions and hands delicate cases to a person."],
-    ["orders", "Managing orders, shipments and returns", 0.6, "09", "Orders, shipments and returns tracked in one view, with automatic customer updates."],
-    ["phone", "Answering the phone and calling back", 0.5, "12", "A voice assistant that answers, books and calls back the people you missed."],
-  ] : [
-    ["leads", "Rispondere a richieste e nuovi contatti", 0.6, "11", "Un agente AI che risponde subito su sito, WhatsApp ed email, qualifica il contatto e fissa la call."],
-    ["data", "Copiare dati tra programmi e fogli Excel", 0.8, "09", "Collegare i tuoi strumenti, così un dato si inserisce una volta sola e arriva ovunque serva."],
-    ["reports", "Preparare report e numeri", 0.75, "08", "Una dashboard che si aggiorna da sola con vendite, cassa e margini."],
-    ["booking", "Fissare appuntamenti e mandare promemoria", 0.7, "04", "Prenotazioni online assegnate alla persona giusta, con conferme e promemoria automatici."],
-    ["followup", "Follow-up ed email ai clienti", 0.65, "05", "Sequenze email che partono al momento giusto in base a cosa fa ogni contatto."],
-    ["docs", "Preventivi, fatture e documenti", 0.5, "06", "Documenti generati in automatico dai dati che hai già, pronti da controllare e inviare."],
-    ["questions", "Cercare informazioni e rispondere a domande interne", 0.5, "07", "Un company brain: tutto quello che sa la tua azienda, a una domanda di distanza."],
-    ["support", "Assistenza clienti ripetitiva", 0.5, "11", "Un assistente AI che risponde alle domande frequenti e passa a una persona i casi delicati."],
-    ["orders", "Gestire ordini, spedizioni e resi", 0.6, "09", "Ordini, spedizioni e resi tracciati in un'unica vista, con aggiornamenti automatici ai clienti."],
-    ["phone", "Rispondere al telefono e richiamare", 0.5, "12", "Un assistente vocale che risponde, prenota e richiama chi non sei riuscito a sentire."],
-  ];
+  // attività e soluzioni per settore: vedi audit-data.js
+  const D = window.R7_AUDIT[en ? "en" : "it"];
+  let si = D.sectors.length - 1, TASKS = D.sectors[si].tasks;
   const TOOLS = en ? [
     ["excel", "Excel or Google Sheets", "Spreadsheets are often the first bottleneck: moving that data into a database or a custom CRM removes errors and conflicting versions."],
     ["whatsapp", "WhatsApp", "On WhatsApp, an AI agent can reply to and qualify leads even outside office hours."],
@@ -72,7 +51,7 @@
     r_plan: "A plan in 3 steps", plan: ["First step", "Second step", "Third step"],
     plan_measure: "Measure the results with a dashboard: hours saved, response times and sales, always up to date.",
     plan_call: "A free 30-minute call: we go through this report on your real numbers and choose where to start.",
-    plan_build: (x) => `I build the first solution, starting from “${x}”, connected to the tools you already use. Then we add the rest one piece at a time.`,
+    plan_build: (x, sol) => `I build the first solution, starting from “${x}”, connected to the tools you already use: ${sol.charAt(0).toLowerCase() + sol.slice(1)}`,
     r_tools: "Notes on your tools", r_pain: "You told me", r_note: "Indicative estimate based on your answers and on conservative assumptions about how much of each activity can be automated (shown next to each one). We'll check the real numbers together, on your data.",
     pdf: "Download PDF", call: "Book a free call", restart: "Start over", sent_fail: "Your details didn't reach me, so no copy was sent by email. Download the PDF or write to me at {email} and I'll get back to you.",
     sent_ok: (e) => `A copy is on its way to <b>${e}</b>.`,
@@ -111,7 +90,7 @@
     r_plan: "Un piano in 3 passi", plan: ["Primo passo", "Secondo passo", "Terzo passo"],
     plan_measure: "Misuriamo i risultati con una dashboard: ore risparmiate, tempi di risposta e vendite, sempre aggiornati.",
     plan_call: "Una call gratuita di 30 minuti: guardiamo questo report sui tuoi numeri reali e scegliamo da dove partire.",
-    plan_build: (x) => `Costruisco la prima soluzione, partendo da “${x}”, collegata agli strumenti che usate già. Poi aggiungiamo il resto un pezzo alla volta.`,
+    plan_build: (x, sol) => `Costruisco la prima soluzione, partendo da “${x}”, collegata agli strumenti che usate già: ${sol.charAt(0).toLowerCase() + sol.slice(1)}`,
     r_tools: "Note sui vostri strumenti", r_pain: "Mi hai detto", r_note: "Stima indicativa basata sulle tue risposte e su ipotesi prudenti su quanto di ogni attività si può automatizzare (indicato accanto a ciascuna). I numeri reali li verifichiamo insieme, sui tuoi dati.",
     pdf: "Scarica il PDF", call: "Prenota una call gratuita", restart: "Ricomincia", sent_fail: "I tuoi dati non mi sono arrivati, quindi la copia per email non è partita. Scarica il PDF oppure scrivimi a {email} e ti rispondo io.",
     sent_ok: (e) => `Una copia sta arrivando a <b>${e}</b>.`,
@@ -134,18 +113,22 @@
     live_get: "Cosa ricevi", get: ["Ore e valore che puoi recuperare", "Cosa automatizzare per primo", "Un piano in 3 passi, anche in PDF"],
   };
 
-  const EFFORT = { leads: 1, data: 1, reports: 0, booking: 0, followup: 0, docs: 1, questions: 2, support: 1, orders: 1, phone: 2 };
   // dati di contesto mostrati in base alle attività scelte
   const statsFor = (a) => {
-    const k = new Set(a.tasks.map((t) => t.key)), out = [];
+    const k = new Set(a.tasks.map((t) => t.icon)), out = [];
+    const own = D.sectors[a.si].stat;
     if (k.has("leads") || k.has("support") || k.has("phone")) out.push("speed");
     if (k.has("data") || k.has("orders") || k.has("docs")) out.push("data");
     if (out.length < 2) out.push("rep");
-    out.push(a.team === T.teams[3] ? "mck" : "it");
-    return out.map((x) => T.stats[x]);
+    out.push(a.ti === 3 || en ? "mck" : "it");
+    const list = out.map((x) => T.stats[x]);
+    return (own ? [own, ...list] : list).slice(0, 3);
   };
   const tierOf = (h) => (h >= 15 ? 2 : h >= 6 ? 1 : 0);
+  // soluzione su misura o rapida, in base a dimensione del team e ore in gioco
+  const custom = (ti, h) => ti >= 2 || (ti === 1 && h >= 10) || h >= 15;
   const ICON = {
+    star: '<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2-5.5-2.9-5.5 2.9 1-6.2L3 9.6l6.2-.9z"/>',
     leads: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
     data: '<rect x="8" y="8" width="13" height="13" rx="2"/><path d="M4 16V5a1 1 0 0 1 1-1h11"/>',
     reports: '<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/>',
@@ -174,11 +157,7 @@
       </fieldset>
       <fieldset class="au-step" data-i="1" hidden>
         <p class="q-label">${T.tasks_q}<small>${T.tasks_hint}</small></p>
-        <div class="au-tasks">${TASKS.map(([k, label], i) => `
-          <div class="au-task" data-i="${i}">
-            <label class="au-check"><input type="checkbox" name="task" value="${i}"><i class="au-ico">${icon(k)}</i><span>${esc(label)}</span></label>
-            <div class="au-hours"><input type="range" min="1" max="40" step="1" value="5" aria-label="${esc(label)} · ${T.hours}"><output>5</output><small>${T.hours}</small></div>
-          </div>`).join("")}</div>
+        <div class="au-tasks"></div>
       </fieldset>
       <fieldset class="au-step" data-i="2" hidden>
         <div class="q-field"><p class="q-label">${T.tools_q}<small>${T.tools_hint}</small></p>${pills("tool", TOOLS.map((t) => t[1]), "checkbox")}</div>
@@ -232,13 +211,23 @@
   };
 
   // ore per attività: il cursore si attiva quando l'attività è selezionata
-  form.querySelectorAll(".au-task").forEach((row) => {
-    const box = row.querySelector("input[type=checkbox]"), range = row.querySelector("input[type=range]"), out = row.querySelector("output");
-    const sync = () => { row.classList.toggle("on", box.checked); range.disabled = !box.checked; };
-    box.addEventListener("change", sync);
-    range.addEventListener("input", () => { out.textContent = range.value; });
-    sync();
-  });
+  const renderTasks = (i) => {
+    si = i; TASKS = D.sectors[i].tasks;
+    const box = form.querySelector(".au-tasks");
+    box.innerHTML = TASKS.map((t, j) => `
+      <div class="au-task" data-i="${j}">
+        <label class="au-check"><input type="checkbox" name="task" value="${j}"><i class="au-ico">${icon(t[1])}</i><span>${esc(t[2])}</span></label>
+        <div class="au-hours"><input type="range" min="1" max="40" step="1" value="5" aria-label="${esc(t[2])} · ${T.hours}"><output>5</output><small>${T.hours}</small></div>
+      </div>`).join("");
+    box.querySelectorAll(".au-task").forEach((row) => {
+      const cb = row.querySelector("input[type=checkbox]"), range = row.querySelector("input[type=range]"), out = row.querySelector("output");
+      const sync = () => { row.classList.toggle("on", cb.checked); range.disabled = !cb.checked; };
+      cb.addEventListener("change", sync);
+      range.addEventListener("input", () => { out.textContent = range.value; });
+      sync();
+    });
+  };
+  renderTasks(si);
   form.addEventListener("change", (e) => e.target.closest(".q-field")?.classList.remove("invalid"));
 
   const valid = () => {
@@ -256,13 +245,14 @@
   const answers = () => {
     const f = new FormData(form);
     const tasks = [...form.querySelectorAll(".au-task.on")].map((row) => {
-      const t = TASKS[+row.dataset.i], h = +row.querySelector("input[type=range]").value;
-      return { key: t[0], label: t[1], f: t[2], svc: t[3], build: t[4], hours: h, saved: h * t[2] };
+      const t = TASKS[+row.dataset.i], h = +row.querySelector("input[type=range]").value, ti = +new FormData(form).get("team");
+      const c = custom(ti, h);
+      return { key: t[0], icon: t[1], label: t[2], f: t[3], svc: t[4], eff: t[5], light: t[6], full: t[7], kpi: t[8], custom: c, build: c ? t[7] : t[6], hours: h, saved: h * t[3] };
     }).sort((a, b) => b.saved - a.saved);
     const saved = tasks.reduce((s, t) => s + t.saved, 0);
     const cost = Math.max(0, parseFloat(f.get("cost")) || 0);
     return {
-      sector: T.sectors[+f.get("sector")], team: T.teams[+f.get("team")], tasks, saved,
+      si: +f.get("sector"), ti: +f.get("team"), sector: T.sectors[+f.get("sector")], team: T.teams[+f.get("team")], tasks, saved,
       tools: f.getAll("tool").map((i) => TOOLS[+i]), pain: (f.get("pain") || "").toString().trim(), cost,
     };
   };
@@ -276,7 +266,7 @@
     live.querySelector(".au-live-days b").textContent = Math.round((target * WEEKS) / 8).toLocaleString(en ? "en-GB" : "it-IT");
     const max = Math.max(1, ...a.tasks.map((t) => t.hours));
     live.querySelector(".au-live-bars").innerHTML = a.tasks.slice(0, 4).map((t) =>
-      `<div><span>${icon(t.key)}${esc(t.label)}</span><i><b style="width:${(t.saved / max) * 100}%"></b></i><em>${fmt(t.saved)}</em></div>`).join("");
+      `<div><span>${icon(t.icon)}${esc(t.label)}</span><i><b style="width:${(t.saved / max) * 100}%"></b></i><em>${fmt(t.saved)}</em></div>`).join("");
     cancelAnimationFrame(raf);
     const from = shown, t0 = performance.now();
     const step = (now) => {
@@ -292,6 +282,7 @@
 
   next.addEventListener("click", () => {
     if (!valid()) return;
+    if (cur === 0) { const ns = +new FormData(form).get("sector"); if (ns !== si) { renderTasks(ns); updateLive(); } }
     if (cur < steps.length - 1) { show(cur + 1); card.scrollIntoView({ block: "nearest", behavior: "smooth" }); return; }
     const a = answers();
     form.hidden = true;
@@ -304,18 +295,18 @@
 
   // piano in 3 passi: usato nel report a schermo e nella copia per email
   const planOf = (a) => {
-    const first = a.tasks[0].label;
-    return [T.plan_call, T.plan_build(first.charAt(0).toLowerCase() + first.slice(1)), T.plan_measure];
+    const first = a.tasks[0].label, kpis = a.tasks.slice(0, 2).map((t) => t.kpi).join(en ? " and " : " e ");
+    return [T.plan_call, T.plan_build(first.charAt(0).toLowerCase() + first.slice(1), a.tasks[0].build), D.measure(kpis)];
   };
   const mailText = (a, name) => {
     const plan = planOf(a), L = [];
-    L.push(T.mail_intro(name), "");
+    L.push(T.mail_intro(name), "", `${D.sector_k} (${a.sector}, ${a.team}): ${D.sectors[a.si].intro}`, "");
     L.push(`${fmt(a.saved)} ${T.k_week} · ${Math.round((a.saved * WEEKS) / 8)} ${T.k_year}` + (a.cost ? ` · ${money(a.saved * WEEKS * a.cost)} ${T.k_value}` : ""), "");
     L.push(`${T.pot}: ${Math.round((a.saved / a.tasks.reduce((x, t) => x + t.hours, 0)) * 100)}% · ${T.tier[tierOf(a.saved)][0]}. ${T.tier[tierOf(a.saved)][1]}`, "");
     L.push(T.r_tasks.toUpperCase());
     a.tasks.forEach((t) => L.push(`- ${t.label}: ${fmt(t.hours)} ${T.r_now}, ${fmt(t.saved)} ${T.r_saved}`));
     L.push("", T.r_prio.toUpperCase());
-    a.tasks.slice(0, 3).forEach((t, i) => L.push(`${i + 1}. ${t.label}: ${t.build}`));
+    a.tasks.slice(0, 3).forEach((t, i) => L.push(`${i + 1}. ${t.label}`, `   ${D.opt[0]}: ${t.light}`, `   ${D.opt[1]}: ${t.full}`, `   ${D.rec}: ${D.opt[t.custom ? 1 : 0].toLowerCase()} · ${D.kpi}: ${t.kpi}`));
     L.push("", T.r_plan.toUpperCase());
     plan.forEach((x, i) => L.push(`${i + 1}. ${x}`));
     L.push("", T.r_note, "", T.mail_end, "", `${T.mail_link} ${location.href.split("#")[0]}`);
@@ -382,6 +373,7 @@
           <p class="au-sum-first"><span class="mono">${T.sum_first}</span>${esc(top[0].label)}: ${esc(top[0].build)}</p></div>
         <div class="au-gauge" style="--p:${pct}"><b>${pct}%</b><span>${T.pot}</span></div>
       </div>
+      <div class="au-sector"><p class="mono">${D.sector_k} · ${esc(a.sector)} · ${esc(a.team)} ${en ? "people" : "persone"}</p><p>${D.sectors[a.si].intro}</p><p class="au-scope">${D.scope[a.ti]}</p></div>
       <div class="au-kpis">
         <div><b>${fmt(a.saved)}</b><span>${T.k_week}</span></div>
         <div><b>${Math.round(days).toLocaleString(en ? "en-GB" : "it-IT")}</b><span>${T.k_year}</span></div>
@@ -396,7 +388,9 @@
             <span>${fmt(t.hours)} ${T.r_now} · <strong>${fmt(t.saved)} ${T.r_saved}</strong></span></div>`).join("")}</div>
       </section>
       <section><h3>${T.r_prio}</h3>
-        <ol class="au-prio">${top.map((t) => `<li><b>${esc(t.label)}</b><em class="au-eff e${EFFORT[t.key]}">${T.effort[EFFORT[t.key]]}</em><p><span class="mono">${T.r_build}</span>${esc(t.build)} <a href="${svcPage}#s${t.svc}">→</a></p></li>`).join("")}</ol>
+        <ol class="au-prio">${top.map((t) => `<li><b>${esc(t.label)}</b><em class="au-eff e${t.eff}">${T.effort[t.eff]}</em>
+          <div class="au-opts">${[t.light, t.full].map((x, j) => `<div class="au-opt${t.custom === !!j ? " rec" : ""}"><span class="mono">${D.opt[j]}${t.custom === !!j ? ` · ${D.rec}` : ""}</span><p>${esc(x)}</p></div>`).join("")}</div>
+          <p class="au-why">${D.why[t.custom ? 1 : 0]} <span>${D.kpi}: ${esc(t.kpi)}.</span> <a href="${svcPage}#s${t.svc}">${en ? "See the service" : "Vedi il servizio"} →</a></p></li>`).join("")}</ol>
       </section>
       <section><h3>${T.r_plan}</h3>
         <ol class="au-plan">${plan.map((p, i) => `<li><span class="mono">${T.plan[i]}</span><p>${esc(p)}</p></li>`).join("")}</ol>

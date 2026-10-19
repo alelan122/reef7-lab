@@ -1141,3 +1141,26 @@ body[data-page="mission"] .page-head + .block { padding-top: clamp(36px, 5vw, 56
   .au-src { color: #666 !important; }
 }
 @media print { .au-report section { break-inside: auto; } .au-report h3 { break-after: avoid; } .au-bar, .au-ctx { break-inside: avoid; } }
+
+/* report audit verticale: settore, due soluzioni per priorità */
+.au-sector { margin-top: 18px; padding: 20px 24px; border-radius: 16px; border: 1px solid var(--rule); }
+.au-sector p { margin: 0; }
+.au-sector p:not(.mono) { font-size: 15.5px; line-height: 1.55; margin-top: 8px; }
+.au-sector .au-scope { color: var(--muted); font-size: 14.5px; }
+.au-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0 10px; }
+.au-opt { padding: 14px 16px; border-radius: 12px; border: 1px solid var(--rule); }
+.au-opt.rec { border-color: rgba(95, 225, 242, .55); background: rgba(95, 225, 242, .06); }
+.au-opt .mono { display: block; margin-bottom: 6px; color: var(--muted); }
+.au-opt.rec .mono { color: var(--aqua); }
+.au-opt p { margin: 0; font-size: 14.5px; line-height: 1.5; }
+.au-why { font-size: 13.5px; color: var(--muted); margin: 0; }
+.au-why span { color: var(--text); }
+@media (max-width: 640px) { .au-opts { grid-template-columns: 1fr; } }
+@media print {
+  .au-sector, .au-opt { border-color: #ddd !important; break-inside: avoid; }
+  .au-opt.rec { border-color: #0b6c80 !important; background: #eef7f9 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .au-opt.rec .mono { color: #0b6c80 !important; }
+  .au-why a { display: none; }
+  .au-prio li { break-inside: avoid; }
+}
+@media print { .au-report { zoom: .86; } }
