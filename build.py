@@ -322,9 +322,10 @@ T = {
     "foot": "© 2026 Reef 7 Lab · Sviluppo software e intelligenza artificiale",
     "cta_k": "Nuovo progetto", "cta_h": "Costruiamo il tuo <em>reef</em>.",
     "founder": {"k": "Chi c'è dietro Reef 7 Lab", "h": "Parli direttamente con <em>me</em>.",
-                "p": "Sono Alessandro. Quando mi scrivi non passi da un commerciale o da un account manager: parli con chi studia il problema, progetta la soluzione e la costruisce. Meno passaggi, meno malintesi, decisioni più veloci.",
-                "points": ["Ho co-fondato Tupitago, startup di sviluppo software vincitrice di un bando della Regione Marche.", "Con Asia Baldoni Fitness abbiamo sostituito gran parte dei 54 software dell'azienda con un'unica piattaforma interna.", "Lavoro in cinque lingue, con una formazione tra Italia, Germania e Spagna."],
-                "cta": "Raccontami il tuo progetto", "a": "La mia storia",
+                "p": "Sono Alessandro. Quello che ti propongo l'ho già fatto: in un'azienda a sette cifre del fitness online ho aiutato a sostituire gran parte di 54 software con un'unica piattaforma interna, tagliando costi e lavoro a mano. Adesso porto lo stesso metodo nella tua azienda, e ogni passo lo segui con me: niente commerciali, niente passaggi di mano.",
+                "points": [["Asia Baldoni Fitness", "Partner tecnologico: gran parte di 54 software sostituiti da una piattaforma interna"], ["Tupitago", "Co-fondatore di una startup di sviluppo vincitrice di un bando della Regione Marche"], ["E-commerce", "Software e marketing per Veneziana, Breeez e Full Peak"], ["5 lingue", "Formazione tra Italia, Germania e Spagna"]],
+                "cta": "Prenota la call gratuita", "a": "La mia storia",
+                "risk": "30 minuti per capire cosa conviene fare nella tua azienda, anche se poi decidi di non lavorare con me. Ti rispondo entro un giorno lavorativo.",
                 "contact_h": "Ti rispondo io", "contact_p": "Leggo ogni richiesta personalmente e ti rispondo entro un giorno lavorativo, con le prime idee."},
     "services": [
         ("01", "Digitale", "Siti web e landing page", "Siti e pagine di vendita che trasformano le visite in contatti.",
@@ -514,9 +515,10 @@ T = {
     "foot": "© 2026 Reef 7 Lab · Software and AI development",
     "cta_k": "New project", "cta_h": "Let's build your <em>reef</em>.",
     "founder": {"k": "Who is behind Reef 7 Lab", "h": "You talk directly to <em>me</em>.",
-                "p": "I'm Alessandro. When you write to me you don't go through a salesperson or an account manager: you talk to the person who studies the problem, designs the solution and builds it. Fewer hand-offs, fewer misunderstandings, faster decisions.",
-                "points": ["I co-founded Tupitago, a software startup that won a Marche Region grant.", "With Asia Baldoni Fitness we replaced most of the company's 54 software tools with one internal platform.", "I work in five languages, trained across Italy, Germany and Spain."],
-                "cta": "Tell me about your project", "a": "My story",
+                "p": "I'm Alessandro. What I propose, I have already done: in a seven-figure online fitness company I helped replace most of 54 software tools with one internal platform, cutting costs and manual work. Now I bring the same method to your company, and you go through every step with me: no salespeople, no hand-offs.",
+                "points": [["Asia Baldoni Fitness", "Technology partner: most of 54 tools replaced by one internal platform"], ["Tupitago", "Co-founder of a software startup that won a Marche Region grant"], ["E-commerce", "Software and marketing for Veneziana, Breeez and Full Peak"], ["5 languages", "Trained across Italy, Germany and Spain"]],
+                "cta": "Book the free call", "a": "My story",
+                "risk": "30 minutes to work out what makes sense for your company, even if you then decide not to work with me. I reply within one business day.",
                 "contact_h": "I'll reply myself", "contact_p": "I read every request personally and reply within one business day, with first ideas."},
     "services": [
         ("01", "Digital", "Websites and landing pages", "Websites and sales pages that turn visits into enquiries.",
@@ -961,8 +963,9 @@ def build(lang, variant=""):
 <section class="block founder-block"><div class="wrap founder">
   <img class="founder-img" src="{pre}assets/alessandro.jpg" alt="{L['studio']['photo_alt']}" width="1024" height="1024" loading="lazy">
   <div class="founder-txt"><p class="mono">{L['founder']['k']}</p><h2>{L['founder']['h']}</h2><p class="founder-p">{L['founder']['p']}</p>
-    <ul class="founder-pts">{"".join(f"<li>{x}</li>" for x in L['founder']['points'])}</ul>
-    <div class="founder-act"><a class="btn" href="{u('contact')}">{L['founder']['cta']} <span class="arr">→</span></a><a class="link" href="{u('studio')}">{L['founder']['a']} {arrow}</a></div></div>
+    <ul class="founder-pts">{"".join(f"<li><b>{k}</b><span>{v}</span></li>" for k, v in L['founder']['points'])}</ul>
+    <div class="founder-act"><a class="btn" href="{u('contact')}">{L['founder']['cta']} <span class="arr">→</span></a><a class="link" href="{u('studio')}">{L['founder']['a']} {arrow}</a></div>
+    <p class="founder-risk">{L['founder']['risk']}</p></div>
 </div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{H['svc_h']}</h2><p>{H['svc_p']}</p></div>

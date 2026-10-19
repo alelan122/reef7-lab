@@ -1041,3 +1041,12 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
   .founder-img { aspect-ratio: 1; max-height: 340px; }
   .founder-txt h2 { font-size: clamp(32px, 9vw, 40px); }
 }
+
+/* sezione personale: credenziali come prove, frase che toglie il rischio */
+.founder-pts { display: grid !important; grid-template-columns: 1fr 1fr; gap: 1px !important; background: var(--rule); border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; max-width: 640px !important; }
+.founder-pts li { padding: 14px 16px !important; background: var(--ink); display: flex; flex-direction: column; gap: 3px; }
+.founder-pts li::before { display: none; }
+.founder-pts b { font-size: 14px; font-weight: 600; color: var(--text); }
+.founder-pts span { font-size: 13px; line-height: 1.45; color: var(--muted); }
+.founder-risk { margin-top: 16px; font-size: 13.5px; color: var(--muted); max-width: 520px; padding-left: 14px; border-left: 2px solid var(--aqua); }
+@media (max-width: 760px) { .founder-pts { grid-template-columns: 1fr; } }
