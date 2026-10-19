@@ -136,10 +136,11 @@
       3: [["19", "03", "17"], ["17", "19", "03"], ["03", "23", "11"]],
       4: [["12", "18", "04"], ["18", "04", "05"], ["18", "01", "05"], ["12", "04", "18"]],
     };
-    const GOAL = [["23", "11", "18"], ["20", "10", "21"], ["06", "08", "07", "25"], ["17", "07", "11"]];
+    const GOAL = [["31", "28", "29", "23"], ["20", "10", "21"], ["06", "08", "07", "25"], ["17", "07", "11"]];
     const subI = a.sub ? (D.subs[a.si] || []).indexOf(a.sub) : -1;
     const heavy = a.sw >= 2 || a.spend >= 2;
     if (a.gi === 1) add("20");
+    if (a.gi === 0) GOAL[0].forEach(add);
     (BY_SUB[a.si] ? BY_SUB[a.si][subI >= 0 ? subI : 0] : ["08", "06"]).forEach(add);
     if (heavy) add("20");
     if (a.gi >= 0) GOAL[a.gi].forEach(add);
@@ -147,6 +148,18 @@
     if (a.ti >= 2) add("26");
     return out.slice(0, 3);
   };
+  // guadagnare di più: leve del settore applicate a contatti, chiusure e valore del cliente
+  const revOf = (a) => {
+    if (a.li < 0 || a.ci < 0) return null;
+    const L = D.leads_mid[a.li], c = D.close_mid[a.ci], clients = L * c;
+    const rows = D.levers[a.si].map(([title, how, type, rate, src]) => {
+      const extra = type === "lost" ? L * (1 - c) * rate : clients * rate;
+      return { title, how, type, rate, src, extra, eur: a.value ? extra * a.value : 0 };
+    });
+    const extra = rows.reduce((x, r) => x + r.extra, 0);
+    return { clients, now: a.value ? clients * a.value : 0, rows, extra, eur: a.value ? extra * a.value : 0 };
+  };
+  const num1 = (n) => (n >= 10 ? Math.round(n) : Math.round(n * 10) / 10).toLocaleString(en ? "en-GB" : "it-IT");
   const tierOf = (h) => (h >= 15 ? 2 : h >= 6 ? 1 : 0);
   // soluzione su misura o rapida, in base a dimensione del team e ore in gioco
   const custom = (ti, h) => ti >= 2 || (ti === 1 && h >= 10) || h >= 15;
@@ -166,7 +179,7 @@
   const icon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICON[k]}</svg>`;
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const fmt = (n) => (Math.round(n * 2) / 2).toLocaleString(en ? "en-GB" : "it-IT");
-  const money = (n) => (en ? "€" : "") + String(Math.round(n / 100) * 100).replace(/\B(?=(\d{3})+(?!\d))/g, en ? "," : ".") + (en ? "" : " €");
+  const money = (n) => (en ? "€" : "") + String(n < 1000 ? Math.round(n / 10) * 10 : n < 10000 ? Math.round(n / 100) * 100 : Math.round(n / 1000) * 1000).replace(/\B(?=(\d{3})+(?!\d))/g, en ? "," : ".") + (en ? "" : " €");
   const pills = (name, opts, type = "radio") => `<div class="picks">${opts.map((o, i) => `<label class="pick"><input type="${type}" name="${name}" value="${i}"><span>${esc(o)}</span></label>`).join("")}</div>`;
 
   root.innerHTML = `
@@ -186,6 +199,9 @@
       </fieldset>
       <fieldset class="au-step" data-i="2" hidden>
         <div class="q-field"><p class="q-label">${T.tools_q}<small>${T.tools_hint}</small></p>${pills("tool", TOOLS.map((t) => t[1]), "checkbox")}</div>
+        <div class="q-field"><p class="q-label">${D.leads_q}</p>${pills("leads", D.leads)}</div>
+        <div class="q-field"><p class="q-label">${D.close_q}</p>${pills("close", D.close)}</div>
+        <label class="field au-cost"><span>${D.value_q}</span><input name="value" type="number" min="0" max="1000000" inputmode="decimal" placeholder="${D.value_ph}"><small>${D.value_hint}</small></label>
         <div class="q-field"><p class="q-label">${D.sw_q}</p>${pills("sw", D.sw)}</div>
         <div class="q-field"><p class="q-label">${D.spend_q}</p>${pills("spend", D.spend)}</div>
         <label class="field"><span>${T.pain}</span><textarea name="pain" rows="3" maxlength="500" placeholder="${T.pain_ph}"></textarea></label>
@@ -297,6 +313,8 @@
       sub: f.get("sub") === null ? null : (D.subs[+f.get("sector")] || [])[+f.get("sub")] || null, gi,
       sw: f.get("sw") === null ? -1 : +f.get("sw"), spend: f.get("spend") === null ? -1 : +f.get("spend"),
       site: (f.get("site") || "").toString().trim().slice(0, 200),
+      li: f.get("leads") === null ? -1 : +f.get("leads"), ci: f.get("close") === null ? -1 : +f.get("close"),
+      value: Math.max(0, parseFloat(f.get("value")) || 0),
     };
   };
 
@@ -347,6 +365,12 @@
     L.push(`${fmt(a.saved)} ${T.k_week} · ${Math.round((a.saved * WEEKS) / 8)} ${T.k_year}` + (a.cost ? ` · ${money(a.saved * WEEKS * a.cost)} ${T.k_value}` : ""), "");
     L.push(`${T.pot}: ${Math.round((a.saved / a.tasks.reduce((x, t) => x + t.hours, 0)) * 100)}% · ${T.tier[tierOf(a.saved)][0]}. ${T.tier[tierOf(a.saved)][1]}`, "");
     if (a.gi >= 0) L.push(D.goal_line[a.gi], "");
+    const rv = revOf(a);
+    if (rv) {
+      L.push(D.rev_h.toUpperCase(), D.rev_now(num1(rv.clients), rv.now ? money(rv.now) : "") + " " + (rv.eur ? D.rev_total(money(rv.eur), money(rv.eur * 12)) : D.rev_total_c(num1(rv.extra))).replace(/<\/?b>/g, ""));
+      rv.rows.forEach((r) => L.push(`- ${r.title}: ${D.rev_each(num1(r.extra), r.eur ? money(r.eur) : "")}`));
+      L.push("");
+    }
     L.push(T.r_tasks.toUpperCase());
     a.tasks.forEach((t) => L.push(`- ${t.label}: ${fmt(t.hours)} ${T.r_now}, ${fmt(t.saved)} ${T.r_saved}`));
     L.push("", T.r_prio.toUpperCase());
@@ -380,6 +404,8 @@
         body: JSON.stringify({
           _subject: `${T.subject}: ${company || name} · ${fmt(a.saved)} h/sett.`, _replyto: email, _template: "table", _captcha: "false",
           _autoresponse: mailText(a, name), "Fonte": "Audit di automazione", "Nome": name, email, "Azienda": company || "—", "Settore": a.sector, "Dettaglio settore": a.sub ? a.sub[0] : "—", "Persone in azienda": a.team, "Obiettivo": a.gi >= 0 ? D.goals[a.gi] : "—",
+          "Contatti al mese": a.li >= 0 ? D.leads[a.li] : "—", "Su 10 diventano clienti": a.ci >= 0 ? D.close[a.ci] : "—", "Valore medio cliente": a.value || "—",
+          "Fatturato in più stimato (anno)": (() => { const r = revOf(a); return r && r.eur ? money(r.eur * 12) : "—"; })(),
           "Software usati": a.sw >= 0 ? D.sw[a.sw] : "—", "Spesa software al mese": a.spend >= 0 ? D.spend[a.spend] : "—", "Sito": a.site || "—",
           "Attività manuali (ore/sett.)": a.tasks.map((t) => `${t.label}: ${t.hours}`).join("; "),
           "Ore recuperabili stimate a settimana": fmt(a.saved), "Priorità": a.tasks.slice(0, 3).map((t) => t.label).join("; "),
@@ -404,7 +430,11 @@
     const plan = planOf(a);
     const total = a.tasks.reduce((x, t) => x + t.hours, 0), pct = Math.round((a.saved / total) * 100);
     const tier = tierOf(a.saved), fte = (Math.round((a.saved / 40) * 10) / 10).toLocaleString(en ? "en-GB" : "it-IT");
-    const perMonth = a.saved * 4.33, stats = statsFor(a);
+    const perMonth = a.saved * 4.33, stats = statsFor(a), rev = revOf(a);
+    const revHtml = rev ? `<section class="au-rev"><h3>${D.rev_h}</h3>
+        <p class="au-rev-now">${D.rev_now(num1(rev.clients), rev.now ? money(rev.now) : "")} ${rev.eur ? D.rev_total(money(rev.eur), money(rev.eur * 12)) : D.rev_total_c(num1(rev.extra))}</p>
+        <div class="au-levers">${rev.rows.map((r) => `<div class="au-lever"><b>${r.title}</b><p>${r.how}</p><span class="au-lever-n">${D.rev_each(num1(r.extra), r.eur ? money(r.eur) : "")}</span><small>${r.type === "lost" ? D.rev_assume_lost(Math.round(r.rate * 100)) : D.rev_assume(Math.round(r.rate * 100))}${r.src ? ` · ${r.src}` : ""}</small></div>`).join("")}</div>
+        <p class="au-note">${D.rev_note}</p></section>` : "";
     const contact = new URL(contactPage, location.href).href.split("?")[0];
     const q = new URLSearchParams({ need: "", team: a.team, goal: `${T.r_title}: ${fmt(a.saved)} ${T.k_week}` });
     report.innerHTML = `
@@ -425,10 +455,12 @@
       <div class="au-kpis">
         <div><b>${fmt(a.saved)}</b><span>${T.k_week}</span></div>
         <div><b>${Math.round(days).toLocaleString(en ? "en-GB" : "it-IT")}</b><span>${T.k_year}</span></div>
-        ${a.cost ? "" : `<div><b>${fte}</b><span>${T.fte(fte).replace(fte + " ", "")}</span></div>`}
+        ${rev && rev.eur ? `<div><b>+${money(rev.eur * 12)}</b><span>${D.k_rev}</span></div>` : ""}
+        ${a.cost || (rev && rev.eur) ? "" : `<div><b>${fte}</b><span>${T.fte(fte).replace(fte + " ", "")}</span></div>`}
         ${a.cost ? `<div><b>${money(a.saved * WEEKS * a.cost)}</b><span>${T.k_value}</span></div>` : ""}
       </div>
       <p class="au-month">${T.month(fmt(perMonth), a.cost ? money(perMonth * a.cost) : "")} ${en ? "That's" : "Equivale a"} ${T.fte(fte)}.</p>
+      ${rev && a.gi === 0 ? revHtml : ""}
       <section><h3>${T.r_tasks}</h3>
         <div class="au-bars">${a.tasks.map((t) => `
           <div class="au-bar"><p>${esc(t.label)}<small>${T.auto(Math.round(t.f * 100))}</small></p>
@@ -443,6 +475,7 @@
       <section><h3>${T.r_plan}</h3>
         <ol class="au-plan">${plan.map((p, i) => `<li><span class="mono">${T.plan[i]}</span><p>${esc(p)}</p></li>`).join("")}</ol>
       </section>
+      ${rev && a.gi !== 0 ? revHtml : ""}
       ${a.sw >= 0 || a.spend >= 0 ? `<section><h3>${D.sw_h}</h3><p class="au-swp">${D.sw_line(a.sw >= 0 ? D.sw[a.sw] : "", a.spend >= 0 ? D.spend[a.spend] : "")} ${a.sw >= 2 || a.spend >= 2 ? D.sw_many : a.sw === 1 || a.spend === 1 ? D.sw_mid : D.sw_few}</p></section>` : ""}
       ${(() => { const r = recsOf(a); return r.length ? `<section><h3>${D.rec_h}</h3><div class="au-recs">${r.map((x) => `<a class="au-rec" href="${svcPage}#s${x}"><b>${D.svc[x][0]}</b><p>${D.svc[x][1]}</p></a>`).join("")}</div></section>` : ""; })()}
       <section><h3>${T.ctx_h}</h3>
