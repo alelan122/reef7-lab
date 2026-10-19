@@ -321,6 +321,11 @@ T = {
     "menu": "Menu", "close": "Chiudi", "pages": "Pagine",
     "foot": "© 2026 Reef 7 Lab · Sviluppo software e intelligenza artificiale",
     "cta_k": "Nuovo progetto", "cta_h": "Costruiamo il tuo <em>reef</em>.",
+    "founder": {"k": "Chi c'è dietro", "h": "Parli direttamente con <em>me</em>.",
+                "p": "Sono Alessandro. Niente intermediari né account manager: segui il progetto con chi lo progetta e lo costruisce, dalla prima call alla consegna.",
+                "points": ["Co-fondatore di Tupitago, vincitrice di un bando della Regione Marche", "Partner di Asia Baldoni Fitness: 54 software riuniti in un'unica piattaforma", "Cinque lingue, formazione tra Italia, Germania e Spagna"],
+                "cta": "Parliamo del tuo progetto", "a": "Scopri chi sono",
+                "contact_h": "Ti rispondo io", "contact_p": "Leggo ogni richiesta personalmente e ti rispondo entro un giorno lavorativo, con le prime idee."},
     "services": [
         ("01", "Digitale", "Siti web e landing page", "Siti e pagine di vendita che trasformano le visite in contatti.",
          "Il sito è spesso il primo contatto con un cliente. Progettiamo siti e landing page che spiegano subito il valore, accompagnano verso il contatto e si aggiornano senza dover chiamare nessuno.",
@@ -508,6 +513,11 @@ T = {
     "menu": "Menu", "close": "Close", "pages": "Pages",
     "foot": "© 2026 Reef 7 Lab · Software and AI development",
     "cta_k": "New project", "cta_h": "Let's build your <em>reef</em>.",
+    "founder": {"k": "Who is behind it", "h": "You talk directly to <em>me</em>.",
+                "p": "I'm Alessandro. No middlemen, no account managers: you work with the person who designs and builds your project, from the first call to delivery.",
+                "points": ["Co-founder of Tupitago, winner of a Marche Region grant", "Partner of Asia Baldoni Fitness: 54 tools brought into one platform", "Five languages, trained across Italy, Germany and Spain"],
+                "cta": "Let's talk about your project", "a": "About me",
+                "contact_h": "I'll reply myself", "contact_p": "I read every request personally and reply within one business day, with first ideas."},
     "services": [
         ("01", "Digital", "Websites and landing pages", "Websites and sales pages that turn visits into enquiries.",
          "Your website is often the first contact a client has with you. We design websites and landing pages that explain the value straight away, guide people towards getting in touch, and can be updated without calling anyone.",
@@ -948,6 +958,12 @@ def build(lang, variant=""):
 </div></section>
 {partners_html}
 {case_home}
+<section class="block founder-block"><div class="wrap founder">
+  <img class="founder-img" src="{pre}assets/alessandro.jpg" alt="{L['studio']['photo_alt']}" width="1024" height="1024" loading="lazy">
+  <div class="founder-txt"><p class="mono">{L['founder']['k']}</p><h2>{L['founder']['h']}</h2><p class="founder-p">{L['founder']['p']}</p>
+    <ul class="founder-pts">{"".join(f"<li>{x}</li>" for x in L['founder']['points'])}</ul>
+    <div class="founder-act"><a class="btn" href="{u('contact')}">{L['founder']['cta']} <span class="arr">→</span></a><a class="link" href="{u('studio')}">{L['founder']['a']} {arrow}</a></div></div>
+</div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{H['svc_h']}</h2><p>{H['svc_p']}</p></div>
   <div class="svc-list">{rows}
@@ -1048,14 +1064,14 @@ def build(lang, variant=""):
   <article class="principle"><span class="mono">{n}</span><h2>{t}</h2><p>{d}</p></article>""" for n, t, d in St["principles"])
     who = "".join(f"<p>{p}</p>" for p in St["who"])
     out["studio"] = page("studio", St["title"], St["desc"], head_block(L["nav"]["studio"], St["h1"], St["sub"]) + f"""
-<section class="wrap principle-list">{pr}
-</section>
-<section class="block"><div class="wrap about">
+<section class="block about-first"><div class="wrap about">
   <div class="portrait"><img src="{pre}assets/alessandro.jpg" alt="{St['photo_alt']}" width="1024" height="1024"></div>
   <div><p class="big">{St['who_big']}</p><div class="about-bio" data-more="{St['more']}">{who}</div>
     <ul class="creds">{"".join(f"<li><b>{k}</b><span>{v}</span></li>" for k, v in St['creds'])}</ul>
     <div class="sign"><b>{St['sign'][0]}</b><span>{St['sign'][1]}</span></div></div>
-</div></section>""")
+</div></section>
+<section class="wrap principle-list">{pr}
+</section>""")
 
     # contatti: modulo in tre passi
     C = L["contact"]; F = C["f"]
@@ -1099,6 +1115,7 @@ def build(lang, variant=""):
     out["contact"] = page("contact", C["title"], C["desc"], head_block(L["nav"]["contact"], C["h1"], C["sub"]) + f"""
 <section class="block contact"><div class="wrap contact-grid">
   <aside class="contact-side">
+    <div class="contact-me"><img src="{pre}assets/alessandro.jpg" alt="{L['studio']['photo_alt']}" width="1024" height="1024"><div><b>{L['founder']['contact_h']}</b><p>{L['founder']['contact_p']}</p></div></div>
     <p class="mono" style="margin-bottom:18px">{C['next_k']}</p>
     <ol class="next-steps">{steps_side}</ol>
     <p class="au-side">{L['audit']['contact_p']} <a class="link" href="{u('audit')}">{L['audit']['contact_a']} {arrow}</a></p>
