@@ -1054,3 +1054,12 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
 /* pulsanti della sezione personale allineati sulla stessa linea */
 .founder-act { align-items: center; }
 .founder-act .link { margin: 0 !important; align-self: center; }
+/* foto del fondatore: sul telefono la testa resta sempre dentro l'inquadratura */
+@media (max-width: 760px) {
+  .founder-img { aspect-ratio: 4 / 5; max-height: none; object-position: 50% 0%; }
+  .portrait img { object-position: 50% 0%; }
+}
+
+/* accessibilità: link per saltare al contenuto, visibile solo con la tastiera */
+.skip { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 10px 16px; border-radius: 999px; background: var(--text); color: var(--ink); font-weight: 600; transition: top .15s; }
+.skip:focus { top: 12px; }

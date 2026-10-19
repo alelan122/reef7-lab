@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /alt/
+Sitemap: https://alelan122.github.io/reef7-lab/sitemap.xml

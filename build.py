@@ -9,6 +9,18 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent
 EMAIL = "lancioni.ale@gmail.com"
+SITE_URL = "https://alelan122.github.io/reef7-lab/"
+_DIMS = {}
+def img_dims(rel):
+    """width/height reali di un'immagine locale, da scrivere nel tag <img>."""
+    if rel not in _DIMS:
+        try:
+            from PIL import Image
+            with Image.open(Path(__file__).parent / rel) as im:
+                _DIMS[rel] = f' width="{im.width}" height="{im.height}"'
+        except Exception:
+            _DIMS[rel] = ""
+    return _DIMS[rel]
 # indirizzo del Worker dell'Agent AI (projects/reef7-agent): vuoto = demo guidata
 AGENT_URL = ""
 
@@ -726,7 +738,7 @@ def eco(H, pre):
     <div class="hubviz" aria-hidden="true">
       <svg viewBox="0 0 100 100" class="hub-lines"><circle cx="50" cy="50" r="38" class="ring"/>{lines}</svg>
       {nodes}
-      <span class="hub-core"><img src="{pre}assets/reef7-logo.png" alt="" width="44" height="44"><b>{H['eco_core']}</b></span>
+      <span class="hub-core"><img src="{pre}assets/logo-88.png" alt="" width="44" height="44"><b>{H['eco_core']}</b></span>
     </div>
   </div>"""
 
@@ -751,6 +763,15 @@ def build(lang, variant=""):
   <div><p class="mono">{L['cta_k']}</p><h2>{L['cta_h']}</h2></div><span class="circle" aria-hidden="true">→</span>
 </a></div></section>"""
         inline_js = INLINE_JS % (EMAIL, AGENT_URL)
+        url_of = lambda lg, k: SITE_URL + ("" if lg == "it" else "en/") + ("" if k == "home" else SLUG[lg][k])
+        self_url, other_url, it_url = url_of(lang, key), url_of(other, key), url_of("it", key)
+        jsonld = ""
+        if key == "home" and not variant:
+            import json as _json
+            data = {"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Reef 7 Lab", "url": SITE_URL, "logo": SITE_URL + "assets/reef7-logo.png",
+                    "image": SITE_URL + "assets/og-card.jpg", "email": EMAIL, "description": desc, "areaServed": "IT", "knowsLanguage": ["it", "en", "es", "de", "zh"],
+                    "founder": {"@type": "Person", "name": "Alessandro Lancioni", "jobTitle": "Founder", "image": SITE_URL + "assets/alessandro.jpg"}}
+            jsonld = '\n  <script type="application/ld+json">' + _json.dumps(data, ensure_ascii=False) + "</script>"
         return f"""<!doctype html>
 <html lang="{lang}">
 <head>
@@ -760,10 +781,20 @@ def build(lang, variant=""):
   <title>{title}</title>
   <meta name="description" content="{desc}">
   <meta name="theme-color" content="#04080f">
+  <link rel="canonical" href="{self_url}">
+  <link rel="alternate" hreflang="{lang}" href="{self_url}">
+  <link rel="alternate" hreflang="{other}" href="{other_url}">
+  <link rel="alternate" hreflang="x-default" href="{it_url}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Reef 7 Lab">
+  <meta property="og:locale" content="{'it_IT' if lang == 'it' else 'en_US'}">
+  <meta property="og:url" content="{self_url}">
   <meta property="og:title" content="{title}">
   <meta property="og:description" content="{desc}">
-  <meta property="og:image" content="{pre}assets/reef7-logo.png">
-  <link rel="alternate" hreflang="{other}" href="{alt}">
+  <meta property="og:image" content="{SITE_URL}assets/og-card.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">{jsonld}
   <link rel="icon" href="{pre}assets/favicon.png">
   <link rel="apple-touch-icon" href="{pre}assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -772,13 +803,14 @@ def build(lang, variant=""):
   <link rel="stylesheet" href="{pre}{css}?v={VERSION}">
 </head>
 <body data-page="{key}" data-build="{BUILD}">
+<a class="skip" href="#main">{"Salta al contenuto" if lang == "it" else "Skip to content"}</a>
 <header class="top{'' if hero else ' solid'}"><div class="wrap top-in">
-  <a class="logo" href="{u('home')}"><img src="{pre}assets/reef7-logo.png" alt="" width="34" height="34">Reef 7 Lab</a>
+  <a class="logo" href="{u('home')}"><img src="{pre}assets/logo-68.png" alt="" width="34" height="34">Reef 7 Lab</a>
   <nav aria-label="{L['pages']}">{links}<a href="{u('contact')}" class="cta" title="{L['nav_d']['contact']}"{cur}><span class="nav-l">{L['nav']['contact']}</span><span class="nav-d">{L['nav_d']['contact']}</span></a></nav>
   <a class="lang" href="{alt}" hreflang="{other}" lang="{other}">{other.upper()}</a>
   <button class="menu" aria-expanded="false" data-close="{L['close']}">{L['menu']}</button>
 </div></header>
-<main>
+<main id="main">
 {body}
 </main>{band}
 <footer class="foot"><div class="wrap foot-in">
@@ -865,12 +897,12 @@ def build(lang, variant=""):
     {link}
     <p class="project-note">{p['note']}</p>
   </div>
-  <div class="project-frame">{frame(w)}{f'<a class="pf-thumb" href="{href}" target="_blank" rel="noopener"><img src="{pre}{w["thumb"]}" alt="{p["name"]}" loading="lazy"><span>{open_t} ↗</span></a>' if href and w.get("thumb") else (f'<span class="pf-thumb"><img src="{pre}{w["thumb"]}" alt="{p["name"]}" loading="lazy"></span>' if w.get("thumb") else "")}</div>
+  <div class="project-frame">{frame(w)}{f'<a class="pf-thumb" href="{href}" target="_blank" rel="noopener"><img src="{pre}{w["thumb"]}"{img_dims(w["thumb"])} alt="{p["name"]}" loading="lazy"><span>{open_t} ↗</span></a>' if href and w.get("thumb") else (f'<span class="pf-thumb"><img src="{pre}{w["thumb"]}"{img_dims(w["thumb"])} alt="{p["name"]}" loading="lazy"></span>' if w.get("thumb") else "")}</div>
 </article>"""
 
     def work_card(w):
         p = W["projects"][w["key"]]
-        img = f'<img src="{pre}{w["thumb"]}" alt="" loading="lazy">' if w["thumb"] else tenka_mock()
+        img = f'<img src="{pre}{w["thumb"]}"{img_dims(w["thumb"])} alt="" loading="lazy">' if w["thumb"] else tenka_mock()
         return f'<a class="work-card2" href="{u("work")}#{w["key"]}"><div class="wc-img">{img}</div><div class="wc-meta"><h3>{p["name"]}</h3><p>{p["type"]}</p></div></a>'
 
     work_cards = "".join(work_card(w) for w in WORK)
@@ -882,7 +914,7 @@ def build(lang, variant=""):
     def feat_card(i, key):
         w = next(x for x in WORK if x["key"] == key)
         p = W["projects"][key]
-        return f"""<a class="feat-card" href="{u('work')}#{key}"><img src="{pre}{FEAT_IMG.get(key, w['thumb'])}" alt="" loading="lazy">
+        return f"""<a class="feat-card" href="{u('work')}#{key}"><img src="{pre}{FEAT_IMG.get(key, w['thumb'])}"{img_dims(FEAT_IMG.get(key, w['thumb']))} alt="" loading="lazy">
       <span class="feat-n mono">0{i}</span>
       <div class="feat-meta"><div><h3>{p['name']}</h3><p>{p['type']}</p></div><span class="feat-go" aria-hidden="true">→</span></div></a>"""
     feat_cards = "".join(feat_card(i, k) for i, k in enumerate(FEAT, 1))
@@ -1155,6 +1187,22 @@ if __name__ == "__main__":
     for lang in T:
         build(lang)
     (ROOT / "version.txt").write_text(BUILD, encoding="utf-8")
+    # sitemap con le due lingue collegate, robots e pagina 404
+    rows = []
+    for k in SLUG["it"]:
+        urls = {lg: SITE_URL + ("" if lg == "it" else "en/") + ("" if k == "home" else SLUG[lg][k]) for lg in ("it", "en")}
+        for lg in ("it", "en"):
+            alts = "".join(f'<xhtml:link rel="alternate" hreflang="{x}" href="{urls[x]}"/>' for x in ("it", "en")) + f'<xhtml:link rel="alternate" hreflang="x-default" href="{urls["it"]}"/>'
+            rows.append(f"  <url><loc>{urls[lg]}</loc>{alts}</url>")
+    (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + "\n".join(rows) + "\n</urlset>\n", encoding="utf-8")
+    (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /alt/\nSitemap: {SITE_URL}sitemap.xml\n", encoding="utf-8")
+    (ROOT / "404.html").write_text(f"""<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>Pagina non trovata · Reef 7 Lab</title><link rel="icon" href="/reef7-lab/assets/favicon.png">
+<style>body{{margin:0;min-height:100vh;display:grid;place-items:center;background:#04080f;color:#eef3f8;font:17px/1.6 "Segoe UI",system-ui,sans-serif;text-align:center;padding:24px}}h1{{font-size:44px;margin:14px 0 6px;letter-spacing:-.03em}}p{{color:#93a3b5;margin:0 0 26px}}a{{display:inline-block;margin:4px;padding:12px 22px;border-radius:999px;background:#eef3f8;color:#04080f;text-decoration:none;font-weight:600}}a.g{{background:none;color:#eef3f8;box-shadow:inset 0 0 0 1px rgba(238,243,248,.25)}}img{{width:64px;height:64px}}</style></head>
+<body><main><img src="/reef7-lab/assets/logo-68.png" alt=""><h1>Pagina non trovata</h1><p>Questa pagina non esiste o è stata spostata. · This page doesn't exist.</p>
+<a href="/reef7-lab/">Torna alla home</a><a class="g" href="/reef7-lab/en/">English</a></main></body></html>
+""", encoding="utf-8")
     # versione B: stesso contenuto, stile editoriale (styles.css + alt-overrides.css)
     alt_css = (ROOT / "styles.css").read_text(encoding="utf-8") + "\n" + (ROOT / "alt-overrides.css").read_text(encoding="utf-8")
     (ROOT / "alt.css").write_text(alt_css, encoding="utf-8")
