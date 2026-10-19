@@ -162,7 +162,7 @@ WT = {
                          "points": ["Orari filtrabili per sede e per giorno", "Prenotazione della lezione di prova, anche via WhatsApp", "Istruttori, serate e gallery", "Veloce sul telefono, dove arrivano quasi tutte le visite"],
                          "note": "Anteprima navigabile del sito."},
     },
-    "home_h": "Projects", "home_p": "Una selezione di progetti recenti, da esplorare dal vivo.", "home_a": "Tutti i progetti",
+    "home_h": "Progetti", "home_p": "Una selezione di progetti recenti, da esplorare dal vivo.", "home_a": "Tutti i progetti",
     "partners_k": "Partner", "partners_h": "Partner, <em>non semplici clienti</em>.",
     "partners_p": "Lavoriamo al fianco di aziende che hanno scelto la tecnologia e l'intelligenza artificiale come leva di crescita. Con loro non ci limitiamo a consegnare un progetto: costruiamo insieme, giorno dopo giorno, i sistemi su cui si regge il loro business.",
     "partners_cta": ("Vuoi crescere con noi?", "Diventa partner"),
@@ -316,7 +316,8 @@ NAV = ["work", "services", "solutions", "studio", "mission"]
 
 T = {
 "it": {
-    "nav": {"work": "Projects", "services": "Services", "solutions": "Solutions", "mission": "Mission", "studio": "Lab", "contact": "Contact"},
+    "nav": {"work": "Progetti", "services": "Servizi", "solutions": "Soluzioni", "mission": "Missione", "studio": "Chi siamo", "contact": "Contattaci"},
+    "nav_d": {"work": "I lavori fatti, da provare dal vivo", "services": "Cosa possiamo costruire per te", "solutions": "Esempi per il tuo settore", "mission": "Il nostro impegno per il mare", "studio": "Il metodo e chi c'è dietro", "contact": "Raccontaci il tuo progetto"},
     "menu": "Menu", "close": "Chiudi", "pages": "Pagine",
     "foot": "© 2026 Reef 7 Lab · Sviluppo software e intelligenza artificiale",
     "cta_k": "Nuovo progetto", "cta_h": "Costruiamo il tuo <em>reef</em>.",
@@ -421,8 +422,8 @@ T = {
         ],
         "flow_lbl": ("Dati in entrata", "Il sistema", "Il risultato"),
         "rows_lbl": ("Oggi, a mano", "Con il sistema, in automatico", "passaggi a mano"),
-        "svc_h": "Services", "svc_p": "Dal sito al CRM, dall'intelligenza artificiale al controllo di gestione: competenze diverse che lavorano insieme.", "svc_all": "Tutti i servizi",
-        "sol_h": "Solutions", "sol_p": "Per ogni settore combiniamo i servizi giusti in un unico sistema. Ecco alcuni esempi.", "sol_all": "Tutte le soluzioni",
+        "svc_h": "Servizi", "svc_p": "Dal sito al CRM, dall'intelligenza artificiale al controllo di gestione: competenze diverse che lavorano insieme.", "svc_all": "Tutti i servizi",
+        "sol_h": "Soluzioni", "sol_p": "Per ogni settore combiniamo i servizi giusti in un unico sistema. Ecco alcuni esempi.", "sol_all": "Tutte le soluzioni",
         "reef_h": "Progettati come <em>un reef</em>", "reef_p": "Il reef è tra gli ecosistemi più efficienti della Terra. I suoi cinque principi guidano ogni progetto.",
         "reef_words": ["Diversità", "Simbiosi", "Connessione", "Crescita stratificata", "Resilienza"], "reef_a": "La nostra filosofia",
     },
@@ -503,6 +504,7 @@ T = {
 },
 "en": {
     "nav": {"work": "Projects", "services": "Services", "solutions": "Solutions", "mission": "Mission", "studio": "Lab", "contact": "Contact"},
+    "nav_d": {"work": "Work you can try live", "services": "What we can build for you", "solutions": "Examples for your industry", "mission": "Our commitment to the sea", "studio": "Our method and the people behind it", "contact": "Tell us about your project"},
     "menu": "Menu", "close": "Close", "pages": "Pages",
     "foot": "© 2026 Reef 7 Lab · Software and AI development",
     "cta_k": "New project", "cta_h": "Let's build your <em>reef</em>.",
@@ -728,7 +730,7 @@ def build(lang, variant=""):
     arrow = '<span class="arr" aria-hidden="true">→</span>'
 
     def page(key, title, desc, body, hero=False, extra=""):
-        links = "".join(f'<a href="{u(k)}"{" aria-current=\"page\"" if k == key else ""}>{L["nav"][k]}</a>' for k in NAV)
+        links = "".join(f'<a href="{u(k)}" title="{L["nav_d"][k]}"{" aria-current=\"page\"" if k == key else ""}><span class="nav-l">{L["nav"][k]}</span><span class="nav-d">{L["nav_d"][k]}</span></a>' for k in NAV)
         cur = ' aria-current="page"' if key == "contact" else ""
         foot_links = "".join(f'<a href="{u(k)}">{L["nav"][k]}</a>' for k in NAV + ["contact"])
         alt = f"{alt_dir}{SLUG[other][key]}"
@@ -760,7 +762,7 @@ def build(lang, variant=""):
 <body data-page="{key}" data-build="{BUILD}">
 <header class="top{'' if hero else ' solid'}"><div class="wrap top-in">
   <a class="logo" href="{u('home')}"><img src="{pre}assets/reef7-logo.png" alt="" width="34" height="34">Reef 7 Lab</a>
-  <nav aria-label="{L['pages']}">{links}<a href="{u('contact')}" class="cta"{cur}>{L['nav']['contact']}</a></nav>
+  <nav aria-label="{L['pages']}">{links}<a href="{u('contact')}" class="cta" title="{L['nav_d']['contact']}"{cur}><span class="nav-l">{L['nav']['contact']}</span><span class="nav-d">{L['nav_d']['contact']}</span></a></nav>
   <a class="lang" href="{alt}" hreflang="{other}" lang="{other}">{other.upper()}</a>
   <button class="menu" aria-expanded="false" data-close="{L['close']}">{L['menu']}</button>
 </div></header>

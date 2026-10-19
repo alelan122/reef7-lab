@@ -1008,3 +1008,15 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
   .foot a { display: inline-block; padding-block: 8px; }
   .goal-org a { display: inline-block; padding-block: 8px; margin-block: -8px; }
 }
+
+/* menu: la riga di spiegazione compare solo nel menu del telefono */
+.top nav .nav-d { display: none; }
+@media (max-width: 760px) {
+  .top.open nav a { display: flex; flex-direction: column; gap: 3px; padding: 14px 0; }
+  .top.open nav .nav-l { font-size: 21px; line-height: 1.15; }
+  .top.open nav .nav-d { display: block; font-size: 13.5px; line-height: 1.35; color: var(--muted); font-weight: 400; }
+  .top.open nav a[aria-current="page"] .nav-l { color: var(--aqua); }
+  .menu { display: inline-flex; align-items: center; gap: 8px; }
+  .menu::before { content: ""; width: 16px; height: 10px; background: linear-gradient(currentColor 0 0) top / 100% 2px no-repeat, linear-gradient(currentColor 0 0) center / 100% 2px no-repeat, linear-gradient(currentColor 0 0) bottom / 100% 2px no-repeat; }
+  .menu[aria-expanded="true"]::before { display: none; }
+}
