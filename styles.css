@@ -1050,3 +1050,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
 .founder-pts span { font-size: 13px; line-height: 1.45; color: var(--muted); }
 .founder-risk { margin-top: 16px; font-size: 13.5px; color: var(--muted); max-width: 520px; padding-left: 14px; border-left: 2px solid var(--aqua); }
 @media (max-width: 760px) { .founder-pts { grid-template-columns: 1fr; } }
+
+/* pulsanti della sezione personale allineati sulla stessa linea */
+.founder-act { align-items: center; }
+.founder-act .link { margin: 0 !important; align-self: center; }

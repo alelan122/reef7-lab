@@ -325,7 +325,7 @@ T = {
                 "p": "Sono Alessandro. Quello che ti propongo l'ho già fatto: in un'azienda a sette cifre del fitness online ho aiutato a sostituire gran parte di 54 software con un'unica piattaforma interna, tagliando costi e lavoro a mano. Adesso porto lo stesso metodo nella tua azienda, e ogni passo lo segui con me: niente commerciali, niente passaggi di mano.",
                 "points": [["Asia Baldoni Fitness", "Partner tecnologico: gran parte di 54 software sostituiti da una piattaforma interna"], ["Tupitago", "Co-fondatore di una startup di sviluppo vincitrice di un bando della Regione Marche"], ["E-commerce", "Software e marketing per Veneziana, Breeez e Full Peak"], ["5 lingue", "Formazione tra Italia, Germania e Spagna"]],
                 "cta": "Prenota la call gratuita", "a": "La mia storia",
-                "risk": "30 minuti per capire cosa conviene fare nella tua azienda, anche se poi decidi di non lavorare con me. Ti rispondo entro un giorno lavorativo.",
+                "risk": "Una call di 30 minuti, gratuita, per capire da dove conviene partire nella tua azienda. Ti rispondo entro un giorno lavorativo.",
                 "contact_h": "Ti rispondo io", "contact_p": "Leggo ogni richiesta personalmente e ti rispondo entro un giorno lavorativo, con le prime idee."},
     "services": [
         ("01", "Digitale", "Siti web e landing page", "Siti e pagine di vendita che trasformano le visite in contatti.",
@@ -518,7 +518,7 @@ T = {
                 "p": "I'm Alessandro. What I propose, I have already done: in a seven-figure online fitness company I helped replace most of 54 software tools with one internal platform, cutting costs and manual work. Now I bring the same method to your company, and you go through every step with me: no salespeople, no hand-offs.",
                 "points": [["Asia Baldoni Fitness", "Technology partner: most of 54 tools replaced by one internal platform"], ["Tupitago", "Co-founder of a software startup that won a Marche Region grant"], ["E-commerce", "Software and marketing for Veneziana, Breeez and Full Peak"], ["5 languages", "Trained across Italy, Germany and Spain"]],
                 "cta": "Book the free call", "a": "My story",
-                "risk": "30 minutes to work out what makes sense for your company, even if you then decide not to work with me. I reply within one business day.",
+                "risk": "A free 30-minute call to work out where it makes sense to start in your company. I reply within one business day.",
                 "contact_h": "I'll reply myself", "contact_p": "I read every request personally and reply within one business day, with first ideas."},
     "services": [
         ("01", "Digital", "Websites and landing pages", "Websites and sales pages that turn visits into enquiries.",
