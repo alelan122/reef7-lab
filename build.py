@@ -846,8 +846,29 @@ T = {
 T["it"]["security"] = {
     "title": "Sicurezza informatica per siti, app e agenti AI · Reef 7 Lab",
     "desc": "Gli attacchi sono già automatici. Mettiamo al sicuro siti, app e gestionali, nuovi e datati, e gli agenti AI che usi: verifica, correzione e guardia continua.",
-    "h1": "Le falle ora le trova un'AI. <em>Anche chi attacca.</em>",
-    "sub": "In poche settimane l'intelligenza artificiale ha trovato falle rimaste nascoste per anni, e chi attacca la usa per sfruttarle in poche ore. Il tuo sito, le tue app e i tuoi gestionali sono stati costruiti per un mondo più lento. Troviamo le porte aperte e le chiudiamo, prima che lo faccia qualcun altro.",
+    "h1": "Le falle ora le trova un'AI. <em>Noi le chiudiamo prima.</em>",
+    "sub": "Mettiamo al sicuro siti, app, gestionali e agenti AI: troviamo le porte aperte e le chiudiamo in ordine di gravità, senza rifare tutto e senza fermare il lavoro. Si parte da un check gratuito di 3 minuti.",
+    "now_k": "Perché adesso", "now_h": "Gli attacchi sono diventati <em>automatici</em>. Le difese, quasi mai.",
+    "now": [
+        ("7 su 10", "dei siti gira su PHP, il linguaggio in cui il 21 ottobre 2026 un'AI ha trovato falle critiche.", "AP / PBS NewsHour", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
+        ("Poche ore", "tra l'annuncio di quelle falle e i primi milioni di tentativi di attacco.", "AP / PBS NewsHour", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
+        ("51%", "del traffico web è ormai automatico: bot e agenti, non persone.", "Imperva, Bad Bot Report 2025", "https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/"),
+    ],
+    "now_end": "Non serve allarmarsi. Serve muoversi prima degli altri.",
+    "gain_h": "Cosa <em>ottieni</em>", "gain_p": "Sicurezza che si vede nei risultati, non in un documento da archiviare.",
+    "gains": [
+        ("Sai dove sei esposto", "Una mappa chiara di cosa è raggiungibile da fuori e di cosa rischi davvero, scritta per chi decide."),
+        ("Le falle gravi, chiuse per prime", "Partiamo da ciò che espone dati o denaro. Il resto segue un piano preciso, con tempi chiari."),
+        ("Nessun rifacimento, nessun fermo", "Lavoriamo su ciò che hai già, su copie o in orari concordati. Il team continua a lavorare."),
+        ("Qualcuno di guardia", "Monitoraggio, aggiornamenti e un rapporto mensile: sai sempre come stai, senza doverci pensare."),
+    ],
+    "start_h": "Come <em>iniziare</em>", "start_p": "Tre passi. I primi due sono gratuiti.",
+    "start": [
+        ("Check di esposizione", "Gratuito · 3 minuti", "Controlliamo il tuo dominio e ricevi subito il tuo livello di esposizione e le 3 priorità da cui partire."),
+        ("Ricognizione", "Gratuita · 30 minuti", "Guardiamo insieme il risultato e ti diciamo cosa conviene fare, in che ordine e in quanto tempo."),
+        ("Proposta chiara", "Per iscritto, prima di iniziare", "Interventi, tempi e costi definiti prima di partire. Nessuna sorpresa a metà lavoro."),
+    ],
+    "start_promise": "Se nella ricognizione non troviamo niente da migliorare, te lo diciamo e finisce lì.",
     "sub_src": ("Fonte: AP / PBS NewsHour, ottobre 2026", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
     "alert_k": "21 ottobre 2026 · Dalla cronaca",
     "alert_h": "Un'AI ha trovato falle critiche nel linguaggio di 7 siti su 10. <em>Poche ore dopo, milioni di tentativi di attacco.</em>",
@@ -855,15 +876,15 @@ T["it"]["security"] = {
     "alert_q": "Il tuo sito gira su PHP? È già aggiornato?",
     "alert_a": "Scoprilo con il check di esposizione",
     "alert_src": ("AP / PBS NewsHour, 22 ottobre 2026", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
-    "b1": "Fai il check di esposizione", "b2": "Guarda i casi reali",
+    "b1": "Fai il check gratuito", "b2": "Come lavoriamo",
     "risks_h": "Cosa è <em>cambiato</em>", "risks_p": "In poche settimane l'attacco è diventato un software che lavora da solo. Gran parte di ciò che è online è stato pensato per un web più lento.",
     "risks": [
         ("Tra la scoperta e l'attacco passano ore", "Una falla rimasta nel codice per oltre dieci anni è stata trovata da un'AI, e nelle ore dopo l'annuncio sono partiti milioni di tentativi di sfruttarla. Aggiornare tra una settimana vuol dire arrivare tardi. Non scegli tu se essere un bersaglio: basta essere online."),
         ("Si pubblica prima di controllare", "Un'app generata con l'AI va online in un weekend. Regole d'accesso, chiavi e permessi spesso non li ha mai guardati nessuno."),
         ("Gli assistenti hanno le chiavi di casa", "Chatbot e agenti leggono email, documenti e CRM, e possono agire. Per manipolarli non serve violarli: basta scrivere la cosa giusta nel posto giusto."),
     ],
-    "cases_k": "Dalle cronache recenti", "cases_h": "Non è teoria. <em>È cronaca.</em>",
-    "cases_p": "Casi pubblici, documentati dai ricercatori e dalle aziende coinvolte. Quasi tutti partono da un errore banale.",
+    "cases_k": "Perché non aspettare", "cases_h": "Non è teoria. <em>È cronaca.</em>",
+    "cases_p": "Casi pubblici, con le fonti. Quasi tutti partono da un errore banale, e quasi tutti si potevano evitare.",
     "cases": [
         ("Settembre 2025", "Un'AI ha attaccato 30 organizzazioni. Quasi da sola.", "Un gruppo sponsorizzato da uno stato ha usato un agente AI per svolgere in autonomia l'80-90% del lavoro operativo contro una trentina di organizzazioni: ricognizione, ricerca di falle, furto di credenziali.", "Il lavoro di una squadra di attaccanti ora lo fa un agente, a velocità di macchina.", "Anthropic", "https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf"),
         ("Agosto 2025", "Un chatbot bucato. I CRM di centinaia di aziende copiati.", "Con i token di accesso rubati all'integrazione di un chatbot di vendita, gli attaccanti hanno estratto dati dai CRM di oltre 700 organizzazioni, comprese aziende di sicurezza informatica, cercando chiavi e password.", "Ogni strumento collegato ai tuoi dati è una porta d'ingresso.", "TechTarget", "https://www.techtarget.com/cybersecurity/news/366630934/News-brief-Salesloft-Drift-breach-update-and-timeline"),
@@ -901,7 +922,7 @@ T["it"]["security"] = {
         "Persone che non lavorano più con te potrebbero avere ancora un accesso",
         "Non sapresti dire quando è stato fatto l'ultimo backup, né se si ripristina davvero",
     ],
-    "check_a": "Fai il check di esposizione",
+    "check_a": "Fai il check gratuito",
     "check_note": "Tre minuti, gratis: il tuo livello di esposizione, cosa vede chi attacca dal tuo dominio e le 3 priorità da cui partire.",
     "box_h": "Gli attacchi sono già <em>automatici</em>.",
     "box_p": "Agenti e bot lavorano giorno e notte su tutto ciò che hai online. Mettiamo al sicuro quello che hai già, quello che costruisci con l'AI e gli agenti che usi.",
@@ -919,8 +940,29 @@ T["it"]["check"] = {
 T["en"]["security"] = {
     "title": "Cybersecurity for websites, apps and AI agents · Reef 7 Lab",
     "desc": "Attacks are already automated. We secure websites, apps and internal tools, new and old, and the AI agents you use: review, fixes and continuous watch.",
-    "h1": "AI now finds the flaws. <em>So do attackers.</em>",
-    "sub": "In a matter of weeks, AI has found flaws that stayed hidden for years, and attackers use it to exploit them within hours. Your website, apps and internal tools were built for a slower world. We find the open doors and close them, before someone else does.",
+    "h1": "AI now finds the flaws. <em>We close them first.</em>",
+    "sub": "We secure websites, apps, internal tools and AI agents: we find the open doors and close them by severity, without rebuilding everything and without stopping your work. It starts with a free 3-minute check.",
+    "now_k": "Why now", "now_h": "Attacks have become <em>automated</em>. Defences, rarely.",
+    "now": [
+        ("7 in 10", "websites run on PHP, the language in which an AI found critical flaws on October 21, 2026.", "AP / PBS NewsHour", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
+        ("Hours", "between the announcement of those flaws and the first millions of attack attempts.", "AP / PBS NewsHour", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
+        ("51%", "of web traffic is now automated: bots and agents, not people.", "Imperva, Bad Bot Report 2025", "https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/"),
+    ],
+    "now_end": "No need to panic. You just need to move before everyone else.",
+    "gain_h": "What you <em>get</em>", "gain_p": "Security you can see in results, not in a document that ends up in a drawer.",
+    "gains": [
+        ("You know where you're exposed", "A clear map of what's reachable from outside and what you really risk, written for decision makers."),
+        ("Serious flaws closed first", "We start with what exposes data or money. The rest follows a precise plan, with clear timelines."),
+        ("No rebuild, no downtime", "We work on what you already have, on copies or at agreed times. Your team keeps working."),
+        ("Someone on watch", "Monitoring, updates and a monthly report: you always know where you stand, without thinking about it."),
+    ],
+    "start_h": "How to <em>start</em>", "start_p": "Three steps. The first two are free.",
+    "start": [
+        ("Exposure check", "Free · 3 minutes", "We check your domain and you instantly get your exposure level and the 3 priorities to start from."),
+        ("Review call", "Free · 30 minutes", "We go through the result together and tell you what to do, in what order and how long it takes."),
+        ("Clear proposal", "In writing, before we start", "Work, timelines and costs defined before we begin. No surprises halfway through."),
+    ],
+    "start_promise": "If the review shows nothing worth improving, we'll tell you, and that's it.",
     "sub_src": ("Source: AP / PBS NewsHour, October 2026", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
     "alert_k": "October 21, 2026 · In the news",
     "alert_h": "An AI found critical flaws in the language behind 7 in 10 websites. <em>Within hours, millions of attack attempts.</em>",
@@ -928,15 +970,15 @@ T["en"]["security"] = {
     "alert_q": "Does your site run on PHP? Is it already updated?",
     "alert_a": "Find out with the exposure check",
     "alert_src": ("AP / PBS NewsHour, October 22, 2026", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
-    "b1": "Take the exposure check", "b2": "See the real cases",
+    "b1": "Take the free check", "b2": "How we work",
     "risks_h": "What has <em>changed</em>", "risks_p": "In a matter of weeks, attacking became software that works on its own. Much of what is online was designed for a slower web.",
     "risks": [
         ("Hours between discovery and attack", "A flaw that sat in the code for over a decade was found by an AI, and within hours of the announcement millions of attempts to exploit it began. Updating next week means arriving too late. You don't choose whether to be a target: being online is enough."),
         ("Shipped before it's checked", "An AI-generated app goes live in a weekend. Access rules, keys and permissions have often never been looked at by anyone."),
         ("Assistants hold the house keys", "Chatbots and agents read email, documents and CRMs, and they can act. You don't need to hack them to manipulate them: you just write the right thing in the right place."),
     ],
-    "cases_k": "From recent headlines", "cases_h": "Not theory. <em>Headlines.</em>",
-    "cases_p": "Public cases, documented by researchers and the companies involved. Almost all of them start from a trivial mistake.",
+    "cases_k": "Why not wait", "cases_h": "Not theory. <em>Headlines.</em>",
+    "cases_p": "Public cases, with sources. Almost all of them start from a trivial mistake, and almost all could have been avoided.",
     "cases": [
         ("September 2025", "An AI attacked 30 organisations. Almost on its own.", "A state-sponsored group used an AI agent to carry out 80-90% of the operational work on its own against around thirty organisations: reconnaissance, vulnerability hunting, credential theft.", "A team of attackers' work is now done by an agent, at machine speed.", "Anthropic", "https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf"),
         ("August 2025", "One chatbot breached. Hundreds of company CRMs copied.", "Using access tokens stolen from a sales chatbot integration, attackers pulled data from the CRMs of more than 700 organisations, including security companies, hunting for keys and passwords.", "Every tool connected to your data is a way in.", "TechTarget", "https://www.techtarget.com/cybersecurity/news/366630934/News-brief-Salesloft-Drift-breach-update-and-timeline"),
@@ -974,7 +1016,7 @@ T["en"]["security"] = {
         "People who no longer work with you might still have access",
         "You couldn't say when the last backup was made, or whether it really restores",
     ],
-    "check_a": "Take the exposure check",
+    "check_a": "Take the free check",
     "check_note": "Three minutes, free: your exposure level, what an attacker sees from your domain and the 3 priorities to start from.",
     "box_h": "Attacks are already <em>automated</em>.",
     "box_p": "Agents and bots work day and night on everything you have online. We secure what you already have, what you build with AI and the agents you use.",
@@ -1354,26 +1396,33 @@ def build(lang, variant=""):
 </div></section>"""
     fasi = "".join(f'<div><span class="mono">0{i}</span><b>{t}</b><p>{d}</p></div>' for i, (t, d) in enumerate(SE["steps"], 1))
     faq = "".join(f'<details class="sec-faq"><summary>{q}</summary><p>{a}</p></details>' for q, a in SE["faq"])
+    ora = "".join(f'<div><b>{n}</b><p>{d}</p><a href="{url}" target="_blank" rel="noopener">{src} ↗</a></div>' for n, d, src, url in SE["now"])
+    guadagni = "".join(f'<div><span class="mono">0{i}</span><b>{t}</b><p>{d}</p></div>' for i, (t, d) in enumerate(SE["gains"], 1))
+    inizio = "".join(f'<li><span class="mono">0{i}</span><b>{t}</b><em>{k}</em><p>{d}</p></li>' for i, (t, k, d) in enumerate(SE["start"], 1))
     out["security"] = page("security", SE["title"], SE["desc"], head_block(L["nav"]["security"], SE["h1"], SE["sub"]) + f"""
-<section class="wrap sec-actions"><p class="sec-src"><a href="{SE['sub_src'][1]}" target="_blank" rel="noopener">{SE['sub_src'][0]} ↗</a></p><div class="actions"><a class="btn" href="{u('check')}">{SE['b1']} {arrow}</a><a class="btn ghost" href="#casi">{SE['b2']}</a></div></section>
-<section class="sec-alert"><div class="wrap">
-  <p class="mono"><span class="sec-dot" aria-hidden="true"></span>{SE['alert_k']}</p>
-  <h2>{SE['alert_h']}</h2>
-  <div class="sec-alert-b"><p>{SE['alert_p']}</p>
-    <div class="sec-alert-cta"><b>{SE['alert_q']}</b><a class="btn" href="{u('check')}">{SE['alert_a']} {arrow}</a><a class="sec-alert-src" href="{SE['alert_src'][1]}" target="_blank" rel="noopener">{SE['alert_src'][0]} ↗</a></div></div>
+<section class="wrap sec-actions"><div class="actions"><a class="btn" href="{u('check')}">{SE['b1']} {arrow}</a><a class="btn ghost" href="#metodo">{SE['b2']}</a></div></section>
+<section class="sec-now"><div class="wrap">
+  <div class="head"><div><p class="mono sec-k"><span class="sec-dot" aria-hidden="true"></span>{SE['now_k']}</p><h2>{SE['now_h']}</h2></div></div>
+  <div class="sec-now-g">{ora}</div>
+  <div class="sec-now-end"><p>{SE['now_end']}</p><a class="btn" href="{u('check')}">{SE['b1']} {arrow}</a></div>
 </div></section>
 <section class="block"><div class="wrap">
-  <div class="head"><h2>{SE['risks_h']}</h2><p>{SE['risks_p']}</p></div>
-  <div class="how">{rischi}</div>
+  <div class="head"><h2>{SE['gain_h']}</h2><p>{SE['gain_p']}</p></div>
+  <div class="how quattro">{guadagni}</div>
+</div></section>{aree}
+<section class="block" id="metodo"><div class="wrap">
+  <div class="head"><h2>{SE['steps_h']}</h2><p>{SE['steps_p']}</p></div>
+  <div class="how quattro">{fasi}</div>
 </div></section>
 <section class="block" id="casi"><div class="wrap">
   <div class="head"><div><p class="mono sec-k">{SE['cases_k']}</p><h2>{SE['cases_h']}</h2></div><p>{SE['cases_p']}</p></div>
   <div class="sec-casi">{casi}
   </div>
-</div></section>{aree}
-<section class="block" id="metodo"><div class="wrap">
-  <div class="head"><h2>{SE['steps_h']}</h2><p>{SE['steps_p']}</p></div>
-  <div class="how quattro">{fasi}</div>
+</div></section>
+<section class="block"><div class="wrap">
+  <div class="head"><h2>{SE['start_h']}</h2><p>{SE['start_p']}</p></div>
+  <ol class="sec-start">{inizio}</ol>
+  <div class="sec-start-end"><a class="btn" href="{u('check')}">{SE['b1']} {arrow}</a><p>{SE['start_promise']}</p></div>
 </div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{SE['faq_h']}</h2></div>
