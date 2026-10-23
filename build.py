@@ -321,15 +321,15 @@ VERSION = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["styles.css", "
 # impronta di tutto il sito (contenuti compresi): se online è diversa, la pagina in cache si ricarica da sola
 BUILD = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["build.py", "styles.css", "site.js", "mission.js", "agent.js", "audit.js", "audit-data.js"])).hexdigest()[:10]
 SLUG = {
-    "it": {"home": "index.html", "work": "lavori.html", "services": "servizi.html", "solutions": "soluzioni.html", "mission": "missione.html", "studio": "lab.html", "contact": "contatti.html", "audit": "audit.html"},
-    "en": {"home": "index.html", "work": "work.html", "services": "services.html", "solutions": "solutions.html", "mission": "mission.html", "studio": "lab.html", "contact": "contact.html", "audit": "audit.html"},
+    "it": {"home": "index.html", "work": "lavori.html", "services": "servizi.html", "security": "sicurezza.html", "solutions": "soluzioni.html", "mission": "missione.html", "studio": "lab.html", "contact": "contatti.html", "audit": "audit.html"},
+    "en": {"home": "index.html", "work": "work.html", "services": "services.html", "security": "security.html", "solutions": "solutions.html", "mission": "mission.html", "studio": "lab.html", "contact": "contact.html", "audit": "audit.html"},
 }
-NAV = ["work", "services", "solutions", "studio", "mission"]
+NAV = ["work", "services", "security", "solutions", "studio", "mission"]
 
 T = {
 "it": {
-    "nav": {"work": "Progetti", "services": "Servizi", "solutions": "Soluzioni", "mission": "Missione", "studio": "Chi siamo", "contact": "Contattaci"},
-    "nav_d": {"work": "I lavori fatti, da provare dal vivo", "services": "Cosa possiamo costruire per te", "solutions": "Esempi per il tuo settore", "mission": "Il nostro impegno per il mare", "studio": "Il metodo e chi c'è dietro", "contact": "Raccontaci il tuo progetto"},
+    "nav": {"work": "Progetti", "services": "Servizi", "security": "Sicurezza", "solutions": "Soluzioni", "mission": "Missione", "studio": "Chi siamo", "contact": "Contattaci"},
+    "nav_d": {"work": "I lavori fatti, da provare dal vivo", "services": "Cosa possiamo costruire per te", "security": "Siti, app e agenti AI al sicuro", "solutions": "Esempi per il tuo settore", "mission": "Il nostro impegno per il mare", "studio": "Il metodo e chi c'è dietro", "contact": "Raccontaci il tuo progetto"},
     "menu": "Menu", "close": "Chiudi", "pages": "Pagine",
     "foot": "© 2026 Reef 7 Lab · Sviluppo software e intelligenza artificiale",
     "cta_k": "Nuovo progetto", "cta_h": "Costruiamo il tuo <em>reef</em>.",
@@ -376,6 +376,24 @@ T = {
         ("26", "Intelligenza artificiale", "Formazione AI per il team", "Il tuo team usa l'intelligenza artificiale sul lavoro vero, da subito.",
          "Gli strumenti di intelligenza artificiale rendono davvero solo quando conoscono l'azienda. Li impostiamo con il contesto della tua azienda, i tuoi processi e il tuo tono di voce, e formiamo il team su casi reali: email, analisi, documenti, automazioni.",
          ["Assistenti AI impostati con il contesto aziendale", "Formazione pratica sui processi di ogni reparto", "Libreria condivisa di istruzioni e modelli", "Regole chiare su dati e privacy", "Accompagnamento nelle prime settimane"]),
+        ("36", "Sicurezza", "Messa in sicurezza di siti e app esistenti", "Pensati per un web senza agenti. Rimessi in sicurezza per quello di oggi.",
+         "Gran parte dei siti, delle app e dei gestionali in uso è nata quando attaccarli richiedeva tempo e competenza. Oggi lo fanno programmi automatici, senza sosta: provano password, cercano versioni con falle note, interrogano ogni modulo e ogni API. Partiamo da ciò che hai, troviamo i punti deboli e li chiudiamo uno per uno, senza rifare tutto da capo.",
+         ["Verifica completa di siti, app e gestionali in uso, anche datati", "Componenti e plugin fuori supporto aggiornati o isolati", "Difese contro bot e tentativi di accesso in massa", "Moduli e API protetti da abusi e raccolta automatica di dati", "Piano per gravità: subito, nelle prossime settimane, strutturale"]),
+        ("37", "Sicurezza", "Accessi, password e persone", "La porta più usata per entrare resta un account dimenticato.",
+         "Ex collaboratori con accessi ancora attivi, password condivise in chat, chiavi di servizio mai cambiate: molte violazioni non partono da una falla tecnica, ma da un accesso rimasto aperto. Facciamo l'inventario di chi entra dove, togliamo ciò che non serve e rendiamo semplice per il team lavorare in modo sicuro.",
+         ["Inventario di account, accessi e chiavi di servizio", "Accessi rimossi a chi non ne ha più bisogno", "Doppio fattore e gestore di password per tutto il team", "Permessi per ruolo: ognuno vede solo ciò che gli serve", "Formazione breve contro phishing e truffe, anche quelle scritte con l'AI"]),
+        ("32", "Sicurezza", "Verifica di siti e app costruiti con l'AI", "Online in pochi giorni. Controllato prima che lo faccia qualcun altro.",
+         "Gli strumenti che generano codice con l'intelligenza artificiale costruiscono in fretta, ma non pensano a chi proverà a entrare. Gli errori sono quasi sempre gli stessi: chiavi segrete nel codice visibile, database aperti a chiunque, pagine riservate raggiungibili senza login, permessi controllati solo nell'interfaccia. Li cerchiamo uno per uno, li correggiamo e ti lasciamo un progetto che puoi far crescere con tranquillità.",
+         ["Chiavi e segreti cercati nel codice e nella cronologia del repository", "Regole del database verificate tabella per tabella", "Ruoli e permessi provati entrando con utenti diversi", "Moduli e API protetti da abusi e invii automatici", "Report chiaro, con le correzioni già applicate"]),
+        ("33", "Sicurezza", "Sicurezza di chatbot e agenti AI", "Un assistente con le chiavi di casa deve sapere quali porte non aprire.",
+         "Un agente che legge le email, consulta i documenti e aggiorna il gestionale è utile proprio perché può agire. Per lo stesso motivo può essere manipolato: un'istruzione nascosta in un messaggio, in un allegato o in una pagina web può spingerlo a rivelare dati o a compiere azioni che nessuno ha chiesto. Lo mettiamo alla prova con attacchi reali e gli diamo confini precisi.",
+         ["Prove contro istruzioni nascoste e tentativi di manipolazione", "Ogni utente raggiunge solo i propri dati, anche passando dall'agente", "Conferma umana prima delle azioni che spostano dati o denaro", "Limiti di utilizzo e di spesa", "Registro di conversazioni e azioni, consultabile in ogni momento"]),
+        ("34", "Sicurezza", "Privacy e dati quando usi l'AI", "Usa l'intelligenza artificiale senza consegnare i dati dei tuoi clienti.",
+         "Ogni testo inviato a un servizio di intelligenza artificiale porta con sé i dati che contiene. Ricostruiamo cosa esce dall'azienda, verso quali fornitori e per quanto tempo resta conservato; togliamo i dati personali dove non servono e scegliamo servizi e impostazioni compatibili con il GDPR, in accordo con il tuo consulente legale.",
+         ["Mappa dei dati che passano dai servizi AI", "Dati personali rimossi o mascherati prima dell'invio", "Fornitori, server e contratti compatibili con il GDPR", "Informativa e registro dei trattamenti aggiornati", "Regole chiare per il team sull'uso quotidiano dell'AI"]),
+        ("35", "Sicurezza", "Sorveglianza e continuità di servizio", "Se qualcosa si ferma, lo sappiamo prima dei tuoi clienti.",
+         "Un sito fermo per un giorno, un database perso senza copia, un aggiornamento rimandato per mesi: sono i problemi che costano di più e si vedono solo quando è tardi. Teniamo sotto controllo siti, app e gestionali, verifichiamo che i backup si possano davvero ripristinare e applichiamo gli aggiornamenti con un calendario preciso.",
+         ["Monitoraggio continuo, con avviso immediato", "Backup automatici e prove di ripristino periodiche", "Protezione da bot, spam e attacchi che saturano il sito", "Aggiornamenti di sicurezza a calendario", "Rapporto mensile, chiaro anche per chi non è tecnico"]),
         ("03", "Vendite e incassi", "CRM su misura", "Lead, trattative e provvigioni in un unico strumento, costruito sul tuo modo di vendere.",
          "Un CRM generico costringe il team commerciale ad adattarsi. Costruiamo CRM su misura: ogni lead arriva già assegnato, le trattative avanzano per fasi, pagamenti e provvigioni si calcolano da soli e la direzione vede risultati e classifica in tempo reale.",
          ["Pipeline e fasi definite sul tuo processo", "Assegnazione automatica dei lead", "Pagamenti e provvigioni calcolati in automatico", "Classifica e KPI del team, anche su uno schermo in ufficio", "Collegato a sito, prenotazioni ed email"]),
@@ -566,8 +584,8 @@ T = {
     },
 },
 "en": {
-    "nav": {"work": "Projects", "services": "Services", "solutions": "Solutions", "mission": "Mission", "studio": "Lab", "contact": "Contact"},
-    "nav_d": {"work": "Work you can try live", "services": "What we can build for you", "solutions": "Examples for your industry", "mission": "Our commitment to the sea", "studio": "Our method and the people behind it", "contact": "Tell us about your project"},
+    "nav": {"work": "Projects", "services": "Services", "security": "Security", "solutions": "Solutions", "mission": "Mission", "studio": "Lab", "contact": "Contact"},
+    "nav_d": {"work": "Work you can try live", "services": "What we can build for you", "security": "Sites, apps and AI agents, secured", "solutions": "Examples for your industry", "mission": "Our commitment to the sea", "studio": "Our method and the people behind it", "contact": "Tell us about your project"},
     "menu": "Menu", "close": "Close", "pages": "Pages",
     "foot": "© 2026 Reef 7 Lab · Software and AI development",
     "cta_k": "New project", "cta_h": "Let's build your <em>reef</em>.",
@@ -614,6 +632,24 @@ T = {
         ("26", "AI", "AI training for your team", "Your team uses AI on real work, from day one.",
          "AI tools only really pay off when they know your company. We set them up with your company's context, processes and tone of voice, and train your team on real cases: emails, analysis, documents, automations.",
          ["AI assistants set up with your company context", "Hands-on training on each team's processes", "Shared library of instructions and templates", "Clear rules on data and privacy", "Support through the first weeks"]),
+        ("36", "Security", "Securing existing websites and apps", "Built for a web without agents. Secured for the one we have now.",
+         "Most of the websites, apps and internal tools in use today were built when attacking them took time and skill. Now automated programs do it nonstop: they try passwords, look for versions with known flaws and probe every form and API. We start from what you have, find the weak points and close them one by one, without rebuilding everything from scratch.",
+         ["A full review of the sites, apps and tools you use, even older ones", "Outdated components and plugins updated or isolated", "Defences against bots and mass login attempts", "Forms and APIs protected from abuse and automated data harvesting", "A plan by severity: right away, in the coming weeks, structural"]),
+        ("37", "Security", "Access, passwords and people", "The most common way in is still a forgotten account.",
+         "Former collaborators with active logins, passwords shared in chat, service keys never rotated: many breaches don't start from a technical flaw but from access that was never closed. We take stock of who can get in where, remove what isn't needed and make it easy for your team to work securely.",
+         ["An inventory of accounts, access and service keys", "Access removed for anyone who no longer needs it", "Two-factor login and a password manager for the whole team", "Role-based permissions: everyone sees only what they need", "Short training against phishing and scams, including AI-written ones"]),
+        ("32", "Security", "Security review for AI-built websites and apps", "Online in days. Checked before someone else checks it for you.",
+         "AI tools that write code build fast, but they don't think about who will try to get in. The mistakes are nearly always the same: secret keys in visible code, databases open to anyone, private pages reachable without logging in, permissions enforced only in the interface. We hunt them down one by one, fix them and hand back a project you can grow with confidence.",
+         ["Keys and secrets searched for in the code and the repository history", "Database rules checked table by table", "Roles and permissions tested by logging in as different users", "Forms and APIs protected from abuse and bots", "A clear report, with the fixes already applied"]),
+        ("33", "Security", "Security for chatbots and AI agents", "An assistant with the house keys must know which doors to keep shut.",
+         "An agent that reads email, searches documents and updates your systems is useful precisely because it can act. For the same reason it can be manipulated: an instruction hidden in a message, an attachment or a web page can push it to reveal data or take actions nobody asked for. We put it through real attacks and give it precise boundaries.",
+         ["Tests against hidden instructions and manipulation attempts", "Every user reaches only their own data, even through the agent", "Human approval before any action that moves data or money", "Usage and spending limits", "A log of conversations and actions, available at any time"]),
+        ("34", "Security", "Privacy and data when you use AI", "Use AI without handing over your customers' data.",
+         "Every piece of text sent to an AI service carries the data inside it. We trace what leaves your company, to which providers and how long it is kept; we strip personal data where it isn't needed and choose services and settings that fit GDPR, together with your legal advisor.",
+         ["A map of the data that goes through AI services", "Personal data removed or masked before it is sent", "Providers, servers and contracts that fit GDPR", "Privacy notice and processing records kept up to date", "Clear rules for your team on everyday AI use"]),
+        ("35", "Security", "Monitoring and service continuity", "If something stops, we know before your customers do.",
+         "A site down for a day, a database lost without a copy, an update postponed for months: these are the problems that cost the most and only show up when it's too late. We keep watch over your sites, apps and internal tools, check that backups can really be restored and apply updates on a fixed schedule.",
+         ["Continuous monitoring with instant alerts", "Automatic backups and regular restore tests", "Protection from bots, spam and attacks that overload the site", "Security updates on a schedule", "A monthly report, clear even for non-technical readers"]),
         ("03", "Sales and payments", "Custom CRM", "Leads, deals and commissions in one tool, built around the way you sell.",
          "A generic CRM forces your sales team to adapt. We build custom CRMs: every lead arrives already assigned, deals move through clear stages, payments and commissions calculate themselves, and leadership sees results and rankings in real time.",
          ["Pipeline and stages designed around your process", "Automatic lead assignment", "Payments and commissions calculated automatically", "Team leaderboard and KPIs, even on a screen in the office", "Connected to your website, bookings and email"]),
@@ -805,6 +841,84 @@ T = {
 },
 }
 
+
+
+T["it"]["security"] = {
+    "title": "Sicurezza per siti, app e agenti AI · Reef 7 Lab",
+    "desc": "Mettiamo al sicuro siti, app e gestionali, nuovi e datati, e gli agenti AI che usi: verifica, correzione e sorveglianza continua.",
+    "h1": "Il web è pieno di <em>agenti</em>. Non tutti lavorano per te.",
+    "sub": "Programmi automatici e agenti di intelligenza artificiale visitano ogni giorno siti, app e gestionali. Alcuni portano clienti, altri cercano un modo per entrare. Ti aiutiamo a trovare le porte rimaste aperte e a chiuderle, prima che lo faccia qualcun altro.",
+    "b1": "Richiedi una verifica", "b2": "Come lavoriamo",
+    "risks_h": "Cosa è <em>cambiato</em>", "risks_p": "Le regole sono cambiate in poco tempo, e molto di ciò che è online è stato pensato per un web diverso.",
+    "risks": [
+        ("Gli attacchi non dormono", "Quello che prima richiedeva ore di lavoro a una persona oggi lo fa un programma, migliaia di volte al minuto e su migliaia di siti insieme. Non serve essere un bersaglio importante: basta essere raggiungibili."),
+        ("Si costruisce più in fretta di quanto si controlli", "Con l'intelligenza artificiale un sito o un'app vanno online in pochi giorni. Funzionano, ma spesso nessuno ha verificato chi può leggere i dati, cosa resta esposto nel codice e cosa succede se qualcuno forza un modulo."),
+        ("Gli assistenti AI hanno le chiavi", "Chatbot e agenti collegati a email, documenti e gestionali possono leggere e agire. Un'istruzione nascosta nel posto giusto basta a fargli fare quello che non dovrebbero."),
+    ],
+    "areas": [
+        ("Ciò che è già online", "Siti e app <em>esistenti</em>", "Il sito di qualche anno fa, il gestionale su misura, l'e-commerce con i plugin mai aggiornati, gli accessi che nessuno ricorda più. Li rendiamo solidi senza rifarli da capo.", ["36", "37", "35"]),
+        ("Ciò che costruisci con l'AI", "Costruito <em>con l'AI</em>", "Velocità e sicurezza possono convivere. Rivediamo quello che è stato generato in fretta, prima che diventi un problema.", ["32"]),
+        ("L'intelligenza artificiale che usi", "Agenti <em>e dati</em>", "Gli assistenti AI rendono di più quando possono agire. Facciamo in modo che agiscano solo come previsto, e che i dati restino dove devono stare.", ["33", "34"]),
+    ],
+    "steps_h": "Come <em>lavoriamo</em>", "steps_p": "Quattro fasi, sempre con il tuo permesso e senza fermare il lavoro del team.",
+    "steps": [
+        ("Ricognizione", "Mappiamo tutto ciò che è raggiungibile da fuori: domini, pagine, moduli, API, accessi e servizi collegati. Spesso è la prima volta che qualcuno ne ha una visione completa."),
+        ("Prova controllata", "Proviamo a entrare come farebbe un attaccante, con il tuo permesso. Ogni falla trovata viene documentata e dimostrata, senza allarmismi."),
+        ("Messa in sicurezza", "Chiudiamo le falle in ordine di gravità, a partire da quelle che espongono dati o denaro, e ti spieghiamo cosa abbiamo cambiato e perché."),
+        ("Sorveglianza", "I rischi cambiano ogni settimana. Restiamo di guardia con monitoraggio, aggiornamenti e nuove verifiche quando cambia qualcosa."),
+    ],
+    "check_k": "Ti riguarda se", "check_h": "Bastano un paio di sì per <em>parlarne</em>.",
+    "check": [
+        "Il tuo sito o la tua app hanno qualche anno e nessuno li ha più ricontrollati",
+        "I clienti lasciano dati in un modulo, in un'area riservata o in un e-commerce",
+        "Il sito o l'app sono stati costruiti con strumenti di intelligenza artificiale",
+        "Usi un chatbot o un agente AI collegato a email, documenti o gestionale",
+        "Qualcuno che non lavora più con te potrebbe avere ancora un accesso",
+        "Non sapresti dire quando è stato fatto l'ultimo backup, né se funziona",
+    ],
+    "check_a": "Richiedi una verifica di sicurezza",
+    "box_h": "Siti, app e agenti AI, <em>al sicuro</em>.",
+    "box_p": "Gli attacchi oggi sono automatici e instancabili, e molti siti e app non sono pronti. Mettiamo al sicuro quello che hai già, quello che costruisci con l'AI e gli agenti che usi.",
+    "box_a": "Scopri la sicurezza",
+}
+T["en"]["security"] = {
+    "title": "Security for websites, apps and AI agents · Reef 7 Lab",
+    "desc": "We secure websites, apps and internal tools, new and old, and the AI agents you use: review, fixes and continuous monitoring.",
+    "h1": "The web is full of <em>agents</em>. Not all of them work for you.",
+    "sub": "Automated programs and AI agents visit websites, apps and internal tools every day. Some bring customers, others look for a way in. We help you find the doors left open and close them, before someone else finds them.",
+    "b1": "Request a review", "b2": "How we work",
+    "risks_h": "What has <em>changed</em>", "risks_p": "The rules changed fast, and much of what is online was designed for a different web.",
+    "risks": [
+        ("Attacks never sleep", "What used to take a person hours of work is now done by a program, thousands of times a minute across thousands of sites at once. You don't need to be an important target: being reachable is enough."),
+        ("We build faster than we check", "With AI a website or app can go live in days. It works, but often nobody has checked who can read the data, what is left exposed in the code and what happens when someone forces a form."),
+        ("AI assistants hold the keys", "Chatbots and agents connected to email, documents and internal systems can read and act. One instruction hidden in the right place is enough to make them do what they shouldn't."),
+    ],
+    "areas": [
+        ("What is already online", "Existing <em>sites and apps</em>", "The website from a few years ago, the custom internal tool, the store with plugins never updated, the logins nobody remembers. We make them solid without rebuilding them.", ["36", "37", "35"]),
+        ("What you build with AI", "Built <em>with AI</em>", "Speed and security can coexist. We review what was generated in a hurry, before it becomes a problem.", ["32"]),
+        ("The AI you use", "Agents <em>and data</em>", "AI assistants deliver the most when they can act. We make sure they act only as intended, and that your data stays where it belongs.", ["33", "34"]),
+    ],
+    "steps_h": "How we <em>work</em>", "steps_p": "Four phases, always with your permission and without stopping your team's work.",
+    "steps": [
+        ("Discovery", "We map everything reachable from the outside: domains, pages, forms, APIs, logins and connected services. It's often the first time anyone has seen the full picture."),
+        ("Controlled test", "We try to get in the way an attacker would, with your permission. Every flaw we find is documented and demonstrated, without alarmism."),
+        ("Hardening", "We close the gaps by severity, starting with those that expose data or money, and explain what we changed and why."),
+        ("Monitoring", "Risks change every week. We stay on watch with monitoring, updates and new checks whenever something changes."),
+    ],
+    "check_k": "This is for you if", "check_h": "A couple of yeses is <em>enough to talk</em>.",
+    "check": [
+        "Your website or app is a few years old and nobody has checked it since",
+        "Customers leave data in a form, a private area or an online store",
+        "Your site or app was built with AI tools",
+        "You use a chatbot or AI agent connected to email, documents or internal systems",
+        "Someone who no longer works with you might still have access",
+        "You couldn't say when the last backup was made, or whether it works",
+    ],
+    "check_a": "Request a security review",
+    "box_h": "Sites, apps and AI agents, <em>secured</em>.",
+    "box_p": "Attacks today are automated and tireless, and many sites and apps aren't ready. We secure what you already have, what you build with AI and the agents you use.",
+    "box_a": "Explore security",
+}
 
 
 def eco(H, pre):
@@ -1048,7 +1162,7 @@ def build(lang, variant=""):
     # home
     H = L["home"]
     rows = "".join(f"""
-    <a class="svc-row" href="{u('services')}#s{n}"><span class="mono">{g}</span><h3>{t}</h3><p>{d}</p><span class="go" aria-hidden="true">→</span></a>""" for n, g, t, d, *_ in L["services"] if n in ("31", "11", "28", "10", "06", "20"))
+    <a class="svc-row" href="{u('security') if g == L['nav']['security'] else u('services')}#s{n}"><span class="mono">{g}</span><h3>{t}</h3><p>{d}</p><span class="go" aria-hidden="true">→</span></a>""" for n, g, t, d, *_ in L["services"] if n in ("31", "11", "28", "36", "10", "06", "20"))
     sectors = "".join(f"""
     <a class="sector" href="{u('solutions')}#k{i}"><span class="mono">0{i}</span><h3>{x['t']}</h3><p>{x['d']}</p><ul>{"".join(f"<li>{b}</li>" for b in x['build'][:3])}</ul></a>""" for i, x in enumerate(L["sectors"][:3], 1))
     reef_words = "".join(f'<div><span class="mono">0{i}</span><b>{w}</b></div>' for i, w in enumerate(H["reef_words"], 1))
@@ -1115,11 +1229,25 @@ def build(lang, variant=""):
     # servizi
     SP = L["services_p"]
     # servizi divisi per gruppo: un'etichetta all'inizio di ogni gruppo
-    svc, last = "", None
-    for i, (n, g, t, short, long, li) in enumerate(L["services"], 1):
+    svc, last, i = "", None, 0
+    SEC = L["security"]
+    sicurezza = [x for x in L["services"] if x[1] == L["nav"]["security"]]
+    for (n, g, t, short, long, li) in L["services"]:
         if g != last:
             svc += f'\n  <p class="svc-group mono">{g}</p>'
             last = g
+            if g == L["nav"]["security"]:
+                i += 1
+                svc += f"""
+  <article class="svc sec-box" id="sicurezza">
+    <span class="mono">{i:02d}</span>
+    <div><h2>{SEC['box_h']}</h2><p class="lead">{SEC['box_p']}</p>
+      <a class="btn" href="{u('security')}">{SEC['box_a']} {arrow}</a></div>
+    <div><ul class="sec-links">{"".join(f'<li><a href="{u("security")}#s{x[0]}">{x[2]}</a></li>' for x in sicurezza)}</ul></div>
+  </article>"""
+        if g == L["nav"]["security"]:
+            continue
+        i += 1
         svc += f"""
   <article class="svc" id="s{n}">
     <span class="mono">{i:02d}</span>
@@ -1129,6 +1257,44 @@ def build(lang, variant=""):
     out["services"] = page("services", SP["title"], SP["desc"], head_block(L["nav"]["services"], SP["h1"], SP["sub"]) + f"""
 <section class="wrap" style="padding-bottom:clamp(80px,10vw,150px)">{svc}
 </section>""")
+
+    # sicurezza: pagina dedicata, con i servizi del gruppo divisi per area
+    SE = L["security"]
+    per_n = {x[0]: x for x in L["services"]}
+    rischi = "".join(f'<div><span class="mono">0{i}</span><b>{t}</b><p>{d}</p></div>' for i, (t, d) in enumerate(SE["risks"], 1))
+    aree, k_svc = "", 0
+    for j, (k, h, d, nums) in enumerate(SE["areas"], 1):
+        arts = ""
+        for n in nums:
+            k_svc += 1
+            _n, _g, t, short, long, li = per_n[n]
+            arts += f"""
+  <article class="svc" id="s{n}">
+    <span class="mono">{k_svc:02d}</span>
+    <div><h3 class="svc-h">{t}</h3><p class="tag">{short}</p><p class="lead">{long}</p></div>
+    <div><ul>{"".join(f"<li>{x}</li>" for x in li)}</ul></div>
+  </article>"""
+        aree += f"""
+<section class="block sec-area"><div class="wrap">
+  <div class="head"><div><p class="mono sec-k">0{j} · {k}</p><h2>{h}</h2></div><p>{d}</p></div>{arts}
+</div></section>"""
+    fasi = "".join(f'<div><span class="mono">0{i}</span><b>{t}</b><p>{d}</p></div>' for i, (t, d) in enumerate(SE["steps"], 1))
+    out["security"] = page("security", SE["title"], SE["desc"], head_block(L["nav"]["security"], SE["h1"], SE["sub"]) + f"""
+<section class="wrap sec-actions"><div class="actions"><a class="btn" href="{u('contact')}">{SE['b1']} {arrow}</a><a class="btn ghost" href="#metodo">{SE['b2']}</a></div></section>
+<section class="block"><div class="wrap">
+  <div class="head"><h2>{SE['risks_h']}</h2><p>{SE['risks_p']}</p></div>
+  <div class="how">{rischi}</div>
+</div></section>{aree}
+<section class="block" id="metodo"><div class="wrap">
+  <div class="head"><h2>{SE['steps_h']}</h2><p>{SE['steps_p']}</p></div>
+  <div class="how quattro">{fasi}</div>
+</div></section>
+<section class="block"><div class="wrap why">
+  <p class="mono">{SE['check_k']}</p>
+  <div><h2>{SE['check_h']}</h2>
+    <ul class="sec-check">{"".join(f"<li>{x}</li>" for x in SE['check'])}</ul>
+    <a class="btn" href="{u('contact')}">{SE['check_a']} {arrow}</a></div>
+</div></section>""")
 
     # soluzioni
     SO = L["solutions"]; lb = SO["lbl"]

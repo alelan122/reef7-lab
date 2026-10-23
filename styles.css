@@ -1269,3 +1269,24 @@ button.btn { font-family: inherit; }
 
 .au-from-agent { margin: -10px 0 18px; padding: 10px 14px; border-radius: 12px; background: rgba(95, 225, 242, .07); border: 1px solid rgba(95, 225, 242, .25); font-size: 13.5px; color: var(--text); }
 .au-from-agent[hidden] { display: none; }
+
+/* Pagina Sicurezza */
+.sec-actions { margin-top: -24px; padding-bottom: clamp(56px, 7vw, 100px); }
+.sec-actions .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.sec-k { margin-bottom: 18px; color: var(--aqua); }
+.sec-area .svc-h { font: 600 clamp(32px, 4vw, 60px)/.95 var(--sans); letter-spacing: -.05em; }
+.how.quattro { grid-template-columns: repeat(4, 1fr); }
+.sec-check { list-style: none; padding: 0; margin: 0 0 36px; border-top: 1px solid var(--rule); max-width: 720px; }
+.sec-check li { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--rule); font-size: clamp(17px, 1.3vw, 19px); }
+.sec-check li::before { content: "✓"; color: var(--aqua); flex: none; }
+@media (max-width: 1180px) { .top nav { gap: 22px; font-size: 14px; } }
+@media (max-width: 1080px) { .how.quattro { grid-template-columns: 1fr 1fr; } .how.quattro div:nth-child(3) { padding-left: 0; border-left: 0; } .how.quattro div:nth-child(n+3) { border-top: 1px solid var(--rule); margin-top: 24px; } }
+@media (max-width: 900px) { .how.quattro { grid-template-columns: 1fr; } }
+[data-page="security"] .page-head h1 { max-width: 18ch; }
+
+.sec-box .btn { margin-top: 28px; }
+.sec-links li::before { content: none; }
+.sec-links a { display: flex; justify-content: space-between; gap: 16px; width: 100%; transition: color .2s; }
+.sec-links a::after { content: "→"; color: var(--aqua); transition: transform .25s; }
+.sec-links a:hover { color: var(--aqua); }
+.sec-links a:hover::after { transform: translateX(4px); }
