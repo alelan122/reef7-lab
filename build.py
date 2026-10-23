@@ -846,13 +846,19 @@ T = {
 T["it"]["security"] = {
     "title": "Sicurezza informatica per siti, app e agenti AI · Reef 7 Lab",
     "desc": "Gli attacchi sono già automatici. Mettiamo al sicuro siti, app e gestionali, nuovi e datati, e gli agenti AI che usi: verifica, correzione e guardia continua.",
-    "h1": "Gli attacchi sono già <em>automatici</em>. Le tue difese?",
-    "sub": "Nel 2024, per la prima volta in dieci anni, il traffico automatico ha superato quello umano: più di metà delle visite a un sito non arriva da una persona. Una parte lavora per te. Il resto cerca password deboli, database aperti e assistenti AI da manipolare. Troviamo le tue porte aperte e le chiudiamo, prima che lo faccia qualcun altro.",
-    "sub_src": ("Fonte: Imperva, Bad Bot Report 2025", "https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/"),
+    "h1": "Le falle ora le trova un'AI. <em>Anche chi attacca.</em>",
+    "sub": "In poche settimane l'intelligenza artificiale ha trovato falle rimaste nascoste per anni, e chi attacca la usa per sfruttarle in poche ore. Il tuo sito, le tue app e i tuoi gestionali sono stati costruiti per un mondo più lento. Troviamo le porte aperte e le chiudiamo, prima che lo faccia qualcun altro.",
+    "sub_src": ("Fonte: AP / PBS NewsHour, ottobre 2026", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
+    "alert_k": "21 ottobre 2026 · Dalla cronaca",
+    "alert_h": "Un'AI ha trovato falle critiche nel linguaggio di 7 siti su 10. <em>Poche ore dopo, milioni di tentativi di attacco.</em>",
+    "alert_p": "Le falle erano in PHP, il linguaggio su cui girano WordPress, la maggior parte degli e-commerce e moltissimi gestionali web, e permettevano di prendere il controllo del server da remoto. L'FBI ha consigliato di spegnere i siti che non si possono aggiornare subito; Giappone, Regno Unito e Finlandia hanno messo offline parte dei servizi pubblici.",
+    "alert_q": "Il tuo sito gira su PHP? È già aggiornato?",
+    "alert_a": "Scoprilo con il check di esposizione",
+    "alert_src": ("AP / PBS NewsHour, 22 ottobre 2026", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
     "b1": "Fai il check di esposizione", "b2": "Guarda i casi reali",
-    "risks_h": "Cosa è <em>cambiato</em>", "risks_p": "In pochi mesi l'attacco è diventato un software. Gran parte di ciò che è online è stato pensato per un web diverso.",
+    "risks_h": "Cosa è <em>cambiato</em>", "risks_p": "In poche settimane l'attacco è diventato un software che lavora da solo. Gran parte di ciò che è online è stato pensato per un web più lento.",
     "risks": [
-        ("L'attaccante non si stanca", "Un agente prova password, cerca versioni vulnerabili e legge ogni modulo giorno e notte, su migliaia di siti insieme. Non scegli tu se essere un bersaglio: basta essere online."),
+        ("Tra la scoperta e l'attacco passano ore", "Una falla rimasta nel codice per oltre dieci anni è stata trovata da un'AI, e nelle ore dopo l'annuncio sono partiti milioni di tentativi di sfruttarla. Aggiornare tra una settimana vuol dire arrivare tardi. Non scegli tu se essere un bersaglio: basta essere online."),
         ("Si pubblica prima di controllare", "Un'app generata con l'AI va online in un weekend. Regole d'accesso, chiavi e permessi spesso non li ha mai guardati nessuno."),
         ("Gli assistenti hanno le chiavi di casa", "Chatbot e agenti leggono email, documenti e CRM, e possono agire. Per manipolarli non serve violarli: basta scrivere la cosa giusta nel posto giusto."),
     ],
@@ -913,13 +919,19 @@ T["it"]["check"] = {
 T["en"]["security"] = {
     "title": "Cybersecurity for websites, apps and AI agents · Reef 7 Lab",
     "desc": "Attacks are already automated. We secure websites, apps and internal tools, new and old, and the AI agents you use: review, fixes and continuous watch.",
-    "h1": "Attacks are already <em>automated</em>. Are your defences?",
-    "sub": "In 2024, for the first time in a decade, automated traffic overtook human traffic: more than half of the visits to a website don't come from a person. Some of them work for you. The rest look for weak passwords, open databases and AI assistants to manipulate. We find your open doors and close them, before someone else does.",
-    "sub_src": ("Source: Imperva, Bad Bot Report 2025", "https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/"),
+    "h1": "AI now finds the flaws. <em>So do attackers.</em>",
+    "sub": "In a matter of weeks, AI has found flaws that stayed hidden for years, and attackers use it to exploit them within hours. Your website, apps and internal tools were built for a slower world. We find the open doors and close them, before someone else does.",
+    "sub_src": ("Source: AP / PBS NewsHour, October 2026", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
+    "alert_k": "October 21, 2026 · In the news",
+    "alert_h": "An AI found critical flaws in the language behind 7 in 10 websites. <em>Within hours, millions of attack attempts.</em>",
+    "alert_p": "The flaws were in PHP, the language behind WordPress, most online stores and countless web-based internal tools, and they allowed attackers to take control of the server remotely. The FBI advised taking sites offline if they couldn't be updated right away; Japan, the UK and Finland took parts of their public services offline.",
+    "alert_q": "Does your site run on PHP? Is it already updated?",
+    "alert_a": "Find out with the exposure check",
+    "alert_src": ("AP / PBS NewsHour, October 22, 2026", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
     "b1": "Take the exposure check", "b2": "See the real cases",
-    "risks_h": "What has <em>changed</em>", "risks_p": "In a matter of months, attacking became software. Much of what is online was designed for a different web.",
+    "risks_h": "What has <em>changed</em>", "risks_p": "In a matter of weeks, attacking became software that works on its own. Much of what is online was designed for a slower web.",
     "risks": [
-        ("The attacker never gets tired", "An agent tries passwords, looks for vulnerable versions and reads every form day and night, across thousands of sites at once. You don't choose whether to be a target: being online is enough."),
+        ("Hours between discovery and attack", "A flaw that sat in the code for over a decade was found by an AI, and within hours of the announcement millions of attempts to exploit it began. Updating next week means arriving too late. You don't choose whether to be a target: being online is enough."),
         ("Shipped before it's checked", "An AI-generated app goes live in a weekend. Access rules, keys and permissions have often never been looked at by anyone."),
         ("Assistants hold the house keys", "Chatbots and agents read email, documents and CRMs, and they can act. You don't need to hack them to manipulate them: you just write the right thing in the right place."),
     ],
@@ -1344,6 +1356,12 @@ def build(lang, variant=""):
     faq = "".join(f'<details class="sec-faq"><summary>{q}</summary><p>{a}</p></details>' for q, a in SE["faq"])
     out["security"] = page("security", SE["title"], SE["desc"], head_block(L["nav"]["security"], SE["h1"], SE["sub"]) + f"""
 <section class="wrap sec-actions"><p class="sec-src"><a href="{SE['sub_src'][1]}" target="_blank" rel="noopener">{SE['sub_src'][0]} ↗</a></p><div class="actions"><a class="btn" href="{u('check')}">{SE['b1']} {arrow}</a><a class="btn ghost" href="#casi">{SE['b2']}</a></div></section>
+<section class="sec-alert"><div class="wrap">
+  <p class="mono"><span class="sec-dot" aria-hidden="true"></span>{SE['alert_k']}</p>
+  <h2>{SE['alert_h']}</h2>
+  <div class="sec-alert-b"><p>{SE['alert_p']}</p>
+    <div class="sec-alert-cta"><b>{SE['alert_q']}</b><a class="btn" href="{u('check')}">{SE['alert_a']} {arrow}</a><a class="sec-alert-src" href="{SE['alert_src'][1]}" target="_blank" rel="noopener">{SE['alert_src'][0]} ↗</a></div></div>
+</div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{SE['risks_h']}</h2><p>{SE['risks_p']}</p></div>
   <div class="how">{rischi}</div>

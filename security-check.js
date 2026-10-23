@@ -24,6 +24,7 @@
     have_q: "What do you have online?", have_hint: "Select everything that applies",
     have: ["Brochure website", "Online store", "Customer area with login", "Internal app or management tool", "Site or app built with AI tools", "Chatbot or AI agent connected to email, documents or CRM", "Integrations between software (CRM, payments, automations)"],
     age_q: "How long has your main website been online?", ages: ["Less than 1 year", "1-3 years", "3-5 years", "More than 5 years", "I don't know"],
+    php_q: "Does your site run on WordPress, WooCommerce, PrestaShop, Magento or another PHP platform?", phps: ["Yes", "No", "I don't know"],
     maint_q: "Who looks after it today?", maints: ["We do, in-house", "The agency that built it, still active", "Nobody since it was delivered", "I don't know"],
     yn: ["Yes", "No", "I don't know"],
     habits: [
@@ -73,6 +74,7 @@
     have_q: "Cosa hai online?", have_hint: "Seleziona tutto quello che c'è",
     have: ["Sito vetrina", "E-commerce", "Area clienti con login", "Gestionale o app interna", "Sito o app costruiti con strumenti di intelligenza artificiale", "Chatbot o agente AI collegato a email, documenti o CRM", "Integrazioni tra software (CRM, pagamenti, automazioni)"],
     age_q: "Da quanto è online il sito principale?", ages: ["Meno di 1 anno", "1-3 anni", "3-5 anni", "Più di 5 anni", "Non lo so"],
+    php_q: "Il sito usa WordPress, WooCommerce, PrestaShop, Magento o un'altra piattaforma in PHP?", phps: ["Sì", "No", "Non lo so"],
     maint_q: "Chi se ne occupa oggi?", maints: ["Noi, internamente", "L'agenzia che l'ha fatto, ancora attiva", "Nessuno, da quando è stato consegnato", "Non lo so"],
     yn: ["Sì", "No", "Non lo so"],
     habits: [
@@ -115,6 +117,7 @@
 
   // rischi: titolo, perché conta (con il caso di cronaca), cosa fare oggi, servizio, quando (0 subito, 1 settimane, 2 strutturale)
   const R = en ? {
+    php: ["Your site runs on PHP: check it's updated now", "On October 21, 2026 an AI found critical flaws in PHP, the language behind about 7 in 10 websites: they let attackers take control of the server. Within hours of the announcement, millions of attack attempts began, and the FBI advised taking offline any site that couldn't be updated right away.", "Ask whoever manages the site today whether PHP and the platform were updated after October 21. If they can't answer, treat it as not updated.", ["sec", "36"], 0],
     web: ["Your site doesn't use the browser's basic protections", "Without these settings, a site is easier to impersonate, tamper with or abuse. Working is not the same as protected: researchers found 170 out of 1,645 AI-built apps leaving data open to anyone.", "Ask whoever manages the site to enforce HTTPS and enable the security headers (HSTS, CSP): these are settings, not a rebuild.", ["sec", "36"], 1],
     mail: ["Anyone can send emails in your name", "It's the favourite tool of scams: a fake invoice or a password request that looks like it comes from you, sent to your customers and suppliers.", "Publish a DMARC record in monitoring mode (p=none), read the reports for two weeks, then move to quarantine.", ["svc", "22"], 0],
     old: ["A website nobody looks after anymore", "Agents look precisely for old components with known flaws: it's the cheapest way in, and it works on thousands of sites at once.", "Ask for the list of components and plugins with their versions: that alone says a lot.", ["sec", "36"], 0],
@@ -128,6 +131,7 @@
     aid: ["Customer data pasted into AI tools", "Every prompt is data leaving the company: often nobody knows where it ends up or how long it stays.", "Set a simple rule: no customer names, emails or documents in public AI chats, only in approved business tools.", ["sec", "34"], 1],
     inc: ["Something has already happened", "An incident is often the visible part of a larger door. It's worth understanding how it happened before it happens again.", "Change the passwords of the accounts involved, turn on two-factor login and keep any suspicious emails as evidence.", ["sec", "36"], 0],
   } : {
+    php: ["Il tuo sito gira su PHP: verifica subito che sia aggiornato", "Il 21 ottobre 2026 un'AI ha trovato falle critiche in PHP, il linguaggio di circa 7 siti su 10: permettono di prendere il controllo del server. Nelle ore dopo l'annuncio sono partiti milioni di tentativi di attacco, e l'FBI ha consigliato di spegnere i siti che non si possono aggiornare subito.", "Chiedi oggi a chi gestisce il sito se PHP e la piattaforma sono stati aggiornati dopo il 21 ottobre. Se non sa risponderti, consideralo non aggiornato.", ["sec", "36"], 0],
     web: ["Il sito non usa le protezioni di base dei browser", "Senza queste impostazioni un sito è più facile da imitare, manomettere o sfruttare. Funzionare non vuol dire essere protetti: i ricercatori hanno trovato 170 app su 1.645, fatte con l'AI, che lasciavano i dati aperti a chiunque.", "Chiedi a chi gestisce il sito di rendere obbligatorio l'HTTPS e di attivare le intestazioni di sicurezza (HSTS, CSP): sono impostazioni, non un rifacimento.", ["sec", "36"], 1],
     mail: ["Chiunque può mandare email a nome tuo", "È lo strumento preferito delle truffe: una fattura falsa o una richiesta di password che sembra arrivare da te, inviata ai tuoi clienti e fornitori.", "Pubblica un record DMARC in modalità monitoraggio (p=none), leggi i rapporti per due settimane e poi passa a quarantine.", ["svc", "22"], 0],
     old: ["Un sito che nessuno guarda più", "Gli agenti cercano proprio componenti vecchi con falle note: è il modo più economico per entrare, e funziona su migliaia di siti insieme.", "Fatti dare l'elenco di componenti e plugin con la loro versione: già quello dice molto.", ["sec", "36"], 0],
@@ -171,6 +175,7 @@
       <fieldset class="au-step" data-i="1" hidden>
         <div class="q-field"><p class="q-label">${T.have_q}<small>${T.have_hint}</small></p>${pills("have", T.have, "checkbox")}</div>
         ${q("age", T.age_q, T.ages)}
+        ${q("php", T.php_q, T.phps)}
         ${q("maint", T.maint_q, T.maints)}
       </fieldset>
       <fieldset class="au-step" data-i="2" hidden>
@@ -277,7 +282,7 @@
     const f = new FormData(form), g = (k) => (f.get(k) === null ? -1 : +f.get(k));
     const have = f.getAll("have").map(Number);
     const h = {}; T.habits.forEach(([k]) => { h[k] = g(k); });
-    return { have, age: g("age"), maint: g("maint"), h, sector: g("sector"), team: g("team"), role: g("role"), inc: g("inc"), agent: have.includes(5), aiBuilt: have.includes(4) };
+    return { have, age: g("age"), php: g("php"), maint: g("maint"), h, sector: g("sector"), team: g("team"), role: g("role"), inc: g("inc"), agent: have.includes(5), aiBuilt: have.includes(4) };
   };
   const score = (a) => {
     const risks = [], good = [];
@@ -289,6 +294,7 @@
     if (a.age === 3 || a.age === 4) old += 2;
     if (a.maint === 2) old += 3; else if (a.maint === 3) old += 2;
     if (old) add("old", Math.min(old, 5)); else if (a.maint === 0 || a.maint === 1) good.push("maint");
+    if (a.php === 0) add("php", a.h.upd === 0 ? 2 : 3); else if (a.php === 2) add("php", 2);
     if (a.aiBuilt) add("ai", 2);
     // abitudini: "no" e "non lo so" contano come rischio; per le domande invertite è il "sì" a pesare
     const W = { mfa: 3, off: 3, pw: 2, bak: 2, upd: 2, aid: 2, agt: 3 };
@@ -422,7 +428,7 @@
           "Nome": name, email, "Azienda": company || "—", "Dominio": scan.domain || "nessun sito",
           "Protezioni del sito": scan.web ? `${scan.web.grade} · ${scan.web.failed}/${scan.web.total} non superati · ${scan.web.url}` : "—",
           "Email a nome dell'azienda": scan.mail ? `DMARC ${scan.mail.dmarc || "assente"} · SPF ${scan.mail.spf ? "presente" : "assente"}` : "—",
-          "Online": a.have.map((i) => T.have[i]).join("; ") || "—", "Età del sito": a.age >= 0 ? T.ages[a.age] : "—", "Chi se ne occupa": a.maint >= 0 ? T.maints[a.maint] : "—",
+          "Online": a.have.map((i) => T.have[i]).join("; ") || "—", "Età del sito": a.age >= 0 ? T.ages[a.age] : "—", "PHP / WordPress": a.php >= 0 ? T.phps[a.php] : "—", "Chi se ne occupa": a.maint >= 0 ? T.maints[a.maint] : "—",
           "Abitudini": T.habits.filter(([k]) => a.h[k] >= 0).map(([k, l]) => `${l}: ${T.yn[a.h[k]]}`).join("; "),
           "Settore": a.sector >= 0 ? T.sectors[a.sector] : "—", "Persone": a.team >= 0 ? T.teams[a.team] : "—", "Ruolo": a.role >= 0 ? T.roles[a.role] : "—",
           "Priorità": s.risks.slice(0, 3).map((r) => R[r.k][0]).join("; "), "Altri punti": s.risks.slice(3).map((r) => R[r.k][0]).join("; ") || "—",
