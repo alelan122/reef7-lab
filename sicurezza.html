@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'sha256-Uj8sggWkvGBxSgNHYVfw/MLoVsaHZdhmdAniX5W0gs8='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://cdn.jsdelivr.net https://*.workers.dev; frame-src 'self' https://alelan122.github.io; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'sha256-Uj8sggWkvGBxSgNHYVfw/MLoVsaHZdhmdAniX5W0gs8='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://cdn.jsdelivr.net https://*.workers.dev https://dns.google https://observatory-api.mdn.mozilla.net; frame-src 'self' https://alelan122.github.io; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sicurezza informatica per siti, app e agenti AI · Reef 7 Lab</title>
@@ -27,9 +27,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=06c6082a">
+  <link rel="stylesheet" href="styles.css?v=fcbc6e64">
 </head>
-<body data-page="security" data-build="12347f4300">
+<body data-page="security" data-build="faba354d5a">
 <a class="skip" href="#main">Salta al contenuto</a>
 <header class="top solid"><div class="wrap top-in">
   <a class="logo" href="index.html"><img src="assets/logo-68.png" alt="" width="34" height="34">Reef 7 Lab</a>
@@ -42,7 +42,7 @@
   <p class="mono">Sicurezza</p>
   <h1>Gli attacchi sono già <em>automatici</em>. Le tue difese?</h1><p class="sub">Nel 2024, per la prima volta in dieci anni, il traffico automatico ha superato quello umano: più di metà delle visite a un sito non arriva da una persona. Una parte lavora per te. Il resto cerca password deboli, database aperti e assistenti AI da manipolare. Troviamo le tue porte aperte e le chiudiamo, prima che lo faccia qualcun altro.</p>
 </div></section>
-<section class="wrap sec-actions"><p class="sec-src"><a href="https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/" target="_blank" rel="noopener">Fonte: Imperva, Bad Bot Report 2025 ↗</a></p><div class="actions"><a class="btn" href="contatti.html">Richiedi una verifica <span class="arr" aria-hidden="true">→</span></a><a class="btn ghost" href="#casi">Guarda i casi reali</a></div></section>
+<section class="wrap sec-actions"><p class="sec-src"><a href="https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/" target="_blank" rel="noopener">Fonte: Imperva, Bad Bot Report 2025 ↗</a></p><div class="actions"><a class="btn" href="sicurezza-check.html">Fai il check di esposizione <span class="arr" aria-hidden="true">→</span></a><a class="btn ghost" href="#casi">Guarda i casi reali</a></div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>Cosa è <em>cambiato</em></h2><p>In pochi mesi l'attacco è diventato un software. Gran parte di ciò che è online è stato pensato per un web diverso.</p></div>
   <div class="how"><div><span class="mono">01</span><b>L'attaccante non si stanca</b><p>Un agente prova password, cerca versioni vulnerabili e legge ogni modulo giorno e notte, su migliaia di siti insieme. Non scegli tu se essere un bersaglio: basta essere online.</p></div><div><span class="mono">02</span><b>Si pubblica prima di controllare</b><p>Un'app generata con l'AI va online in un weekend. Regole d'accesso, chiavi e permessi spesso non li ha mai guardati nessuno.</p></div><div><span class="mono">03</span><b>Gli assistenti hanno le chiavi di casa</b><p>Chatbot e agenti leggono email, documenti e CRM, e possono agire. Per manipolarli non serve violarli: basta scrivere la cosa giusta nel posto giusto.</p></div></div>
@@ -50,12 +50,12 @@
 <section class="block" id="casi"><div class="wrap">
   <div class="head"><div><p class="mono sec-k">Dalle cronache recenti</p><h2>Non è teoria. <em>È cronaca.</em></h2></div><p>Casi pubblici, documentati dai ricercatori e dalle aziende coinvolte. Quasi tutti partono da un errore banale.</p></div>
   <div class="sec-casi">
-    <article class="sec-caso"><p class="mono">Settembre 2025</p><h3>Lo spionaggio lo ha fatto un'AI</h3><p>Un gruppo sponsorizzato da uno stato ha usato un agente AI per svolgere in autonomia l'80-90% del lavoro operativo contro una trentina di organizzazioni: ricognizione, ricerca di falle, furto di credenziali.</p><p class="sec-lez">Il lavoro di una squadra di attaccanti ora lo fa un agente, a velocità di macchina.</p><a href="https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf" target="_blank" rel="noopener">Anthropic ↗</a></article>
-    <article class="sec-caso"><p class="mono">Agosto 2025</p><h3>Un chatbot, settecento aziende</h3><p>Con i token di accesso rubati all'integrazione di un chatbot di vendita, gli attaccanti hanno estratto dati dai CRM di oltre 700 organizzazioni, comprese aziende di sicurezza informatica, cercando chiavi e password.</p><p class="sec-lez">Ogni strumento collegato ai tuoi dati è una porta d'ingresso.</p><a href="https://www.techtarget.com/cybersecurity/news/366630934/News-brief-Salesloft-Drift-breach-update-and-timeline" target="_blank" rel="noopener">TechTarget ↗</a></article>
-    <article class="sec-caso"><p class="mono">Giugno 2025</p><h3>Un'email, zero clic</h3><p>Una sola email preparata ad arte bastava a far consegnare dati interni a un server esterno da un assistente AI aziendale diffusissimo, senza che l'utente cliccasse nulla. Corretto prima che venisse sfruttato.</p><p class="sec-lez">Per un assistente AI anche un'email è un'istruzione.</p><a href="https://www.bleepingcomputer.com/news/security/zero-click-ai-data-leak-flaw-uncovered-in-microsoft-365-copilot/" target="_blank" rel="noopener">BleepingComputer ↗</a></article>
-    <article class="sec-caso"><p class="mono">2025</p><h3>App fatte con l'AI, dati aperti</h3><p>Su 1.645 app pubblicate con un noto generatore basato sull'AI, i ricercatori ne hanno trovate 170 che lasciavano leggere a chiunque utenti, pagamenti o chiavi.</p><p class="sec-lez">Funzionare non vuol dire essere protetti.</p><a href="https://www.superblocks.com/blog/lovable-vulnerabilities" target="_blank" rel="noopener">Superblocks ↗</a></article>
-    <article class="sec-caso"><p class="mono">Luglio 2025</p><h3>72.000 immagini in chiaro</h3><p>Un'app di incontri ha esposto circa 72.000 immagini, tra cui 13.000 selfie e documenti d'identità, da uno spazio di archiviazione accessibile dall'esterno.</p><p class="sec-lez">Un'impostazione sbagliata vale quanto una falla.</p><a href="https://cyberinsider.com/tea-app-suffers-data-breach-exposing-72000-users-photos-and-private-messages/" target="_blank" rel="noopener">CyberInsider ↗</a></article>
-    <article class="sec-caso"><p class="mono">Luglio 2025</p><h3>La password era 123456</h3><p>La piattaforma di selezione con chatbot usata da una grande catena di fast food aveva un pannello di prova protetto da 123456, senza doppio fattore: aperti i dati di fino a 64 milioni di candidature.</p><p class="sec-lez">Un ambiente di prova dimenticato è un ingresso di servizio.</p><a href="https://www.bleepingcomputer.com/news/security/123456-password-exposed-chats-for-64-million-mcdonalds-job-chatbot-applications/" target="_blank" rel="noopener">BleepingComputer ↗</a></article>
+    <article class="sec-caso"><p class="mono">Settembre 2025</p><h3>Un'AI ha condotto da sola l'80-90% di un attacco</h3><p>Un gruppo sponsorizzato da uno stato ha usato un agente AI per svolgere in autonomia l'80-90% del lavoro operativo contro una trentina di organizzazioni: ricognizione, ricerca di falle, furto di credenziali.</p><p class="sec-lez">Il lavoro di una squadra di attaccanti ora lo fa un agente, a velocità di macchina.</p><a href="https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf" target="_blank" rel="noopener">Anthropic ↗</a></article>
+    <article class="sec-caso"><p class="mono">Agosto 2025</p><h3>Un chatbot violato ha aperto i CRM di 700 aziende</h3><p>Con i token di accesso rubati all'integrazione di un chatbot di vendita, gli attaccanti hanno estratto dati dai CRM di oltre 700 organizzazioni, comprese aziende di sicurezza informatica, cercando chiavi e password.</p><p class="sec-lez">Ogni strumento collegato ai tuoi dati è una porta d'ingresso.</p><a href="https://www.techtarget.com/cybersecurity/news/366630934/News-brief-Salesloft-Drift-breach-update-and-timeline" target="_blank" rel="noopener">TechTarget ↗</a></article>
+    <article class="sec-caso"><p class="mono">Giugno 2025</p><h3>Bastava un'email per rubare dati, senza un clic</h3><p>Una sola email preparata ad arte bastava a far consegnare dati interni a un server esterno da un assistente AI aziendale diffusissimo, senza che l'utente cliccasse nulla. Corretto prima che venisse sfruttato.</p><p class="sec-lez">Per un assistente AI anche un'email è un'istruzione.</p><a href="https://www.bleepingcomputer.com/news/security/zero-click-ai-data-leak-flaw-uncovered-in-microsoft-365-copilot/" target="_blank" rel="noopener">BleepingComputer ↗</a></article>
+    <article class="sec-caso"><p class="mono">2025</p><h3>Un'app su dieci fatta con l'AI lasciava i dati aperti</h3><p>Su 1.645 app pubblicate con un noto generatore basato sull'AI, i ricercatori ne hanno trovate 170 che lasciavano leggere a chiunque utenti, pagamenti o chiavi.</p><p class="sec-lez">Funzionare non vuol dire essere protetti.</p><a href="https://www.superblocks.com/blog/lovable-vulnerabilities" target="_blank" rel="noopener">Superblocks ↗</a></article>
+    <article class="sec-caso"><p class="mono">Luglio 2025</p><h3>13.000 documenti d'identità aperti a chiunque</h3><p>Un'app di incontri ha esposto circa 72.000 immagini, tra cui 13.000 selfie e documenti d'identità, da uno spazio di archiviazione accessibile dall'esterno.</p><p class="sec-lez">Un'impostazione sbagliata vale quanto una falla.</p><a href="https://cyberinsider.com/tea-app-suffers-data-breach-exposing-72000-users-photos-and-private-messages/" target="_blank" rel="noopener">CyberInsider ↗</a></article>
+    <article class="sec-caso"><p class="mono">Luglio 2025</p><h3>Password 123456: esposte fino a 64 milioni di candidature</h3><p>La piattaforma di selezione con chatbot usata da una grande catena di fast food aveva un pannello di prova protetto da 123456, senza doppio fattore: aperti i dati di fino a 64 milioni di candidature.</p><p class="sec-lez">Un ambiente di prova dimenticato è un ingresso di servizio.</p><a href="https://www.bleepingcomputer.com/news/security/123456-password-exposed-chats-for-64-million-mcdonalds-job-chatbot-applications/" target="_blank" rel="noopener">BleepingComputer ↗</a></article>
   </div>
 </div></section>
 <section class="block sec-area"><div class="wrap">
@@ -109,8 +109,8 @@
   <p class="mono">Ti riguarda se</p>
   <div><h2>Due sì bastano per <em>parlarne</em>.</h2>
     <ul class="sec-check"><li>Il sito o l'app hanno qualche anno e da allora nessuno li ha più ricontrollati</li><li>I clienti lasciano dati, documenti o pagamenti in un modulo o in un'area riservata</li><li>Hai costruito qualcosa con l'intelligenza artificiale e l'hai messo online</li><li>Un chatbot o un agente AI legge le tue email, i tuoi documenti o il tuo CRM</li><li>Persone che non lavorano più con te potrebbero avere ancora un accesso</li><li>Non sapresti dire quando è stato fatto l'ultimo backup, né se si ripristina davvero</li></ul>
-    <a class="btn" href="contatti.html">Richiedi una verifica di sicurezza <span class="arr" aria-hidden="true">→</span></a>
-    <p class="sec-note">Una prima call di 30 minuti, gratuita: ci racconti cosa hai online e ti diciamo da dove partiremmo.</p></div>
+    <a class="btn" href="sicurezza-check.html">Fai il check di esposizione <span class="arr" aria-hidden="true">→</span></a>
+    <p class="sec-note">Tre minuti, gratis: il tuo livello di esposizione, cosa vede chi attacca dal tuo dominio e le 3 priorità da cui partire. <a href="contatti.html?need=Sicurezza%20di%20siti,%20app%20e%20agenti%20AI#contact-form">Preferisci scriverci? Vai ai contatti</a></p></div>
 </div></section>
 </main>
 <section class="cta-band"><div class="wrap"><a href="contatti.html">
@@ -122,7 +122,7 @@
   <a class="r" href="mailto:lancioni.ale@gmail.com">lancioni.ale@gmail.com</a>
 </div></footer>
 <script>window.REEF = { email: "lancioni.ale@gmail.com", agent: "" };</script>
-<script src="site.js?v=06c6082a"></script>
-<script src="agent.js?v=06c6082a"></script>
+<script src="site.js?v=fcbc6e64"></script>
+<script src="agent.js?v=fcbc6e64"></script>
 </body>
 </html>

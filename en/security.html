@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'sha256-Uj8sggWkvGBxSgNHYVfw/MLoVsaHZdhmdAniX5W0gs8='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://cdn.jsdelivr.net https://*.workers.dev; frame-src 'self' https://alelan122.github.io; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'sha256-Uj8sggWkvGBxSgNHYVfw/MLoVsaHZdhmdAniX5W0gs8='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://cdn.jsdelivr.net https://*.workers.dev https://dns.google https://observatory-api.mdn.mozilla.net; frame-src 'self' https://alelan122.github.io; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cybersecurity for websites, apps and AI agents · Reef 7 Lab</title>
@@ -27,9 +27,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=06c6082a">
+  <link rel="stylesheet" href="../styles.css?v=fcbc6e64">
 </head>
-<body data-page="security" data-build="12347f4300">
+<body data-page="security" data-build="faba354d5a">
 <a class="skip" href="#main">Skip to content</a>
 <header class="top solid"><div class="wrap top-in">
   <a class="logo" href="index.html"><img src="../assets/logo-68.png" alt="" width="34" height="34">Reef 7 Lab</a>
@@ -42,7 +42,7 @@
   <p class="mono">Security</p>
   <h1>Attacks are already <em>automated</em>. Are your defences?</h1><p class="sub">In 2024, for the first time in a decade, automated traffic overtook human traffic: more than half of the visits to a website don't come from a person. Some of them work for you. The rest look for weak passwords, open databases and AI assistants to manipulate. We find your open doors and close them, before someone else does.</p>
 </div></section>
-<section class="wrap sec-actions"><p class="sec-src"><a href="https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/" target="_blank" rel="noopener">Source: Imperva, Bad Bot Report 2025 ↗</a></p><div class="actions"><a class="btn" href="contact.html">Request a review <span class="arr" aria-hidden="true">→</span></a><a class="btn ghost" href="#casi">See the real cases</a></div></section>
+<section class="wrap sec-actions"><p class="sec-src"><a href="https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/" target="_blank" rel="noopener">Source: Imperva, Bad Bot Report 2025 ↗</a></p><div class="actions"><a class="btn" href="security-check.html">Take the exposure check <span class="arr" aria-hidden="true">→</span></a><a class="btn ghost" href="#casi">See the real cases</a></div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>What has <em>changed</em></h2><p>In a matter of months, attacking became software. Much of what is online was designed for a different web.</p></div>
   <div class="how"><div><span class="mono">01</span><b>The attacker never gets tired</b><p>An agent tries passwords, looks for vulnerable versions and reads every form day and night, across thousands of sites at once. You don't choose whether to be a target: being online is enough.</p></div><div><span class="mono">02</span><b>Shipped before it's checked</b><p>An AI-generated app goes live in a weekend. Access rules, keys and permissions have often never been looked at by anyone.</p></div><div><span class="mono">03</span><b>Assistants hold the house keys</b><p>Chatbots and agents read email, documents and CRMs, and they can act. You don't need to hack them to manipulate them: you just write the right thing in the right place.</p></div></div>
@@ -50,12 +50,12 @@
 <section class="block" id="casi"><div class="wrap">
   <div class="head"><div><p class="mono sec-k">From recent headlines</p><h2>Not theory. <em>Headlines.</em></h2></div><p>Public cases, documented by researchers and the companies involved. Almost all of them start from a trivial mistake.</p></div>
   <div class="sec-casi">
-    <article class="sec-caso"><p class="mono">September 2025</p><h3>Espionage, run by an AI</h3><p>A state-sponsored group used an AI agent to carry out 80-90% of the operational work on its own against around thirty organisations: reconnaissance, vulnerability hunting, credential theft.</p><p class="sec-lez">A team of attackers' work is now done by an agent, at machine speed.</p><a href="https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf" target="_blank" rel="noopener">Anthropic ↗</a></article>
-    <article class="sec-caso"><p class="mono">August 2025</p><h3>One chatbot, seven hundred companies</h3><p>Using access tokens stolen from a sales chatbot integration, attackers pulled data from the CRMs of more than 700 organisations, including security companies, hunting for keys and passwords.</p><p class="sec-lez">Every tool connected to your data is a way in.</p><a href="https://www.techtarget.com/cybersecurity/news/366630934/News-brief-Salesloft-Drift-breach-update-and-timeline" target="_blank" rel="noopener">TechTarget ↗</a></article>
-    <article class="sec-caso"><p class="mono">June 2025</p><h3>One email, zero clicks</h3><p>A single crafted email was enough to make a widely used enterprise AI assistant send internal data to an outside server, without the user clicking anything. Fixed before it was exploited.</p><p class="sec-lez">To an AI assistant, even an email is an instruction.</p><a href="https://www.bleepingcomputer.com/news/security/zero-click-ai-data-leak-flaw-uncovered-in-microsoft-365-copilot/" target="_blank" rel="noopener">BleepingComputer ↗</a></article>
-    <article class="sec-caso"><p class="mono">2025</p><h3>AI-built apps, open data</h3><p>Out of 1,645 apps published with a well-known AI app builder, researchers found 170 that let anyone read users, payments or keys.</p><p class="sec-lez">Working is not the same as protected.</p><a href="https://www.superblocks.com/blog/lovable-vulnerabilities" target="_blank" rel="noopener">Superblocks ↗</a></article>
-    <article class="sec-caso"><p class="mono">July 2025</p><h3>72,000 images in the open</h3><p>A dating app exposed around 72,000 images, including 13,000 selfies and ID documents, from a storage space reachable from outside.</p><p class="sec-lez">One wrong setting is as bad as a flaw.</p><a href="https://cyberinsider.com/tea-app-suffers-data-breach-exposing-72000-users-photos-and-private-messages/" target="_blank" rel="noopener">CyberInsider ↗</a></article>
-    <article class="sec-caso"><p class="mono">July 2025</p><h3>The password was 123456</h3><p>The chatbot hiring platform used by a major fast-food chain had a test panel protected by 123456, with no two-factor login: data from up to 64 million job applications was open.</p><p class="sec-lez">A forgotten test environment is a service entrance.</p><a href="https://www.bleepingcomputer.com/news/security/123456-password-exposed-chats-for-64-million-mcdonalds-job-chatbot-applications/" target="_blank" rel="noopener">BleepingComputer ↗</a></article>
+    <article class="sec-caso"><p class="mono">September 2025</p><h3>An AI ran 80-90% of a cyberattack on its own</h3><p>A state-sponsored group used an AI agent to carry out 80-90% of the operational work on its own against around thirty organisations: reconnaissance, vulnerability hunting, credential theft.</p><p class="sec-lez">A team of attackers' work is now done by an agent, at machine speed.</p><a href="https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf" target="_blank" rel="noopener">Anthropic ↗</a></article>
+    <article class="sec-caso"><p class="mono">August 2025</p><h3>One hacked chatbot opened the CRMs of 700 companies</h3><p>Using access tokens stolen from a sales chatbot integration, attackers pulled data from the CRMs of more than 700 organisations, including security companies, hunting for keys and passwords.</p><p class="sec-lez">Every tool connected to your data is a way in.</p><a href="https://www.techtarget.com/cybersecurity/news/366630934/News-brief-Salesloft-Drift-breach-update-and-timeline" target="_blank" rel="noopener">TechTarget ↗</a></article>
+    <article class="sec-caso"><p class="mono">June 2025</p><h3>One email could steal data, with zero clicks</h3><p>A single crafted email was enough to make a widely used enterprise AI assistant send internal data to an outside server, without the user clicking anything. Fixed before it was exploited.</p><p class="sec-lez">To an AI assistant, even an email is an instruction.</p><a href="https://www.bleepingcomputer.com/news/security/zero-click-ai-data-leak-flaw-uncovered-in-microsoft-365-copilot/" target="_blank" rel="noopener">BleepingComputer ↗</a></article>
+    <article class="sec-caso"><p class="mono">2025</p><h3>One in ten AI-built apps left its data open</h3><p>Out of 1,645 apps published with a well-known AI app builder, researchers found 170 that let anyone read users, payments or keys.</p><p class="sec-lez">Working is not the same as protected.</p><a href="https://www.superblocks.com/blog/lovable-vulnerabilities" target="_blank" rel="noopener">Superblocks ↗</a></article>
+    <article class="sec-caso"><p class="mono">July 2025</p><h3>13,000 ID documents left open to anyone</h3><p>A dating app exposed around 72,000 images, including 13,000 selfies and ID documents, from a storage space reachable from outside.</p><p class="sec-lez">One wrong setting is as bad as a flaw.</p><a href="https://cyberinsider.com/tea-app-suffers-data-breach-exposing-72000-users-photos-and-private-messages/" target="_blank" rel="noopener">CyberInsider ↗</a></article>
+    <article class="sec-caso"><p class="mono">July 2025</p><h3>Password 123456 exposed up to 64 million job applications</h3><p>The chatbot hiring platform used by a major fast-food chain had a test panel protected by 123456, with no two-factor login: data from up to 64 million job applications was open.</p><p class="sec-lez">A forgotten test environment is a service entrance.</p><a href="https://www.bleepingcomputer.com/news/security/123456-password-exposed-chats-for-64-million-mcdonalds-job-chatbot-applications/" target="_blank" rel="noopener">BleepingComputer ↗</a></article>
   </div>
 </div></section>
 <section class="block sec-area"><div class="wrap">
@@ -109,8 +109,8 @@
   <p class="mono">This is for you if</p>
   <div><h2>Two yeses are <em>enough to talk</em>.</h2>
     <ul class="sec-check"><li>Your website or app is a few years old and nobody has checked it since</li><li>Customers leave data, documents or payments in a form or a private area</li><li>You built something with AI and put it online</li><li>A chatbot or AI agent reads your email, your documents or your CRM</li><li>People who no longer work with you might still have access</li><li>You couldn't say when the last backup was made, or whether it really restores</li></ul>
-    <a class="btn" href="contact.html">Request a security review <span class="arr" aria-hidden="true">→</span></a>
-    <p class="sec-note">A free 30-minute first call: tell us what you have online and we'll tell you where we would start.</p></div>
+    <a class="btn" href="security-check.html">Take the exposure check <span class="arr" aria-hidden="true">→</span></a>
+    <p class="sec-note">Three minutes, free: your exposure level, what an attacker sees from your domain and the 3 priorities to start from. <a href="contact.html?need=Security%20for%20websites,%20apps%20and%20AI%20agents#contact-form">Prefer to write to us? Go to contact</a></p></div>
 </div></section>
 </main>
 <section class="cta-band"><div class="wrap"><a href="contact.html">
@@ -122,7 +122,7 @@
   <a class="r" href="mailto:lancioni.ale@gmail.com">lancioni.ale@gmail.com</a>
 </div></footer>
 <script>window.REEF = { email: "lancioni.ale@gmail.com", agent: "" };</script>
-<script src="../site.js?v=06c6082a"></script>
-<script src="../agent.js?v=06c6082a"></script>
+<script src="../site.js?v=fcbc6e64"></script>
+<script src="../agent.js?v=fcbc6e64"></script>
 </body>
 </html>

@@ -36,7 +36,7 @@ def csp_meta(inline_js):
            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
            "font-src 'self' https://fonts.gstatic.com; "
            "img-src 'self' data: https:; "
-           f"connect-src 'self' https://formsubmit.co https://cdn.jsdelivr.net https://*.workers.dev{agent}; "
+           f"connect-src 'self' https://formsubmit.co https://cdn.jsdelivr.net https://*.workers.dev https://dns.google https://observatory-api.mdn.mozilla.net{agent}; "
            "frame-src 'self' https://alelan122.github.io; "
            "object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests")
     return f'<meta http-equiv="Content-Security-Policy" content="{pol}">\n  <meta name="referrer" content="strict-origin-when-cross-origin">'
@@ -317,12 +317,12 @@ def goal_state():
     return out, active
 
 
-VERSION = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["styles.css", "alt-overrides.css", "site.js", "mission.js", "agent.js", "audit.js", "audit-data.js"])).hexdigest()[:8]
+VERSION = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["styles.css", "alt-overrides.css", "site.js", "mission.js", "agent.js", "audit.js", "audit-data.js", "security-check.js"])).hexdigest()[:8]
 # impronta di tutto il sito (contenuti compresi): se online è diversa, la pagina in cache si ricarica da sola
-BUILD = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["build.py", "styles.css", "site.js", "mission.js", "agent.js", "audit.js", "audit-data.js"])).hexdigest()[:10]
+BUILD = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["build.py", "styles.css", "site.js", "mission.js", "agent.js", "audit.js", "audit-data.js", "security-check.js"])).hexdigest()[:10]
 SLUG = {
-    "it": {"home": "index.html", "work": "lavori.html", "services": "servizi.html", "security": "sicurezza.html", "solutions": "soluzioni.html", "mission": "missione.html", "studio": "lab.html", "contact": "contatti.html", "audit": "audit.html"},
-    "en": {"home": "index.html", "work": "work.html", "services": "services.html", "security": "security.html", "solutions": "solutions.html", "mission": "mission.html", "studio": "lab.html", "contact": "contact.html", "audit": "audit.html"},
+    "it": {"home": "index.html", "work": "lavori.html", "services": "servizi.html", "security": "sicurezza.html", "check": "sicurezza-check.html", "solutions": "soluzioni.html", "mission": "missione.html", "studio": "lab.html", "contact": "contatti.html", "audit": "audit.html"},
+    "en": {"home": "index.html", "work": "work.html", "services": "services.html", "security": "security.html", "check": "security-check.html", "solutions": "solutions.html", "mission": "mission.html", "studio": "lab.html", "contact": "contact.html", "audit": "audit.html"},
 }
 NAV = ["work", "services", "security", "solutions", "studio", "mission"]
 
@@ -566,7 +566,7 @@ T = {
         "form_h": "Iniziamo dal tuo progetto",
         "steps": ["Il progetto", "La tua azienda", "Tempi e contatti"],
         "f": {"need": "Di cosa hai bisogno?", "need_hint": "Puoi sceglierne più di uno",
-              "need_opts": ["Sito web o landing page", "App o gestionale su misura", "CRM e vendite", "Prenotazioni ed email marketing", "Automazioni (con o senza AI)", "Agenti AI e assistenti vocali", "Company brain", "Dashboard e controllo di gestione", "Integrazioni tra software", "Multilingue o progetti con la Cina", "Non lo so ancora"],
+              "need_opts": ["Sito web o landing page", "App o gestionale su misura", "CRM e vendite", "Prenotazioni ed email marketing", "Automazioni (con o senza AI)", "Agenti AI e assistenti vocali", "Company brain", "Dashboard e controllo di gestione", "Integrazioni tra software", "Multilingue o progetti con la Cina", "Sicurezza di siti, app e agenti AI", "Non lo so ancora"],
               "goal": "Qual è l'obiettivo principale?", "goal_ph": "Es. vogliamo smettere di gestire i contatti su Excel e sapere ogni giorno quanto vende ogni commerciale",
               "company": "Nome dell'azienda", "site": "Sito web", "site_ph": "www.tuazienda.it",
               "sector": "Settore", "sector_ph": "Es. e-commerce, studio professionale, formazione",
@@ -822,7 +822,7 @@ T = {
         "form_h": "Let's start with your project",
         "steps": ["The project", "Your company", "Timeline and contact"],
         "f": {"need": "What do you need?", "need_hint": "You can pick more than one",
-              "need_opts": ["Website or landing page", "Custom app or management system", "CRM and sales", "Bookings and email marketing", "Automation (with or without AI)", "AI agents and voice assistants", "Company brain", "Dashboards and financial control", "Software integrations", "Multilingual or China projects", "Not sure yet"],
+              "need_opts": ["Website or landing page", "Custom app or management system", "CRM and sales", "Bookings and email marketing", "Automation (with or without AI)", "AI agents and voice assistants", "Company brain", "Dashboards and financial control", "Software integrations", "Multilingual or China projects", "Security for websites, apps and AI agents", "Not sure yet"],
               "goal": "What's your main goal?", "goal_ph": "E.g. we want to stop managing leads in spreadsheets and know every day how much each rep is selling",
               "company": "Company name", "site": "Website", "site_ph": "www.yourcompany.com",
               "sector": "Industry", "sector_ph": "E.g. e-commerce, professional services, education",
@@ -849,7 +849,7 @@ T["it"]["security"] = {
     "h1": "Gli attacchi sono già <em>automatici</em>. Le tue difese?",
     "sub": "Nel 2024, per la prima volta in dieci anni, il traffico automatico ha superato quello umano: più di metà delle visite a un sito non arriva da una persona. Una parte lavora per te. Il resto cerca password deboli, database aperti e assistenti AI da manipolare. Troviamo le tue porte aperte e le chiudiamo, prima che lo faccia qualcun altro.",
     "sub_src": ("Fonte: Imperva, Bad Bot Report 2025", "https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/"),
-    "b1": "Richiedi una verifica", "b2": "Guarda i casi reali",
+    "b1": "Fai il check di esposizione", "b2": "Guarda i casi reali",
     "risks_h": "Cosa è <em>cambiato</em>", "risks_p": "In pochi mesi l'attacco è diventato un software. Gran parte di ciò che è online è stato pensato per un web diverso.",
     "risks": [
         ("L'attaccante non si stanca", "Un agente prova password, cerca versioni vulnerabili e legge ogni modulo giorno e notte, su migliaia di siti insieme. Non scegli tu se essere un bersaglio: basta essere online."),
@@ -859,12 +859,12 @@ T["it"]["security"] = {
     "cases_k": "Dalle cronache recenti", "cases_h": "Non è teoria. <em>È cronaca.</em>",
     "cases_p": "Casi pubblici, documentati dai ricercatori e dalle aziende coinvolte. Quasi tutti partono da un errore banale.",
     "cases": [
-        ("Settembre 2025", "Lo spionaggio lo ha fatto un'AI", "Un gruppo sponsorizzato da uno stato ha usato un agente AI per svolgere in autonomia l'80-90% del lavoro operativo contro una trentina di organizzazioni: ricognizione, ricerca di falle, furto di credenziali.", "Il lavoro di una squadra di attaccanti ora lo fa un agente, a velocità di macchina.", "Anthropic", "https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf"),
-        ("Agosto 2025", "Un chatbot, settecento aziende", "Con i token di accesso rubati all'integrazione di un chatbot di vendita, gli attaccanti hanno estratto dati dai CRM di oltre 700 organizzazioni, comprese aziende di sicurezza informatica, cercando chiavi e password.", "Ogni strumento collegato ai tuoi dati è una porta d'ingresso.", "TechTarget", "https://www.techtarget.com/cybersecurity/news/366630934/News-brief-Salesloft-Drift-breach-update-and-timeline"),
-        ("Giugno 2025", "Un'email, zero clic", "Una sola email preparata ad arte bastava a far consegnare dati interni a un server esterno da un assistente AI aziendale diffusissimo, senza che l'utente cliccasse nulla. Corretto prima che venisse sfruttato.", "Per un assistente AI anche un'email è un'istruzione.", "BleepingComputer", "https://www.bleepingcomputer.com/news/security/zero-click-ai-data-leak-flaw-uncovered-in-microsoft-365-copilot/"),
-        ("2025", "App fatte con l'AI, dati aperti", "Su 1.645 app pubblicate con un noto generatore basato sull'AI, i ricercatori ne hanno trovate 170 che lasciavano leggere a chiunque utenti, pagamenti o chiavi.", "Funzionare non vuol dire essere protetti.", "Superblocks", "https://www.superblocks.com/blog/lovable-vulnerabilities"),
-        ("Luglio 2025", "72.000 immagini in chiaro", "Un'app di incontri ha esposto circa 72.000 immagini, tra cui 13.000 selfie e documenti d'identità, da uno spazio di archiviazione accessibile dall'esterno.", "Un'impostazione sbagliata vale quanto una falla.", "CyberInsider", "https://cyberinsider.com/tea-app-suffers-data-breach-exposing-72000-users-photos-and-private-messages/"),
-        ("Luglio 2025", "La password era 123456", "La piattaforma di selezione con chatbot usata da una grande catena di fast food aveva un pannello di prova protetto da 123456, senza doppio fattore: aperti i dati di fino a 64 milioni di candidature.", "Un ambiente di prova dimenticato è un ingresso di servizio.", "BleepingComputer", "https://www.bleepingcomputer.com/news/security/123456-password-exposed-chats-for-64-million-mcdonalds-job-chatbot-applications/"),
+        ("Settembre 2025", "Un'AI ha condotto da sola l'80-90% di un attacco", "Un gruppo sponsorizzato da uno stato ha usato un agente AI per svolgere in autonomia l'80-90% del lavoro operativo contro una trentina di organizzazioni: ricognizione, ricerca di falle, furto di credenziali.", "Il lavoro di una squadra di attaccanti ora lo fa un agente, a velocità di macchina.", "Anthropic", "https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf"),
+        ("Agosto 2025", "Un chatbot violato ha aperto i CRM di 700 aziende", "Con i token di accesso rubati all'integrazione di un chatbot di vendita, gli attaccanti hanno estratto dati dai CRM di oltre 700 organizzazioni, comprese aziende di sicurezza informatica, cercando chiavi e password.", "Ogni strumento collegato ai tuoi dati è una porta d'ingresso.", "TechTarget", "https://www.techtarget.com/cybersecurity/news/366630934/News-brief-Salesloft-Drift-breach-update-and-timeline"),
+        ("Giugno 2025", "Bastava un'email per rubare dati, senza un clic", "Una sola email preparata ad arte bastava a far consegnare dati interni a un server esterno da un assistente AI aziendale diffusissimo, senza che l'utente cliccasse nulla. Corretto prima che venisse sfruttato.", "Per un assistente AI anche un'email è un'istruzione.", "BleepingComputer", "https://www.bleepingcomputer.com/news/security/zero-click-ai-data-leak-flaw-uncovered-in-microsoft-365-copilot/"),
+        ("2025", "Un'app su dieci fatta con l'AI lasciava i dati aperti", "Su 1.645 app pubblicate con un noto generatore basato sull'AI, i ricercatori ne hanno trovate 170 che lasciavano leggere a chiunque utenti, pagamenti o chiavi.", "Funzionare non vuol dire essere protetti.", "Superblocks", "https://www.superblocks.com/blog/lovable-vulnerabilities"),
+        ("Luglio 2025", "13.000 documenti d'identità aperti a chiunque", "Un'app di incontri ha esposto circa 72.000 immagini, tra cui 13.000 selfie e documenti d'identità, da uno spazio di archiviazione accessibile dall'esterno.", "Un'impostazione sbagliata vale quanto una falla.", "CyberInsider", "https://cyberinsider.com/tea-app-suffers-data-breach-exposing-72000-users-photos-and-private-messages/"),
+        ("Luglio 2025", "Password 123456: esposte fino a 64 milioni di candidature", "La piattaforma di selezione con chatbot usata da una grande catena di fast food aveva un pannello di prova protetto da 123456, senza doppio fattore: aperti i dati di fino a 64 milioni di candidature.", "Un ambiente di prova dimenticato è un ingresso di servizio.", "BleepingComputer", "https://www.bleepingcomputer.com/news/security/123456-password-exposed-chats-for-64-million-mcdonalds-job-chatbot-applications/"),
     ],
     "areas": [
         ("Ciò che è già online", "Quello che <em>hai già</em>", "Il sito di cinque anni fa, il gestionale su misura, l'e-commerce con plugin che nessuno aggiorna, gli account di chi se n'è andato. È lì che gli agenti cercano per primi. Lo rinforziamo senza rifarlo da capo.", ["36", "37", "35"]),
@@ -895,11 +895,20 @@ T["it"]["security"] = {
         "Persone che non lavorano più con te potrebbero avere ancora un accesso",
         "Non sapresti dire quando è stato fatto l'ultimo backup, né se si ripristina davvero",
     ],
-    "check_a": "Richiedi una verifica di sicurezza",
-    "check_note": "Una prima call di 30 minuti, gratuita: ci racconti cosa hai online e ti diciamo da dove partiremmo.",
+    "check_a": "Fai il check di esposizione",
+    "check_note": "Tre minuti, gratis: il tuo livello di esposizione, cosa vede chi attacca dal tuo dominio e le 3 priorità da cui partire.",
     "box_h": "Gli attacchi sono già <em>automatici</em>.",
     "box_p": "Agenti e bot lavorano giorno e notte su tutto ciò che hai online. Mettiamo al sicuro quello che hai già, quello che costruisci con l'AI e gli agenti che usi.",
     "box_a": "Scopri la sicurezza",
+    "alt_contact": "Preferisci scriverci? Vai ai contatti",
+    "need": "Sicurezza di siti, app e agenti AI",
+}
+T["it"]["check"] = {
+    "title": "Check di esposizione gratuito · Reef 7 Lab",
+    "desc": "In 3 minuti scopri cosa vede chi attacca dal tuo dominio, il tuo livello di esposizione e le 3 priorità da cui partire.",
+    "k": "Check di esposizione", "h1": "Quanto è <em>esposta</em> la tua azienda?",
+    "sub": "Guardiamo il tuo dominio come lo vede chi attacca, con controlli pubblici e non invasivi, e ti facciamo poche domande mirate. Ricevi il tuo livello di esposizione e le 3 priorità da cui partire, con cosa puoi fare già oggi.",
+    "pts": ["3 minuti", "Controlli veri sul tuo dominio", "Gratis, senza impegno"],
 }
 T["en"]["security"] = {
     "title": "Cybersecurity for websites, apps and AI agents · Reef 7 Lab",
@@ -907,7 +916,7 @@ T["en"]["security"] = {
     "h1": "Attacks are already <em>automated</em>. Are your defences?",
     "sub": "In 2024, for the first time in a decade, automated traffic overtook human traffic: more than half of the visits to a website don't come from a person. Some of them work for you. The rest look for weak passwords, open databases and AI assistants to manipulate. We find your open doors and close them, before someone else does.",
     "sub_src": ("Source: Imperva, Bad Bot Report 2025", "https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/"),
-    "b1": "Request a review", "b2": "See the real cases",
+    "b1": "Take the exposure check", "b2": "See the real cases",
     "risks_h": "What has <em>changed</em>", "risks_p": "In a matter of months, attacking became software. Much of what is online was designed for a different web.",
     "risks": [
         ("The attacker never gets tired", "An agent tries passwords, looks for vulnerable versions and reads every form day and night, across thousands of sites at once. You don't choose whether to be a target: being online is enough."),
@@ -917,12 +926,12 @@ T["en"]["security"] = {
     "cases_k": "From recent headlines", "cases_h": "Not theory. <em>Headlines.</em>",
     "cases_p": "Public cases, documented by researchers and the companies involved. Almost all of them start from a trivial mistake.",
     "cases": [
-        ("September 2025", "Espionage, run by an AI", "A state-sponsored group used an AI agent to carry out 80-90% of the operational work on its own against around thirty organisations: reconnaissance, vulnerability hunting, credential theft.", "A team of attackers' work is now done by an agent, at machine speed.", "Anthropic", "https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf"),
-        ("August 2025", "One chatbot, seven hundred companies", "Using access tokens stolen from a sales chatbot integration, attackers pulled data from the CRMs of more than 700 organisations, including security companies, hunting for keys and passwords.", "Every tool connected to your data is a way in.", "TechTarget", "https://www.techtarget.com/cybersecurity/news/366630934/News-brief-Salesloft-Drift-breach-update-and-timeline"),
-        ("June 2025", "One email, zero clicks", "A single crafted email was enough to make a widely used enterprise AI assistant send internal data to an outside server, without the user clicking anything. Fixed before it was exploited.", "To an AI assistant, even an email is an instruction.", "BleepingComputer", "https://www.bleepingcomputer.com/news/security/zero-click-ai-data-leak-flaw-uncovered-in-microsoft-365-copilot/"),
-        ("2025", "AI-built apps, open data", "Out of 1,645 apps published with a well-known AI app builder, researchers found 170 that let anyone read users, payments or keys.", "Working is not the same as protected.", "Superblocks", "https://www.superblocks.com/blog/lovable-vulnerabilities"),
-        ("July 2025", "72,000 images in the open", "A dating app exposed around 72,000 images, including 13,000 selfies and ID documents, from a storage space reachable from outside.", "One wrong setting is as bad as a flaw.", "CyberInsider", "https://cyberinsider.com/tea-app-suffers-data-breach-exposing-72000-users-photos-and-private-messages/"),
-        ("July 2025", "The password was 123456", "The chatbot hiring platform used by a major fast-food chain had a test panel protected by 123456, with no two-factor login: data from up to 64 million job applications was open.", "A forgotten test environment is a service entrance.", "BleepingComputer", "https://www.bleepingcomputer.com/news/security/123456-password-exposed-chats-for-64-million-mcdonalds-job-chatbot-applications/"),
+        ("September 2025", "An AI ran 80-90% of a cyberattack on its own", "A state-sponsored group used an AI agent to carry out 80-90% of the operational work on its own against around thirty organisations: reconnaissance, vulnerability hunting, credential theft.", "A team of attackers' work is now done by an agent, at machine speed.", "Anthropic", "https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf"),
+        ("August 2025", "One hacked chatbot opened the CRMs of 700 companies", "Using access tokens stolen from a sales chatbot integration, attackers pulled data from the CRMs of more than 700 organisations, including security companies, hunting for keys and passwords.", "Every tool connected to your data is a way in.", "TechTarget", "https://www.techtarget.com/cybersecurity/news/366630934/News-brief-Salesloft-Drift-breach-update-and-timeline"),
+        ("June 2025", "One email could steal data, with zero clicks", "A single crafted email was enough to make a widely used enterprise AI assistant send internal data to an outside server, without the user clicking anything. Fixed before it was exploited.", "To an AI assistant, even an email is an instruction.", "BleepingComputer", "https://www.bleepingcomputer.com/news/security/zero-click-ai-data-leak-flaw-uncovered-in-microsoft-365-copilot/"),
+        ("2025", "One in ten AI-built apps left its data open", "Out of 1,645 apps published with a well-known AI app builder, researchers found 170 that let anyone read users, payments or keys.", "Working is not the same as protected.", "Superblocks", "https://www.superblocks.com/blog/lovable-vulnerabilities"),
+        ("July 2025", "13,000 ID documents left open to anyone", "A dating app exposed around 72,000 images, including 13,000 selfies and ID documents, from a storage space reachable from outside.", "One wrong setting is as bad as a flaw.", "CyberInsider", "https://cyberinsider.com/tea-app-suffers-data-breach-exposing-72000-users-photos-and-private-messages/"),
+        ("July 2025", "Password 123456 exposed up to 64 million job applications", "The chatbot hiring platform used by a major fast-food chain had a test panel protected by 123456, with no two-factor login: data from up to 64 million job applications was open.", "A forgotten test environment is a service entrance.", "BleepingComputer", "https://www.bleepingcomputer.com/news/security/123456-password-exposed-chats-for-64-million-mcdonalds-job-chatbot-applications/"),
     ],
     "areas": [
         ("What is already online", "What you <em>already have</em>", "The website from five years ago, the custom internal tool, the store with plugins nobody updates, the accounts of people who have left. That's where agents look first. We harden it without rebuilding it.", ["36", "37", "35"]),
@@ -953,11 +962,20 @@ T["en"]["security"] = {
         "People who no longer work with you might still have access",
         "You couldn't say when the last backup was made, or whether it really restores",
     ],
-    "check_a": "Request a security review",
-    "check_note": "A free 30-minute first call: tell us what you have online and we'll tell you where we would start.",
+    "check_a": "Take the exposure check",
+    "check_note": "Three minutes, free: your exposure level, what an attacker sees from your domain and the 3 priorities to start from.",
     "box_h": "Attacks are already <em>automated</em>.",
     "box_p": "Agents and bots work day and night on everything you have online. We secure what you already have, what you build with AI and the agents you use.",
     "box_a": "Explore security",
+    "alt_contact": "Prefer to write to us? Go to contact",
+    "need": "Security for websites, apps and AI agents",
+}
+T["en"]["check"] = {
+    "title": "Free exposure check · Reef 7 Lab",
+    "desc": "In 3 minutes, see what an attacker sees from your domain, your exposure level and the 3 priorities to start from.",
+    "k": "Exposure check", "h1": "How <em>exposed</em> is your business?",
+    "sub": "We look at your domain the way an attacker sees it, with public, non-intrusive checks, and ask a few focused questions. You get your exposure level and the 3 priorities to start from, with what you can do today.",
+    "pts": ["3 minutes", "Real checks on your domain", "Free, no commitment"],
 }
 
 
@@ -1323,7 +1341,7 @@ def build(lang, variant=""):
     fasi = "".join(f'<div><span class="mono">0{i}</span><b>{t}</b><p>{d}</p></div>' for i, (t, d) in enumerate(SE["steps"], 1))
     faq = "".join(f'<details class="sec-faq"><summary>{q}</summary><p>{a}</p></details>' for q, a in SE["faq"])
     out["security"] = page("security", SE["title"], SE["desc"], head_block(L["nav"]["security"], SE["h1"], SE["sub"]) + f"""
-<section class="wrap sec-actions"><p class="sec-src"><a href="{SE['sub_src'][1]}" target="_blank" rel="noopener">{SE['sub_src'][0]} ↗</a></p><div class="actions"><a class="btn" href="{u('contact')}">{SE['b1']} {arrow}</a><a class="btn ghost" href="#casi">{SE['b2']}</a></div></section>
+<section class="wrap sec-actions"><p class="sec-src"><a href="{SE['sub_src'][1]}" target="_blank" rel="noopener">{SE['sub_src'][0]} ↗</a></p><div class="actions"><a class="btn" href="{u('check')}">{SE['b1']} {arrow}</a><a class="btn ghost" href="#casi">{SE['b2']}</a></div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{SE['risks_h']}</h2><p>{SE['risks_p']}</p></div>
   <div class="how">{rischi}</div>
@@ -1345,8 +1363,8 @@ def build(lang, variant=""):
   <p class="mono">{SE['check_k']}</p>
   <div><h2>{SE['check_h']}</h2>
     <ul class="sec-check">{"".join(f"<li>{x}</li>" for x in SE['check'])}</ul>
-    <a class="btn" href="{u('contact')}">{SE['check_a']} {arrow}</a>
-    <p class="sec-note">{SE['check_note']}</p></div>
+    <a class="btn" href="{u('check')}">{SE['check_a']} {arrow}</a>
+    <p class="sec-note">{SE['check_note']} <a href="{u('contact')}?need={SE['need'].replace(' ', '%20')}#contact-form">{SE['alt_contact']}</a></p></div>
 </div></section>""")
 
     # soluzioni
@@ -1480,6 +1498,13 @@ def build(lang, variant=""):
   <ul class="au-pts">{"".join(f"<li>{x}</li>" for x in A['pts'])}</ul>
   <div id="audit"></div>
 </div></section>""", extra=f'\n<script src="{pre}audit-data.js?v={VERSION}"></script>\n<script src="{pre}audit.js?v={VERSION}"></script>')
+
+    CK = L["check"]
+    out["check"] = page("check", CK["title"], CK["desc"], head_block(CK["k"], CK["h1"], CK["sub"]) + f"""
+<section class="block au-block"><div class="wrap">
+  <ul class="au-pts">{"".join(f"<li>{x}</li>" for x in CK['pts'])}</ul>
+  <div id="check"></div>
+</div></section>""", extra=f'\n<script src="{pre}security-check.js?v={VERSION}"></script>')
 
     base = ROOT / variant if variant else ROOT
     folder = base if lang == "it" else base / "en"
