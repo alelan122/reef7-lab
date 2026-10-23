@@ -855,6 +855,7 @@ T["it"]["security"] = {
     "desc": "Cybersicurezza per PMI: gli attacchi sono già automatici. Mettiamo al sicuro siti, app e gestionali, nuovi e datati, e gli agenti AI che usi: verifica, correzione e guardia continua.",
     "h1": "Gli attacchi sono già <em>automatici</em>. Le tue difese?",
     "sub": "Scrivi il tuo dominio: in 3 minuti scopri cosa vede un attaccante, quanto sei esposto e cosa sistemare per primo. Gratis, senza installare nulla.",
+    "feed": {"k": "Simulazione · attacco automatico", "live": "in corso", "dom": "tuazienda.it", "rows": [["03:12:04", "Bot", "prova 2.400 password rubate sul tuo login", "bad"], ["03:12:41", "Agente AI", "cerca plugin e versioni PHP con falle note", "bad"], ["03:13:09", "Scanner", "bussa a 380 indirizzi nascosti del sito", "mid"], ["03:13:55", "Truffa", "email «abbiamo cambiato IBAN» ai tuoi clienti, a nome tuo", "bad"], ["03:14:20", "Bot", "copia listino e contatti dei clienti", "mid"]], "q": "Le tue difese?", "a": "Scoprilo in 3 minuti"},
     "dom_ph": "tuazienda.it",
     "dom_btn": "Controlla gratis",
     "dom_note": "Solo dati pubblici. Nessuna prova invasiva, nessun impegno.",
@@ -1009,6 +1010,7 @@ T["en"]["security"] = {
     "desc": "Attacks are already automated. We secure websites, apps and internal tools, new and old, and the AI agents you use: review, fixes and continuous watch.",
     "h1": "Attacks are already <em>automated</em>. Are your defences?",
     "sub": "Enter your domain: in 3 minutes you'll see what an attacker sees, how exposed you are and what to fix first. Free, nothing to install.",
+    "feed": {"k": "Simulation · automated attack", "live": "in progress", "dom": "yourcompany.com", "rows": [["03:12:04", "Bot", "tries 2,400 stolen passwords on your login", "bad"], ["03:12:41", "AI agent", "looks for plugins and PHP versions with known flaws", "bad"], ["03:13:09", "Scanner", "knocks on 380 hidden addresses of your site", "mid"], ["03:13:55", "Scam", "\"we've changed our bank details\" emailed to your customers, in your name", "bad"], ["03:14:20", "Bot", "copies your price list and customer contacts", "mid"]], "q": "Your defences?", "a": "Find out in 3 minutes"},
     "dom_ph": "yourcompany.com",
     "dom_btn": "Check for free",
     "dom_note": "Public data only. No intrusive tests, no commitment.",
@@ -1543,6 +1545,8 @@ def build(lang, variant=""):
     inizio = "".join(f'<li><span class="mono">0{i}</span><b>{t}</b><em>{k}</em><p>{d}</p></li>' for i, (t, k, d) in enumerate(SE["start"], 1))
     SC = SE["scan"]
     righe = "".join(f'<div class="sec-scan-r {c}" style="--d:{0.5 + i * 0.45}s"><span>{a}</span><b>{v}</b></div>' for i, (a, v, c) in enumerate(SC["rows"]))
+    FD = SE["feed"]
+    log = "".join(f'<li class="{c}" style="--d:{0.4 + i * 0.55}s"><time class="mono">{t}</time><b>{w}</b><span>{x}</span></li>' for i, (t, w, x, c) in enumerate(FD["rows"]))
     hero = f"""<section class="page-head sec-hero"><div class="wrap sec-hero-g">
   <div>
     <p class="mono">{SE['k']}</p>
@@ -1555,11 +1559,11 @@ def build(lang, variant=""):
     </form>
     <p class="sec-dom-note">{SE['dom_note']}</p>
   </div>
-  <a class="sec-scan" href="{u('check')}" aria-label="{SE['b1']}">
-    <div class="sec-scan-top"><span class="sec-scan-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mono">{SC['k']}</span></div>
-    <div class="sec-scan-dom"><b>{SC['dom']}</b><span class="mono"><span class="sec-dot" aria-hidden="true"></span>{SC['live']}</span></div>
-    <div class="sec-scan-rows">{righe}</div>
-    <div class="sec-scan-lvl" style="--d:{0.5 + len(SC['rows']) * 0.45}s"><span class="mono">{SC['lvl']}</span><b>{SC['lvl_v']}</b><i class="sec-scan-meter"><i></i></i><small>{SC['prio']} →</small></div>
+  <a class="sec-feed" href="{u('check')}" aria-label="{FD['a']}">
+    <div class="sec-feed-top"><span class="sec-scan-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mono">{FD['k']}</span><span class="sec-feed-live mono"><span class="sec-dot" aria-hidden="true"></span>{FD['live']}</span></div>
+    <p class="sec-feed-dom mono">→ {FD['dom']}</p>
+    <ol class="sec-feed-log">{log}</ol>
+    <div class="sec-feed-end" style="--d:{0.4 + len(FD['rows']) * 0.55}s"><b>{FD['q']}</b><span>{FD['a']} →</span></div>
   </a>
 </div></section>"""
     perdite = "".join(f'<div class="sec-loss"><i>{ico(k)}</i><b>{t}</b><p>{d}</p></div>' for k, t, d in SE["losses"])
