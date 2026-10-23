@@ -472,4 +472,7 @@
   if (P.get("src") === "agent") root.querySelector(".au-from-agent").hidden = false;
   show(0);
   if (P.get("d")) { form.domain.value = P.get("d"); runScan(); }
+  // situazione scelta nella pagina Sicurezza: le risposte corrispondenti sono già spuntate
+  const SEG = { old: [0], ai: [4], agent: [5] }[P.get("seg")];
+  if (SEG) SEG.forEach((i) => { const x = form.querySelector(`input[name="have"][value="${i}"]`); if (x) x.checked = true; });
 })();

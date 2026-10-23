@@ -1507,3 +1507,49 @@ button.btn { font-family: inherit; }
 .sec-hero h1 { font-size: clamp(44px, 5.2vw, 86px); max-width: 15ch; text-wrap: balance; }
 .sec-scan .mono { margin: 0; display: inline-flex; }
 .sec-scan .mono::before { content: none; }
+
+/* ---------- Sicurezza: funnel v3 ---------- */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sec-hero h1 { max-width: 15ch; }
+.sec-dom { display: flex; gap: 10px; max-width: 620px; margin-top: 36px; padding: 8px; border-radius: 999px; border: 1px solid var(--rule-2); background: rgba(238, 243, 248, .04); transition: border-color .2s, box-shadow .2s; }
+.sec-dom:focus-within { border-color: var(--aqua); box-shadow: 0 0 0 6px rgba(95, 225, 242, .12); }
+.sec-dom input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--text); font: inherit; font-size: 18px; padding: 0 18px; outline: none; }
+.sec-dom input::placeholder { color: var(--faint); }
+.sec-dom .btn { flex: none; padding: 15px 24px; }
+.sec-dom-note { margin-top: 14px; color: var(--faint); font-size: 14px; }
+.sec-routes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.sec-route { display: flex; flex-direction: column; gap: 12px; padding: 26px 24px; border-radius: 22px; border: 1px solid var(--rule); background: rgba(238, 243, 248, .02); color: inherit; transition: border-color .3s, background .3s, transform .4s cubic-bezier(.2, .8, .2, 1); }
+.sec-route:hover { border-color: color-mix(in srgb, var(--aqua) 55%, transparent); background: rgba(95, 225, 242, .05); transform: translateY(-3px); }
+.sec-route b { font-size: clamp(20px, 1.7vw, 24px); line-height: 1.15; letter-spacing: -.025em; }
+.sec-route p { color: var(--muted); font-size: 15px; }
+.sec-route span { margin-top: auto; padding-top: 8px; color: var(--aqua); font-size: 15px; font-weight: 500; }
+.sec-route:last-child { border-color: rgba(248, 113, 113, .3); }
+.sec-route:last-child span { color: #f87171; }
+.sec-get { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
+.sec-get h2 { font: 600 clamp(40px, 5vw, 76px)/.95 var(--sans); letter-spacing: -.05em; }
+.sec-get h2 em { color: var(--aqua); letter-spacing: -.03em; }
+.sec-get-p { color: var(--muted); margin: 18px 0 26px; font-size: 18px; }
+.sec-get .sec-check { margin-bottom: 30px; }
+.sec-promise { margin-top: 26px; color: var(--text); font-size: 18px; display: flex; gap: 12px; align-items: center; }
+.sec-promise::before { content: "✓"; color: var(--aqua); }
+.sec-fixes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.sec-fix { padding: 24px; border-radius: 20px; border: 1px solid var(--rule); background: rgba(238, 243, 248, .02); display: flex; flex-direction: column; gap: 10px; scroll-margin-top: 100px; }
+.sec-fix:target { border-color: var(--aqua); }
+.sec-fix h3 { font-size: clamp(20px, 1.6vw, 23px); line-height: 1.15; letter-spacing: -.025em; }
+.sec-fix p { color: var(--muted); font-size: 15px; }
+.sec-fix details { margin-top: auto; padding-top: 6px; }
+.sec-fix summary { cursor: pointer; list-style: none; color: var(--aqua); font-size: 14px; display: inline-flex; gap: 8px; }
+.sec-fix summary::-webkit-details-marker { display: none; }
+.sec-fix summary::after { content: "+"; transition: transform .25s; }
+.sec-fix details[open] summary::after { transform: rotate(45deg); }
+.sec-fix ul { list-style: none; padding: 0; margin: 12px 0 0; }
+.sec-fix li { display: flex; gap: 10px; padding: 7px 0; color: var(--muted); font-size: 14px; border-top: 1px solid var(--rule); }
+.sec-fix li::before { content: "—"; color: var(--aqua); }
+.sec-end { text-align: left; background: radial-gradient(80% 120% at 0% 100%, rgba(95, 225, 242, .1), transparent 60%); }
+.sec-end h2 { font: 600 clamp(44px, 6vw, 96px)/.95 var(--sans); letter-spacing: -.05em; max-width: 14ch; }
+.sec-end h2 em { color: var(--aqua); letter-spacing: -.03em; }
+.sec-end .sub { margin-top: 22px; color: var(--muted); font-size: clamp(18px, 1.5vw, 21px); max-width: 560px; }
+.sec-end .sec-note { margin-top: 18px; }
+@media (max-width: 1080px) { .sec-routes, .sec-fixes { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 900px) { .sec-get { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .sec-routes, .sec-fixes { grid-template-columns: 1fr; } .sec-dom { flex-direction: column; border-radius: 22px; } .sec-dom input { padding: 12px 14px; } .sec-dom .btn { justify-content: center; } }
