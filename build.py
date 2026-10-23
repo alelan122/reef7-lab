@@ -317,9 +317,9 @@ def goal_state():
     return out, active
 
 
-VERSION = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["styles.css", "alt-overrides.css", "site.js", "mission.js", "agent.js", "audit.js", "audit-data.js", "security-check.js"])).hexdigest()[:8]
+VERSION = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["styles.css", "alt-overrides.css", "site.js", "mission.js", "agent.js", "audit.js", "audit-data.js", "security-check.js", "security-page.js"])).hexdigest()[:8]
 # impronta di tutto il sito (contenuti compresi): se online è diversa, la pagina in cache si ricarica da sola
-BUILD = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["build.py", "styles.css", "site.js", "mission.js", "agent.js", "audit.js", "audit-data.js", "security-check.js"])).hexdigest()[:10]
+BUILD = hashlib.md5(b"".join((ROOT / f).read_bytes() for f in ["build.py", "styles.css", "site.js", "mission.js", "agent.js", "audit.js", "audit-data.js", "security-check.js", "security-page.js"])).hexdigest()[:10]
 SLUG = {
     "it": {"home": "index.html", "work": "lavori.html", "services": "servizi.html", "security": "sicurezza.html", "check": "sicurezza-check.html", "solutions": "soluzioni.html", "mission": "missione.html", "studio": "lab.html", "contact": "contatti.html", "audit": "audit.html"},
     "en": {"home": "index.html", "work": "work.html", "services": "services.html", "security": "security.html", "check": "security-check.html", "solutions": "solutions.html", "mission": "mission.html", "studio": "lab.html", "contact": "contact.html", "audit": "audit.html"},
@@ -844,8 +844,8 @@ T = {
 
 
 T["it"]["security"] = {
-    "title": "Sicurezza informatica per siti, app e agenti AI · Reef 7 Lab",
-    "desc": "Gli attacchi sono già automatici. Mettiamo al sicuro siti, app e gestionali, nuovi e datati, e gli agenti AI che usi: verifica, correzione e guardia continua.",
+    "title": "Cybersicurezza per siti, app e agenti AI · Reef 7 Lab", "k": "Cybersicurezza",
+    "desc": "Cybersicurezza per PMI: gli attacchi sono già automatici. Mettiamo al sicuro siti, app e gestionali, nuovi e datati, e gli agenti AI che usi: verifica, correzione e guardia continua.",
     "h1": "Gli attacchi sono già <em>automatici</em>. Le tue difese?",
     "sub": "Mettiamo al sicuro siti, app, gestionali e agenti AI: troviamo le porte aperte e le chiudiamo in ordine di gravità, senza rifare tutto e senza fermare il lavoro. Si parte da un check gratuito di 3 minuti.",
     "now_k": "Perché adesso", "now_h": "Il tempo per rimediare <em>si è accorciato</em>.",
@@ -855,6 +855,11 @@ T["it"]["security"] = {
         ("51%", "del traffico web è ormai automatico: bot e agenti, non persone.", "Imperva, Bad Bot Report 2025", "https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/"),
     ],
     "now_end": "Non serve allarmarsi. Serve muoversi prima degli altri.",
+    "scan": {"k": "Esempio di check", "dom": "tuazienda.it", "live": "analisi completata",
+             "rows": [("Protezioni del sito", "F", "bad"), ("Email a tuo nome", "Non protetta", "bad"), ("Piattaforma", "PHP da aggiornare", "mid"), ("Accessi", "2 ex collaboratori attivi", "mid")],
+             "lvl": "Esposizione", "lvl_v": "Alta", "prio": "3 priorità pronte nel report"},
+    "check_hint": "Spunta quello che ti riguarda",
+    "check_ok": "Ha senso parlarne. Il check gratuito ti dice da dove partire.",
     "gain_h": "Cosa <em>ottieni</em>", "gain_p": "Sicurezza che si vede nei risultati, non in un documento da archiviare.",
     "gains": [
         ("Sai dove sei esposto", "Una mappa chiara di cosa è raggiungibile da fuori e di cosa rischi davvero, scritta per chi decide."),
@@ -938,7 +943,7 @@ T["it"]["check"] = {
     "pts": ["3 minuti", "Controlli veri sul tuo dominio", "Gratis, senza impegno"],
 }
 T["en"]["security"] = {
-    "title": "Cybersecurity for websites, apps and AI agents · Reef 7 Lab",
+    "title": "Cybersecurity for websites, apps and AI agents · Reef 7 Lab", "k": "Cybersecurity",
     "desc": "Attacks are already automated. We secure websites, apps and internal tools, new and old, and the AI agents you use: review, fixes and continuous watch.",
     "h1": "Attacks are already <em>automated</em>. Are your defences?",
     "sub": "We secure websites, apps, internal tools and AI agents: we find the open doors and close them by severity, without rebuilding everything and without stopping your work. It starts with a free 3-minute check.",
@@ -949,6 +954,11 @@ T["en"]["security"] = {
         ("51%", "of web traffic is now automated: bots and agents, not people.", "Imperva, Bad Bot Report 2025", "https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/"),
     ],
     "now_end": "No need to panic. You just need to move before everyone else.",
+    "scan": {"k": "Sample check", "dom": "yourcompany.com", "live": "analysis complete",
+             "rows": [("Site protections", "F", "bad"), ("Email in your name", "Not protected", "bad"), ("Platform", "PHP needs updating", "mid"), ("Access", "2 former staff still active", "mid")],
+             "lvl": "Exposure", "lvl_v": "High", "prio": "3 priorities ready in the report"},
+    "check_hint": "Tick what applies to you",
+    "check_ok": "Worth a conversation. The free check tells you where to start.",
     "gain_h": "What you <em>get</em>", "gain_p": "Security you can see in results, not in a document that ends up in a drawer.",
     "gains": [
         ("You know where you're exposed", "A clear map of what's reachable from outside and what you really risk, written for decision makers."),
@@ -1370,37 +1380,61 @@ def build(lang, variant=""):
 <section class="wrap" style="padding-bottom:clamp(80px,10vw,150px)">{svc}
 </section>""")
 
-    # sicurezza: pagina dedicata, con casi reali, servizi per area, metodo, obiezioni e lista di controllo
+    # sicurezza: pagina di vendita con esempio di report, servizi a schede, metodo a tappe e lista interattiva
     SE = L["security"]
     per_n = {x[0]: x for x in L["services"]}
-    rischi = "".join(f'<div><span class="mono">0{i}</span><b>{t}</b><p>{d}</p></div>' for i, (t, d) in enumerate(SE["risks"], 1))
-    # titolo in due tempi: il fatto, poi la conseguenza in evidenza
+    ICO = {
+        "map": '<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',
+        "shield": '<path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/>',
+        "flow": '<path d="M4 12h12"/><path d="m12 6 6 6-6 6"/><path d="M20 5v14"/>',
+        "eye": '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    }
+    ico = lambda k: f'<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">{ICO[k]}</svg>'
     titolo = lambda t: (lambda x: f"{x[0]}. <em>{x[1]}</em>" if len(x) == 2 else t)(t.split(". ", 1))
     casi = "".join(f"""
     <article class="sec-caso"><p class="mono">{q}</p><h3>{titolo(t)}</h3><p>{d}</p><p class="sec-lez">{lz}</p><a href="{url}" target="_blank" rel="noopener">{fonte} ↗</a></article>""" for q, t, d, lz, fonte, url in SE["cases"])
+    more = "Come lavoriamo" if lang == "it" else "How we do it"
     aree, k_svc = "", 0
     for j, (k, h, d, nums) in enumerate(SE["areas"], 1):
-        arts = ""
+        cards = ""
         for n in nums:
             k_svc += 1
             _n, _g, t, short, long, li = per_n[n]
-            arts += f"""
-  <article class="svc" id="s{n}">
-    <span class="mono">{k_svc:02d}</span>
-    <div><h3 class="svc-h">{t}</h3><p class="tag">{short}</p><p class="lead">{long}</p></div>
-    <div><ul>{"".join(f"<li>{x}</li>" for x in li)}</ul></div>
-  </article>"""
+            cards += f"""
+    <article class="sec-svc" id="s{n}">
+      <span class="mono">{k_svc:02d}</span>
+      <h3>{t}</h3><p class="sec-svc-tag">{short}</p>
+      <ul>{"".join(f"<li>{x}</li>" for x in li)}</ul>
+      <details><summary>{more}</summary><p>{long}</p></details>
+    </article>"""
         aree += f"""
 <section class="block sec-area"><div class="wrap">
-  <div class="head"><div><p class="mono sec-k">0{j} / 0{len(SE["areas"])}</p><h2>{h}</h2></div><p>{d}</p></div>{arts}
+  <div class="head"><div><p class="mono sec-k">0{j} / 0{len(SE["areas"])}</p><h2>{h}</h2></div><p>{d}</p></div>
+  <div class="sec-svcs n{len(nums)}">{cards}
+  </div>
 </div></section>"""
-    fasi = "".join(f'<div><span class="mono">0{i}</span><b>{t}</b><p>{d}</p></div>' for i, (t, d) in enumerate(SE["steps"], 1))
+    fasi = "".join(f'<li><span class="sec-step-n">{i}</span><b>{t}</b><p>{d}</p></li>' for i, (t, d) in enumerate(SE["steps"], 1))
     faq = "".join(f'<details class="sec-faq"><summary>{q}</summary><p>{a}</p></details>' for q, a in SE["faq"])
     ora = "".join(f'<div><b>{n}</b><p>{d}</p><a href="{url}" target="_blank" rel="noopener">{src} ↗</a></div>' for n, d, src, url in SE["now"])
-    guadagni = "".join(f'<div><span class="mono">0{i}</span><b>{t}</b><p>{d}</p></div>' for i, (t, d) in enumerate(SE["gains"], 1))
+    guadagni = "".join(f'<div class="sec-gain"><i>{ico(k)}</i><b>{t}</b><p>{d}</p></div>' for k, (t, d) in zip(["map", "shield", "flow", "eye"], SE["gains"]))
     inizio = "".join(f'<li><span class="mono">0{i}</span><b>{t}</b><em>{k}</em><p>{d}</p></li>' for i, (t, k, d) in enumerate(SE["start"], 1))
-    out["security"] = page("security", SE["title"], SE["desc"], head_block(L["nav"]["security"], SE["h1"], SE["sub"]) + f"""
-<section class="wrap sec-actions"><div class="actions"><a class="btn" href="{u('check')}">{SE['b1']} {arrow}</a><a class="btn ghost" href="#metodo">{SE['b2']}</a></div></section>
+    SC = SE["scan"]
+    righe = "".join(f'<div class="sec-scan-r {c}" style="--d:{0.5 + i * 0.45}s"><span>{a}</span><b>{v}</b></div>' for i, (a, v, c) in enumerate(SC["rows"]))
+    hero = f"""<section class="page-head sec-hero"><div class="wrap sec-hero-g">
+  <div>
+    <p class="mono">{SE['k']}</p>
+    <h1>{SE['h1']}</h1>
+    <p class="sub">{SE['sub']}</p>
+    <div class="actions"><a class="btn" href="{u('check')}">{SE['b1']} {arrow}</a><a class="btn ghost" href="#metodo">{SE['b2']}</a></div>
+  </div>
+  <a class="sec-scan" href="{u('check')}" aria-label="{SE['b1']}">
+    <div class="sec-scan-top"><span class="sec-scan-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mono">{SC['k']}</span></div>
+    <div class="sec-scan-dom"><b>{SC['dom']}</b><span class="mono"><span class="sec-dot" aria-hidden="true"></span>{SC['live']}</span></div>
+    <div class="sec-scan-rows">{righe}</div>
+    <div class="sec-scan-lvl" style="--d:{0.5 + len(SC['rows']) * 0.45}s"><span class="mono">{SC['lvl']}</span><b>{SC['lvl_v']}</b><i class="sec-scan-meter"><i></i></i><small>{SC['prio']} →</small></div>
+  </a>
+</div></section>"""
+    out["security"] = page("security", SE["title"], SE["desc"], hero + f"""
 <section class="sec-now"><div class="wrap">
   <div class="head"><div><p class="mono sec-k"><span class="sec-dot" aria-hidden="true"></span>{SE['now_k']}</p><h2>{SE['now_h']}</h2></div></div>
   <div class="sec-now-g">{ora}</div>
@@ -1408,11 +1442,11 @@ def build(lang, variant=""):
 </div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{SE['gain_h']}</h2><p>{SE['gain_p']}</p></div>
-  <div class="how quattro">{guadagni}</div>
+  <div class="sec-gains">{guadagni}</div>
 </div></section>{aree}
 <section class="block" id="metodo"><div class="wrap">
   <div class="head"><h2>{SE['steps_h']}</h2><p>{SE['steps_p']}</p></div>
-  <div class="how quattro">{fasi}</div>
+  <ol class="sec-steps">{fasi}</ol>
 </div></section>
 <section class="block" id="casi"><div class="wrap">
   <div class="head"><div><p class="mono sec-k">{SE['cases_k']}</p><h2>{SE['cases_h']}</h2></div><p>{SE['cases_p']}</p></div>
@@ -1430,11 +1464,12 @@ def build(lang, variant=""):
 </div></section>
 <section class="block"><div class="wrap sec-final">
   <p class="mono sec-k">{SE['check_k']}</p>
-  <div><h2>{SE['check_h']}</h2>
-    <ul class="sec-check">{"".join(f"<li>{x}</li>" for x in SE['check'])}</ul>
-    <a class="btn" href="{u('check')}">{SE['check_a']} {arrow}</a>
-    <p class="sec-note">{SE['check_note']} <a href="{u('contact')}?need={SE['need'].replace(' ', '%20')}#contact-form">{SE['alt_contact']}</a></p></div>
-</div></section>""")
+  <h2>{SE['check_h']}</h2>
+  <p class="sec-final-hint">{SE['check_hint']}</p>
+  <ul class="sec-check sec-check-i">{"".join(f'<li><label><input type="checkbox"><span>{x}</span></label></li>' for x in SE['check'])}</ul>
+  <div class="sec-final-cta"><a class="btn" href="{u('check')}">{SE['check_a']} {arrow}</a><p class="sec-final-ok" aria-live="polite" data-ok="{SE['check_ok']}"></p></div>
+  <p class="sec-note">{SE['check_note']} <a href="{u('contact')}?need={SE['need'].replace(' ', '%20')}#contact-form">{SE['alt_contact']}</a></p>
+</div></section>""", extra=f'\n<script src="{pre}security-page.js?v={VERSION}"></script>')
 
     # soluzioni
     SO = L["solutions"]; lb = SO["lbl"]
