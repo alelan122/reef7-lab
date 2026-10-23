@@ -376,24 +376,24 @@ T = {
         ("26", "Intelligenza artificiale", "Formazione AI per il team", "Il tuo team usa l'intelligenza artificiale sul lavoro vero, da subito.",
          "Gli strumenti di intelligenza artificiale rendono davvero solo quando conoscono l'azienda. Li impostiamo con il contesto della tua azienda, i tuoi processi e il tuo tono di voce, e formiamo il team su casi reali: email, analisi, documenti, automazioni.",
          ["Assistenti AI impostati con il contesto aziendale", "Formazione pratica sui processi di ogni reparto", "Libreria condivisa di istruzioni e modelli", "Regole chiare su dati e privacy", "Accompagnamento nelle prime settimane"]),
-        ("36", "Sicurezza", "Messa in sicurezza di siti e app esistenti", "Pensati per un web senza agenti. Rimessi in sicurezza per quello di oggi.",
-         "Gran parte dei siti, delle app e dei gestionali in uso è nata quando attaccarli richiedeva tempo e competenza. Oggi lo fanno programmi automatici, senza sosta: provano password, cercano versioni con falle note, interrogano ogni modulo e ogni API. Partiamo da ciò che hai, troviamo i punti deboli e li chiudiamo uno per uno, senza rifare tutto da capo.",
-         ["Verifica completa di siti, app e gestionali in uso, anche datati", "Componenti e plugin fuori supporto aggiornati o isolati", "Difese contro bot e tentativi di accesso in massa", "Moduli e API protetti da abusi e raccolta automatica di dati", "Piano per gravità: subito, nelle prossime settimane, strutturale"]),
-        ("37", "Sicurezza", "Accessi, password e persone", "La porta più usata per entrare resta un account dimenticato.",
-         "Ex collaboratori con accessi ancora attivi, password condivise in chat, chiavi di servizio mai cambiate: molte violazioni non partono da una falla tecnica, ma da un accesso rimasto aperto. Facciamo l'inventario di chi entra dove, togliamo ciò che non serve e rendiamo semplice per il team lavorare in modo sicuro.",
-         ["Inventario di account, accessi e chiavi di servizio", "Accessi rimossi a chi non ne ha più bisogno", "Doppio fattore e gestore di password per tutto il team", "Permessi per ruolo: ognuno vede solo ciò che gli serve", "Formazione breve contro phishing e truffe, anche quelle scritte con l'AI"]),
-        ("32", "Sicurezza", "Verifica di siti e app costruiti con l'AI", "Online in pochi giorni. Controllato prima che lo faccia qualcun altro.",
-         "Gli strumenti che generano codice con l'intelligenza artificiale costruiscono in fretta, ma non pensano a chi proverà a entrare. Gli errori sono quasi sempre gli stessi: chiavi segrete nel codice visibile, database aperti a chiunque, pagine riservate raggiungibili senza login, permessi controllati solo nell'interfaccia. Li cerchiamo uno per uno, li correggiamo e ti lasciamo un progetto che puoi far crescere con tranquillità.",
-         ["Chiavi e segreti cercati nel codice e nella cronologia del repository", "Regole del database verificate tabella per tabella", "Ruoli e permessi provati entrando con utenti diversi", "Moduli e API protetti da abusi e invii automatici", "Report chiaro, con le correzioni già applicate"]),
-        ("33", "Sicurezza", "Sicurezza di chatbot e agenti AI", "Un assistente con le chiavi di casa deve sapere quali porte non aprire.",
-         "Un agente che legge le email, consulta i documenti e aggiorna il gestionale è utile proprio perché può agire. Per lo stesso motivo può essere manipolato: un'istruzione nascosta in un messaggio, in un allegato o in una pagina web può spingerlo a rivelare dati o a compiere azioni che nessuno ha chiesto. Lo mettiamo alla prova con attacchi reali e gli diamo confini precisi.",
-         ["Prove contro istruzioni nascoste e tentativi di manipolazione", "Ogni utente raggiunge solo i propri dati, anche passando dall'agente", "Conferma umana prima delle azioni che spostano dati o denaro", "Limiti di utilizzo e di spesa", "Registro di conversazioni e azioni, consultabile in ogni momento"]),
-        ("34", "Sicurezza", "Privacy e dati quando usi l'AI", "Usa l'intelligenza artificiale senza consegnare i dati dei tuoi clienti.",
-         "Ogni testo inviato a un servizio di intelligenza artificiale porta con sé i dati che contiene. Ricostruiamo cosa esce dall'azienda, verso quali fornitori e per quanto tempo resta conservato; togliamo i dati personali dove non servono e scegliamo servizi e impostazioni compatibili con il GDPR, in accordo con il tuo consulente legale.",
+        ("36", "Sicurezza", "Messa in sicurezza di siti e app esistenti", "Costruiti per il web di ieri. Esposti agli attacchi di oggi.",
+         "Quando il tuo sito o il tuo gestionale sono nati, attaccarli richiedeva tempo e una persona competente. Oggi lo fa un programma, senza sosta e quasi a costo zero: prova password rubate altrove, cerca componenti con falle note, interroga ogni modulo e ogni API. Analizziamo quello che hai, ti mostriamo da dove si entra e chiudiamo ogni varco in ordine di gravità. Senza rifare tutto, senza fermare il lavoro.",
+         ["Verifica di siti, app, e-commerce e gestionali, anche datati", "Componenti, plugin e librerie vulnerabili aggiornati o isolati", "Difese contro bot, furto di account e accessi in massa", "Moduli e API protetti da abusi e raccolta automatica di dati", "Piano per gravità: subito, nelle prossime settimane, strutturale"]),
+        ("37", "Sicurezza", "Accessi, password e persone", "Il modo più facile per entrare resta una porta lasciata aperta.",
+         "Un pannello di prova protetto dalla password 123456 ha esposto i dati legati a milioni di candidature di lavoro. Non serviva un genio, bastava un accesso dimenticato. Ex collaboratori ancora attivi, password condivise in chat, chiavi mai cambiate, integrazioni autorizzate anni fa: facciamo l'inventario di chi entra dove, chiudiamo ciò che non serve e rendiamo la sicurezza semplice per tutto il team.",
+         ["Inventario di account, chiavi di servizio e integrazioni autorizzate", "Accessi revocati a chi non ne ha più bisogno", "Doppio fattore e gestore di password per tutto il team", "Permessi per ruolo: ognuno vede solo ciò che gli serve", "Formazione contro phishing e truffe, anche vocali e scritte con l'AI"]),
+        ("32", "Sicurezza", "Verifica di siti e app costruiti con l'AI", "Online in un weekend. Aperti a chiunque per mesi?",
+         "Quando alcuni ricercatori hanno analizzato 1.645 app pubblicate con un noto generatore basato sull'AI, 170 lasciavano leggere a chiunque elenchi di utenti, pagamenti o chiavi. Non per un attacco raffinato: per regole del database mai scritte. Gli strumenti AI costruiscono in fretta, ma non pensano a chi proverà a entrare. Noi sì: cerchiamo gli errori tipici uno per uno, li correggiamo e ti restituiamo un progetto che puoi far crescere senza pensieri.",
+         ["Chiavi e segreti cercati nel codice e in tutta la cronologia del repository", "Regole del database verificate tabella per tabella", "Ruoli e permessi provati entrando con utenti diversi", "Pagine riservate e API provate senza login", "Report chiaro, con le correzioni già applicate"]),
+        ("33", "Sicurezza", "Sicurezza di chatbot e agenti AI", "Più un agente può fare, più costa un suo errore.",
+         "Una sola email preparata ad arte bastava a far consegnare dati aziendali a un assistente AI diffusissimo, senza un clic. Un agente di sviluppo ha cancellato un database di produzione durante un blocco delle modifiche. Un'integrazione di chatbot compromessa ha aperto i CRM di centinaia di aziende. Mettiamo il tuo agente alla prova con gli stessi attacchi, gli togliamo i permessi che non gli servono e mettiamo una persona davanti a ogni azione che conta.",
+         ["Prove contro istruzioni nascoste in email, documenti e pagine web", "Permessi minimi: l'agente raggiunge solo ciò che gli serve", "Conferma umana prima delle azioni che spostano dati o denaro", "Ambienti separati: nessun esperimento sui dati veri", "Registro completo di conversazioni e azioni"]),
+        ("34", "Sicurezza", "Privacy e dati quando usi l'AI", "Ogni prompt è un dato che esce dall'azienda.",
+         "Contratti incollati in una chat, elenchi clienti caricati per un'analisi, email riassunte da un assistente: ogni volta i dati lasciano l'azienda, spesso senza che nessuno sappia dove finiscono e per quanto restano. Ricostruiamo questi flussi, togliamo i dati personali dove non servono e scegliamo servizi e impostazioni compatibili con il GDPR, insieme al tuo consulente legale. Così il team usa l'AI ogni giorno senza esporre i clienti.",
          ["Mappa dei dati che passano dai servizi AI", "Dati personali rimossi o mascherati prima dell'invio", "Fornitori, server e contratti compatibili con il GDPR", "Informativa e registro dei trattamenti aggiornati", "Regole chiare per il team sull'uso quotidiano dell'AI"]),
-        ("35", "Sicurezza", "Sorveglianza e continuità di servizio", "Se qualcosa si ferma, lo sappiamo prima dei tuoi clienti.",
-         "Un sito fermo per un giorno, un database perso senza copia, un aggiornamento rimandato per mesi: sono i problemi che costano di più e si vedono solo quando è tardi. Teniamo sotto controllo siti, app e gestionali, verifichiamo che i backup si possano davvero ripristinare e applichiamo gli aggiornamenti con un calendario preciso.",
-         ["Monitoraggio continuo, con avviso immediato", "Backup automatici e prove di ripristino periodiche", "Protezione da bot, spam e attacchi che saturano il sito", "Aggiornamenti di sicurezza a calendario", "Rapporto mensile, chiaro anche per chi non è tecnico"]),
+        ("35", "Sicurezza", "Sorveglianza e continuità di servizio", "Se qualcosa si rompe, lo sai prima dei tuoi clienti.",
+         "Il backup che non si ripristina, l'aggiornamento rimandato da mesi, il sito che cade il venerdì sera: sono i problemi che costano di più e che nessuno vede finché non è tardi. Teniamo d'occhio siti, app e gestionali ogni giorno, proviamo davvero i ripristini e applichiamo gli aggiornamenti con un calendario preciso. Ogni mese ricevi un rapporto chiaro, scritto per chi decide e non per chi programma.",
+         ["Monitoraggio continuo, con avviso immediato", "Backup automatici e prove di ripristino reali", "Difese contro bot e attacchi che bloccano il sito", "Aggiornamenti di sicurezza a calendario", "Rapporto mensile leggibile anche da chi non è tecnico"]),
         ("03", "Vendite e incassi", "CRM su misura", "Lead, trattative e provvigioni in un unico strumento, costruito sul tuo modo di vendere.",
          "Un CRM generico costringe il team commerciale ad adattarsi. Costruiamo CRM su misura: ogni lead arriva già assegnato, le trattative avanzano per fasi, pagamenti e provvigioni si calcolano da soli e la direzione vede risultati e classifica in tempo reale.",
          ["Pipeline e fasi definite sul tuo processo", "Assegnazione automatica dei lead", "Pagamenti e provvigioni calcolati in automatico", "Classifica e KPI del team, anche su uno schermo in ufficio", "Collegato a sito, prenotazioni ed email"]),
@@ -632,24 +632,24 @@ T = {
         ("26", "AI", "AI training for your team", "Your team uses AI on real work, from day one.",
          "AI tools only really pay off when they know your company. We set them up with your company's context, processes and tone of voice, and train your team on real cases: emails, analysis, documents, automations.",
          ["AI assistants set up with your company context", "Hands-on training on each team's processes", "Shared library of instructions and templates", "Clear rules on data and privacy", "Support through the first weeks"]),
-        ("36", "Security", "Securing existing websites and apps", "Built for a web without agents. Secured for the one we have now.",
-         "Most of the websites, apps and internal tools in use today were built when attacking them took time and skill. Now automated programs do it nonstop: they try passwords, look for versions with known flaws and probe every form and API. We start from what you have, find the weak points and close them one by one, without rebuilding everything from scratch.",
-         ["A full review of the sites, apps and tools you use, even older ones", "Outdated components and plugins updated or isolated", "Defences against bots and mass login attempts", "Forms and APIs protected from abuse and automated data harvesting", "A plan by severity: right away, in the coming weeks, structural"]),
-        ("37", "Security", "Access, passwords and people", "The most common way in is still a forgotten account.",
-         "Former collaborators with active logins, passwords shared in chat, service keys never rotated: many breaches don't start from a technical flaw but from access that was never closed. We take stock of who can get in where, remove what isn't needed and make it easy for your team to work securely.",
-         ["An inventory of accounts, access and service keys", "Access removed for anyone who no longer needs it", "Two-factor login and a password manager for the whole team", "Role-based permissions: everyone sees only what they need", "Short training against phishing and scams, including AI-written ones"]),
-        ("32", "Security", "Security review for AI-built websites and apps", "Online in days. Checked before someone else checks it for you.",
-         "AI tools that write code build fast, but they don't think about who will try to get in. The mistakes are nearly always the same: secret keys in visible code, databases open to anyone, private pages reachable without logging in, permissions enforced only in the interface. We hunt them down one by one, fix them and hand back a project you can grow with confidence.",
-         ["Keys and secrets searched for in the code and the repository history", "Database rules checked table by table", "Roles and permissions tested by logging in as different users", "Forms and APIs protected from abuse and bots", "A clear report, with the fixes already applied"]),
-        ("33", "Security", "Security for chatbots and AI agents", "An assistant with the house keys must know which doors to keep shut.",
-         "An agent that reads email, searches documents and updates your systems is useful precisely because it can act. For the same reason it can be manipulated: an instruction hidden in a message, an attachment or a web page can push it to reveal data or take actions nobody asked for. We put it through real attacks and give it precise boundaries.",
-         ["Tests against hidden instructions and manipulation attempts", "Every user reaches only their own data, even through the agent", "Human approval before any action that moves data or money", "Usage and spending limits", "A log of conversations and actions, available at any time"]),
-        ("34", "Security", "Privacy and data when you use AI", "Use AI without handing over your customers' data.",
-         "Every piece of text sent to an AI service carries the data inside it. We trace what leaves your company, to which providers and how long it is kept; we strip personal data where it isn't needed and choose services and settings that fit GDPR, together with your legal advisor.",
+        ("36", "Security", "Securing existing websites and apps", "Built for yesterday's web. Exposed to today's attacks.",
+         "When your website or internal tool was built, attacking it took time and a skilled person. Today a program does it nonstop, at almost no cost: it tries passwords stolen elsewhere, looks for components with known flaws and probes every form and API. We analyse what you have, show you where the way in is and close every gap by severity. Without rebuilding everything, without stopping your work.",
+         ["Review of websites, apps, stores and internal tools, even older ones", "Vulnerable components, plugins and libraries updated or isolated", "Defences against bots, account takeover and mass login attempts", "Forms and APIs protected from abuse and automated data harvesting", "A plan by severity: right away, in the coming weeks, structural"]),
+        ("37", "Security", "Access, passwords and people", "The easiest way in is still a door left open.",
+         "A test admin panel protected by the password 123456 exposed data tied to millions of job applications. It didn't take a genius, just a forgotten login. Former collaborators still active, passwords shared in chat, keys never rotated, integrations authorised years ago: we take stock of who can get in where, close what isn't needed and make security simple for your whole team.",
+         ["Inventory of accounts, service keys and authorised integrations", "Access revoked for anyone who no longer needs it", "Two-factor login and a password manager for the whole team", "Role-based permissions: everyone sees only what they need", "Training against phishing and scams, including voice and AI-written ones"]),
+        ("32", "Security", "Security review for AI-built websites and apps", "Live in a weekend. Open to anyone for months?",
+         "When researchers analysed 1,645 apps published with a well-known AI app builder, 170 let anyone read user lists, payments or keys. Not because of a clever attack, but because database rules were never written. AI tools build fast, but they don't think about who will try to get in. We do: we hunt down the typical mistakes one by one, fix them and hand back a project you can grow without worry.",
+         ["Keys and secrets searched for in the code and the full repository history", "Database rules checked table by table", "Roles and permissions tested by logging in as different users", "Private pages and APIs tested without logging in", "A clear report, with the fixes already applied"]),
+        ("33", "Security", "Security for chatbots and AI agents", "The more an agent can do, the more its mistakes cost.",
+         "A single crafted email was enough to make a widely used AI assistant hand over company data, without a single click. A coding agent deleted a production database during a code freeze. A compromised chatbot integration opened the CRMs of hundreds of companies. We put your agent through the same attacks, strip the permissions it doesn't need and put a person in front of every action that matters.",
+         ["Tests against instructions hidden in emails, documents and web pages", "Least privilege: the agent reaches only what it needs", "Human approval before actions that move data or money", "Separate environments: no experiments on real data", "A full log of conversations and actions"]),
+        ("34", "Security", "Privacy and data when you use AI", "Every prompt is data leaving your company.",
+         "Contracts pasted into a chat, customer lists uploaded for analysis, emails summarised by an assistant: each time, data leaves your company, often with nobody knowing where it ends up or how long it stays. We trace these flows, strip personal data where it isn't needed and choose services and settings that fit GDPR, together with your legal advisor. Your team uses AI every day without exposing your customers.",
          ["A map of the data that goes through AI services", "Personal data removed or masked before it is sent", "Providers, servers and contracts that fit GDPR", "Privacy notice and processing records kept up to date", "Clear rules for your team on everyday AI use"]),
-        ("35", "Security", "Monitoring and service continuity", "If something stops, we know before your customers do.",
-         "A site down for a day, a database lost without a copy, an update postponed for months: these are the problems that cost the most and only show up when it's too late. We keep watch over your sites, apps and internal tools, check that backups can really be restored and apply updates on a fixed schedule.",
-         ["Continuous monitoring with instant alerts", "Automatic backups and regular restore tests", "Protection from bots, spam and attacks that overload the site", "Security updates on a schedule", "A monthly report, clear even for non-technical readers"]),
+        ("35", "Security", "Monitoring and service continuity", "If something breaks, you know before your customers do.",
+         "The backup that won't restore, the update postponed for months, the site that goes down on a Friday night: these are the problems that cost the most and that nobody sees until it's too late. We watch your sites, apps and internal tools every day, actually test restores and apply updates on a fixed schedule. Every month you get a clear report, written for decision makers, not for developers.",
+         ["Continuous monitoring with instant alerts", "Automatic backups and real restore tests", "Defences against bots and attacks that take the site down", "Security updates on a schedule", "A monthly report readable by non-technical people"]),
         ("03", "Sales and payments", "Custom CRM", "Leads, deals and commissions in one tool, built around the way you sell.",
          "A generic CRM forces your sales team to adapt. We build custom CRMs: every lead arrives already assigned, deals move through clear stages, payments and commissions calculate themselves, and leadership sees results and rankings in real time.",
          ["Pipeline and stages designed around your process", "Automatic lead assignment", "Payments and commissions calculated automatically", "Team leaderboard and KPIs, even on a screen in the office", "Connected to your website, bookings and email"]),
@@ -844,79 +844,119 @@ T = {
 
 
 T["it"]["security"] = {
-    "title": "Sicurezza per siti, app e agenti AI · Reef 7 Lab",
-    "desc": "Mettiamo al sicuro siti, app e gestionali, nuovi e datati, e gli agenti AI che usi: verifica, correzione e sorveglianza continua.",
-    "h1": "Il web è pieno di <em>agenti</em>. Non tutti lavorano per te.",
-    "sub": "Programmi automatici e agenti di intelligenza artificiale visitano ogni giorno siti, app e gestionali. Alcuni portano clienti, altri cercano un modo per entrare. Ti aiutiamo a trovare le porte rimaste aperte e a chiuderle, prima che lo faccia qualcun altro.",
-    "b1": "Richiedi una verifica", "b2": "Come lavoriamo",
-    "risks_h": "Cosa è <em>cambiato</em>", "risks_p": "Le regole sono cambiate in poco tempo, e molto di ciò che è online è stato pensato per un web diverso.",
+    "title": "Sicurezza informatica per siti, app e agenti AI · Reef 7 Lab",
+    "desc": "Gli attacchi sono già automatici. Mettiamo al sicuro siti, app e gestionali, nuovi e datati, e gli agenti AI che usi: verifica, correzione e guardia continua.",
+    "h1": "Gli attacchi sono già <em>automatici</em>. Le tue difese?",
+    "sub": "Nel 2024, per la prima volta in dieci anni, il traffico automatico ha superato quello umano: più di metà delle visite a un sito non arriva da una persona. Una parte lavora per te. Il resto cerca password deboli, database aperti e assistenti AI da manipolare. Troviamo le tue porte aperte e le chiudiamo, prima che lo faccia qualcun altro.",
+    "sub_src": ("Fonte: Imperva, Bad Bot Report 2025", "https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/"),
+    "b1": "Richiedi una verifica", "b2": "Guarda i casi reali",
+    "risks_h": "Cosa è <em>cambiato</em>", "risks_p": "In pochi mesi l'attacco è diventato un software. Gran parte di ciò che è online è stato pensato per un web diverso.",
     "risks": [
-        ("Gli attacchi non dormono", "Quello che prima richiedeva ore di lavoro a una persona oggi lo fa un programma, migliaia di volte al minuto e su migliaia di siti insieme. Non serve essere un bersaglio importante: basta essere raggiungibili."),
-        ("Si costruisce più in fretta di quanto si controlli", "Con l'intelligenza artificiale un sito o un'app vanno online in pochi giorni. Funzionano, ma spesso nessuno ha verificato chi può leggere i dati, cosa resta esposto nel codice e cosa succede se qualcuno forza un modulo."),
-        ("Gli assistenti AI hanno le chiavi", "Chatbot e agenti collegati a email, documenti e gestionali possono leggere e agire. Un'istruzione nascosta nel posto giusto basta a fargli fare quello che non dovrebbero."),
+        ("L'attaccante non si stanca", "Un agente prova password, cerca versioni vulnerabili e legge ogni modulo giorno e notte, su migliaia di siti insieme. Non scegli tu se essere un bersaglio: basta essere online."),
+        ("Si pubblica prima di controllare", "Un'app generata con l'AI va online in un weekend. Regole d'accesso, chiavi e permessi spesso non li ha mai guardati nessuno."),
+        ("Gli assistenti hanno le chiavi di casa", "Chatbot e agenti leggono email, documenti e CRM, e possono agire. Per manipolarli non serve violarli: basta scrivere la cosa giusta nel posto giusto."),
+    ],
+    "cases_k": "Dalle cronache recenti", "cases_h": "Non è teoria. <em>È cronaca.</em>",
+    "cases_p": "Casi pubblici, documentati dai ricercatori e dalle aziende coinvolte. Quasi tutti partono da un errore banale.",
+    "cases": [
+        ("Settembre 2025", "Lo spionaggio lo ha fatto un'AI", "Un gruppo sponsorizzato da uno stato ha usato un agente AI per svolgere in autonomia l'80-90% del lavoro operativo contro una trentina di organizzazioni: ricognizione, ricerca di falle, furto di credenziali.", "Il lavoro di una squadra di attaccanti ora lo fa un agente, a velocità di macchina.", "Anthropic", "https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf"),
+        ("Agosto 2025", "Un chatbot, settecento aziende", "Con i token di accesso rubati all'integrazione di un chatbot di vendita, gli attaccanti hanno estratto dati dai CRM di oltre 700 organizzazioni, comprese aziende di sicurezza informatica, cercando chiavi e password.", "Ogni strumento collegato ai tuoi dati è una porta d'ingresso.", "TechTarget", "https://www.techtarget.com/cybersecurity/news/366630934/News-brief-Salesloft-Drift-breach-update-and-timeline"),
+        ("Giugno 2025", "Un'email, zero clic", "Una sola email preparata ad arte bastava a far consegnare dati interni a un server esterno da un assistente AI aziendale diffusissimo, senza che l'utente cliccasse nulla. Corretto prima che venisse sfruttato.", "Per un assistente AI anche un'email è un'istruzione.", "BleepingComputer", "https://www.bleepingcomputer.com/news/security/zero-click-ai-data-leak-flaw-uncovered-in-microsoft-365-copilot/"),
+        ("2025", "App fatte con l'AI, dati aperti", "Su 1.645 app pubblicate con un noto generatore basato sull'AI, i ricercatori ne hanno trovate 170 che lasciavano leggere a chiunque utenti, pagamenti o chiavi.", "Funzionare non vuol dire essere protetti.", "Superblocks", "https://www.superblocks.com/blog/lovable-vulnerabilities"),
+        ("Luglio 2025", "72.000 immagini in chiaro", "Un'app di incontri ha esposto circa 72.000 immagini, tra cui 13.000 selfie e documenti d'identità, da uno spazio di archiviazione accessibile dall'esterno.", "Un'impostazione sbagliata vale quanto una falla.", "CyberInsider", "https://cyberinsider.com/tea-app-suffers-data-breach-exposing-72000-users-photos-and-private-messages/"),
+        ("Luglio 2025", "La password era 123456", "La piattaforma di selezione con chatbot usata da una grande catena di fast food aveva un pannello di prova protetto da 123456, senza doppio fattore: aperti i dati di fino a 64 milioni di candidature.", "Un ambiente di prova dimenticato è un ingresso di servizio.", "BleepingComputer", "https://www.bleepingcomputer.com/news/security/123456-password-exposed-chats-for-64-million-mcdonalds-job-chatbot-applications/"),
     ],
     "areas": [
-        ("Ciò che è già online", "Siti e app <em>esistenti</em>", "Il sito di qualche anno fa, il gestionale su misura, l'e-commerce con i plugin mai aggiornati, gli accessi che nessuno ricorda più. Li rendiamo solidi senza rifarli da capo.", ["36", "37", "35"]),
-        ("Ciò che costruisci con l'AI", "Costruito <em>con l'AI</em>", "Velocità e sicurezza possono convivere. Rivediamo quello che è stato generato in fretta, prima che diventi un problema.", ["32"]),
-        ("L'intelligenza artificiale che usi", "Agenti <em>e dati</em>", "Gli assistenti AI rendono di più quando possono agire. Facciamo in modo che agiscano solo come previsto, e che i dati restino dove devono stare.", ["33", "34"]),
+        ("Ciò che è già online", "Quello che <em>hai già</em>", "Il sito di cinque anni fa, il gestionale su misura, l'e-commerce con plugin che nessuno aggiorna, gli account di chi se n'è andato. È lì che gli agenti cercano per primi. Lo rinforziamo senza rifarlo da capo.", ["36", "37", "35"]),
+        ("Ciò che costruisci con l'AI", "Quello che <em>costruisci con l'AI</em>", "La velocità è un vantaggio solo se non lascia porte aperte. Rivediamo quello che è stato generato in fretta, prima che lo faccia qualcun altro.", ["32"]),
+        ("L'AI che usi", "L'AI che <em>lavora per te</em>", "Più un assistente può fare, più vale, e più costa un suo errore. Gli diamo confini chiari e teniamo i dati dei tuoi clienti dove devono stare.", ["33", "34"]),
     ],
-    "steps_h": "Come <em>lavoriamo</em>", "steps_p": "Quattro fasi, sempre con il tuo permesso e senza fermare il lavoro del team.",
+    "steps_h": "Come <em>lavoriamo</em>", "steps_p": "Quattro fasi. Sempre con il tuo permesso scritto, mai fermando il lavoro.",
     "steps": [
-        ("Ricognizione", "Mappiamo tutto ciò che è raggiungibile da fuori: domini, pagine, moduli, API, accessi e servizi collegati. Spesso è la prima volta che qualcuno ne ha una visione completa."),
-        ("Prova controllata", "Proviamo a entrare come farebbe un attaccante, con il tuo permesso. Ogni falla trovata viene documentata e dimostrata, senza allarmismi."),
-        ("Messa in sicurezza", "Chiudiamo le falle in ordine di gravità, a partire da quelle che espongono dati o denaro, e ti spieghiamo cosa abbiamo cambiato e perché."),
-        ("Sorveglianza", "I rischi cambiano ogni settimana. Restiamo di guardia con monitoraggio, aggiornamenti e nuove verifiche quando cambia qualcosa."),
+        ("Ricognizione", "Guardiamo la tua azienda con gli occhi di chi attacca: ogni dominio, pagina, modulo, API, accesso e integrazione raggiungibile da fuori. Spesso è la prima mappa completa che qualcuno ne abbia mai fatto."),
+        ("Attacco controllato", "Proviamo a entrare con le tecniche usate oggi, comprese quelle automatiche e quelle contro gli agenti AI. Ogni falla viene dimostrata, non ipotizzata."),
+        ("Messa in sicurezza", "Chiudiamo prima ciò che espone dati o denaro, poi il resto. Ti spieghiamo cosa abbiamo cambiato e perché, in parole semplici."),
+        ("Guardia continua", "Le tecniche d'attacco cambiano ogni mese. Restiamo di guardia con monitoraggio, aggiornamenti e nuove verifiche a ogni cambiamento importante."),
     ],
-    "check_k": "Ti riguarda se", "check_h": "Bastano un paio di sì per <em>parlarne</em>.",
+    "faq_h": "Le domande che <em>ci fanno</em>",
+    "faq": [
+        ("Siamo un'azienda piccola: chi vuoi che ci attacchi?", "Nessuno ti sceglie. Gli agenti automatici provano tutto ciò che è online, senza guardare l'insegna. Le aziende piccole sono spesso le più facili, proprio perché nessuno le controlla."),
+        ("Il sito ce lo ha fatto un'agenzia seria.", "Probabilmente lo era, il giorno della consegna. Da allora sono cambiati i componenti, le tecniche d'attacco e le persone con un accesso. La sicurezza non è uno stato: è manutenzione."),
+        ("Usiamo piattaforme famose, ci pensano loro.", "Proteggono la loro infrastruttura. Impostazioni, accessi, dati e integrazioni restano tua responsabilità, ed è lì che nascono quasi tutti i casi di cronaca."),
+        ("Rischiamo di fermare il lavoro?", "No. Ogni prova è autorizzata da te per iscritto e si svolge su copie o in orari concordati."),
+        ("E se non trovate niente?", "È la notizia migliore, e te la mettiamo per iscritto: avrai la mappa completa dei tuoi sistemi e la certezza di dove sei."),
+    ],
+    "check_k": "Ti riguarda se", "check_h": "Due sì bastano per <em>parlarne</em>.",
     "check": [
-        "Il tuo sito o la tua app hanno qualche anno e nessuno li ha più ricontrollati",
-        "I clienti lasciano dati in un modulo, in un'area riservata o in un e-commerce",
-        "Il sito o l'app sono stati costruiti con strumenti di intelligenza artificiale",
-        "Usi un chatbot o un agente AI collegato a email, documenti o gestionale",
-        "Qualcuno che non lavora più con te potrebbe avere ancora un accesso",
-        "Non sapresti dire quando è stato fatto l'ultimo backup, né se funziona",
+        "Il sito o l'app hanno qualche anno e da allora nessuno li ha più ricontrollati",
+        "I clienti lasciano dati, documenti o pagamenti in un modulo o in un'area riservata",
+        "Hai costruito qualcosa con l'intelligenza artificiale e l'hai messo online",
+        "Un chatbot o un agente AI legge le tue email, i tuoi documenti o il tuo CRM",
+        "Persone che non lavorano più con te potrebbero avere ancora un accesso",
+        "Non sapresti dire quando è stato fatto l'ultimo backup, né se si ripristina davvero",
     ],
     "check_a": "Richiedi una verifica di sicurezza",
-    "box_h": "Siti, app e agenti AI, <em>al sicuro</em>.",
-    "box_p": "Gli attacchi oggi sono automatici e instancabili, e molti siti e app non sono pronti. Mettiamo al sicuro quello che hai già, quello che costruisci con l'AI e gli agenti che usi.",
+    "check_note": "Una prima call di 30 minuti, gratuita: ci racconti cosa hai online e ti diciamo da dove partiremmo.",
+    "box_h": "Gli attacchi sono già <em>automatici</em>.",
+    "box_p": "Agenti e bot lavorano giorno e notte su tutto ciò che hai online. Mettiamo al sicuro quello che hai già, quello che costruisci con l'AI e gli agenti che usi.",
     "box_a": "Scopri la sicurezza",
 }
 T["en"]["security"] = {
-    "title": "Security for websites, apps and AI agents · Reef 7 Lab",
-    "desc": "We secure websites, apps and internal tools, new and old, and the AI agents you use: review, fixes and continuous monitoring.",
-    "h1": "The web is full of <em>agents</em>. Not all of them work for you.",
-    "sub": "Automated programs and AI agents visit websites, apps and internal tools every day. Some bring customers, others look for a way in. We help you find the doors left open and close them, before someone else finds them.",
-    "b1": "Request a review", "b2": "How we work",
-    "risks_h": "What has <em>changed</em>", "risks_p": "The rules changed fast, and much of what is online was designed for a different web.",
+    "title": "Cybersecurity for websites, apps and AI agents · Reef 7 Lab",
+    "desc": "Attacks are already automated. We secure websites, apps and internal tools, new and old, and the AI agents you use: review, fixes and continuous watch.",
+    "h1": "Attacks are already <em>automated</em>. Are your defences?",
+    "sub": "In 2024, for the first time in a decade, automated traffic overtook human traffic: more than half of the visits to a website don't come from a person. Some of them work for you. The rest look for weak passwords, open databases and AI assistants to manipulate. We find your open doors and close them, before someone else does.",
+    "sub_src": ("Source: Imperva, Bad Bot Report 2025", "https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/"),
+    "b1": "Request a review", "b2": "See the real cases",
+    "risks_h": "What has <em>changed</em>", "risks_p": "In a matter of months, attacking became software. Much of what is online was designed for a different web.",
     "risks": [
-        ("Attacks never sleep", "What used to take a person hours of work is now done by a program, thousands of times a minute across thousands of sites at once. You don't need to be an important target: being reachable is enough."),
-        ("We build faster than we check", "With AI a website or app can go live in days. It works, but often nobody has checked who can read the data, what is left exposed in the code and what happens when someone forces a form."),
-        ("AI assistants hold the keys", "Chatbots and agents connected to email, documents and internal systems can read and act. One instruction hidden in the right place is enough to make them do what they shouldn't."),
+        ("The attacker never gets tired", "An agent tries passwords, looks for vulnerable versions and reads every form day and night, across thousands of sites at once. You don't choose whether to be a target: being online is enough."),
+        ("Shipped before it's checked", "An AI-generated app goes live in a weekend. Access rules, keys and permissions have often never been looked at by anyone."),
+        ("Assistants hold the house keys", "Chatbots and agents read email, documents and CRMs, and they can act. You don't need to hack them to manipulate them: you just write the right thing in the right place."),
+    ],
+    "cases_k": "From recent headlines", "cases_h": "Not theory. <em>Headlines.</em>",
+    "cases_p": "Public cases, documented by researchers and the companies involved. Almost all of them start from a trivial mistake.",
+    "cases": [
+        ("September 2025", "Espionage, run by an AI", "A state-sponsored group used an AI agent to carry out 80-90% of the operational work on its own against around thirty organisations: reconnaissance, vulnerability hunting, credential theft.", "A team of attackers' work is now done by an agent, at machine speed.", "Anthropic", "https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf"),
+        ("August 2025", "One chatbot, seven hundred companies", "Using access tokens stolen from a sales chatbot integration, attackers pulled data from the CRMs of more than 700 organisations, including security companies, hunting for keys and passwords.", "Every tool connected to your data is a way in.", "TechTarget", "https://www.techtarget.com/cybersecurity/news/366630934/News-brief-Salesloft-Drift-breach-update-and-timeline"),
+        ("June 2025", "One email, zero clicks", "A single crafted email was enough to make a widely used enterprise AI assistant send internal data to an outside server, without the user clicking anything. Fixed before it was exploited.", "To an AI assistant, even an email is an instruction.", "BleepingComputer", "https://www.bleepingcomputer.com/news/security/zero-click-ai-data-leak-flaw-uncovered-in-microsoft-365-copilot/"),
+        ("2025", "AI-built apps, open data", "Out of 1,645 apps published with a well-known AI app builder, researchers found 170 that let anyone read users, payments or keys.", "Working is not the same as protected.", "Superblocks", "https://www.superblocks.com/blog/lovable-vulnerabilities"),
+        ("July 2025", "72,000 images in the open", "A dating app exposed around 72,000 images, including 13,000 selfies and ID documents, from a storage space reachable from outside.", "One wrong setting is as bad as a flaw.", "CyberInsider", "https://cyberinsider.com/tea-app-suffers-data-breach-exposing-72000-users-photos-and-private-messages/"),
+        ("July 2025", "The password was 123456", "The chatbot hiring platform used by a major fast-food chain had a test panel protected by 123456, with no two-factor login: data from up to 64 million job applications was open.", "A forgotten test environment is a service entrance.", "BleepingComputer", "https://www.bleepingcomputer.com/news/security/123456-password-exposed-chats-for-64-million-mcdonalds-job-chatbot-applications/"),
     ],
     "areas": [
-        ("What is already online", "Existing <em>sites and apps</em>", "The website from a few years ago, the custom internal tool, the store with plugins never updated, the logins nobody remembers. We make them solid without rebuilding them.", ["36", "37", "35"]),
-        ("What you build with AI", "Built <em>with AI</em>", "Speed and security can coexist. We review what was generated in a hurry, before it becomes a problem.", ["32"]),
-        ("The AI you use", "Agents <em>and data</em>", "AI assistants deliver the most when they can act. We make sure they act only as intended, and that your data stays where it belongs.", ["33", "34"]),
+        ("What is already online", "What you <em>already have</em>", "The website from five years ago, the custom internal tool, the store with plugins nobody updates, the accounts of people who have left. That's where agents look first. We harden it without rebuilding it.", ["36", "37", "35"]),
+        ("What you build with AI", "What you <em>build with AI</em>", "Speed is an advantage only if it doesn't leave doors open. We review what was generated in a hurry, before someone else does.", ["32"]),
+        ("The AI you use", "The AI <em>working for you</em>", "The more an assistant can do, the more it's worth, and the more its mistakes cost. We give it clear boundaries and keep your customers' data where it belongs.", ["33", "34"]),
     ],
-    "steps_h": "How we <em>work</em>", "steps_p": "Four phases, always with your permission and without stopping your team's work.",
+    "steps_h": "How we <em>work</em>", "steps_p": "Four phases. Always with your written permission, never stopping your work.",
     "steps": [
-        ("Discovery", "We map everything reachable from the outside: domains, pages, forms, APIs, logins and connected services. It's often the first time anyone has seen the full picture."),
-        ("Controlled test", "We try to get in the way an attacker would, with your permission. Every flaw we find is documented and demonstrated, without alarmism."),
-        ("Hardening", "We close the gaps by severity, starting with those that expose data or money, and explain what we changed and why."),
-        ("Monitoring", "Risks change every week. We stay on watch with monitoring, updates and new checks whenever something changes."),
+        ("Discovery", "We look at your company through an attacker's eyes: every domain, page, form, API, login and integration reachable from outside. It's often the first complete map anyone has ever made of it."),
+        ("Controlled attack", "We try to get in with the techniques used today, including automated ones and those aimed at AI agents. Every flaw is demonstrated, not assumed."),
+        ("Hardening", "We close what exposes data or money first, then the rest. We explain what we changed and why, in plain words."),
+        ("Continuous watch", "Attack techniques change every month. We stay on watch with monitoring, updates and new checks at every significant change."),
     ],
-    "check_k": "This is for you if", "check_h": "A couple of yeses is <em>enough to talk</em>.",
+    "faq_h": "The questions <em>we get</em>",
+    "faq": [
+        ("We're a small company: who would bother attacking us?", "Nobody picks you. Automated agents try everything that's online, regardless of the name on the door. Small companies are often the easiest, precisely because nobody is watching them."),
+        ("A serious agency built our website.", "It probably was, on delivery day. Since then the components, the attack techniques and the people with access have all changed. Security isn't a state: it's maintenance."),
+        ("We use well-known platforms, they take care of it.", "They protect their infrastructure. Settings, access, data and integrations remain your responsibility, and that's where almost every headline starts."),
+        ("Will this stop our work?", "No. Every test is authorised by you in writing and runs on copies or at agreed times."),
+        ("What if you find nothing?", "That's the best news, and we put it in writing: you get a complete map of your systems and certainty about where you stand."),
+    ],
+    "check_k": "This is for you if", "check_h": "Two yeses are <em>enough to talk</em>.",
     "check": [
         "Your website or app is a few years old and nobody has checked it since",
-        "Customers leave data in a form, a private area or an online store",
-        "Your site or app was built with AI tools",
-        "You use a chatbot or AI agent connected to email, documents or internal systems",
-        "Someone who no longer works with you might still have access",
-        "You couldn't say when the last backup was made, or whether it works",
+        "Customers leave data, documents or payments in a form or a private area",
+        "You built something with AI and put it online",
+        "A chatbot or AI agent reads your email, your documents or your CRM",
+        "People who no longer work with you might still have access",
+        "You couldn't say when the last backup was made, or whether it really restores",
     ],
     "check_a": "Request a security review",
-    "box_h": "Sites, apps and AI agents, <em>secured</em>.",
-    "box_p": "Attacks today are automated and tireless, and many sites and apps aren't ready. We secure what you already have, what you build with AI and the agents you use.",
+    "check_note": "A free 30-minute first call: tell us what you have online and we'll tell you where we would start.",
+    "box_h": "Attacks are already <em>automated</em>.",
+    "box_p": "Agents and bots work day and night on everything you have online. We secure what you already have, what you build with AI and the agents you use.",
     "box_a": "Explore security",
 }
 
@@ -1258,10 +1298,12 @@ def build(lang, variant=""):
 <section class="wrap" style="padding-bottom:clamp(80px,10vw,150px)">{svc}
 </section>""")
 
-    # sicurezza: pagina dedicata, con i servizi del gruppo divisi per area
+    # sicurezza: pagina dedicata, con casi reali, servizi per area, metodo, obiezioni e lista di controllo
     SE = L["security"]
     per_n = {x[0]: x for x in L["services"]}
     rischi = "".join(f'<div><span class="mono">0{i}</span><b>{t}</b><p>{d}</p></div>' for i, (t, d) in enumerate(SE["risks"], 1))
+    casi = "".join(f"""
+    <article class="sec-caso"><p class="mono">{q}</p><h3>{t}</h3><p>{d}</p><p class="sec-lez">{lz}</p><a href="{url}" target="_blank" rel="noopener">{fonte} ↗</a></article>""" for q, t, d, lz, fonte, url in SE["cases"])
     aree, k_svc = "", 0
     for j, (k, h, d, nums) in enumerate(SE["areas"], 1):
         arts = ""
@@ -1279,21 +1321,32 @@ def build(lang, variant=""):
   <div class="head"><div><p class="mono sec-k">0{j} · {k}</p><h2>{h}</h2></div><p>{d}</p></div>{arts}
 </div></section>"""
     fasi = "".join(f'<div><span class="mono">0{i}</span><b>{t}</b><p>{d}</p></div>' for i, (t, d) in enumerate(SE["steps"], 1))
+    faq = "".join(f'<details class="sec-faq"><summary>{q}</summary><p>{a}</p></details>' for q, a in SE["faq"])
     out["security"] = page("security", SE["title"], SE["desc"], head_block(L["nav"]["security"], SE["h1"], SE["sub"]) + f"""
-<section class="wrap sec-actions"><div class="actions"><a class="btn" href="{u('contact')}">{SE['b1']} {arrow}</a><a class="btn ghost" href="#metodo">{SE['b2']}</a></div></section>
+<section class="wrap sec-actions"><p class="sec-src"><a href="{SE['sub_src'][1]}" target="_blank" rel="noopener">{SE['sub_src'][0]} ↗</a></p><div class="actions"><a class="btn" href="{u('contact')}">{SE['b1']} {arrow}</a><a class="btn ghost" href="#casi">{SE['b2']}</a></div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{SE['risks_h']}</h2><p>{SE['risks_p']}</p></div>
   <div class="how">{rischi}</div>
+</div></section>
+<section class="block" id="casi"><div class="wrap">
+  <div class="head"><div><p class="mono sec-k">{SE['cases_k']}</p><h2>{SE['cases_h']}</h2></div><p>{SE['cases_p']}</p></div>
+  <div class="sec-casi">{casi}
+  </div>
 </div></section>{aree}
 <section class="block" id="metodo"><div class="wrap">
   <div class="head"><h2>{SE['steps_h']}</h2><p>{SE['steps_p']}</p></div>
   <div class="how quattro">{fasi}</div>
 </div></section>
+<section class="block"><div class="wrap">
+  <div class="head"><h2>{SE['faq_h']}</h2></div>
+  <div class="sec-faqs">{faq}</div>
+</div></section>
 <section class="block"><div class="wrap why">
   <p class="mono">{SE['check_k']}</p>
   <div><h2>{SE['check_h']}</h2>
     <ul class="sec-check">{"".join(f"<li>{x}</li>" for x in SE['check'])}</ul>
-    <a class="btn" href="{u('contact')}">{SE['check_a']} {arrow}</a></div>
+    <a class="btn" href="{u('contact')}">{SE['check_a']} {arrow}</a>
+    <p class="sec-note">{SE['check_note']}</p></div>
 </div></section>""")
 
     # soluzioni
