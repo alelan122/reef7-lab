@@ -1320,8 +1320,10 @@ def build(lang, variant=""):
     SE = L["security"]
     per_n = {x[0]: x for x in L["services"]}
     rischi = "".join(f'<div><span class="mono">0{i}</span><b>{t}</b><p>{d}</p></div>' for i, (t, d) in enumerate(SE["risks"], 1))
+    # titolo in due tempi: il fatto, poi la conseguenza in evidenza
+    titolo = lambda t: (lambda x: f"{x[0]}. <em>{x[1]}</em>" if len(x) == 2 else t)(t.split(". ", 1))
     casi = "".join(f"""
-    <article class="sec-caso"><p class="mono">{q}</p><h3>{t}</h3><p>{d}</p><p class="sec-lez">{lz}</p><a href="{url}" target="_blank" rel="noopener">{fonte} ↗</a></article>""" for q, t, d, lz, fonte, url in SE["cases"])
+    <article class="sec-caso"><p class="mono">{q}</p><h3>{titolo(t)}</h3><p>{d}</p><p class="sec-lez">{lz}</p><a href="{url}" target="_blank" rel="noopener">{fonte} ↗</a></article>""" for q, t, d, lz, fonte, url in SE["cases"])
     aree, k_svc = "", 0
     for j, (k, h, d, nums) in enumerate(SE["areas"], 1):
         arts = ""

@@ -1366,3 +1366,5 @@ button.btn { font-family: inherit; }
 .ck-found[hidden], .ck-status:empty { display: none; }
 .ck-row .btn { justify-content: center; }
 @media (max-width: 640px) { .ck-row .btn { padding: 15px 22px; } }
+.sec-caso h3 { font-size: clamp(26px, 2.5vw, 36px); line-height: 1.04; letter-spacing: -.04em; }
+.sec-caso h3 em { font-style: normal; color: var(--aqua); }
