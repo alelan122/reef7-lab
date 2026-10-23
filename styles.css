@@ -1563,5 +1563,8 @@ button.btn { font-family: inherit; }
 .sec-fix span { color: var(--muted); font-size: 15px; }
 .sec-fix:target { border-color: var(--rule); }
 .sec-fix:target b { color: var(--aqua); }
-.sec-casi { grid-template-columns: repeat(3, 1fr); }
 @media (max-width: 900px) { .sec-fixes { grid-template-columns: 1fr; } }
+
+/* Sicurezza: test subito nell'apertura (versione con esempio di report) */
+.sec-hero-g .sec-dom { margin-top: 32px; }
+[data-page="security"] .block { padding: clamp(80px, 9vw, 136px) 0; }

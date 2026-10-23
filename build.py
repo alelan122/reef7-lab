@@ -879,7 +879,7 @@ T["it"]["security"] = {
         ("Nessun rifacimento, nessun fermo", "Lavoriamo su ciò che hai già, su copie o in orari concordati. Il team continua a lavorare."),
         ("Qualcuno di guardia", "Monitoraggio, aggiornamenti e un rapporto mensile: sai sempre come stai, senza doverci pensare."),
     ],
-    "start_h": "Come <em>funziona</em>", "start_p": "Tre passi. I primi due sono gratuiti.",
+    "start_h": "Come <em>iniziare</em>", "start_p": "Tre passi. I primi due sono gratuiti.",
     "start": [
         ("Check di esposizione", "Gratuito · 3 minuti", "Controlliamo il tuo dominio e ricevi subito il tuo livello di esposizione e le 3 priorità da cui partire."),
         ("Ricognizione", "Gratuita · 30 minuti", "Guardiamo insieme il risultato e ti diciamo cosa conviene fare, in che ordine e in quanto tempo."),
@@ -887,7 +887,7 @@ T["it"]["security"] = {
     ],
     "start_promise": "Se nella ricognizione non troviamo niente da migliorare, te lo diciamo e finisce lì.",
     "sub_src": ("Fonte: AP / PBS NewsHour, ottobre 2026", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
-    "alert_k": "21 ottobre 2026 · Dalla cronaca",
+    "alert_k": "21 ottobre 2026",
     "alert_h": "Un'AI ha trovato falle critiche nel linguaggio di 7 siti su 10. <em>Poche ore dopo, milioni di tentativi di attacco.</em>",
     "alert_p": "Le falle erano in PHP, il linguaggio su cui girano WordPress, la maggior parte degli e-commerce e moltissimi gestionali web, e permettevano di prendere il controllo del server da remoto. L'FBI ha consigliato di spegnere i siti che non si possono aggiornare subito; Giappone, Regno Unito e Finlandia hanno messo offline parte dei servizi pubblici.",
     "alert_q": "Il tuo sito gira su PHP? È già aggiornato?",
@@ -990,7 +990,7 @@ T["en"]["security"] = {
         ("No rebuild, no downtime", "We work on what you already have, on copies or at agreed times. Your team keeps working."),
         ("Someone on watch", "Monitoring, updates and a monthly report: you always know where you stand, without thinking about it."),
     ],
-    "start_h": "How it <em>works</em>", "start_p": "Three steps. The first two are free.",
+    "start_h": "How to <em>start</em>", "start_p": "Three steps. The first two are free.",
     "start": [
         ("Exposure check", "Free · 3 minutes", "We check your domain and you instantly get your exposure level and the 3 priorities to start from."),
         ("Review call", "Free · 30 minutes", "We go through the result together and tell you what to do, in what order and how long it takes."),
@@ -998,7 +998,7 @@ T["en"]["security"] = {
     ],
     "start_promise": "If the review shows nothing worth improving, we'll tell you, and that's it.",
     "sub_src": ("Source: AP / PBS NewsHour, October 2026", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
-    "alert_k": "October 21, 2026 · In the news",
+    "alert_k": "October 21, 2026",
     "alert_h": "An AI found critical flaws in the language behind 7 in 10 websites. <em>Within hours, millions of attack attempts.</em>",
     "alert_p": "The flaws were in PHP, the language behind WordPress, most online stores and countless web-based internal tools, and they allowed attackers to take control of the server remotely. The FBI advised taking sites offline if they couldn't be updated right away; Japan, the UK and Finland took parts of their public services offline.",
     "alert_q": "Does your site run on PHP? Is it already updated?",
@@ -1405,65 +1405,79 @@ def build(lang, variant=""):
 <section class="wrap" style="padding-bottom:clamp(80px,10vw,150px)">{svc}
 </section>""")
 
-    # sicurezza: funnel. Dominio subito nell'apertura, scelta della situazione, cosa ricevi, come funziona, cosa sistemiamo, prove, domande, di nuovo il dominio
+    # sicurezza: pagina di vendita con esempio di report, servizi a schede, metodo a tappe e lista interattiva
     SE = L["security"]
     per_n = {x[0]: x for x in L["services"]}
+    ICO = {
+        "map": '<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',
+        "shield": '<path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/>',
+        "flow": '<path d="M4 12h12"/><path d="m12 6 6 6-6 6"/><path d="M20 5v14"/>',
+        "eye": '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    }
+    ico = lambda k: f'<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">{ICO[k]}</svg>'
     titolo = lambda t: (lambda x: f"{x[0]}. <em>{x[1]}</em>" if len(x) == 2 else t)(t.split(". ", 1))
     casi = "".join(f"""
-    <article class="sec-caso"><p class="mono">{q}</p><h3>{titolo(t)}</h3><p>{d}</p><p class="sec-lez">{lz}</p><a href="{url}" target="_blank" rel="noopener">{fonte} ↗</a></article>""" for q, t, d, lz, fonte, url in [SE["cases"][i] for i in (0, 3, 5)])
-    dominio = lambda cls="": f"""<form class="sec-dom {cls}" action="{u('check')}" method="get">
-      <label class="sr-only" for="dom-{cls or 'top'}">{SE['dom_ph']}</label>
-      <input id="dom-{cls or 'top'}" name="d" type="text" inputmode="url" autocomplete="url" required maxlength="200" placeholder="{SE['dom_ph']}">
+    <article class="sec-caso"><p class="mono">{q}</p><h3>{titolo(t)}</h3><p>{d}</p><p class="sec-lez">{lz}</p><a href="{url}" target="_blank" rel="noopener">{fonte} ↗</a></article>""" for q, t, d, lz, fonte, url in SE["cases"])
+    more = "Come lavoriamo" if lang == "it" else "How we do it"
+    aree, k_svc = "", 0
+    for j, (k, h, d, nums) in enumerate(SE["areas"], 1):
+        cards = ""
+        for n in nums:
+            k_svc += 1
+            _n, _g, t, short, long, li = per_n[n]
+            cards += f"""
+    <article class="sec-svc" id="s{n}">
+      <span class="mono">{k_svc:02d}</span>
+      <h3>{t}</h3><p class="sec-svc-tag">{short}</p>
+      <ul>{"".join(f"<li>{x}</li>" for x in li)}</ul>
+      <details><summary>{more}</summary><p>{long}</p></details>
+    </article>"""
+        aree += f"""
+<section class="block sec-area"><div class="wrap">
+  <div class="head"><div><p class="mono sec-k">0{j} / 0{len(SE["areas"])}</p><h2>{h}</h2></div><p>{d}</p></div>
+  <div class="sec-svcs n{len(nums)}">{cards}
+  </div>
+</div></section>"""
+    fasi = "".join(f'<li><span class="sec-step-n">{i}</span><b>{t}</b><p>{d}</p></li>' for i, (t, d) in enumerate(SE["steps"], 1))
+    faq = "".join(f'<details class="sec-faq"><summary>{q}</summary><p>{a}</p></details>' for q, a in SE["faq"])
+    ora = "".join(f'<div><b>{n}</b><p>{d}</p><a href="{url}" target="_blank" rel="noopener">{src} ↗</a></div>' for n, d, src, url in SE["now"])
+    guadagni = "".join(f'<div class="sec-gain"><i>{ico(k)}</i><b>{t}</b><p>{d}</p></div>' for k, (t, d) in zip(["map", "shield", "flow", "eye"], SE["gains"]))
+    inizio = "".join(f'<li><span class="mono">0{i}</span><b>{t}</b><em>{k}</em><p>{d}</p></li>' for i, (t, k, d) in enumerate(SE["start"], 1))
+    SC = SE["scan"]
+    righe = "".join(f'<div class="sec-scan-r {c}" style="--d:{0.5 + i * 0.45}s"><span>{a}</span><b>{v}</b></div>' for i, (a, v, c) in enumerate(SC["rows"]))
+    hero = f"""<section class="page-head sec-hero"><div class="wrap sec-hero-g">
+  <div>
+    <p class="mono">{SE['k']}</p>
+    <h1>{SE['h1']}</h1>
+    <p class="sub">{SE['sub']}</p>
+    <form class="sec-dom" action="{u('check')}" method="get">
+      <label class="sr-only" for="dom-top">{SE['dom_ph']}</label>
+      <input id="dom-top" name="d" type="text" inputmode="url" autocomplete="url" required maxlength="200" placeholder="{SE['dom_ph']}">
       <button class="btn" type="submit">{SE['dom_btn']} {arrow}</button>
     </form>
-    <p class="sec-dom-note">{SE['dom_note']}</p>"""
-    contatti = f"{u('contact')}?need={SE['need'].replace(' ', '%20')}#contact-form"
-    strade = "".join(f"""
-    <a class="sec-route" href="{contatti if k == 'inc' else u('check') + '?seg=' + k}"><b>{t}</b><p>{d}</p><span>{c} {arrow}</span></a>""" for k, t, d, c in SE["routes"])
-    ora = "".join(f'<div><b>{n}</b><p>{d}</p><a href="{url}" target="_blank" rel="noopener">{src} ↗</a></div>' for n, d, src, url in SE["now"])
-    SC = SE["scan"]
-    righe = "".join(f'<div class="sec-scan-r {c}" style="--d:{0.3 + i * 0.35}s"><span>{a}</span><b>{v}</b></div>' for i, (a, v, c) in enumerate(SC["rows"]))
-    scheda = f"""<a class="sec-scan" href="{u('check')}" aria-label="{SE['b1']}">
+    <p class="sec-dom-note">{SE['dom_note']}</p>
+  </div>
+  <a class="sec-scan" href="{u('check')}" aria-label="{SE['b1']}">
     <div class="sec-scan-top"><span class="sec-scan-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mono">{SC['k']}</span></div>
     <div class="sec-scan-dom"><b>{SC['dom']}</b><span class="mono"><span class="sec-dot" aria-hidden="true"></span>{SC['live']}</span></div>
     <div class="sec-scan-rows">{righe}</div>
-    <div class="sec-scan-lvl" style="--d:{0.3 + len(SC['rows']) * 0.35}s"><span class="mono">{SC['lvl']}</span><b>{SC['lvl_v']}</b><i class="sec-scan-meter"><i></i></i><small>{SC['prio']} →</small></div>
-  </a>"""
-    inizio = "".join(f'<li><span class="mono">0{i}</span><b>{t}</b><em>{k}</em><p>{d}</p></li>' for i, (t, k, d) in enumerate(SE["start"], 1))
-    nums = [n for _k, _h, _d, ns in SE["areas"] for n in ns]
-    fix = "".join(f"""
-    <li class="sec-fix" id="s{n}"><b>{per_n[n][2]}</b><span>{per_n[n][3]}</span></li>""" for n in nums)
-    faq = "".join(f'<details class="sec-faq"><summary>{q}</summary><p>{a}</p></details>' for q, a in [SE["faq"][i] for i in (0, 1, 4)])
-    out["security"] = page("security", SE["title"], SE["desc"], f"""<section class="page-head sec-hero"><div class="wrap">
-  <p class="mono">{SE['k']}</p>
-  <h1>{SE['h1']}</h1>
-  <p class="sub">{SE['sub']}</p>
-  {dominio()}
-</div></section>
-<section class="sec-now"><div class="wrap">
-  <div class="head"><div><p class="mono sec-k"><span class="sec-dot" aria-hidden="true"></span>{SE['now_k']}</p><h2>{SE['now_h']}</h2></div><p>{SE['now_end']}</p></div>
-  <div class="sec-now-g">{ora}</div>
+    <div class="sec-scan-lvl" style="--d:{0.5 + len(SC['rows']) * 0.45}s"><span class="mono">{SC['lvl']}</span><b>{SC['lvl_v']}</b><i class="sec-scan-meter"><i></i></i><small>{SC['prio']} →</small></div>
+  </a>
+</div></section>"""
+    out["security"] = page("security", SE["title"], SE["desc"], hero + f"""
+<section class="sec-alert"><div class="wrap">
+  <p class="mono"><span class="sec-dot" aria-hidden="true"></span>{SE['now_k']} · {SE['alert_k']}</p>
+  <h2>{SE['alert_h']}</h2>
+  <div class="sec-alert-b"><p>{SE['alert_p']}</p>
+    <div class="sec-alert-cta"><b>{SE['alert_q']}</b><a class="btn" href="{u('check')}">{SE['alert_a']} {arrow}</a><a class="sec-alert-src" href="{SE['alert_src'][1]}" target="_blank" rel="noopener">{SE['alert_src'][0]} ↗</a></div></div>
 </div></section>
 <section class="block"><div class="wrap">
-  <div class="head"><div><p class="mono sec-k">{SE['route_k']}</p><h2>{SE['route_h']}</h2></div><p>{SE['route_p']}</p></div>
-  <div class="sec-routes">{strade}
-  </div>
-</div></section>
-<section class="block"><div class="wrap sec-get">
-  <div><h2>{SE['get_h']}</h2><p class="sec-get-p">{SE['get_p']}</p>
-    <ul class="sec-check">{"".join(f"<li>{x}</li>" for x in SE['get'])}</ul>
-    <a class="btn" href="{u('check')}">{SE['b1']} {arrow}</a></div>
-  {scheda}
-</div></section>
+  <div class="head"><h2>{SE['gain_h']}</h2><p>{SE['gain_p']}</p></div>
+  <div class="sec-gains">{guadagni}</div>
+</div></section>{aree}
 <section class="block" id="metodo"><div class="wrap">
-  <div class="head"><h2>{SE['start_h']}</h2><p>{SE['start_p']}</p></div>
-  <ol class="sec-start">{inizio}</ol>
-  <p class="sec-promise">{SE['start_promise']}</p>
-</div></section>
-<section class="block"><div class="wrap">
-  <div class="head"><h2>{SE['fix_h']}</h2><p>{SE['fix_p']}</p></div>
-  <ul class="sec-fixes">{fix}
-  </ul>
+  <div class="head"><h2>{SE['steps_h']}</h2><p>{SE['steps_p']}</p></div>
+  <ol class="sec-steps">{fasi}</ol>
 </div></section>
 <section class="block" id="casi"><div class="wrap">
   <div class="head"><div><p class="mono sec-k">{SE['cases_k']}</p><h2>{SE['cases_h']}</h2></div><p>{SE['cases_p']}</p></div>
@@ -1471,15 +1485,22 @@ def build(lang, variant=""):
   </div>
 </div></section>
 <section class="block"><div class="wrap">
+  <div class="head"><h2>{SE['start_h']}</h2><p>{SE['start_p']}</p></div>
+  <ol class="sec-start">{inizio}</ol>
+  <div class="sec-start-end"><a class="btn" href="{u('check')}">{SE['b1']} {arrow}</a><p>{SE['start_promise']}</p></div>
+</div></section>
+<section class="block"><div class="wrap">
   <div class="head"><h2>{SE['faq_h']}</h2></div>
   <div class="sec-faqs">{faq}</div>
 </div></section>
-<section class="block sec-end"><div class="wrap">
-  <h2>{SE['end_h']}</h2>
-  <p class="sub">{SE['end_p']}</p>
-  {dominio("fine")}
-  <p class="sec-note"><a href="{contatti}">{SE['alt_contact']}</a></p>
-</div></section>""")
+<section class="block"><div class="wrap sec-final">
+  <p class="mono sec-k">{SE['check_k']}</p>
+  <h2>{SE['check_h']}</h2>
+  <p class="sec-final-hint">{SE['check_hint']}</p>
+  <ul class="sec-check sec-check-i">{"".join(f'<li><label><input type="checkbox"><span>{x}</span></label></li>' for x in SE['check'])}</ul>
+  <div class="sec-final-cta"><a class="btn" href="{u('check')}">{SE['check_a']} {arrow}</a><p class="sec-final-ok" aria-live="polite" data-ok="{SE['check_ok']}"></p></div>
+  <p class="sec-note">{SE['check_note']} <a href="{u('contact')}?need={SE['need'].replace(' ', '%20')}#contact-form">{SE['alt_contact']}</a></p>
+</div></section>""", extra=f'\n<script src="{pre}security-page.js?v={VERSION}"></script>')
 
     # soluzioni
     SO = L["solutions"]; lb = SO["lbl"]
