@@ -15,7 +15,7 @@
 
   const T = en ? {
     steps: ["Your domain", "What you have online", "Habits", "Your report"], step_of: (a, b) => `Step ${a} of ${b}`,
-    domain_q: "Your company's website", domain_ph: "yourcompany.com", domain_hint: "We only use public information, as any browser would. No intrusive tests.",
+    domain_q: "Your company's website", domain_ph: "yourcompany.com", domain_hint: "We only use public information, read through Google DNS and Mozilla Observatory. No intrusive tests.",
     scan: "Check", scanning: "We're looking at your site the way an attacker sees it…", no_site: "We don't have a website",
     bad_domain: "Enter a domain like yourcompany.com", not_found: "This domain doesn't seem to exist: check the spelling.",
     r_web: "Site protections", r_mail: "Email in your name", r_na: "not available right now", r_fail: (f, n) => `${f} of ${n} checks not passed`,
@@ -51,7 +51,7 @@
     ],
     gate_k: "Your result", gate_h: (l, n) => `Exposure: <em>${l}</em>. We found ${n} point${n === 1 ? "" : "s"} to fix.`,
     gate_p: "Get the full report: what an attacker sees from your domain, your 3 priorities with what to do today, and how we fix them. A copy also arrives by email.",
-    name: "Name", company: "Company", email: "Work email", consent: "I agree to be contacted by Reef 7 Lab about this report.",
+    name: "Name", company: "Company", email: "Work email", consent: "I agree to be contacted by Reef 7 Lab about this report. Details are sent through FormSubmit.",
     unlock: "Get the full report", sending: "Sending…", bad_email: "Check your email address.", need_consent: "Tick the box to receive the report.",
     subject: "Security check", r_title: "Exposure check", r_for: "for",
     sent_ok: (e) => `A copy is on its way to <b>${e}</b>.`, sent_fail: "Your details didn't reach me, so the email copy wasn't sent. Download the PDF or write to me at {email}.",
@@ -65,7 +65,7 @@
     from_agent: "We continue from your chat with the AI agent.",
   } : {
     steps: ["Il tuo dominio", "Cosa hai online", "Le abitudini", "Il tuo report"], step_of: (a, b) => `Passo ${a} di ${b}`,
-    domain_q: "Il sito della tua azienda", domain_ph: "tuazienda.it", domain_hint: "Usiamo solo informazioni pubbliche, come farebbe qualsiasi browser. Nessuna prova invasiva.",
+    domain_q: "Il sito della tua azienda", domain_ph: "tuazienda.it", domain_hint: "Usiamo solo informazioni pubbliche, lette tramite Google DNS e Mozilla Observatory. Nessuna prova invasiva.",
     scan: "Controlla", scanning: "Stiamo guardando il tuo sito come lo vede chi attacca…", no_site: "Non abbiamo un sito",
     bad_domain: "Scrivi un dominio come tuazienda.it", not_found: "Questo dominio non sembra esistere: controlla come l'hai scritto.",
     r_web: "Protezioni del sito", r_mail: "Email a tuo nome", r_na: "non disponibile in questo momento", r_fail: (f, n) => (f === 1 ? `1 controllo su ${n} non superato` : `${f} controlli su ${n} non superati`),
@@ -101,7 +101,7 @@
     ],
     gate_k: "Il tuo risultato", gate_h: (l, n) => `Esposizione: <em>${l}</em>. Abbiamo trovato ${n} ${n === 1 ? "punto" : "punti"} da sistemare.`,
     gate_p: "Ricevi il report completo: cosa vede chi attacca dal tuo dominio, le tue 3 priorità con cosa fare già oggi e come le risolviamo noi. Una copia arriva anche per email.",
-    name: "Nome", company: "Azienda", email: "Email di lavoro", consent: "Accetto di essere ricontattato da Reef 7 Lab su questo report.",
+    name: "Nome", company: "Azienda", email: "Email di lavoro", consent: "Accetto di essere ricontattato da Reef 7 Lab su questo report. I dati arrivano tramite FormSubmit.",
     unlock: "Ricevi il report completo", sending: "Invio…", bad_email: "Controlla l'indirizzo email.", need_consent: "Spunta la casella per ricevere il report.",
     subject: "Check sicurezza", r_title: "Check di esposizione", r_for: "per",
     sent_ok: (e) => `Una copia sta arrivando a <b>${e}</b>.`, sent_fail: "I tuoi dati non mi sono arrivati, quindi la copia per email non è partita. Scarica il PDF oppure scrivimi a {email}.",
@@ -193,8 +193,8 @@
     <div class="au-gate" hidden>
       <p class="mono">${T.gate_k}</p><h2 class="au-teaser"></h2><p class="au-teaser-p">${T.gate_p}</p>
       <form class="au-lead" novalidate>
-        <label class="field"><span>${T.name}</span><input name="name" required autocomplete="name"></label>
-        <label class="field"><span>${T.company}</span><input name="company" autocomplete="organization"></label>
+        <label class="field"><span>${T.name}</span><input name="name" required maxlength="80" autocomplete="name"></label>
+        <label class="field"><span>${T.company}</span><input name="company" maxlength="80" autocomplete="organization"></label>
         <label class="field full"><span>${T.email}</span><input name="email" type="email" required autocomplete="email"></label>
         <label class="check full"><input type="checkbox" name="consent" required><span>${T.consent}</span></label>
         <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -240,8 +240,10 @@
   const checkWeb = async (h) => {
     const r = await withTimeout(fetch(`https://observatory-api.mdn.mozilla.net/api/v2/scan?host=${encodeURIComponent(h)}`, { method: "POST" }), 30000);
     const j = await r.json();
-    if (!r.ok || j.error || !j.grade) return null;
-    return { grade: j.grade, failed: j.tests_failed, total: j.tests_quantity, url: j.details_url };
+    if (!r.ok || j.error || !/^[A-F][+-]?$/.test(String(j.grade))) return null;
+    // ogni dato esterno è ostile: numeri come numeri, link solo verso la pagina pubblica di Mozilla
+    const url = typeof j.details_url === "string" && j.details_url.startsWith("https://developer.mozilla.org/") ? j.details_url : null;
+    return { grade: String(j.grade), failed: Number(j.tests_failed) || 0, total: Number(j.tests_quantity) || 0, url };
   };
   const mailLine = (m) => (m.dmarc === "reject" || m.dmarc === "quarantine" ? T.mail_ok : m.dmarc === "none" ? T.mail_mon : T.mail_none) + (m.spf ? "" : ` · ${T.spf_none}`);
   const tone = (bad) => (bad === 0 ? "ok" : bad === 1 ? "mid" : "bad");
@@ -406,7 +408,9 @@
     e.preventDefault();
     const m2 = lead.querySelector(".au-msg2"), f = new FormData(lead);
     if (f.get("_honey")) return;
-    const email = (f.get("email") || "").toString().trim(), name = (f.get("name") || "").toString().trim(), company = (f.get("company") || "").toString().trim();
+    // campi liberi corti e senza parentesi quadre: nessuno può falsificare l'oggetto dell'email ("[URGENTE]")
+    const free = (k) => (f.get(k) || "").toString().replace(/[\[\]<>]/g, "").trim().slice(0, 80);
+    const email = (f.get("email") || "").toString().trim().slice(0, 160), name = free("name"), company = free("company");
     if (!name) { lead.name.focus(); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { m2.textContent = T.bad_email; lead.email.focus(); return; }
     if (!lead.consent.checked) { m2.textContent = T.need_consent; return; }

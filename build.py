@@ -28,15 +28,25 @@ AGENT_URL = ""
 # niente plugin, invii dei moduli solo verso il sito o FormSubmit, connessioni solo verso i servizi usati.
 import base64 as _b64, hashlib as _hl
 INLINE_JS = 'window.REEF = { email: "%s", agent: "%s" };'
-def csp_meta(inline_js):
+# librerie esterne della pagina missione: percorso esatto e impronta (SRI), consentite solo lì
+MISSION_LIBS = [
+    ("https://cdn.jsdelivr.net/npm/d3-array@3.2.4/dist/d3-array.min.js", "sha384-VpKMdU+TlpggHFip46tJ/xkFUs8NFBwLqUMo3+3uiu411lU6eUQYsHVU+JFpA5ja"),
+    ("https://cdn.jsdelivr.net/npm/d3-geo@3.1.1/dist/d3-geo.min.js", "sha384-VNiKRUXp0MmglFfqDwkfuk+Y78C3WTJShdKSaFwOacLR3UmamxHIJLBTD3BadIXD"),
+    ("https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js", "sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67"),
+]
+WORLD_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-110m.json"
+def csp_meta(inline_js, key=""):
     h = _b64.b64encode(_hl.sha256(inline_js.encode("utf-8")).digest()).decode()
     agent = " " + AGENT_URL.split("/", 3)[0] + "//" + AGENT_URL.split("/", 3)[2] if AGENT_URL.startswith("https://") else ""
+    libs = "".join(" " + u for u, _ in MISSION_LIBS) if key == "mission" else ""
+    world = " " + WORLD_URL if key == "mission" else ""
+    check = " https://dns.google https://observatory-api.mdn.mozilla.net" if key == "check" else ""
     pol = ("default-src 'self'; "
-           f"script-src 'self' https://cdn.jsdelivr.net 'sha256-{h}'; "
+           f"script-src 'self'{libs} 'sha256-{h}'; "
            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
            "font-src 'self' https://fonts.gstatic.com; "
            "img-src 'self' data: https:; "
-           f"connect-src 'self' https://formsubmit.co https://cdn.jsdelivr.net https://*.workers.dev https://dns.google https://observatory-api.mdn.mozilla.net{agent}; "
+           f"connect-src 'self' https://formsubmit.co{world}{check}{agent}; "
            "frame-src 'self' https://alelan122.github.io; "
            "object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests")
     return f'<meta http-equiv="Content-Security-Policy" content="{pol}">\n  <meta name="referrer" content="strict-origin-when-cross-origin">'
@@ -858,7 +868,7 @@ T["it"]["security"] = {
     "feed": {"k": "Simulazione · attacco automatico", "live": "in corso", "dom": "tuazienda.it", "rows": [["03:12:04", "Bot", "prova 2.400 password rubate sul tuo login", "bad"], ["03:12:41", "Agente AI", "cerca plugin e versioni PHP con falle note", "bad"], ["03:13:09", "Scanner", "bussa a 380 indirizzi nascosti del sito", "mid"], ["03:13:55", "Truffa", "email «abbiamo cambiato IBAN» ai tuoi clienti, a nome tuo", "bad"], ["03:14:20", "Bot", "copia listino e contatti dei clienti", "mid"]], "q": "Le tue difese?", "a": "Scoprilo in 3 minuti"},
     "dom_ph": "tuazienda.it",
     "dom_btn": "Controlla gratis",
-    "dom_note": "Solo dati pubblici. Nessuna prova invasiva, nessun impegno.",
+    "dom_note": "Solo dati pubblici, letti tramite Google DNS e Mozilla Observatory. Nessuna prova invasiva, nessun impegno.",
     "route_k": "Da dove partire",
     "route_h": "Qual è la <em>tua situazione</em>?",
     "route_p": "Scegli il tuo caso: il check parte già impostato.",
@@ -890,7 +900,7 @@ T["it"]["security"] = {
     ],
     "now_end": "Non serve allarmarsi. Serve muoversi prima.",
     "loss_k": "Cosa rischi davvero",
-    "loss_h": "Non rischi il sito. <em>Rischi i soldi.</em>",
+    "loss_h": "Non rischi il sito. <em>Rischi tutto.</em>",
     "loss_p": "Per chi attacca, il sito è solo la porta. Quello che cerca sono i tuoi soldi, i tuoi dati e i tuoi clienti.",
     "losses": [
         ("money", "Bonifico sul conto sbagliato", "Un'email del fornitore, dal suo indirizzo vero: «abbiamo cambiato IBAN». Paghi, e quei soldi non tornano."),
@@ -1013,7 +1023,7 @@ T["en"]["security"] = {
     "feed": {"k": "Simulation · automated attack", "live": "in progress", "dom": "yourcompany.com", "rows": [["03:12:04", "Bot", "tries 2,400 stolen passwords on your login", "bad"], ["03:12:41", "AI agent", "looks for plugins and PHP versions with known flaws", "bad"], ["03:13:09", "Scanner", "knocks on 380 hidden addresses of your site", "mid"], ["03:13:55", "Scam", "\"we've changed our bank details\" emailed to your customers, in your name", "bad"], ["03:14:20", "Bot", "copies your price list and customer contacts", "mid"]], "q": "Your defences?", "a": "Find out in 3 minutes"},
     "dom_ph": "yourcompany.com",
     "dom_btn": "Check for free",
-    "dom_note": "Public data only. No intrusive tests, no commitment.",
+    "dom_note": "Public data only, read through Google DNS and Mozilla Observatory. No intrusive tests, no commitment.",
     "route_k": "Where to start",
     "route_h": "What's <em>your situation</em>?",
     "route_p": "Pick your case: the check starts already set up.",
@@ -1045,7 +1055,7 @@ T["en"]["security"] = {
     ],
     "now_end": "No need to panic. Just move first.",
     "loss_k": "What's really at stake",
-    "loss_h": "You're not risking your website. <em>You're risking money.</em>",
+    "loss_h": "You're not risking your website. <em>You're risking everything.</em>",
     "loss_p": "To an attacker, your website is just the door. What they're after is your money, your data and your customers.",
     "losses": [
         ("money", "Payment to the wrong account", "An email from your supplier, from their real address: \"we've changed bank details\". You pay, and it's gone."),
@@ -1221,7 +1231,7 @@ def build(lang, variant=""):
 <html lang="{lang}">
 <head>
   <meta charset="utf-8">
-  {csp_meta(inline_js)}
+  {csp_meta(inline_js, key)}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{title}</title>
   <meta name="description" content="{desc}">
@@ -1637,10 +1647,7 @@ def build(lang, variant=""):
     map_data = json.dumps(points, ensure_ascii=False).replace('"', "&quot;")
     cards = "".join(goal_card(i) for i in range(len(GOALS)))
     why = "".join(f"<p>{p}</p>" for p in M["why_p"])
-    libs = """
-<script src="https://cdn.jsdelivr.net/npm/d3-array@3.2.4/dist/d3-array.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/d3-geo@3.1.1/dist/d3-geo.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>"""
+    libs = "".join(f'\n<script src="{u}" integrity="{sri}" crossorigin="anonymous"></script>' for u, sri in MISSION_LIBS)
     out["mission"] = page("mission", M["title"], M["desc"], head_block(L["nav"]["mission"], M["h1"], M["sub"]) + f"""
 <section class="block" style="border-top:0;padding-top:0"><div class="wrap">
   <div class="head"><h2>{M['how_h']}</h2></div>
@@ -1648,7 +1655,7 @@ def build(lang, variant=""):
 </div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{M['map_h']}</h2><p>{M['map_p']}</p></div>
-  <div class="reef-map" id="reef-map" data-points="{map_data}" data-world="https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-110m.json">
+  <div class="reef-map" id="reef-map" data-points="{map_data}" data-world="{WORLD_URL}">
     <svg viewBox="0 0 1000 500" role="img" aria-label="{M['map_h'].replace('<em>', '').replace('</em>', '')}"></svg>
   </div>
   <ol class="map-legend">{"".join(f'<li><a href="#g{p["n"]}"><span>{p["n"]:02d}</span>{p["name"]}</a></li>' for p in points)}</ol>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'sha256-Uj8sggWkvGBxSgNHYVfw/MLoVsaHZdhmdAniX5W0gs8='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://cdn.jsdelivr.net https://*.workers.dev https://dns.google https://observatory-api.mdn.mozilla.net; frame-src 'self' https://alelan122.github.io; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Uj8sggWkvGBxSgNHYVfw/MLoVsaHZdhmdAniX5W0gs8='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co; frame-src 'self' https://alelan122.github.io; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cybersecurity for websites, apps and AI agents · Reef 7 Lab</title>
@@ -27,9 +27,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=8499499b">
+  <link rel="stylesheet" href="../styles.css?v=f9e87c3a">
 </head>
-<body data-page="security" data-build="dc3e470a0b">
+<body data-page="security" data-build="ab6b0b8ca7">
 <a class="skip" href="#main">Skip to content</a>
 <header class="top solid"><div class="wrap top-in">
   <a class="logo" href="index.html"><img src="../assets/logo-68.png" alt="" width="34" height="34">Reef 7 Lab</a>
@@ -48,7 +48,7 @@
       <input id="dom-top" name="d" type="text" inputmode="url" autocomplete="url" required maxlength="200" placeholder="yourcompany.com">
       <button class="btn" type="submit">Check for free <span class="arr" aria-hidden="true">→</span></button>
     </form>
-    <p class="sec-dom-note">Public data only. No intrusive tests, no commitment.</p>
+    <p class="sec-dom-note">Public data only, read through Google DNS and Mozilla Observatory. No intrusive tests, no commitment.</p>
   </div>
   <a class="sec-feed" href="security-check.html" aria-label="Find out in 3 minutes">
     <div class="sec-feed-top"><span class="sec-scan-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mono">Simulation · automated attack</span><span class="sec-feed-live mono"><span class="sec-dot" aria-hidden="true"></span>in progress</span></div>
@@ -64,7 +64,7 @@
     <div class="sec-alert-cta"><b>Does your site run on PHP? Is it already updated?</b><a class="btn" href="security-check.html">Find out with the exposure check <span class="arr" aria-hidden="true">→</span></a><a class="sec-alert-src" href="https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it" target="_blank" rel="noopener">AP / PBS NewsHour, October 22, 2026 ↗</a></div></div>
 </div></section>
 <section class="block sec-losses-b"><div class="wrap">
-  <div class="head"><div><p class="mono sec-k">What's really at stake</p><h2>You're not risking your website. <em>You're risking money.</em></h2></div><p>To an attacker, your website is just the door. What they're after is your money, your data and your customers.</p></div>
+  <div class="head"><div><p class="mono sec-k">What's really at stake</p><h2>You're not risking your website. <em>You're risking everything.</em></h2></div><p>To an attacker, your website is just the door. What they're after is your money, your data and your customers.</p></div>
   <div class="sec-losses"><div class="sec-loss"><i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 10v4M18 10v4"/></svg></i><b>Payment to the wrong account</b><p>An email from your supplier, from their real address: "we've changed bank details". You pay, and it's gone.</p></div><div class="sec-loss"><i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10 12 4l9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg></i><b>Bank and payments hijacked</b><p>From your email, someone resets your bank, Stripe and PayPal passwords. One reused password is enough.</p></div><div class="sec-loss"><i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></i><b>Customer data up for sale</b><p>A copied customer list never comes back. GDPR fines reach 20 million euros or 4% of turnover.</p></div><div class="sec-loss"><i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></i><b>Business stopped by ransom</b><p>Overnight, files, systems and backups become unreadable. Paying the ransom guarantees nothing.</p></div><div class="sec-loss"><i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c2 .7 3.2 2.5 3.5 5.2"/></svg></i><b>Customers scammed in your name</b><p>Fake invoices from your domain, cards copied at checkout. Customers lose money, you lose trust.</p></div><div class="sec-loss"><i><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.01"/></svg></i><b>Reputation burned</b><p>Scam pages on your site, Google flagging it as dangerous. Burned in hours, rebuilt over years.</p></div></div>
   <div class="sec-losses-end"><a class="btn" href="security-check.html">Find out what you risk: take the free check <span class="arr" aria-hidden="true">→</span></a><a class="sec-alert-src" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679" target="_blank" rel="noopener">GDPR, Articles 33 and 83 ↗</a></div>
 </div></section>
@@ -168,8 +168,8 @@
   <a class="r" href="mailto:lancioni.ale@gmail.com">lancioni.ale@gmail.com</a>
 </div></footer>
 <script>window.REEF = { email: "lancioni.ale@gmail.com", agent: "" };</script>
-<script src="../site.js?v=8499499b"></script>
-<script src="../agent.js?v=8499499b"></script>
-<script src="../security-page.js?v=8499499b"></script>
+<script src="../site.js?v=f9e87c3a"></script>
+<script src="../agent.js?v=f9e87c3a"></script>
+<script src="../security-page.js?v=f9e87c3a"></script>
 </body>
 </html>
