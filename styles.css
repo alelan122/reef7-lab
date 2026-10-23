@@ -1620,3 +1620,24 @@ button.btn { font-family: inherit; }
 .sec-caso h3 { min-height: 3.12em; text-wrap: balance; }
 @media (max-width: 640px) { .sec-loss b, .sec-gain b, .sec-svc h3, .sec-caso h3 { min-height: 0; } }
 @media (min-width: 1081px) { .sec-caso h3 { min-height: 4.16em; } }
+
+/* Schede rischi e vantaggi: icona e titolo sulla stessa riga, testo sotto a tutta larghezza */
+.sec-loss, .sec-gain { display: grid; grid-template-columns: 44px minmax(0, 1fr); align-items: center; column-gap: 16px; row-gap: 14px; }
+.sec-loss b, .sec-gain b { min-height: 0; display: block; margin: 0; font-size: clamp(19px, 1.5vw, 22px); line-height: 1.2; }
+.sec-loss p, .sec-gain p { grid-column: 1 / -1; margin: 0; }
+@media (max-width: 640px) {
+  .sec-loss, .sec-gain { padding: 20px; border-radius: 18px; column-gap: 14px; row-gap: 10px; }
+  .sec-loss i, .sec-gain i { width: 40px; height: 40px; }
+  .sec-loss b, .sec-gain b { font-size: 19px; }
+}
+
+/* Sicurezza da telefono: schede da sfogliare col dito, apertura più corta */
+@media (max-width: 640px) {
+  .sec-losses, .sec-gains, .sec-svcs, .sec-svcs.n2, .sec-casi { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 calc(-1 * var(--gut)); padding: 2px var(--gut) 14px; scrollbar-width: none; border: 0; }
+  .sec-losses::-webkit-scrollbar, .sec-gains::-webkit-scrollbar, .sec-svcs::-webkit-scrollbar, .sec-casi::-webkit-scrollbar { display: none; }
+  .sec-losses > *, .sec-gains > *, .sec-svcs > *, .sec-casi > * { flex: 0 0 84%; scroll-snap-align: start; scroll-margin-left: var(--gut); }
+  .sec-caso { border: 1px solid var(--rule); border-radius: 18px; }
+  .sec-feed-log li:nth-child(n+4) { display: none; }
+  .sec-feed { padding: 18px; }
+  .sec-feed-end b { font-size: 26px; }
+}
