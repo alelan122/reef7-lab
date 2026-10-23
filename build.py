@@ -846,9 +846,9 @@ T = {
 T["it"]["security"] = {
     "title": "Sicurezza informatica per siti, app e agenti AI · Reef 7 Lab",
     "desc": "Gli attacchi sono già automatici. Mettiamo al sicuro siti, app e gestionali, nuovi e datati, e gli agenti AI che usi: verifica, correzione e guardia continua.",
-    "h1": "Le falle ora le trova un'AI. <em>Noi le chiudiamo prima.</em>",
+    "h1": "Gli attacchi sono già <em>automatici</em>. Le tue difese?",
     "sub": "Mettiamo al sicuro siti, app, gestionali e agenti AI: troviamo le porte aperte e le chiudiamo in ordine di gravità, senza rifare tutto e senza fermare il lavoro. Si parte da un check gratuito di 3 minuti.",
-    "now_k": "Perché adesso", "now_h": "Gli attacchi sono diventati <em>automatici</em>. Le difese, quasi mai.",
+    "now_k": "Perché adesso", "now_h": "Il tempo per rimediare <em>si è accorciato</em>.",
     "now": [
         ("7 su 10", "dei siti gira su PHP, il linguaggio in cui il 21 ottobre 2026 un'AI ha trovato falle critiche.", "AP / PBS NewsHour", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
         ("Poche ore", "tra l'annuncio di quelle falle e i primi milioni di tentativi di attacco.", "AP / PBS NewsHour", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
@@ -895,7 +895,7 @@ T["it"]["security"] = {
     ],
     "areas": [
         ("Ciò che è già online", "Quello che <em>hai già</em>", "Il sito di cinque anni fa, il gestionale su misura, l'e-commerce con plugin che nessuno aggiorna, gli account di chi se n'è andato. È lì che gli agenti cercano per primi. Lo rinforziamo senza rifarlo da capo.", ["36", "37", "35"]),
-        ("Ciò che costruisci con l'AI", "Quello che <em>costruisci con l'AI</em>", "La velocità è un vantaggio solo se non lascia porte aperte. Rivediamo quello che è stato generato in fretta, prima che lo faccia qualcun altro.", ["32"]),
+        ("Ciò che costruisci con l'AI", "Fatto <em>con l'AI</em>", "La velocità è un vantaggio solo se non lascia porte aperte. Rivediamo quello che è stato generato in fretta, prima che lo faccia qualcun altro.", ["32"]),
         ("L'AI che usi", "L'AI che <em>lavora per te</em>", "Più un assistente può fare, più vale, e più costa un suo errore. Gli diamo confini chiari e teniamo i dati dei tuoi clienti dove devono stare.", ["33", "34"]),
     ],
     "steps_h": "Come <em>lavoriamo</em>", "steps_p": "Quattro fasi. Sempre con il tuo permesso scritto, mai fermando il lavoro.",
@@ -940,9 +940,9 @@ T["it"]["check"] = {
 T["en"]["security"] = {
     "title": "Cybersecurity for websites, apps and AI agents · Reef 7 Lab",
     "desc": "Attacks are already automated. We secure websites, apps and internal tools, new and old, and the AI agents you use: review, fixes and continuous watch.",
-    "h1": "AI now finds the flaws. <em>We close them first.</em>",
+    "h1": "Attacks are already <em>automated</em>. Are your defences?",
     "sub": "We secure websites, apps, internal tools and AI agents: we find the open doors and close them by severity, without rebuilding everything and without stopping your work. It starts with a free 3-minute check.",
-    "now_k": "Why now", "now_h": "Attacks have become <em>automated</em>. Defences, rarely.",
+    "now_k": "Why now", "now_h": "The time to react <em>has shrunk</em>.",
     "now": [
         ("7 in 10", "websites run on PHP, the language in which an AI found critical flaws on October 21, 2026.", "AP / PBS NewsHour", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
         ("Hours", "between the announcement of those flaws and the first millions of attack attempts.", "AP / PBS NewsHour", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
@@ -989,7 +989,7 @@ T["en"]["security"] = {
     ],
     "areas": [
         ("What is already online", "What you <em>already have</em>", "The website from five years ago, the custom internal tool, the store with plugins nobody updates, the accounts of people who have left. That's where agents look first. We harden it without rebuilding it.", ["36", "37", "35"]),
-        ("What you build with AI", "What you <em>build with AI</em>", "Speed is an advantage only if it doesn't leave doors open. We review what was generated in a hurry, before someone else does.", ["32"]),
+        ("What you build with AI", "Built <em>with AI</em>", "Speed is an advantage only if it doesn't leave doors open. We review what was generated in a hurry, before someone else does.", ["32"]),
         ("The AI you use", "The AI <em>working for you</em>", "The more an assistant can do, the more it's worth, and the more its mistakes cost. We give it clear boundaries and keep your customers' data where it belongs.", ["33", "34"]),
     ],
     "steps_h": "How we <em>work</em>", "steps_p": "Four phases. Always with your written permission, never stopping your work.",
@@ -1392,7 +1392,7 @@ def build(lang, variant=""):
   </article>"""
         aree += f"""
 <section class="block sec-area"><div class="wrap">
-  <div class="head"><div><p class="mono sec-k">0{j} · {k}</p><h2>{h}</h2></div><p>{d}</p></div>{arts}
+  <div class="head"><div><p class="mono sec-k">0{j} / 0{len(SE["areas"])}</p><h2>{h}</h2></div><p>{d}</p></div>{arts}
 </div></section>"""
     fasi = "".join(f'<div><span class="mono">0{i}</span><b>{t}</b><p>{d}</p></div>' for i, (t, d) in enumerate(SE["steps"], 1))
     faq = "".join(f'<details class="sec-faq"><summary>{q}</summary><p>{a}</p></details>' for q, a in SE["faq"])
@@ -1428,8 +1428,8 @@ def build(lang, variant=""):
   <div class="head"><h2>{SE['faq_h']}</h2></div>
   <div class="sec-faqs">{faq}</div>
 </div></section>
-<section class="block"><div class="wrap why">
-  <p class="mono">{SE['check_k']}</p>
+<section class="block"><div class="wrap sec-final">
+  <p class="mono sec-k">{SE['check_k']}</p>
   <div><h2>{SE['check_h']}</h2>
     <ul class="sec-check">{"".join(f"<li>{x}</li>" for x in SE['check'])}</ul>
     <a class="btn" href="{u('check')}">{SE['check_a']} {arrow}</a>
