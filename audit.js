@@ -43,7 +43,7 @@
     cost: "Average hourly cost of a team member (optional)", cost_ph: "E.g. 25", cost_hint: "Used only to estimate the value of the time saved.",
     next: "Next", back: "Back", calc: "Calculate", need_task: "Select at least one activity.", need_pick: "Choose an option.",
     teaser_k: "Your estimate", teaser: (h) => `Your team could win back about <b>${h} hours a week</b>.`,
-    teaser_p: "Get the full plan: priorities, two solutions for each, how much more you could earn and the first 3 steps. You'll see it right away, as a PDF too, and I'll send you a copy by email.",
+    teaser_p: "Get the full plan: priorities, two solutions for each, how much more you could earn and the first 3 steps. You'll see it right away, as a PDF too.",
     name: "Name", email: "Work email", company: "Company", consent: "I agree to Reef 7 Lab using these details to send me a copy of the report and get back to me.",
     unlock: "See the full report", sending: "Preparing…", bad_email: "Check the email address.", need_consent: "Consent is needed to send the report.",
     r_title: "Automation report", r_for: "for", k_week: "hours a week", k_year: "working days a year", k_value: "value of time won back in a year",
@@ -53,8 +53,8 @@
     plan_call: "A free 30-minute call: we go through this report on your real numbers and choose where to start.",
     plan_build: (x, sol) => `I build the first solution, starting from “${x}”, connected to the tools you already use: ${sol.charAt(0).toLowerCase() + sol.slice(1)}`,
     r_tools: "Notes on your tools", r_pain: "You told me", r_note: "Indicative estimate based on your answers and on conservative assumptions about how much of each activity can be automated (shown next to each one). We'll check the real numbers together, on your data.",
-    pdf: "Download PDF", call: "Book a free call", restart: "Start over", sent_fail: "Your details didn't reach me, so no copy was sent by email. Download the PDF or write to me at {email} and I'll get back to you.",
-    sent_ok: (e) => `A copy is on its way to <b>${e}</b>.`,
+    pdf: "Download PDF", call: "Book a free call", restart: "Start over", sent_fail: "Your details didn't reach me. Download the PDF or write to me at {email} and I'll get back to you.",
+    sent_ok: (e) => `Received. I'll write to you at <b>${e}</b> within one working day.`,
     sign_h: "I'll write to you myself", sign_p: "I read every report personally. Within one business day you'll get an email from me with first ideas on where to start.", sign_n: "Alessandro Lancioni · Founder, Reef 7 Lab",
     mail_intro: (n) => `Hi ${n},\n\nhere is a copy of your Reef 7 Lab growth plan: where to win back time and, if you shared your numbers, how much more you could earn.`, mail_end: "I read every report personally: within one business day I'll write to you with first ideas on where to start.\n\nAlessandro Lancioni\nReef 7 Lab", mail_link: "Redo the audit or book a call:",
     auto: (p) => `automatable: about ${p}%`, subject: "New automation audit",
@@ -82,7 +82,7 @@
     cost: "Costo orario medio di una persona del team (facoltativo)", cost_ph: "Es. 25", cost_hint: "Serve solo a stimare il valore del tempo recuperato.",
     next: "Avanti", back: "Indietro", calc: "Calcola", need_task: "Seleziona almeno un'attività.", need_pick: "Scegli un'opzione.",
     teaser_k: "La tua stima", teaser: (h) => `Il tuo team potrebbe recuperare circa <b>${h} ore a settimana</b>.`,
-    teaser_p: "Ricevi il piano completo: priorità, due soluzioni per ognuna, quanto puoi guadagnare in più e i primi 3 passi. Lo vedi subito, anche in PDF, e te ne mando una copia per email.",
+    teaser_p: "Ricevi il piano completo: priorità, due soluzioni per ognuna, quanto puoi guadagnare in più e i primi 3 passi. Lo vedi subito, anche in PDF.",
     name: "Nome", email: "Email di lavoro", company: "Azienda", consent: "Acconsento a che Reef 7 Lab usi questi dati per inviarmi una copia del report e ricontattarmi.",
     unlock: "Vedi il report completo", sending: "Preparo il report…", bad_email: "Controlla l'indirizzo email.", need_consent: "Serve il consenso per inviarti il report.",
     r_title: "Report di automazione", r_for: "per", k_week: "ore a settimana", k_year: "giornate lavorative l'anno", k_value: "valore del tempo recuperato in un anno",
@@ -92,8 +92,8 @@
     plan_call: "Una call gratuita di 30 minuti: guardiamo questo report sui tuoi numeri reali e scegliamo da dove partire.",
     plan_build: (x, sol) => `Costruisco la prima soluzione, partendo da “${x}”, collegata agli strumenti che usate già: ${sol.charAt(0).toLowerCase() + sol.slice(1)}`,
     r_tools: "Note sui tuoi strumenti", r_pain: "Mi hai detto", r_note: "Stima indicativa basata sulle tue risposte e su ipotesi prudenti su quanto di ogni attività si può automatizzare (indicato accanto a ciascuna). I numeri reali li verifichiamo insieme, sui tuoi dati.",
-    pdf: "Scarica il PDF", call: "Prenota una call gratuita", restart: "Ricomincia", sent_fail: "I tuoi dati non mi sono arrivati, quindi la copia per email non è partita. Scarica il PDF oppure scrivimi a {email} e ti rispondo io.",
-    sent_ok: (e) => `Una copia sta arrivando a <b>${e}</b>.`,
+    pdf: "Scarica il PDF", call: "Prenota una call gratuita", restart: "Ricomincia", sent_fail: "I tuoi dati non mi sono arrivati. Scarica il PDF oppure scrivimi a {email} e ti rispondo io.",
+    sent_ok: (e) => `Ricevuto. Ti scrivo a <b>${e}</b> entro un giorno lavorativo.`,
     sign_h: "Ti scrivo io", sign_p: "Leggo ogni report personalmente. Entro un giorno lavorativo ricevi una mia email con le prime idee su da dove partire.", sign_n: "Alessandro Lancioni · Fondatore di Reef 7 Lab",
     mail_intro: (n) => `Ciao ${n},\n\necco la copia del tuo piano di crescita di Reef 7 Lab: dove recuperare tempo e, se mi hai dato i numeri, quanto puoi guadagnare in più.`, mail_end: "Leggo ogni report personalmente: entro un giorno lavorativo ti scrivo con le prime idee su da dove partire.\n\nAlessandro Lancioni\nReef 7 Lab", mail_link: "Rifai l'audit o prenota una call:",
     auto: (p) => `automatizzabile: circa il ${p}%`, subject: "Nuovo audit di automazione",
@@ -400,33 +400,10 @@
   });
   back.addEventListener("click", () => { clearTimeout(autoT); show(cur - 1, -1); toCard(); });
 
-  // piano in 3 passi: usato nel report a schermo e nella copia per email
+  // piano in 3 passi del report a schermo
   const planOf = (a) => {
     const first = a.tasks[0].label, kpis = a.tasks.slice(0, 2).map((t) => t.kpi).join(en ? " and " : " e ");
     return [D.plan_call2, D.plan_build2(first.charAt(0).toLowerCase() + first.slice(1), a.tasks[0].build), D.measure(kpis)];
-  };
-  const mailText = (a, name) => {
-    const plan = planOf(a), L = [];
-    L.push(T.mail_intro(name), "", `${D.sector_k} (${a.sector}, ${a.team}): ${D.sectors[a.si].intro}`, "");
-    L.push(`${fmt(a.saved)} ${T.k_week} · ${Math.round((a.saved * WEEKS) / 8)} ${T.k_year}` + (a.cost ? ` · ${money(a.saved * WEEKS * a.cost)} ${T.k_value}` : ""), "");
-    L.push(`${T.pot}: ${Math.round((a.saved / a.tasks.reduce((x, t) => x + t.hours, 0)) * 100)}% · ${T.tier[tierOf(a.saved)][0]}. ${T.tier[tierOf(a.saved)][1]}`, "");
-    if (a.gi >= 0) L.push(D.goal_line[a.gi], "");
-    const rv = revOf(a);
-    if (rv) {
-      L.push(D.rev_h.toUpperCase(), D.rev_now(num1(rv.clients), rv.now ? money(rv.now) : "") + " " + (rv.eur ? D.rev_total(money(rv.eur), money(rv.eur * 12)) : D.rev_total_c(num1(rv.extra))).replace(/<\/?b>/g, ""));
-      rv.rows.forEach((r) => L.push(`- ${r.title}: ${D.rev_each(num1(r.extra), r.eur ? money(r.eur) : "")}`));
-      L.push("");
-    }
-    L.push(T.r_tasks.toUpperCase());
-    a.tasks.forEach((t) => L.push(`- ${t.label}: ${fmt(t.hours)} ${T.r_now}, ${fmt(t.saved)} ${T.r_saved}`));
-    L.push("", T.r_prio.toUpperCase());
-    a.tasks.slice(0, 3).forEach((t, i) => L.push(`${i + 1}. ${t.label}`, `   ${D.opt[0]}: ${t.light}`, `   ${D.opt[1]}: ${t.full}`, `   ${D.rec}: ${D.opt[t.custom ? 1 : 0].toLowerCase()} · ${D.kpi}: ${t.kpi}`));
-    L.push("", T.r_plan.toUpperCase());
-    plan.forEach((x, i) => L.push(`${i + 1}. ${x}`));
-    const rc = recsOf(a);
-    if (rc.length) { L.push("", D.rec_h.toUpperCase()); rc.forEach((x) => L.push(`- ${D.svc[x][0]}: ${D.svc[x][1]}`)); }
-    L.push("", T.r_note, "", T.mail_end, "", `${T.mail_link} ${location.href.split("#")[0]}`);
-    return L.join("\n");
   };
   const r7code = (o) => "R7L1." + btoa(unescape(encodeURIComponent(JSON.stringify({ v: 1, lang: document.documentElement.lang || "it", at: new Date().toISOString(), ...o })))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
   lead.addEventListener("submit", async (e) => {
@@ -449,7 +426,7 @@
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           _subject: `${T.subject}: ${company || name} · ${fmt(a.saved)} h/sett.`, _replyto: email, _template: "table", _captcha: "false",
-          _autoresponse: mailText(a, name), "Fonte": fromAgent ? "Audit di automazione (dall'Agent AI)" : "Audit di automazione", "Nome": name, email, "Azienda": company || "—", "Settore": a.sector, "Dettaglio settore": a.sub ? a.sub[0] : "—", "Persone in azienda": a.team, "Obiettivo": a.gi >= 0 ? D.goals[a.gi] : "—",
+          "Fonte": fromAgent ? "Audit di automazione (dall'Agent AI)" : "Audit di automazione", "Nome": name, email, "Azienda": company || "—", "Settore": a.sector, "Dettaglio settore": a.sub ? a.sub[0] : "—", "Persone in azienda": a.team, "Obiettivo": a.gi >= 0 ? D.goals[a.gi] : "—",
           "Contatti al mese": a.li >= 0 ? D.leads[a.li] : "—", "Su 10 diventano clienti": a.ci >= 0 ? D.close[a.ci] : "—", "Valore medio cliente": a.value || "—",
           "Fatturato in più stimato (anno)": (() => { const r = revOf(a); return r && r.eur ? money(r.eur * 12) : "—"; })(),
           "Software usati": a.sw >= 0 ? D.sw[a.sw] : "—", "Spesa software al mese": a.spend >= 0 ? D.spend[a.spend] : "—", "Sito": a.site || "—",

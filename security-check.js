@@ -50,18 +50,17 @@
       "Several serious risks at once: today these are exactly the conditions automated attacks look for. It's worth acting this week.",
     ],
     gate_k: "Your result", gate_h: (l, n) => `Exposure: <em>${l}</em>. We found ${n} point${n === 1 ? "" : "s"} to fix.`,
-    gate_p: "Get the full report: what an attacker sees from your domain, your 3 priorities with what to do today, and how we fix them. A copy also arrives by email.",
+    gate_p: "Get the full report: what an attacker sees from your domain, your 3 priorities with what to do today, and how we fix them. You can also download it as a PDF.",
     name: "Name", company: "Company", email: "Work email", consent: "I agree to be contacted by Reef 7 Lab about this report. Details are sent through FormSubmit.",
     unlock: "Get the full report", sending: "Sending…", bad_email: "Check your email address.", need_consent: "Tick the box to receive the report.",
     subject: "Security check", r_title: "Exposure check", r_for: "for",
-    sent_ok: (e) => `A copy is on its way to <b>${e}</b>.`, sent_fail: "Your details didn't reach me, so the email copy wasn't sent. Download the PDF or write to me at {email}.",
+    sent_ok: (e) => `Received. I'll write to you at <b>${e}</b> within one working day.`, sent_fail: "Your details didn't reach me. Download the PDF or write to me at {email}.",
     r_seen: "What an attacker sees from your domain", r_details: "Full public details", r_prio: "Your 3 priorities", r_good: "What's already working",
     p_why: "Why it matters", p_today: "What you can do today", p_us: "What we do", p_when: "When", when: ["Right away", "In the coming weeks", "Structural"],
     see_svc: "See the service", r_all: "Other points to fix",
     sign_h: "I'll write to you myself", sign_p: "I read every check personally. Within one working day you'll get an email from me to set up a free 30-minute review of your systems.", sign_n: "Alessandro Lancioni · Founder of Reef 7 Lab",
     add: "Add details", pdf: "Download PDF", restart: "Start again",
     note: "This is an indicative check based on public information and your answers: it doesn't replace a full review, but it tells you where to start. Weights: each risk counts 1 to 3 points depending on severity; Low 0-5, Medium 6-11, High 12-18, Critical 19+.",
-    mail_intro: (n) => `Hi ${n},\n\nhere is your Reef 7 Lab exposure check.`, mail_end: "I read every check personally: within one working day I'll write to you to set up a free 30-minute review.\n\nAlessandro Lancioni\nReef 7 Lab",
     from_agent: "We continue from your chat with the AI agent.",
   } : {
     steps: ["Il tuo dominio", "Cosa hai online", "Le abitudini", "Il tuo report"], step_of: (a, b) => `Passo ${a} di ${b}`,
@@ -100,18 +99,17 @@
       "Più rischi seri insieme: sono esattamente le condizioni che oggi cercano gli attacchi automatici. Conviene intervenire questa settimana.",
     ],
     gate_k: "Il tuo risultato", gate_h: (l, n) => `Esposizione: <em>${l}</em>. Abbiamo trovato ${n} ${n === 1 ? "punto" : "punti"} da sistemare.`,
-    gate_p: "Ricevi il report completo: cosa vede chi attacca dal tuo dominio, le tue 3 priorità con cosa fare già oggi e come le risolviamo noi. Una copia arriva anche per email.",
+    gate_p: "Ricevi il report completo: cosa vede chi attacca dal tuo dominio, le tue 3 priorità con cosa fare già oggi e come le risolviamo noi. Puoi anche scaricarlo in PDF.",
     name: "Nome", company: "Azienda", email: "Email di lavoro", consent: "Accetto di essere ricontattato da Reef 7 Lab su questo report. I dati arrivano tramite FormSubmit.",
     unlock: "Ricevi il report completo", sending: "Invio…", bad_email: "Controlla l'indirizzo email.", need_consent: "Spunta la casella per ricevere il report.",
     subject: "Check sicurezza", r_title: "Check di esposizione", r_for: "per",
-    sent_ok: (e) => `Una copia sta arrivando a <b>${e}</b>.`, sent_fail: "I tuoi dati non mi sono arrivati, quindi la copia per email non è partita. Scarica il PDF oppure scrivimi a {email}.",
+    sent_ok: (e) => `Ricevuto. Ti scrivo a <b>${e}</b> entro un giorno lavorativo.`, sent_fail: "I tuoi dati non mi sono arrivati. Scarica il PDF oppure scrivimi a {email}.",
     r_seen: "Cosa vede chi attacca dal tuo dominio", r_details: "Dettaglio pubblico completo", r_prio: "Le tue 3 priorità", r_good: "Cosa va già bene",
     p_why: "Perché conta", p_today: "Cosa puoi fare oggi", p_us: "Cosa facciamo noi", p_when: "Quando", when: ["Subito", "Nelle prossime settimane", "Strutturale"],
     see_svc: "Vedi il servizio", r_all: "Altri punti da sistemare",
     sign_h: "Ti scrivo io", sign_p: "Leggo ogni check personalmente. Entro un giorno lavorativo ricevi una mia email per fissare una ricognizione gratuita di 30 minuti sui tuoi sistemi.", sign_n: "Alessandro Lancioni · Fondatore di Reef 7 Lab",
     add: "Aggiungi dettagli", pdf: "Scarica il PDF", restart: "Ricomincia",
     note: "È un check orientativo, basato su informazioni pubbliche e sulle tue risposte: non sostituisce una verifica completa, ma ti dice da dove partire. Pesi: ogni rischio vale da 1 a 3 punti secondo la gravità; Bassa 0-5, Media 6-11, Alta 12-18, Critica 19 e oltre.",
-    mail_intro: (n) => `Ciao ${n},\n\necco il tuo check di esposizione di Reef 7 Lab.`, mail_end: "Leggo ogni check personalmente: entro un giorno lavorativo ti scrivo per fissare una ricognizione gratuita di 30 minuti.\n\nAlessandro Lancioni\nReef 7 Lab",
     from_agent: "Continuiamo dalla chat con l'agente AI.",
   };
 
@@ -386,24 +384,6 @@
 
   // ---------- report ----------
   const svcHref = ([kind, n]) => (kind === "svc" ? `${svcPage}#s${n}` : `${secPage}#s${n}`);
-  const mailText = (a, s, name) => {
-    const L = [T.mail_intro(name), "", `${T.levels[s.level].toUpperCase()}: ${T.level_p[s.level]}`, ""];
-    if (scan.done) {
-      L.push(T.r_seen.toUpperCase(), `${scan.domain}`);
-      L.push(`- ${T.r_web}: ${scan.web ? `${scan.web.grade} · ${T.r_fail(scan.web.failed, scan.web.total)}` : T.r_na}`);
-      L.push(`- ${T.r_mail}: ${scan.mail ? mailLine(scan.mail) : T.r_na}`, "");
-    }
-    L.push(T.r_prio.toUpperCase());
-    s.risks.slice(0, 3).forEach((r, i) => {
-      const x = R[r.k];
-      L.push(`${i + 1}. ${x[0]} (${T.when[x[4]]})`, `   ${T.p_why}: ${x[1]}`, `   ${T.p_today}: ${x[2]}`, `   ${T.p_us}: ${new URL(svcHref(x[3]), location.href).href}`);
-    });
-    if (s.risks.length > 3) L.push("", T.r_all.toUpperCase(), ...s.risks.slice(3).map((r) => `- ${R[r.k][0]}`));
-    if (s.good.length) L.push("", T.r_good.toUpperCase(), ...s.good.map((k) => `- ${GOOD[k]}`));
-    L.push("", T.note, "", T.mail_end);
-    return L.join("\n");
-  };
-
   lead.addEventListener("submit", async (e) => {
     e.preventDefault();
     const m2 = lead.querySelector(".au-msg2"), f = new FormData(lead);
@@ -426,7 +406,6 @@
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           _subject: `${tag} ${T.subject}: ${company || name} · ${scan.domain || "—"}`, _replyto: email, _template: "table", _captcha: "false",
-          _autoresponse: mailText(a, s, name),
           "Fonte": new URLSearchParams(location.search).get("src") === "agent" ? "Check di esposizione (dall'Agent AI)" : "Check di esposizione",
           "Livello": `${T.levels[s.level]} (${s.total} punti)`, "Urgente": urgent ? T.incs[a.inc] : "no",
           "Nome": name, email, "Azienda": company || "—", "Dominio": scan.domain || "nessun sito",
