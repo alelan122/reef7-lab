@@ -382,6 +382,9 @@ T = {
         ("37", "Sicurezza", "Accessi, password e persone", "Il modo più facile per entrare resta una porta lasciata aperta.",
          "Un pannello di prova protetto dalla password 123456 ha esposto i dati legati a milioni di candidature di lavoro. Non serviva un genio, bastava un accesso dimenticato. Ex collaboratori ancora attivi, password condivise in chat, chiavi mai cambiate, integrazioni autorizzate anni fa: facciamo l'inventario di chi entra dove, chiudiamo ciò che non serve e rendiamo la sicurezza semplice per tutto il team.",
          ["Inventario di account, chiavi di servizio e integrazioni autorizzate", "Accessi revocati a chi non ne ha più bisogno", "Doppio fattore e gestore di password per tutto il team", "Permessi per ruolo: ognuno vede solo ciò che gli serve", "Formazione contro phishing e truffe, anche vocali e scritte con l'AI"]),
+        ("38", "Sicurezza", "Email e truffe a tuo nome", "Le truffe migliori arrivano da un indirizzo che sembra il tuo.",
+         "Una fattura falsa inviata ai tuoi clienti dal tuo dominio, un fornitore che chiede di cambiare IBAN, un messaggio vocale con la voce del titolare: oggi le truffe sono scritte, e perfino parlate, con l'AI, e sembrano vere. Proteggiamo il tuo dominio perché nessuno possa scrivere a nome tuo, e prepariamo il team a riconoscere i tentativi prima che costino.",
+         ["SPF, DKIM e DMARC impostati fino al blocco delle email false", "Avvisi quando qualcuno prova a usare il tuo dominio", "Doppia conferma per pagamenti e cambi di IBAN", "Prove di phishing realistiche per il team", "Una procedura chiara su cosa fare davanti a un'email strana"]),
         ("32", "Sicurezza", "Verifica di siti e app costruiti con l'AI", "Online in un weekend. Aperti a chiunque per mesi?",
          "Quando alcuni ricercatori hanno analizzato 1.645 app pubblicate con un noto generatore basato sull'AI, 170 lasciavano leggere a chiunque elenchi di utenti, pagamenti o chiavi. Non per un attacco raffinato: per regole del database mai scritte. Gli strumenti AI costruiscono in fretta, ma non pensano a chi proverà a entrare. Noi sì: cerchiamo gli errori tipici uno per uno, li correggiamo e ti restituiamo un progetto che puoi far crescere senza pensieri.",
          ["Chiavi e segreti cercati nel codice e in tutta la cronologia del repository", "Regole del database verificate tabella per tabella", "Ruoli e permessi provati entrando con utenti diversi", "Pagine riservate e API provate senza login", "Report chiaro, con le correzioni già applicate"]),
@@ -638,6 +641,9 @@ T = {
         ("37", "Security", "Access, passwords and people", "The easiest way in is still a door left open.",
          "A test admin panel protected by the password 123456 exposed data tied to millions of job applications. It didn't take a genius, just a forgotten login. Former collaborators still active, passwords shared in chat, keys never rotated, integrations authorised years ago: we take stock of who can get in where, close what isn't needed and make security simple for your whole team.",
          ["Inventory of accounts, service keys and authorised integrations", "Access revoked for anyone who no longer needs it", "Two-factor login and a password manager for the whole team", "Role-based permissions: everyone sees only what they need", "Training against phishing and scams, including voice and AI-written ones"]),
+        ("38", "Security", "Email and scams in your name", "The best scams come from an address that looks like yours.",
+         "A fake invoice sent to your customers from your domain, a supplier asking to change bank details, a voice message with the owner's voice: today scams are written, and even spoken, with AI, and they look real. We protect your domain so nobody can write in your name, and train your team to spot attempts before they cost you.",
+         ["SPF, DKIM and DMARC set all the way to blocking fake emails", "Alerts when someone tries to use your domain", "Double confirmation for payments and bank detail changes", "Realistic phishing tests for your team", "A clear procedure for what to do with a strange email"]),
         ("32", "Security", "Security review for AI-built websites and apps", "Live in a weekend. Open to anyone for months?",
          "When researchers analysed 1,645 apps published with a well-known AI app builder, 170 let anyone read user lists, payments or keys. Not because of a clever attack, but because database rules were never written. AI tools build fast, but they don't think about who will try to get in. We do: we hunt down the typical mistakes one by one, fix them and hand back a project you can grow without worry.",
          ["Keys and secrets searched for in the code and the full repository history", "Database rules checked table by table", "Roles and permissions tested by logging in as different users", "Private pages and APIs tested without logging in", "A clear report, with the fixes already applied"]),
@@ -867,6 +873,18 @@ T["it"]["security"] = {
         ("51%", "del traffico web è ormai automatico: bot e agenti, non persone.", "Imperva, Bad Bot Report 2025", "https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/"),
     ],
     "now_end": "Non serve allarmarsi. Serve muoversi prima.",
+    "loss_k": "Cosa rischi davvero", "loss_h": "Non rischi il sito. <em>Rischi i soldi.</em>",
+    "loss_p": "Un attacco non è un problema tecnico: è un problema di soldi, di clienti e di reputazione. Ecco come si traduce, in concreto.",
+    "losses": [
+        ("money", "Un bonifico sul conto sbagliato", "Un'email dal tuo fornitore, dal suo indirizzo vero, chiede di pagare su un nuovo IBAN. Nessun virus: basta una casella email violata. Quando te ne accorgi, i soldi sono già lontani."),
+        ("bank", "Conto e pagamenti in mano a un altro", "Chi entra nella tua email può azzerare le password di banca, Stripe, PayPal e piattaforme di vendita. Spesso bastano una password riutilizzata e nessun doppio fattore."),
+        ("data", "I dati dei clienti in vendita", "Elenchi clienti, documenti e ordini, una volta copiati, non tornano indietro. Il GDPR prevede sanzioni fino a 20 milioni di euro o al 4% del fatturato annuo mondiale, e l'obbligo di avvisare il Garante entro 72 ore."),
+        ("lock", "L'azienda ferma, con un riscatto da pagare", "File, gestionale e backup cifrati in una notte. Per riavere tutto ti chiedono un riscatto, e pagarlo non garantisce niente. Ogni giorno di fermo è fatturato perso."),
+        ("users", "I tuoi clienti derubati a nome tuo", "Dal tuo dominio partono fatture false ai tuoi clienti, oppure il checkout del tuo e-commerce viene manomesso per copiare le carte. I soldi li perdono loro, la colpa ricade su di te."),
+        ("alert", "La reputazione distrutta in un giorno", "Il sito che mostra pagine truffa, Google che lo segnala come pericoloso, recensioni e social pieni di clienti arrabbiati. Si distrugge in un giorno, si ricostruisce in anni."),
+    ],
+    "loss_src": ("GDPR, articoli 33 e 83", "https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:32016R0679"),
+    "loss_cta": "Scopri cosa rischi tu: fai il check gratuito",
     "scan": {"k": "Esempio di check", "dom": "tuazienda.it", "live": "analisi completata",
              "rows": [("Protezioni del sito", "F", "bad"), ("Email a tuo nome", "Non protetta", "bad"), ("Piattaforma", "PHP da aggiornare", "mid"), ("Accessi", "2 ex collaboratori attivi", "mid")],
              "lvl": "Esposizione", "lvl_v": "Alta", "prio": "3 priorità pronte nel report"},
@@ -911,9 +929,9 @@ T["it"]["security"] = {
         ("Luglio 2025", "La password era 123456. Dietro, fino a 64 milioni di candidature.", "La piattaforma di selezione con chatbot usata da una grande catena di fast food aveva un pannello di prova protetto da 123456, senza doppio fattore: aperti i dati di fino a 64 milioni di candidature.", "Un ambiente di prova dimenticato è un ingresso di servizio.", "BleepingComputer", "https://www.bleepingcomputer.com/news/security/123456-password-exposed-chats-for-64-million-mcdonalds-job-chatbot-applications/"),
     ],
     "areas": [
-        ("Ciò che è già online", "Quello che <em>hai già</em>", "Il sito di cinque anni fa, il gestionale su misura, l'e-commerce con plugin che nessuno aggiorna, gli account di chi se n'è andato. È lì che gli agenti cercano per primi. Lo rinforziamo senza rifarlo da capo.", ["36", "37", "35"]),
-        ("Ciò che costruisci con l'AI", "Fatto <em>con l'AI</em>", "La velocità è un vantaggio solo se non lascia porte aperte. Rivediamo quello che è stato generato in fretta, prima che lo faccia qualcun altro.", ["32"]),
-        ("L'AI che usi", "L'AI che <em>lavora per te</em>", "Più un assistente può fare, più vale, e più costa un suo errore. Gli diamo confini chiari e teniamo i dati dei tuoi clienti dove devono stare.", ["33", "34"]),
+        ("Ciò che è già online", "Quello che <em>hai già</em>", "Il sito di cinque anni fa, il gestionale su misura, l'e-commerce con plugin che nessuno aggiorna: è lì che gli agenti cercano per primi. Lo rinforziamo senza rifarlo da capo, e restiamo di guardia.", ["36", "35"]),
+        ("L'AI che usi", "L'AI, <em>senza sorprese</em>", "Siti e app generati con l'AI, chatbot e agenti collegati ai tuoi dati: verifichiamo cosa possono leggere e fare, e mettiamo confini chiari.", ["32", "33", "34"]),
+        ("Persone ed email", "Persone <em>ed email</em>", "La porta più usata resta quella umana: un accesso dimenticato, un'email che sembra vera. Chiudiamo anche quella.", ["37", "38"]),
     ],
     "steps_h": "Come <em>lavoriamo</em>", "steps_p": "Quattro fasi. Sempre con il tuo permesso scritto, mai fermando il lavoro.",
     "steps": [
@@ -978,6 +996,18 @@ T["en"]["security"] = {
         ("51%", "of web traffic is now automated: bots and agents, not people.", "Imperva, Bad Bot Report 2025", "https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/"),
     ],
     "now_end": "No need to panic. Just move first.",
+    "loss_k": "What's really at stake", "loss_h": "You're not risking your website. <em>You're risking money.</em>",
+    "loss_p": "An attack isn't a technical problem: it's a problem of money, customers and reputation. Here's what it means in practice.",
+    "losses": [
+        ("money", "A payment to the wrong account", "An email from your supplier, from their real address, asks you to pay into new bank details. No virus: one hacked inbox is enough. By the time you notice, the money is long gone."),
+        ("bank", "Your bank and payments in someone else's hands", "Whoever gets into your email can reset the passwords for your bank, Stripe, PayPal and sales platforms. Often a reused password and no two-factor login are all it takes."),
+        ("data", "Your customers' data up for sale", "Customer lists, documents and orders don't come back once copied. GDPR allows fines of up to 20 million euros or 4% of worldwide annual turnover, and requires notifying the authority within 72 hours."),
+        ("lock", "Your business stopped, with a ransom to pay", "Files, systems and backups encrypted overnight. To get everything back you're asked for a ransom, and paying guarantees nothing. Every day offline is lost revenue."),
+        ("users", "Your customers robbed in your name", "Fake invoices go out to your customers from your domain, or your store's checkout is tampered with to copy cards. They lose the money, you take the blame."),
+        ("alert", "Your reputation wrecked in a day", "Your site showing scam pages, Google flagging it as dangerous, reviews and social media full of angry customers. Destroyed in a day, rebuilt over years."),
+    ],
+    "loss_src": ("GDPR, Articles 33 and 83", "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"),
+    "loss_cta": "Find out what you risk: take the free check",
     "scan": {"k": "Sample check", "dom": "yourcompany.com", "live": "analysis complete",
              "rows": [("Site protections", "F", "bad"), ("Email in your name", "Not protected", "bad"), ("Platform", "PHP needs updating", "mid"), ("Access", "2 former staff still active", "mid")],
              "lvl": "Exposure", "lvl_v": "High", "prio": "3 priorities ready in the report"},
@@ -1022,9 +1052,9 @@ T["en"]["security"] = {
         ("July 2025", "The password was 123456. Behind it, up to 64 million applications.", "The chatbot hiring platform used by a major fast-food chain had a test panel protected by 123456, with no two-factor login: data from up to 64 million job applications was open.", "A forgotten test environment is a service entrance.", "BleepingComputer", "https://www.bleepingcomputer.com/news/security/123456-password-exposed-chats-for-64-million-mcdonalds-job-chatbot-applications/"),
     ],
     "areas": [
-        ("What is already online", "What you <em>already have</em>", "The website from five years ago, the custom internal tool, the store with plugins nobody updates, the accounts of people who have left. That's where agents look first. We harden it without rebuilding it.", ["36", "37", "35"]),
-        ("What you build with AI", "Built <em>with AI</em>", "Speed is an advantage only if it doesn't leave doors open. We review what was generated in a hurry, before someone else does.", ["32"]),
-        ("The AI you use", "The AI <em>working for you</em>", "The more an assistant can do, the more it's worth, and the more its mistakes cost. We give it clear boundaries and keep your customers' data where it belongs.", ["33", "34"]),
+        ("What is already online", "What you <em>already have</em>", "The website from five years ago, the custom internal tool, the store with plugins nobody updates: that's where agents look first. We harden it without rebuilding it, and stay on watch.", ["36", "35"]),
+        ("The AI you use", "AI, <em>without surprises</em>", "AI-generated sites and apps, chatbots and agents connected to your data: we check what they can read and do, and set clear boundaries.", ["32", "33", "34"]),
+        ("People and email", "People <em>and email</em>", "The most used door is still the human one: a forgotten login, an email that looks real. We close that one too.", ["37", "38"]),
     ],
     "steps_h": "How we <em>work</em>", "steps_p": "Four phases. Always with your written permission, never stopping your work.",
     "steps": [
@@ -1413,6 +1443,12 @@ def build(lang, variant=""):
         "shield": '<path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/>',
         "flow": '<path d="M4 12h12"/><path d="m12 6 6 6-6 6"/><path d="M20 5v14"/>',
         "eye": '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+        "money": '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 10v4M18 10v4"/>',
+        "bank": '<path d="M3 10 12 4l9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/>',
+        "data": '<ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/>',
+        "lock": '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+        "users": '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c2 .7 3.2 2.5 3.5 5.2"/>',
+        "alert": '<path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.01"/>',
     }
     ico = lambda k: f'<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">{ICO[k]}</svg>'
     titolo = lambda t: (lambda x: f"{x[0]}. <em>{x[1]}</em>" if len(x) == 2 else t)(t.split(". ", 1))
@@ -1464,12 +1500,18 @@ def build(lang, variant=""):
     <div class="sec-scan-lvl" style="--d:{0.5 + len(SC['rows']) * 0.45}s"><span class="mono">{SC['lvl']}</span><b>{SC['lvl_v']}</b><i class="sec-scan-meter"><i></i></i><small>{SC['prio']} →</small></div>
   </a>
 </div></section>"""
+    perdite = "".join(f'<div class="sec-loss"><i>{ico(k)}</i><b>{t}</b><p>{d}</p></div>' for k, t, d in SE["losses"])
     out["security"] = page("security", SE["title"], SE["desc"], hero + f"""
 <section class="sec-alert"><div class="wrap">
   <p class="mono"><span class="sec-dot" aria-hidden="true"></span>{SE['now_k']} · {SE['alert_k']}</p>
   <h2>{SE['alert_h']}</h2>
   <div class="sec-alert-b"><p>{SE['alert_p']}</p>
     <div class="sec-alert-cta"><b>{SE['alert_q']}</b><a class="btn" href="{u('check')}">{SE['alert_a']} {arrow}</a><a class="sec-alert-src" href="{SE['alert_src'][1]}" target="_blank" rel="noopener">{SE['alert_src'][0]} ↗</a></div></div>
+</div></section>
+<section class="block sec-losses-b"><div class="wrap">
+  <div class="head"><div><p class="mono sec-k">{SE['loss_k']}</p><h2>{SE['loss_h']}</h2></div><p>{SE['loss_p']}</p></div>
+  <div class="sec-losses">{perdite}</div>
+  <div class="sec-losses-end"><a class="btn" href="{u('check')}">{SE['loss_cta']} {arrow}</a><a class="sec-alert-src" href="{SE['loss_src'][1]}" target="_blank" rel="noopener">{SE['loss_src'][0]} ↗</a></div>
 </div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{SE['gain_h']}</h2><p>{SE['gain_p']}</p></div>

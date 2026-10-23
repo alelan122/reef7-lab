@@ -1568,3 +1568,16 @@ button.btn { font-family: inherit; }
 /* Sicurezza: test subito nell'apertura (versione con esempio di report) */
 .sec-hero-g .sec-dom { margin-top: 32px; }
 [data-page="security"] .block { padding: clamp(80px, 9vw, 136px) 0; }
+
+/* Sicurezza: cosa rischi davvero */
+.sec-losses { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.sec-loss { display: flex; flex-direction: column; gap: 12px; padding: 26px 24px; border-radius: 20px; border: 1px solid var(--rule); background: linear-gradient(180deg, rgba(248, 113, 113, .05), rgba(238, 243, 248, .01) 60%); transition: border-color .3s; }
+.sec-loss:hover { border-color: rgba(248, 113, 113, .4); }
+.sec-loss i { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; color: #f87171; background: rgba(248, 113, 113, .12); }
+.sec-loss i svg { width: 22px; height: 22px; }
+.sec-loss b { font-size: clamp(20px, 1.7vw, 25px); letter-spacing: -.025em; line-height: 1.15; margin-top: 6px; }
+.sec-loss p { color: var(--muted); font-size: 15px; }
+.sec-losses-b .head h2 em { color: #f87171; }
+.sec-losses-end { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: 32px; }
+@media (max-width: 1080px) { .sec-losses { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .sec-losses { grid-template-columns: 1fr; } }
