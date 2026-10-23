@@ -849,24 +849,24 @@ T["it"]["security"] = {
     "h1": "Gli attacchi sono già <em>automatici</em>. Le tue difese?",
     "sub": "Scrivi il dominio del tuo sito: in 3 minuti vedi cosa vede chi attacca, quanto sei esposto e da dove partire. Gratis, senza installare niente.",
     "dom_ph": "tuazienda.it", "dom_btn": "Controlla gratis", "dom_note": "Solo controlli pubblici e non invasivi. Nessun impegno.",
-    "route_k": "Da dove partire", "route_h": "Qual è la <em>tua situazione</em>?", "route_p": "Scegli quella più vicina a te: il check parte già impostato sul tuo caso.",
+    "route_k": "Da dove partire", "route_h": "Qual è la <em>tua situazione</em>?", "route_p": "Scegli il tuo caso: il check parte già impostato.",
     "routes": [
         ("old", "Ho un sito o un e-commerce da qualche anno", "WordPress, plugin, gestionali: è lì che gli attacchi automatici cercano per primi.", "Controlla il tuo sito"),
         ("ai", "Ho fatto un sito o un'app con l'AI", "Funziona. Ma qualcuno ha controllato chi può leggere i dati?", "Controlla il tuo progetto"),
         ("agent", "Usiamo chatbot o agenti AI", "Leggono email, documenti e CRM. Vediamo cosa possono fare, e cosa no.", "Controlla i tuoi agenti"),
         ("inc", "È successo qualcosa di strano", "Email sospette, accessi che non riconosci, sito modificato: scrivici e partiamo subito.", "Scrivici adesso"),
     ],
-    "get_h": "Cosa ricevi <em>in 3 minuti</em>", "get_p": "Un report chiaro, scritto per chi decide, non per chi programma.",
+    "get_h": "Cosa ricevi <em>in 3 minuti</em>", "get_p": "Un report chiaro, scritto per chi decide.",
     "get": ["Il tuo livello di esposizione: basso, medio, alto o critico", "Cosa vede chi attacca dal tuo dominio: protezioni del sito ed email a tuo nome", "Le 3 priorità da cui partire, con cosa puoi fare già oggi da solo", "Una copia del report per email, e la mia risposta entro un giorno lavorativo"],
-    "fix_h": "Cosa <em>sistemiamo</em>", "fix_p": "Dopo il check interveniamo solo dove serve. Senza rifare tutto e senza fermare il lavoro.", "fix_more": "Cosa comprende",
-    "end_h": "Il primo passo richiede <em>3 minuti</em>.", "end_p": "Scrivi il tuo dominio e scopri dove sei esposto. Se poi vuoi parlarne, ti rispondo io.",
+    "fix_h": "Cosa <em>sistemiamo</em>", "fix_p": "Solo dove serve. Senza rifare tutto, senza fermare il lavoro.", "fix_more": "Cosa comprende",
+    "end_h": "Il primo passo richiede <em>3 minuti</em>.", "end_p": "Scrivi il tuo dominio. Se poi vuoi parlarne, ti rispondo io entro un giorno.",
     "now_k": "Perché adesso", "now_h": "Il tempo per rimediare <em>si è accorciato</em>.",
     "now": [
         ("7 su 10", "dei siti gira su PHP, il linguaggio in cui il 21 ottobre 2026 un'AI ha trovato falle critiche.", "AP / PBS NewsHour", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
         ("Poche ore", "tra l'annuncio di quelle falle e i primi milioni di tentativi di attacco.", "AP / PBS NewsHour", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
         ("51%", "del traffico web è ormai automatico: bot e agenti, non persone.", "Imperva, Bad Bot Report 2025", "https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/"),
     ],
-    "now_end": "Non serve allarmarsi. Serve muoversi prima degli altri.",
+    "now_end": "Non serve allarmarsi. Serve muoversi prima.",
     "scan": {"k": "Esempio di check", "dom": "tuazienda.it", "live": "analisi completata",
              "rows": [("Protezioni del sito", "F", "bad"), ("Email a tuo nome", "Non protetta", "bad"), ("Piattaforma", "PHP da aggiornare", "mid"), ("Accessi", "2 ex collaboratori attivi", "mid")],
              "lvl": "Esposizione", "lvl_v": "Alta", "prio": "3 priorità pronte nel report"},
@@ -901,7 +901,7 @@ T["it"]["security"] = {
         ("Gli assistenti hanno le chiavi di casa", "Chatbot e agenti leggono email, documenti e CRM, e possono agire. Per manipolarli non serve violarli: basta scrivere la cosa giusta nel posto giusto."),
     ],
     "cases_k": "Perché non aspettare", "cases_h": "Non è teoria. <em>È cronaca.</em>",
-    "cases_p": "Casi pubblici, con le fonti. Quasi tutti partono da un errore banale, e quasi tutti si potevano evitare.",
+    "cases_p": "Casi pubblici, con le fonti. Tutti evitabili.",
     "cases": [
         ("Settembre 2025", "Un'AI ha attaccato 30 organizzazioni. Quasi da sola.", "Un gruppo sponsorizzato da uno stato ha usato un agente AI per svolgere in autonomia l'80-90% del lavoro operativo contro una trentina di organizzazioni: ricognizione, ricerca di falle, furto di credenziali.", "Il lavoro di una squadra di attaccanti ora lo fa un agente, a velocità di macchina.", "Anthropic", "https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf"),
         ("Agosto 2025", "Un chatbot bucato. I CRM di centinaia di aziende copiati.", "Con i token di accesso rubati all'integrazione di un chatbot di vendita, gli attaccanti hanno estratto dati dai CRM di oltre 700 organizzazioni, comprese aziende di sicurezza informatica, cercando chiavi e password.", "Ogni strumento collegato ai tuoi dati è una porta d'ingresso.", "TechTarget", "https://www.techtarget.com/cybersecurity/news/366630934/News-brief-Salesloft-Drift-breach-update-and-timeline"),
@@ -960,24 +960,24 @@ T["en"]["security"] = {
     "h1": "Attacks are already <em>automated</em>. Are your defences?",
     "sub": "Enter your website's domain: in 3 minutes you'll see what an attacker sees, how exposed you are and where to start. Free, nothing to install.",
     "dom_ph": "yourcompany.com", "dom_btn": "Check for free", "dom_note": "Public, non-intrusive checks only. No commitment.",
-    "route_k": "Where to start", "route_h": "What's <em>your situation</em>?", "route_p": "Pick the one closest to you: the check starts already set up for your case.",
+    "route_k": "Where to start", "route_h": "What's <em>your situation</em>?", "route_p": "Pick your case: the check starts already set up.",
     "routes": [
         ("old", "We've had a website or online store for a few years", "WordPress, plugins, internal tools: that's where automated attacks look first.", "Check your site"),
         ("ai", "We built a site or app with AI", "It works. But has anyone checked who can read the data?", "Check your project"),
         ("agent", "We use chatbots or AI agents", "They read email, documents and CRMs. Let's see what they can do, and what they can't.", "Check your agents"),
         ("inc", "Something strange has happened", "Suspicious emails, logins you don't recognise, an altered site: write to us and we'll start right away.", "Write to us now"),
     ],
-    "get_h": "What you get <em>in 3 minutes</em>", "get_p": "A clear report, written for decision makers, not developers.",
+    "get_h": "What you get <em>in 3 minutes</em>", "get_p": "A clear report, written for decision makers.",
     "get": ["Your exposure level: low, medium, high or critical", "What an attacker sees from your domain: site protections and email in your name", "The 3 priorities to start from, with what you can do today on your own", "A copy of the report by email, and my reply within one working day"],
-    "fix_h": "What we <em>fix</em>", "fix_p": "After the check we step in only where it's needed. Without rebuilding everything and without stopping your work.", "fix_more": "What's included",
-    "end_h": "The first step takes <em>3 minutes</em>.", "end_p": "Enter your domain and find out where you're exposed. If you then want to talk, I'll reply myself.",
+    "fix_h": "What we <em>fix</em>", "fix_p": "Only where needed. No rebuild, no downtime.", "fix_more": "What's included",
+    "end_h": "The first step takes <em>3 minutes</em>.", "end_p": "Enter your domain. If you then want to talk, I'll reply within a day.",
     "now_k": "Why now", "now_h": "The time to react <em>has shrunk</em>.",
     "now": [
         ("7 in 10", "websites run on PHP, the language in which an AI found critical flaws on October 21, 2026.", "AP / PBS NewsHour", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
         ("Hours", "between the announcement of those flaws and the first millions of attack attempts.", "AP / PBS NewsHour", "https://pbs.org/newshour/nation/ai-discovered-a-software-vulnerability-that-could-impact-70-of-websites-worldwide-the-rush-is-on-to-patch-it"),
         ("51%", "of web traffic is now automated: bots and agents, not people.", "Imperva, Bad Bot Report 2025", "https://www.imperva.com/blog/2025-imperva-bad-bot-report-how-ai-is-supercharging-the-bot-threat/"),
     ],
-    "now_end": "No need to panic. You just need to move before everyone else.",
+    "now_end": "No need to panic. Just move first.",
     "scan": {"k": "Sample check", "dom": "yourcompany.com", "live": "analysis complete",
              "rows": [("Site protections", "F", "bad"), ("Email in your name", "Not protected", "bad"), ("Platform", "PHP needs updating", "mid"), ("Access", "2 former staff still active", "mid")],
              "lvl": "Exposure", "lvl_v": "High", "prio": "3 priorities ready in the report"},
@@ -1012,7 +1012,7 @@ T["en"]["security"] = {
         ("Assistants hold the house keys", "Chatbots and agents read email, documents and CRMs, and they can act. You don't need to hack them to manipulate them: you just write the right thing in the right place."),
     ],
     "cases_k": "Why not wait", "cases_h": "Not theory. <em>Headlines.</em>",
-    "cases_p": "Public cases, with sources. Almost all of them start from a trivial mistake, and almost all could have been avoided.",
+    "cases_p": "Public cases, with sources. All avoidable.",
     "cases": [
         ("September 2025", "An AI attacked 30 organisations. Almost on its own.", "A state-sponsored group used an AI agent to carry out 80-90% of the operational work on its own against around thirty organisations: reconnaissance, vulnerability hunting, credential theft.", "A team of attackers' work is now done by an agent, at machine speed.", "Anthropic", "https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf"),
         ("August 2025", "One chatbot breached. Hundreds of company CRMs copied.", "Using access tokens stolen from a sales chatbot integration, attackers pulled data from the CRMs of more than 700 organisations, including security companies, hunting for keys and passwords.", "Every tool connected to your data is a way in.", "TechTarget", "https://www.techtarget.com/cybersecurity/news/366630934/News-brief-Salesloft-Drift-breach-update-and-timeline"),
@@ -1108,7 +1108,8 @@ def build(lang, variant=""):
         cur = ' aria-current="page"' if key == "contact" else ""
         foot_links = "".join(f'<a href="{u(k)}">{L["nav"][k]}</a>' for k in NAV + ["contact"])
         alt = f"{alt_dir}{SLUG[other][key]}"
-        band = "" if key == "contact" else f"""
+        # sulle pagine di vendita della sicurezza resta una sola azione: niente fascia generica
+        band = "" if key in ("contact", "security", "check") else f"""
 <section class="cta-band"><div class="wrap"><a href="{u('contact')}">
   <div><p class="mono">{L['cta_k']}</p><h2>{L['cta_h']}</h2></div><span class="circle" aria-hidden="true">→</span>
 </a></div></section>"""
@@ -1409,7 +1410,7 @@ def build(lang, variant=""):
     per_n = {x[0]: x for x in L["services"]}
     titolo = lambda t: (lambda x: f"{x[0]}. <em>{x[1]}</em>" if len(x) == 2 else t)(t.split(". ", 1))
     casi = "".join(f"""
-    <article class="sec-caso"><p class="mono">{q}</p><h3>{titolo(t)}</h3><p>{d}</p><p class="sec-lez">{lz}</p><a href="{url}" target="_blank" rel="noopener">{fonte} ↗</a></article>""" for q, t, d, lz, fonte, url in SE["cases"])
+    <article class="sec-caso"><p class="mono">{q}</p><h3>{titolo(t)}</h3><p>{d}</p><p class="sec-lez">{lz}</p><a href="{url}" target="_blank" rel="noopener">{fonte} ↗</a></article>""" for q, t, d, lz, fonte, url in [SE["cases"][i] for i in (0, 3, 5)])
     dominio = lambda cls="": f"""<form class="sec-dom {cls}" action="{u('check')}" method="get">
       <label class="sr-only" for="dom-{cls or 'top'}">{SE['dom_ph']}</label>
       <input id="dom-{cls or 'top'}" name="d" type="text" inputmode="url" autocomplete="url" required maxlength="200" placeholder="{SE['dom_ph']}">
@@ -1431,9 +1432,8 @@ def build(lang, variant=""):
     inizio = "".join(f'<li><span class="mono">0{i}</span><b>{t}</b><em>{k}</em><p>{d}</p></li>' for i, (t, k, d) in enumerate(SE["start"], 1))
     nums = [n for _k, _h, _d, ns in SE["areas"] for n in ns]
     fix = "".join(f"""
-    <article class="sec-fix" id="s{n}"><h3>{per_n[n][2]}</h3><p>{per_n[n][3]}</p>
-      <details><summary>{SE['fix_more']}</summary><ul>{"".join(f"<li>{x}</li>" for x in per_n[n][5])}</ul></details></article>""" for n in nums)
-    faq = "".join(f'<details class="sec-faq"><summary>{q}</summary><p>{a}</p></details>' for q, a in SE["faq"])
+    <li class="sec-fix" id="s{n}"><b>{per_n[n][2]}</b><span>{per_n[n][3]}</span></li>""" for n in nums)
+    faq = "".join(f'<details class="sec-faq"><summary>{q}</summary><p>{a}</p></details>' for q, a in [SE["faq"][i] for i in (0, 1, 4)])
     out["security"] = page("security", SE["title"], SE["desc"], f"""<section class="page-head sec-hero"><div class="wrap">
   <p class="mono">{SE['k']}</p>
   <h1>{SE['h1']}</h1>
@@ -1462,8 +1462,8 @@ def build(lang, variant=""):
 </div></section>
 <section class="block"><div class="wrap">
   <div class="head"><h2>{SE['fix_h']}</h2><p>{SE['fix_p']}</p></div>
-  <div class="sec-fixes">{fix}
-  </div>
+  <ul class="sec-fixes">{fix}
+  </ul>
 </div></section>
 <section class="block" id="casi"><div class="wrap">
   <div class="head"><div><p class="mono sec-k">{SE['cases_k']}</p><h2>{SE['cases_h']}</h2></div><p>{SE['cases_p']}</p></div>
